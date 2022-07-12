@@ -2,7 +2,7 @@
 
 > Given markdown as JSON, render markdown! What could go wrong?
 
-(psst: heavily *heavily* inspired [json2md](https://github.com/IonicaBizau/json2md))
+(psst: heavily *heavily* inspired by [json2md](https://github.com/IonicaBizau/json2md))
 
 ## How It Works
 
