@@ -1,8 +1,6 @@
-# Data-Driven Markdown Generator
+# Data-Driven Markdown Generator 💽 ➡ 🏭 ➡ 📄
 
 > Given markdown as JSON, render markdown! What could go wrong?
-
-💽 ➡ 🏭 ➡ 📄
 
 (psst: heavily *heavily* inspired [json2md](https://github.com/IonicaBizau/json2md))
 
