@@ -1,0 +1,21 @@
+{
+  "name": "data-driven-markdown",
+  "version": "0.1.0",
+  "description": "Use JSON representations of markdown to generate markdown.",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "tsc && node dist/app.js"
+  },
+  "keywords": [
+    "markdown",
+    "json",
+    "generate",
+    "data",
+    "render"
+  ],
+  "author": "KGar",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
