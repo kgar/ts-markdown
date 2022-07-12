@@ -4,7 +4,8 @@
   "description": "Use JSON representations of markdown to generate markdown.",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && node dist/app.js"
+    "start": "tsc && node dist/app.js",
+    "test": "jest"
   },
   "keywords": [
     "markdown",
@@ -16,6 +17,10 @@
   "author": "KGar",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^28.1.4",
+    "jest": "^28.1.2",
+    "ts-jest": "^28.0.5",
+    "ts-node": "^10.8.2",
     "typescript": "^4.7.4"
   }
 }
