@@ -758,5 +758,63 @@ describe('single element tests', () => {
     });
   });
 
+  describe('given an emoji element', () => {
+    const emojiEntry: EmojiEntry = {
+      emoji: 'joy',
+    };
+
+    test('renders an emoji line', () => {
+      expect(renderMarkdown([emojiEntry])).toBe(':joy:');
+    });
+  });
+
+  describe('given a text element with a superscript', () => {
+    const textEntry: TextEntry = {
+      text: ['H', { sup: '2' }, 'O'],
+    };
+
+    test('renders text with the specified superscript content', () => {
+      expect(renderMarkdown([textEntry])).toBe('H^2^O');
+    });
+  });
+
+  describe('given a text element with a superscript and the HTML flag turned on', () => {
+    const textEntry: TextEntry = {
+      text: [
+        'H',
+        { sup: { bold: { highlight: { italic: '2' } } }, html: true },
+        'O',
+      ],
+    };
+
+    test('renders text with the specified superscript content with HTML superscript tags', () => {
+      expect(renderMarkdown([textEntry])).toBe('H<sup>**==*2*==**</sup>O');
+    });
+  });
+
+  describe('given a text element with a subscript', () => {
+    const textEntry: TextEntry = {
+      text: ['H', { sub: '2' }, 'O'],
+    };
+
+    test('renders text with the specified subscript content', () => {
+      expect(renderMarkdown([textEntry])).toBe('H~2~O');
+    });
+  });
+
+  describe('given a text element with a subcript and the HTML flag turned on', () => {
+    const textEntry: TextEntry = {
+      text: [
+        'H',
+        { sub: { bold: { highlight: { italic: '2' } } }, html: true },
+        'O',
+      ],
+    };
+
+    test('renders text with the specified superscript content with HTML superscript tags', () => {
+      expect(renderMarkdown([textEntry])).toBe('H<sub>**==*2*==**</sub>O');
+    });
+  });
+
   // TODO: Test `code` elements and remove newlines? Is that kosher?
 });

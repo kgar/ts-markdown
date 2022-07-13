@@ -1,26 +1,22 @@
 type DataDrivenMarkdownEntry =
+  | BlockquoteEntry
+  | CodeEntry
   | H1Entry
   | H2Entry
   | H3Entry
   | H4Entry
   | H5Entry
   | H6Entry
-  | BoldEntry
-  | ItalicEntry
-  | StrikethroughEntry
-  | HighlightEntry
-  | TextEntry
-  | BlockquoteEntry
-  | OrderedListEntry
-  | UnorderedListEntry
   | HorizontalRuleEntry
-  | CodeEntry
-  | LinkEntry
-  | ParagraphEntry
   | ImageEntry
+  | LinkEntry
+  | OrderedListEntry
+  | ParagraphEntry
+  | RichTextEntry
   | TableEntry
   | TaskListEntry
-  | string;
+  | TextEntry
+  | UnorderedListEntry;
 
 type H1Entry = {
   h1: string;
@@ -71,6 +67,9 @@ type RichTextEntry =
   | BoldEntry
   | StrikethroughEntry
   | HighlightEntry
+  | SuperscriptEntry
+  | SubscriptEntry
+  | EmojiEntry
   | string;
 
 type TextEntry = {
@@ -136,4 +135,18 @@ type TaskListEntry = {
 type TaskEntry = {
   task: RichTextEntry;
   completed?: boolean;
+};
+
+type EmojiEntry = {
+  emoji: string;
+};
+
+type SuperscriptEntry = {
+  sup: RichTextEntry;
+  html?: boolean;
+};
+
+type SubscriptEntry = {
+  sub: RichTextEntry;
+  html?: boolean;
 };

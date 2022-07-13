@@ -188,6 +188,26 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
       .join('\n');
   }
 
+  if ('emoji' in entry) {
+    return `:${entry.emoji}:`;
+  }
+
+  if ('sup' in entry) {
+    let superscriptOpen = entry.html ? '<sup>' : '^';
+    let superscriptClose = entry.html ? '</sup>' : '^';
+    return `${superscriptOpen}${getMarkdownString(
+      entry.sup
+    )}${superscriptClose}`;
+  }
+
+  if ('sub' in entry) {
+    let subscriptOpen = entry.html ? '<sub>' : '~';
+    let subscriptClose = entry.html ? '</sub>' : '~';
+    return `${subscriptOpen}${getMarkdownString(
+      entry.sub
+    )}${subscriptClose}`;
+  }
+
   return null;
 }
 
