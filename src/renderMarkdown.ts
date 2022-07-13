@@ -80,5 +80,29 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
     return `[${entry.link.text}](${formattedLink}${titleSegment})`;
   }
 
+  if ('p' in entry) {
+    if (typeof entry.p === 'string') {
+      return getMarkdownString(formatParagraphText(entry.p));
+    }
+
+    return formatParagraphText(entry.p.map(getMarkdownString).join(''));
+  }
+
+  if ('img' in entry) {
+    const formattedLink = entry.img.href.replace(/\s/g, '%20');
+
+    const titleSegment =
+      entry.img.title !== undefined ? ` "${entry.img.title}"` : '';
+
+    return `![${entry.img.alt ?? ''}](${formattedLink}${titleSegment})`;
+  }
+
   return null;
+}
+
+function formatParagraphText(text: string) {
+  return text
+    ?.trimStart()
+    .replace(/(^.*?)[\t]+/g, '')
+    .trimStart();
 }

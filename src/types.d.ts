@@ -13,7 +13,9 @@ type DataDrivenMarkdownEntry =
   | UnorderedListEntry
   | HorizontalRuleEntry
   | CodeEntry
-  | LinkEntry;
+  | LinkEntry
+  | ParagraphEntry
+  | ImageEntry;
 
 type H1Entry = {
   h1: string;
@@ -47,10 +49,10 @@ type ItalicEntry = {
   italic: string;
 };
 
-type RichTextEntry = ItalicEntry | BoldEntry;
+type RichTextEntry = ItalicEntry | BoldEntry | string;
 
 type TextEntry = {
-  text: string | (RichTextEntry | string)[];
+  text: string | RichTextEntry[];
 };
 
 type BlockquoteEntry = {
@@ -75,4 +77,16 @@ type CodeEntry = {
 
 type LinkEntry = {
   link: { source: string; text?: string; title?: string };
+};
+
+type ParagraphEntry = {
+  p: string | RichTextEntry[];
+};
+
+type ImageEntry = {
+  img: {
+    href: string;
+    alt?: string;
+    title?: string;
+  };
 };

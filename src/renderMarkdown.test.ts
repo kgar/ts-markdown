@@ -264,4 +264,96 @@ describe('single element tests', () => {
       );
     });
   });
+
+  describe('given a single paragraph element', () => {
+    const pEntry = {
+      p: 'Hello, world!',
+    };
+
+    test('renders a paragraph line with the specified string', () => {
+      expect(renderMarkdown([pEntry])).toBe(pEntry.p);
+    });
+  });
+
+  /**
+   * Based on this recommendation: https://www.markdownguide.org/basic-syntax/#paragraph-best-practices
+   * Also, a paragraph with 4 spaces creates a code block.
+   */
+  describe('given a single paragraph element with 4 spaces of indentation', () => {
+    const pEntry = {
+      p: '    Hello, world!',
+    };
+
+    test('renders a paragraph line with the specified string and without indentation', () => {
+      expect(renderMarkdown([pEntry])).toBe(pEntry.p.trim());
+    });
+  });
+
+  /**
+   * Based on this recommendation: https://www.markdownguide.org/basic-syntax/#paragraph-best-practices
+   */
+  describe('given a single paragraph element with 2 tabs of indentation', () => {
+    const pEntry = {
+      p: '\t\tHello, world!',
+    };
+
+    test('renders a paragraph line with the specified string and without indentation', () => {
+      expect(renderMarkdown([pEntry])).toBe('Hello, world!');
+    });
+  });
+
+  describe('given a single paragraph element with rich text', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        p: [{ bold: 'Hello,' }, ' ', { italic: 'world!' }],
+      },
+    ];
+
+    test('renders a paragraph line with the specified string and rich text formatting', () => {
+      expect(renderMarkdown(data)).toBe('**Hello,** *world!*');
+    });
+  });
+
+  describe('given a single image element with an href', () => {
+    const imgEntry = {
+      img: {
+        href: 'image.png',
+      },
+    };
+
+    test('renders an image line with the specified href', () => {
+      expect(renderMarkdown([imgEntry])).toBe(`![](${imgEntry.img.href})`);
+    });
+  });
+
+  describe('given a single image element with an href and alt text', () => {
+    const imgEntry = {
+      img: {
+        href: 'image.png',
+        alt: 'Alt text here',
+      },
+    };
+
+    test('renders an image line with the specified href and alt text', () => {
+      expect(renderMarkdown([imgEntry])).toBe(
+        `![${imgEntry.img.alt}](${imgEntry.img.href})`
+      );
+    });
+  });
+
+  describe('given a single image element with an href, title, and alt text', () => {
+    const imgEntry = {
+      img: {
+        href: 'image.png',
+        alt: 'Alt text here',
+        title: 'Title here',
+      },
+    };
+
+    test('renders an image line with the specified href and alt text', () => {
+      expect(renderMarkdown([imgEntry])).toBe(
+        `![${imgEntry.img.alt}](${imgEntry.img.href} "${imgEntry.img.title}")`
+      );
+    });
+  });
 });
