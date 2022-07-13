@@ -203,9 +203,20 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
   if ('sub' in entry) {
     let subscriptOpen = entry.html ? '<sub>' : '~';
     let subscriptClose = entry.html ? '</sub>' : '~';
-    return `${subscriptOpen}${getMarkdownString(
-      entry.sub
-    )}${subscriptClose}`;
+    return `${subscriptOpen}${getMarkdownString(entry.sub)}${subscriptClose}`;
+  }
+
+  if ('codeblock' in entry) {
+    let linePrefix = entry.fenced ? '' : '    ';
+    let blockStart = entry.fenced ? getCodeFenceOpen(entry) + '\n' : '';
+    let blockEnd = entry.fenced ? '\n' + getCodeFenceClose(entry) : '';
+
+    let codeBlock =
+      typeof entry.codeblock === 'string'
+        ? linePrefix + entry.codeblock.split('\n').join('\n' + linePrefix)
+        : entry.codeblock.map((line) => linePrefix + line).join('\n');
+
+    return `${blockStart}${codeBlock}${blockEnd}`;
   }
 
   return null;
@@ -358,4 +369,18 @@ function getOptionalHeaderIdText(
   }
 
   return `${prefix}{#${entry.id}}`;
+}
+function getCodeFenceOpen(entry: CodeBlockEntry) {
+  let fenceCharacter = getCodeFenceCharacter(entry);
+  let languageCharacter = entry.language ?? '';
+  return fenceCharacter + fenceCharacter + fenceCharacter + languageCharacter;
+}
+
+function getCodeFenceCharacter(entry: CodeBlockEntry) {
+  return entry.fenced === '~' ? '~' : '`';
+}
+
+function getCodeFenceClose(entry: CodeBlockEntry) {
+  let fenceCharacter = getCodeFenceCharacter(entry);
+  return fenceCharacter + fenceCharacter + fenceCharacter;
 }

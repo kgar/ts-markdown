@@ -16,7 +16,8 @@ type DataDrivenMarkdownEntry =
   | TableEntry
   | TaskListEntry
   | TextEntry
-  | UnorderedListEntry;
+  | UnorderedListEntry
+  | CodeBlockEntry;
 
 type H1Entry = {
   h1: string;
@@ -149,4 +150,10 @@ type SuperscriptEntry = {
 type SubscriptEntry = {
   sub: RichTextEntry;
   html?: boolean;
+};
+
+type CodeBlockEntry = {
+  codeblock: string | string[];
+  fenced?: boolean | '`' | '~';
+  language?: string;
 };
