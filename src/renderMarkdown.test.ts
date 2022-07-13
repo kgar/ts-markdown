@@ -162,4 +162,106 @@ describe('single element tests', () => {
       expect(renderMarkdown(data)).toBe(`- ${data[0]['ul']}`);
     });
   });
+
+  describe('given a code element with a string value', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        code: 'Hello, world!',
+      },
+    ];
+
+    test('renders a code line with the specified string as text', () => {
+      expect(renderMarkdown(data)).toBe(`\`${data[0]['code']}\``);
+    });
+  });
+
+  describe('given a horizontal rule element with any value', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        hr: '',
+      },
+    ];
+
+    test('renders a horizontal rule', () => {
+      expect(renderMarkdown(data)).toBe(`---`);
+    });
+  });
+
+  describe('given a link element with no text', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        link: { source: 'https://www.google.com' },
+      },
+    ];
+
+    test('renders an auto-link', () => {
+      expect(renderMarkdown(data)).toBe(data[0]['link']['source']);
+    });
+  });
+
+  describe('given a link element with text', () => {
+    const linkEntry = {
+      link: { source: 'https://www.google.com', text: 'Google' },
+    };
+
+    test('renders a link line with specified text and source', () => {
+      expect(renderMarkdown([linkEntry])).toBe(
+        `[${linkEntry.link.text}](${linkEntry.link.source})`
+      );
+    });
+  });
+
+  describe('given a link element with source, text, and title', () => {
+    const linkEntry = {
+      link: {
+        source: 'https://www.google.com',
+        text: 'Google',
+        title: 'Let Me Google That For You...',
+      },
+    };
+
+    test('renders a link line with specified text and source', () => {
+      expect(renderMarkdown([linkEntry])).toBe(
+        `[${linkEntry.link.text}](${linkEntry.link.source} "${linkEntry.link.title}")`
+      );
+    });
+  });
+
+  /**
+   * Based on this recommendation: https://www.markdownguide.org/basic-syntax/#link-best-practices
+   */
+  describe('given a link with source that has spaces', () => {
+    const linkEntry = {
+      link: {
+        source: 'https://www.google.com/this is my cool link',
+      },
+    };
+
+    test('renders an auto-link with spaces URL-encoded', () => {
+      expect(renderMarkdown([linkEntry])).toBe(
+        linkEntry.link.source.replace(/\s/g, '%20')
+      );
+    });
+  });
+
+  /**
+   * Based on this recommendation: https://www.markdownguide.org/basic-syntax/#link-best-practices
+   */
+  describe('given a link with source and text that has spaces', () => {
+    const linkEntry = {
+      link: {
+        source: 'https://www.google.com/this is my cool link',
+        text: 'Not a cool link',
+      },
+    };
+
+    test('renders a link line with spaces URL-encoded on the source', () => {
+      expect(renderMarkdown([linkEntry])).toBe(
+        `[${linkEntry.link.text}](${linkEntry.link.source.replace(
+          /\s/g,
+          '%20'
+        )})`
+      );
+    });
+  });
 });

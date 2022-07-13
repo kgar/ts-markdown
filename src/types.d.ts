@@ -10,7 +10,10 @@ type DataDrivenMarkdownEntry =
   | TextEntry
   | BlockquoteEntry
   | OrderedListEntry
-  | UnorderedListEntry;
+  | UnorderedListEntry
+  | HorizontalRuleEntry
+  | CodeEntry
+  | LinkEntry;
 
 type H1Entry = {
   h1: string;
@@ -60,4 +63,16 @@ type OrderedListEntry = {
 
 type UnorderedListEntry = {
   ul: string[];
+};
+
+type HorizontalRuleEntry = {
+  hr: '' | null | undefined | true;
+};
+
+type CodeEntry = {
+  code: string;
+};
+
+type LinkEntry = {
+  link: { source: string; text?: string; title?: string };
 };

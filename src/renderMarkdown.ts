@@ -59,5 +59,26 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
     return `- ${entry.ul}`;
   }
 
+  if ('hr' in entry) {
+    return '---';
+  }
+
+  if ('code' in entry) {
+    return `\`${entry.code}\``;
+  }
+
+  if ('link' in entry) {
+    const formattedLink = entry.link.source.replace(/\s/g, '%20');
+
+    if (!entry.link.text) {
+      return formattedLink;
+    }
+
+    const titleSegment =
+      entry.link.title !== undefined ? ` "${entry.link.title}"` : '';
+
+    return `[${entry.link.text}](${formattedLink}${titleSegment})`;
+  }
+
   return null;
 }
