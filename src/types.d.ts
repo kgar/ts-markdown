@@ -7,7 +7,10 @@ type DataDrivenMarkdownEntry =
   | H6Entry
   | BoldEntry
   | ItalicEntry
-  | TextEntry;
+  | TextEntry
+  | BlockquoteEntry
+  | OrderedListEntry
+  | UnorderedListEntry;
 
 type H1Entry = {
   h1: string;
@@ -45,4 +48,16 @@ type RichTextEntry = ItalicEntry | BoldEntry;
 
 type TextEntry = {
   text: string | (RichTextEntry | string)[];
+};
+
+type BlockquoteEntry = {
+  blockquote: string;
+};
+
+type OrderedListEntry = {
+  ol: string[];
+};
+
+type UnorderedListEntry = {
+  ul: string[];
 };

@@ -73,7 +73,7 @@ describe('single element tests', () => {
     });
   });
 
-  describe('given a single bold elemet with a string value', () => {
+  describe('given a single bold element with a string value', () => {
     const data: DataDrivenMarkdownEntry[] = [
       {
         bold: 'Hello, world!',
@@ -88,7 +88,7 @@ describe('single element tests', () => {
   /**
    * Based on this recommendation: https://www.markdownguide.org/basic-syntax/#bold-best-practices
    */
-  describe('given a single text elemet mid-word bolding', () => {
+  describe('given a single text element mid-word bolding', () => {
     const data: DataDrivenMarkdownEntry[] = [
       {
         text: ['He', { bold: 'll' }, 'o'],
@@ -96,11 +96,11 @@ describe('single element tests', () => {
     ];
 
     test('renders a string with asterisks to denote mid-word bolding', () => {
-      expect(renderMarkdown(data)).toBe("He**ll**o");
+      expect(renderMarkdown(data)).toBe('He**ll**o');
     });
   });
 
-  describe('given a single italic elemet with a string value', () => {
+  describe('given a single italic element with a string value', () => {
     const data: DataDrivenMarkdownEntry[] = [
       {
         italic: 'Hello, world!',
@@ -123,7 +123,43 @@ describe('single element tests', () => {
     ];
 
     test('renders a string with asterisks to denote mid-word italicizing', () => {
-      expect(renderMarkdown(data)).toBe("He*ll*o");
+      expect(renderMarkdown(data)).toBe('He*ll*o');
+    });
+  });
+
+  describe('given a single blockquote element with a string value', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        blockquote: 'Hello, world!',
+      },
+    ];
+
+    test('renders a blokquote markdown line with the specified string as text', () => {
+      expect(renderMarkdown(data)).toBe(`> ${data[0]['blockquote']}`);
+    });
+  });
+
+  describe('given an ordered list element with a string value', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        ol: ['Hello, world!'],
+      },
+    ];
+
+    test('renders an ordered list line with the specified string as text', () => {
+      expect(renderMarkdown(data)).toBe(`1. ${data[0]['ol']}`);
+    });
+  });
+
+  describe('given an unordered list element with a string value', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        ul: ['Hello, world!'],
+      },
+    ];
+
+    test('renders an unordered list line with hyphen and the specified string as text', () => {
+      expect(renderMarkdown(data)).toBe(`- ${data[0]['ul']}`);
     });
   });
 });

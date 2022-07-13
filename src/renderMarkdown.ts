@@ -47,5 +47,17 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
     return entry.text.map(getMarkdownString).join('');
   }
 
+  if ('blockquote' in entry) {
+    return `> ${entry.blockquote}`;
+  }
+
+  if ('ol' in entry) {
+    return `1. ${entry.ol}`;
+  }
+
+  if ('ul' in entry) {
+    return `- ${entry.ul}`;
+  }
+
   return null;
 }
