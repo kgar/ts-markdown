@@ -597,18 +597,27 @@ describe('single element tests', () => {
     });
   });
 
+  describe('given a single table element rich row text and two pipes', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Col1'],
+        rows: [[{ text: [{ bold: 'Row1||' }, ' works'] }]],
+      },
+    };
+
+    test('renders a markdown table with rich row text and escaped pipes', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Col1                       |
+| -------------------------- |
+| **Row1&#124;&#124;** works |`
+      );
+    });
+  });
+
   // TODO: Add table tests for acceptable elements.
   // TODO: Test
   /*
     - links
-    - code
-    - emphasis
-    - bold
-    - italic
-    - strikethrough
-    - highlight
-    - text (rich text)
-    - array of rich strings and rich text objects
   */
 
   // TODO: Test pipe-escaping in nested rich text scenarios
