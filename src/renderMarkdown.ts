@@ -99,6 +99,7 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
 
   // TODO: Extract to own module. It's getting unruly in here.
   if ('table' in entry) {
+    escapePipes(entry);
     let columnCount = entry.table.columns.length;
     let columnNames = entry.table.columns.reduce(
       (prev, curr) => prev.concat(typeof curr === 'string' ? curr : curr.name),
@@ -131,8 +132,8 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
     }
 
     return [
-      buildHeaderRow(entry, cellWidths),
-      buildDividerRow(cellWidths),
+      buildHeaderRow(entry, cellWidths, entry.table.columns),
+      buildDividerRow(cellWidths, entry.table.columns),
       ...buildDataRows(entry, cellWidths, columnNames),
     ].join('\n');
   }
@@ -148,11 +149,21 @@ function buildDataRows(
   return entry.table.rows.map((row) => {
     let cells: string[] = [];
     if (Array.isArray(row)) {
-      cells = [...row.map((x, index) => x.padEnd(cellWidths[index], ' '))];
+      cells = [
+        ...row.map((x, index) =>
+          padAlign(x, cellWidths[index], entry.table.columns[index])
+        ),
+      ];
     } else if (typeof row === 'object') {
       cells = columnNames.reduce(
         (prev, curr, index) =>
-          prev.concat((row[curr] ?? '').padEnd(cellWidths[index], ' ')),
+          prev.concat(
+            padAlign(
+              row[curr] ?? '',
+              cellWidths[index],
+              entry.table.columns[index]
+            )
+          ),
         []
       );
     }
@@ -160,13 +171,64 @@ function buildDataRows(
   });
 }
 
-function buildDividerRow(cellWidths: any[]) {
-  return `| ${cellWidths.map((x) => ''.padStart(x, '-')).join(' | ')} |`;
+function padAlign(
+  cellText: string,
+  cellWidth: number,
+  column: string | TableColumn
+): string {
+  return typeof column === 'string' || column.align === 'left' || !column.align
+    ? cellText.padEnd(cellWidth, ' ')
+    : column.align === 'center'
+    ? cellText
+        .padStart(
+          cellText.length + Math.floor(cellWidth - cellText.length) / 2,
+          ' '
+        )
+        .padEnd(cellWidth, ' ')
+    : column.align === 'right'
+    ? cellText.padStart(cellWidth, ' ')
+    : cellText;
 }
 
-function buildHeaderRow(entry: TableEntry, cellWidths: any[]) {
+function buildDividerRow(
+  cellWidths: number[],
+  columns: (string | TableColumn)[]
+) {
+  return `|${cellWidths
+    .map(
+      (x, index) =>
+        getLeftSideAlignmentCharacter(columns[index]) +
+        ''.padStart(x, '-') +
+        getRightSideAlignmentCharacter(columns[index])
+    )
+    .join('|')}|`;
+}
+
+function getLeftSideAlignmentCharacter(column: string | TableColumn) {
+  if (typeof column === 'string') {
+    return ' ';
+  }
+
+  return column.align === 'left' || column.align === 'center' ? ':' : ' ';
+}
+
+function getRightSideAlignmentCharacter(column: string | TableColumn) {
+  if (typeof column === 'string') {
+    return ' ';
+  }
+
+  return column.align === 'right' || column.align === 'center' ? ':' : ' ';
+}
+
+function buildHeaderRow(
+  entry: TableEntry,
+  cellWidths: number[],
+  columns: (string | TableColumn)[]
+) {
   return `| ${entry.table.columns
-    .map((x, index) => getColumnName(x).padEnd(cellWidths[index], ' '))
+    .map((x, index) =>
+      padAlign(getColumnName(x), cellWidths[index], columns[index])
+    )
     .join(' | ')} |`;
 }
 
@@ -183,4 +245,24 @@ function formatParagraphText(text: string) {
 
 function getColumnHeaderTextLength(column: string | TableColumn) {
   return typeof column === 'string' ? column.length : column.name.length;
+}
+
+function escapePipes<T>(target: T): T {
+  if (typeof target === 'string') {
+    return target.replaceAll('|', '&#124;') as unknown as T;
+  }
+
+  if (Array.isArray(target)) {
+    for (let i = 0; i < target.length; i++) {
+      target[i] = escapePipes(target[i]);
+    }
+  }
+
+  if (typeof target === 'object') {
+    for (let key of Object.keys(target)) {
+      target[key] = escapePipes(target[key]);
+    }
+  }
+
+  return target;
 }

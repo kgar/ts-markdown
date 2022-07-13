@@ -494,7 +494,7 @@ describe('single element tests', () => {
     test('renders a markdown table with justified cell widths and column 2 set to left-aligned', () => {
       expect(renderMarkdown([tableEntry])).toBe(
         `| Col1 | Col2           |
-| ---- | -------------- |
+| ---- |:-------------- |
 | Row1 | Row2           |
 | Row3 | Row4 is longer |`
       );
@@ -506,8 +506,8 @@ describe('single element tests', () => {
       table: {
         columns: ['Col|1', 'Col|2'],
         rows: [
-          { Col1: 'Row|1', Col2: 'Row|2' },
-          { Col1: 'Row|3', Col2: 'Row|4' },
+          ['Row|1', 'Row|2'],
+          ['Row|3', 'Row|4'],
         ],
       },
     };
@@ -515,13 +515,13 @@ describe('single element tests', () => {
     test('renders a markdown table with justified cell widths and HTML-encoded pipe characters', () => {
       expect(renderMarkdown([tableEntry])).toBe(
         `| Col&#124;1 | Col&#124;2 |
-| ---- | ---- |
+| ---------- | ---------- |
 | Row&#124;1 | Row&#124;2 |
 | Row&#124;3 | Row&#124;4 |`
       );
     });
   });
-  
+
   // TODO: Add table tests for acceptable elements.
   // TODO: Test
   /*
@@ -532,8 +532,11 @@ describe('single element tests', () => {
     - italic
     - strikethrough
     - highlight
-    - 
+    - text (rich text)
+    - array of rich strings and rich text objects
   */
+
+  // TODO: Test pipe-escaping in nested rich text scenarios
 
   // TODO: Add table tests for unacceptable elements. (correlate this with Obsidian. Does Obsidian let you put things in tables that the Markdown guide says cannot go there?)
 });
