@@ -9,5 +9,5 @@
     "rootDir": "src"
   },
   "lib": ["es2022"],
-  "exclude": ["node_modules", "dist", "out"]
+  "exclude": ["node_modules", "dist", "out", "jest.config.ts"]
 }
