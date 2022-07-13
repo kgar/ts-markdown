@@ -1,4 +1,4 @@
-import { renderMarkdown } from './renderMarkdown';
+import { renderMarkdown } from '../renderMarkdown';
 
 describe('single element tests', () => {
   describe('given a single h1 object with a string value', () => {
@@ -656,17 +656,83 @@ describe('single element tests', () => {
     });
   });
 
-  // TODO: Test `code` elements and remove newlines? Is that kosher?
-});
-
-describe('nested element tests', () => {
-  describe('given bolded, highlighted text', () => {
-    const textEntry: TextEntry = {
-      text: [{ bold: { highlight: 'Hello, world!' } }],
+  describe('given an h1 with an id', () => {
+    const headerEntry: H1Entry = {
+      h1: 'Test',
+      id: 'test-id',
     };
 
-    test('renders bolded, highlighted line of specified text', () => {
-      expect(renderMarkdown([textEntry])).toBe('**==Hello, world!==**');
+    test('renders an h1 with the specified text and id', () => {
+      expect(renderMarkdown([headerEntry])).toBe(
+        `# ${headerEntry.h1} {#${headerEntry.id}}`
+      );
     });
   });
+
+  describe('given an h2 with an id', () => {
+    const headerEntry: H2Entry = {
+      h2: 'Test',
+      id: 'test-id',
+    };
+
+    test('renders an h2 with the specified text and id', () => {
+      expect(renderMarkdown([headerEntry])).toBe(
+        `## ${headerEntry.h2} {#${headerEntry.id}}`
+      );
+    });
+  });
+
+  describe('given an h3 with an id', () => {
+    const headerEntry: H3Entry = {
+      h3: 'Test',
+      id: 'test-id',
+    };
+
+    test('renders an h3 with the specified text and id', () => {
+      expect(renderMarkdown([headerEntry])).toBe(
+        `### ${headerEntry.h3} {#${headerEntry.id}}`
+      );
+    });
+  });
+
+  describe('given an h4 with an id', () => {
+    const headerEntry: H4Entry = {
+      h4: 'Test',
+      id: 'test-id',
+    };
+
+    test('renders an h4 with the specified text and id', () => {
+      expect(renderMarkdown([headerEntry])).toBe(
+        `#### ${headerEntry.h4} {#${headerEntry.id}}`
+      );
+    });
+  });
+
+  describe('given an h5 with an id', () => {
+    const headerEntry: H5Entry = {
+      h5: 'Test',
+      id: 'test-id',
+    };
+
+    test('renders an h5 with the specified text and id', () => {
+      expect(renderMarkdown([headerEntry])).toBe(
+        `##### ${headerEntry.h5} {#${headerEntry.id}}`
+      );
+    });
+  });
+
+  describe('given an h6 with an id', () => {
+    const headerEntry: H6Entry = {
+      h6: 'Test',
+      id: 'test-id',
+    };
+
+    test('renders an h6 with the specified text and id', () => {
+      expect(renderMarkdown([headerEntry])).toBe(
+        `###### ${headerEntry.h6} {#${headerEntry.id}}`
+      );
+    });
+  });
+
+  // TODO: Test `code` elements and remove newlines? Is that kosher?
 });

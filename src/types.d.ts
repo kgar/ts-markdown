@@ -23,27 +23,31 @@ type DataDrivenMarkdownEntry =
 
 type H1Entry = {
   h1: string;
-};
+} & Partial<Identifiable>;
 
 type H2Entry = {
   h2: string;
-};
+} & Partial<Identifiable>;
 
 type H3Entry = {
   h3: string;
-};
+} & Partial<Identifiable>;
 
 type H4Entry = {
   h4: string;
-};
+} & Partial<Identifiable>;
 
 type H5Entry = {
   h5: string;
-};
+} & Partial<Identifiable>;
 
 type H6Entry = {
   h6: string;
-};
+} & Partial<Identifiable>;
+
+type Identifiable = {
+  id: string;
+}
 
 type BoldEntry = {
   bold: RichTextEntry;

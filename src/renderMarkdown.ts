@@ -12,27 +12,27 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
   }
 
   if ('h1' in entry) {
-    return `# ${getMarkdownString(entry.h1)}`;
+    return `# ${getMarkdownString(entry.h1)}${getOptionalHeaderIdText(entry, ' ')}`;
   }
 
   if ('h2' in entry) {
-    return `## ${getMarkdownString(entry.h2)}`;
+    return `## ${getMarkdownString(entry.h2)}${getOptionalHeaderIdText(entry, ' ')}`;
   }
 
   if ('h3' in entry) {
-    return `### ${getMarkdownString(entry.h3)}`;
+    return `### ${getMarkdownString(entry.h3)}${getOptionalHeaderIdText(entry, ' ')}`;
   }
 
   if ('h4' in entry) {
-    return `#### ${getMarkdownString(entry.h4)}`;
+    return `#### ${getMarkdownString(entry.h4)}${getOptionalHeaderIdText(entry, ' ')}`;
   }
 
   if ('h5' in entry) {
-    return `##### ${getMarkdownString(entry.h5)}`;
+    return `##### ${getMarkdownString(entry.h5)}${getOptionalHeaderIdText(entry, ' ')}`;
   }
 
   if ('h6' in entry) {
-    return `###### ${getMarkdownString(entry.h6)}`;
+    return `###### ${getMarkdownString(entry.h6)}${getOptionalHeaderIdText(entry, ' ')}`;
   }
 
   if ('bold' in entry) {
@@ -290,3 +290,12 @@ function escapePipes<T>(target: T): T {
 
   return target;
 }
+
+function getOptionalHeaderIdText(entry: Partial<Identifiable>, prefix: string = '') {
+  if (entry.id === undefined) {
+    return '';
+  }
+
+  return `${prefix}{#${entry.id}}`
+}
+
