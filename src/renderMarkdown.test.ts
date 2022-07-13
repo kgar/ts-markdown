@@ -1,6 +1,6 @@
 import { renderMarkdown } from './renderMarkdown';
 
-describe('single element header tests', () => {
+describe('single element tests', () => {
   describe('given a single h1 object with a string value', () => {
     const data: DataDrivenMarkdownEntry[] = [
       {
@@ -8,7 +8,7 @@ describe('single element header tests', () => {
       },
     ];
 
-    test('renders an h1 HTML element with the specified string as text', () => {
+    test('renders an h1 markdown line with the specified string as text', () => {
       expect(renderMarkdown(data)).toBe(`# ${data[0]['h1']}`);
     });
   });
@@ -20,7 +20,7 @@ describe('single element header tests', () => {
       },
     ];
 
-    test('renders an h2 HTML element with the specified string as text', () => {
+    test('renders an h2 markdown line with the specified string as text', () => {
       expect(renderMarkdown(data)).toBe(`## ${data[0]['h2']}`);
     });
   });
@@ -32,7 +32,7 @@ describe('single element header tests', () => {
       },
     ];
 
-    test('renders an h3 HTML element with the specified string as text', () => {
+    test('renders an h3 markdown line with the specified string as text', () => {
       expect(renderMarkdown(data)).toBe(`### ${data[0]['h3']}`);
     });
   });
@@ -44,7 +44,7 @@ describe('single element header tests', () => {
       },
     ];
 
-    test('renders an h4 HTML element with the specified string as text', () => {
+    test('renders an h4 markdown line with the specified string as text', () => {
       expect(renderMarkdown(data)).toBe(`#### ${data[0]['h4']}`);
     });
   });
@@ -56,7 +56,7 @@ describe('single element header tests', () => {
       },
     ];
 
-    test('renders an h5 HTML element with the specified string as text', () => {
+    test('renders an h5 markdown line with the specified string as text', () => {
       expect(renderMarkdown(data)).toBe(`##### ${data[0]['h5']}`);
     });
   });
@@ -68,8 +68,56 @@ describe('single element header tests', () => {
       },
     ];
 
-    test('renders an h6 HTML element with the specified string as text', () => {
+    test('renders an h6 markdown line with the specified string as text', () => {
       expect(renderMarkdown(data)).toBe(`###### ${data[0]['h6']}`);
+    });
+  });
+
+  describe('given a single bold elemet with a string value', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        bold: 'Hello, world!',
+      },
+    ];
+
+    test('renders a bolded markdown line with the specified string as text', () => {
+      expect(renderMarkdown(data)).toBe(`**${data[0]['bold']}**`);
+    });
+  });
+
+  describe('given a single text elemet mid-word bolding', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        text: ['He', { bold: 'll' }, 'o'],
+      },
+    ];
+
+    test('renders a string with asterisks to denote mid-word bolding', () => {
+      expect(renderMarkdown(data)).toBe("He**ll**o");
+    });
+  });
+
+  describe('given a single italic elemet with a string value', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        italic: 'Hello, world!',
+      },
+    ];
+
+    test('renders a italicized markdown line with the specified string as text', () => {
+      expect(renderMarkdown(data)).toBe(`*${data[0]['italic']}*`);
+    });
+  });
+
+  describe('given a single text element mid-word italicizing', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        text: ['He', { italic: 'll' }, 'o'],
+      },
+    ];
+
+    test('renders a string with asterisks to denote mid-word italicizing', () => {
+      expect(renderMarkdown(data)).toBe("He*ll*o");
     });
   });
 });

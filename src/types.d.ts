@@ -4,7 +4,10 @@ type DataDrivenMarkdownEntry =
   | H3Entry
   | H4Entry
   | H5Entry
-  | H6Entry;
+  | H6Entry
+  | BoldEntry
+  | ItalicEntry
+  | TextEntry;
 
 type H1Entry = {
   h1: string;
@@ -28,4 +31,18 @@ type H5Entry = {
 
 type H6Entry = {
   h6: string;
+};
+
+type BoldEntry = {
+  bold: string;
+};
+
+type ItalicEntry = {
+  italic: string;
+};
+
+type RichTextEntry = ItalicEntry | BoldEntry;
+
+type TextEntry = {
+  text: string | (RichTextEntry | string)[];
 };
