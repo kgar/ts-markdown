@@ -175,6 +175,26 @@ describe('single element tests', () => {
     });
   });
 
+  describe('given a highlight element with a string value', () => {
+    const highlightEntry: HighlightEntry = {
+      highlight: 'Hello, world!',
+    };
+
+    test('renders a highlight line with the specified text', () => {
+      expect(renderMarkdown([highlightEntry])).toBe('==Hello, world!==');
+    });
+  });
+
+  describe('given a strikethrough element with a string value', () => {
+    const strikethroughEntry: StrikethroughEntry = {
+      strikethrough: 'Hello, world!',
+    };
+
+    test('renders a highlight line with the specified text', () => {
+      expect(renderMarkdown([strikethroughEntry])).toBe('~~Hello, world!~~');
+    });
+  });
+
   describe('given a horizontal rule element with any value', () => {
     const data: DataDrivenMarkdownEntry[] = [
       {
@@ -522,6 +542,61 @@ describe('single element tests', () => {
     });
   });
 
+  describe('given a single table element rich row text', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Col1'],
+        rows: [
+          [{ text: [{ bold: 'Row1' }, ' works'] }],
+          [{ text: [{ italic: 'Row2' }, ' works'] }],
+          [{ text: ['Yes, ', { strikethrough: 'Row3' }, ' works'] }],
+          [{ text: [{ highlight: 'Row4' }, ' works'] }],
+          [{ text: [{ bold: { italic: 'Row5' } }, ' ', { italic: 'works' }] }],
+          [
+            {
+              text: [
+                { strikethrough: { bold: { italic: 'Row6' } } },
+                ' ',
+                { code: 'works' },
+              ],
+            },
+          ],
+          [
+            {
+              text: [
+                {
+                  highlight: {
+                    bold: {
+                      italic: 'Row7',
+                    },
+                  },
+                },
+                ' ',
+                {
+                  code: 'works like a charm!',
+                },
+              ],
+            },
+          ],
+        ],
+      },
+    };
+
+    test('renders a markdown table with rich row text', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Col1                                 |
+| ------------------------------------ |
+| **Row1** works                       |
+| *Row2* works                         |
+| Yes, ~~Row3~~ works                  |
+| ==Row4== works                       |
+| ***Row5*** *works*                   |
+| ~~***Row6***~~ \`works\`               |
+| ==***Row7***== \`works like a charm!\` |`
+      );
+    });
+  });
+
   // TODO: Add table tests for acceptable elements.
   // TODO: Test
   /*
@@ -539,4 +614,18 @@ describe('single element tests', () => {
   // TODO: Test pipe-escaping in nested rich text scenarios
 
   // TODO: Add table tests for unacceptable elements. (correlate this with Obsidian. Does Obsidian let you put things in tables that the Markdown guide says cannot go there?)
+
+  // TODO: Test `code` elements and remove newlines? Is that kosher?
+});
+
+describe('nested element tests', () => {
+  describe('given bolded, highlighted text', () => {
+    const textEntry: TextEntry = {
+      text: [{ bold: { highlight: 'Hello, world!' } }],
+    };
+
+    test('renders bolded, highlighted line of specified text', () => {
+      expect(renderMarkdown([textEntry])).toBe('**==Hello, world!==**');
+    });
+  });
 });

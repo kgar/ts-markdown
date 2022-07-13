@@ -7,6 +7,8 @@ type DataDrivenMarkdownEntry =
   | H6Entry
   | BoldEntry
   | ItalicEntry
+  | StrikethroughEntry
+  | HighlightEntry
   | TextEntry
   | BlockquoteEntry
   | OrderedListEntry
@@ -16,7 +18,8 @@ type DataDrivenMarkdownEntry =
   | LinkEntry
   | ParagraphEntry
   | ImageEntry
-  | TableEntry;
+  | TableEntry
+  | string;
 
 type H1Entry = {
   h1: string;
@@ -43,14 +46,28 @@ type H6Entry = {
 };
 
 type BoldEntry = {
-  bold: string;
+  bold: RichTextEntry;
 };
 
 type ItalicEntry = {
-  italic: string;
+  italic: RichTextEntry;
 };
 
-type RichTextEntry = ItalicEntry | BoldEntry | string;
+type StrikethroughEntry = {
+  strikethrough: RichTextEntry;
+};
+
+type HighlightEntry = {
+  highlight: RichTextEntry;
+};
+
+type RichTextEntry =
+  | ItalicEntry
+  | BoldEntry
+  | StrikethroughEntry
+  | HighlightEntry
+  | CodeEntry
+  | string;
 
 type TextEntry = {
   text: string | RichTextEntry[];
@@ -95,7 +112,7 @@ type ImageEntry = {
 type TableEntry = {
   table: {
     columns: (TableColumn | string)[];
-    rows: (TableRow | string[])[];
+    rows: (TableRow | (TextEntry | string)[])[];
   };
 };
 
@@ -105,5 +122,5 @@ type TableColumn = {
 };
 
 type TableRow = {
-  [key: string]: string;
+  [key: string]: string | TextEntry;
 };

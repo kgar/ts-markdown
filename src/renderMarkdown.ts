@@ -3,40 +3,52 @@ export function renderMarkdown(data: DataDrivenMarkdownEntry[]) {
 }
 
 function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
+  if (entry === null || entry === undefined) {
+    return '';
+  }
+
   if (typeof entry === 'string') {
     return entry;
   }
 
   if ('h1' in entry) {
-    return `# ${entry.h1}`;
+    return `# ${getMarkdownString(entry.h1)}`;
   }
 
   if ('h2' in entry) {
-    return `## ${entry.h2}`;
+    return `## ${getMarkdownString(entry.h2)}`;
   }
 
   if ('h3' in entry) {
-    return `### ${entry.h3}`;
+    return `### ${getMarkdownString(entry.h3)}`;
   }
 
   if ('h4' in entry) {
-    return `#### ${entry.h4}`;
+    return `#### ${getMarkdownString(entry.h4)}`;
   }
 
   if ('h5' in entry) {
-    return `##### ${entry.h5}`;
+    return `##### ${getMarkdownString(entry.h5)}`;
   }
 
   if ('h6' in entry) {
-    return `###### ${entry.h6}`;
+    return `###### ${getMarkdownString(entry.h6)}`;
   }
 
   if ('bold' in entry) {
-    return `**${entry.bold}**`;
+    return `**${getMarkdownString(entry.bold)}**`;
   }
 
   if ('italic' in entry) {
-    return `*${entry.italic}*`;
+    return `*${getMarkdownString(entry.italic)}*`;
+  }
+
+  if ('highlight' in entry) {
+    return `==${getMarkdownString(entry.highlight)}==`;
+  }
+
+  if ('strikethrough' in entry) {
+    return `~~${getMarkdownString(entry.strikethrough)}~~`;
   }
 
   if ('text' in entry) {
@@ -48,7 +60,7 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
   }
 
   if ('blockquote' in entry) {
-    return `> ${entry.blockquote}`;
+    return `> ${getMarkdownString(entry.blockquote)}`;
   }
 
   if ('ol' in entry) {
@@ -117,7 +129,7 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
           .reduce<string[]>((prev, curr) => {
             let value = 'length' in curr ? curr[i] : curr[columnName];
             if (value !== undefined) {
-              prev.push(value);
+              prev.push(getMarkdownString(value));
             }
 
             return prev;
@@ -151,7 +163,11 @@ function buildDataRows(
     if (Array.isArray(row)) {
       cells = [
         ...row.map((x, index) =>
-          padAlign(x, cellWidths[index], entry.table.columns[index])
+          padAlign(
+            renderCellText(x),
+            cellWidths[index],
+            entry.table.columns[index]
+          )
         ),
       ];
     } else if (typeof row === 'object') {
@@ -159,7 +175,7 @@ function buildDataRows(
         (prev, curr, index) =>
           prev.concat(
             padAlign(
-              row[curr] ?? '',
+              renderCellText(row[curr]) ?? '',
               cellWidths[index],
               entry.table.columns[index]
             )
@@ -169,6 +185,14 @@ function buildDataRows(
     }
     return `| ${cells.join(' | ')} |`;
   });
+}
+
+function renderCellText(value: string | TextEntry): string {
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  return renderMarkdown([value]);
 }
 
 function padAlign(
