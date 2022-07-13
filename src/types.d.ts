@@ -19,6 +19,7 @@ type DataDrivenMarkdownEntry =
   | ParagraphEntry
   | ImageEntry
   | TableEntry
+  | TaskListEntry
   | string;
 
 type H1Entry = {
@@ -47,7 +48,7 @@ type H6Entry = {
 
 type Identifiable = {
   id: string;
-}
+};
 
 type BoldEntry = {
   bold: RichTextEntry;
@@ -126,4 +127,13 @@ type TableColumn = {
 
 type TableRow = {
   [key: string]: string | TextEntry;
+};
+
+type TaskListEntry = {
+  tasks: (RichTextEntry | TaskEntry)[];
+};
+
+type TaskEntry = {
+  task: RichTextEntry;
+  completed?: boolean;
 };

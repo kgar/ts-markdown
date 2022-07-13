@@ -12,27 +12,45 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
   }
 
   if ('h1' in entry) {
-    return `# ${getMarkdownString(entry.h1)}${getOptionalHeaderIdText(entry, ' ')}`;
+    return `# ${getMarkdownString(entry.h1)}${getOptionalHeaderIdText(
+      entry,
+      ' '
+    )}`;
   }
 
   if ('h2' in entry) {
-    return `## ${getMarkdownString(entry.h2)}${getOptionalHeaderIdText(entry, ' ')}`;
+    return `## ${getMarkdownString(entry.h2)}${getOptionalHeaderIdText(
+      entry,
+      ' '
+    )}`;
   }
 
   if ('h3' in entry) {
-    return `### ${getMarkdownString(entry.h3)}${getOptionalHeaderIdText(entry, ' ')}`;
+    return `### ${getMarkdownString(entry.h3)}${getOptionalHeaderIdText(
+      entry,
+      ' '
+    )}`;
   }
 
   if ('h4' in entry) {
-    return `#### ${getMarkdownString(entry.h4)}${getOptionalHeaderIdText(entry, ' ')}`;
+    return `#### ${getMarkdownString(entry.h4)}${getOptionalHeaderIdText(
+      entry,
+      ' '
+    )}`;
   }
 
   if ('h5' in entry) {
-    return `##### ${getMarkdownString(entry.h5)}${getOptionalHeaderIdText(entry, ' ')}`;
+    return `##### ${getMarkdownString(entry.h5)}${getOptionalHeaderIdText(
+      entry,
+      ' '
+    )}`;
   }
 
   if ('h6' in entry) {
-    return `###### ${getMarkdownString(entry.h6)}${getOptionalHeaderIdText(entry, ' ')}`;
+    return `###### ${getMarkdownString(entry.h6)}${getOptionalHeaderIdText(
+      entry,
+      ' '
+    )}`;
   }
 
   if ('bold' in entry) {
@@ -148,6 +166,26 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
       buildDividerRow(cellWidths, entry.table.columns),
       ...buildDataRows(entry, cellWidths, columnNames),
     ].join('\n');
+  }
+
+  if ('tasks' in entry) {
+    return entry.tasks
+      .map((taskEntry) => {
+        let completed = false;
+        let taskText = '';
+
+        if (typeof taskEntry === 'string') {
+          taskText = taskEntry;
+        } else if ('task' in taskEntry) {
+          completed = taskEntry.completed === true;
+          taskText = getMarkdownString(taskEntry.task);
+        } else {
+          taskText = getMarkdownString(taskEntry);
+        }
+
+        return `- [${completed ? 'x' : ' '}] ${taskText}`;
+      })
+      .join('\n');
   }
 
   return null;
@@ -291,11 +329,13 @@ function escapePipes<T>(target: T): T {
   return target;
 }
 
-function getOptionalHeaderIdText(entry: Partial<Identifiable>, prefix: string = '') {
+function getOptionalHeaderIdText(
+  entry: Partial<Identifiable>,
+  prefix: string = ''
+) {
   if (entry.id === undefined) {
     return '';
   }
 
-  return `${prefix}{#${entry.id}}`
+  return `${prefix}{#${entry.id}}`;
 }
-
