@@ -6,6 +6,7 @@
   "scripts": {
     "start": "tsc && node dist/app.js",
     "test": "jest",
+    "test-watch": "jest --watch",
     "build": "tsc"
   },
   "keywords": [
