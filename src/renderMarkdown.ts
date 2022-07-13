@@ -162,9 +162,9 @@ function buildDataRows(
     let cells: string[] = [];
     if (Array.isArray(row)) {
       cells = [
-        ...row.map((x, index) =>
+        ...row.map((cell, index) =>
           padAlign(
-            renderCellText(x),
+            renderCellText(cell),
             cellWidths[index],
             entry.table.columns[index]
           )

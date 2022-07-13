@@ -614,15 +614,47 @@ describe('single element tests', () => {
     });
   });
 
-  // TODO: Add table tests for acceptable elements.
-  // TODO: Test
-  /*
-    - links
-  */
+  describe('given a table with rich text including a link in one row and rich text including an image in another row', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Test'],
+        rows: [
+          [
+            {
+              text: [
+                { bold: 'Hello, please go to' },
+                ' ',
+                { link: { text: 'Google', source: 'https://www.google.com' } },
+                '.',
+              ],
+            },
+          ],
+          [
+            {
+              text: [
+                'Look at this: ',
+                {
+                  img: {
+                    alt: 'Placeholder!',
+                    href: 'https://via.placeholder.com/150',
+                  },
+                },
+              ],
+            },
+          ],
+        ],
+      },
+    };
 
-  // TODO: Test pipe-escaping in nested rich text scenarios
-
-  // TODO: Add table tests for unacceptable elements. (correlate this with Obsidian. Does Obsidian let you put things in tables that the Markdown guide says cannot go there?)
+    test('renders a table with rich text and a link on one row and rich text with an image on another row', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Test                                                           |
+| -------------------------------------------------------------- |
+| **Hello, please go to** [Google](https://www.google.com).      |
+| Look at this: ![Placeholder!](https://via.placeholder.com/150) |`
+      );
+    });
+  });
 
   // TODO: Test `code` elements and remove newlines? Is that kosher?
 });

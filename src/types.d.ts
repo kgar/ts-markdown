@@ -66,11 +66,10 @@ type RichTextEntry =
   | BoldEntry
   | StrikethroughEntry
   | HighlightEntry
-  | CodeEntry
   | string;
 
 type TextEntry = {
-  text: string | RichTextEntry[];
+  text: string | (RichTextEntry | LinkEntry | ImageEntry | CodeEntry)[];
 };
 
 type BlockquoteEntry = {
