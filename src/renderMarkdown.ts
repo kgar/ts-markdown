@@ -97,7 +97,81 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
     return `![${entry.img.alt ?? ''}](${formattedLink}${titleSegment})`;
   }
 
+  // TODO: Extract to own module. It's getting unruly in here.
+  if ('table' in entry) {
+    let columnCount = entry.table.columns.length;
+    let columnNames = entry.table.columns.reduce(
+      (prev, curr) => prev.concat(typeof curr === 'string' ? curr : curr.name),
+      []
+    );
+
+    let cellWidths = [];
+    for (let i = 0; i < columnCount; i++) {
+      let column = entry.table.columns[i];
+      let columnName = getColumnName(column);
+
+      let columnCellTexts = [
+        getColumnHeaderTextLength(entry.table.columns[i]),
+        ...entry.table.rows
+          .reduce<string[]>((prev, curr) => {
+            let value = 'length' in curr ? curr[i] : curr[columnName];
+            if (value !== undefined) {
+              prev.push(value);
+            }
+
+            return prev;
+          }, [])
+          .map((x) => x.length),
+      ];
+
+      cellWidths[i] = columnCellTexts.reduce(
+        (prev, curr) => Math.max(prev, curr),
+        0
+      );
+    }
+
+    return [
+      buildHeaderRow(entry, cellWidths),
+      buildDividerRow(cellWidths),
+      ...buildDataRows(entry, cellWidths, columnNames),
+    ].join('\n');
+  }
+
   return null;
+}
+
+function buildDataRows(
+  entry: TableEntry,
+  cellWidths: number[],
+  columnNames: string[]
+) {
+  return entry.table.rows.map((row) => {
+    let cells: string[] = [];
+    if (Array.isArray(row)) {
+      cells = [...row.map((x, index) => x.padEnd(cellWidths[index], ' '))];
+    } else if (typeof row === 'object') {
+      cells = columnNames.reduce(
+        (prev, curr, index) =>
+          prev.concat((row[curr] ?? '').padEnd(cellWidths[index], ' ')),
+        []
+      );
+    }
+    return `| ${cells.join(' | ')} |`;
+  });
+}
+
+function buildDividerRow(cellWidths: any[]) {
+  return `| ${cellWidths.map((x) => ''.padStart(x, '-')).join(' | ')} |`;
+}
+
+function buildHeaderRow(entry: TableEntry, cellWidths: any[]) {
+  return `| ${entry.table.columns
+    .map((x, index) => getColumnName(x).padEnd(cellWidths[index], ' '))
+    .join(' | ')} |`;
+}
+
+function getColumnName(column: string | TableColumn) {
+  return typeof column === 'string' ? column : column.name;
 }
 
 function formatParagraphText(text: string) {
@@ -105,4 +179,8 @@ function formatParagraphText(text: string) {
     ?.trimStart()
     .replace(/(^.*?)[\t]+/g, '')
     .trimStart();
+}
+
+function getColumnHeaderTextLength(column: string | TableColumn) {
+  return typeof column === 'string' ? column.length : column.name.length;
 }

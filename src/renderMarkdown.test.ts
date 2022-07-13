@@ -356,4 +356,184 @@ describe('single element tests', () => {
       );
     });
   });
+
+  describe('given a single table element with columns and array-index rows', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Col1', 'Col2'],
+        rows: [
+          ['Row1', 'Row2'],
+          ['Row3', 'Row4 is longer'],
+        ],
+      },
+    };
+
+    test('renders a markdown table with justified cell widths', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Col1 | Col2           |
+| ---- | -------------- |
+| Row1 | Row2           |
+| Row3 | Row4 is longer |`
+      );
+    });
+  });
+
+  describe('given a single table element with columns and column-reference rows', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Col1', 'Col2'],
+        rows: [
+          { Col1: 'Row1', Col2: 'Row2' },
+          { Col1: 'Row3', Col2: 'Row4 is longer' },
+        ],
+      },
+    };
+
+    test('renders a markdown table with justified cell widths', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Col1 | Col2           |
+| ---- | -------------- |
+| Row1 | Row2           |
+| Row3 | Row4 is longer |`
+      );
+    });
+  });
+
+  describe('given a single table element with missing cell data', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Col1', 'Col2'],
+        rows: [{ Col1: 'Row1' }, { Col1: 'Row3', Col2: 'Row4 is longer' }],
+      },
+    };
+
+    test('renders a markdown table with justified cell widths and an empty cell for the missing data', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Col1 | Col2           |
+| ---- | -------------- |
+| Row1 |                |
+| Row3 | Row4 is longer |`
+      );
+    });
+  });
+
+  describe('given a single table element with column 2 right-aligned', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Col1', { name: 'Col2', align: 'right' }],
+        rows: [
+          { Col1: 'Row1', Col2: 'Row2' },
+          { Col1: 'Row3', Col2: 'Row4 is longer' },
+        ],
+      },
+    };
+
+    test('renders a markdown table with justified cell widths and column 2 set to right-aligned', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Col1 |           Col2 |
+| ---- | --------------:|
+| Row1 |           Row2 |
+| Row3 | Row4 is longer |`
+      );
+    });
+  });
+
+  describe('given a single table element with column 2 center-aligned', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Col1', { name: 'Col2', align: 'center' }],
+        rows: [
+          { Col1: 'Row1', Col2: 'Row2' },
+          { Col1: 'Row3', Col2: 'Row4 is longer' },
+        ],
+      },
+    };
+
+    test('renders a markdown table with justified cell widths and column 2 set to center-aligned', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Col1 |      Col2      |
+| ---- |:--------------:|
+| Row1 |      Row2      |
+| Row3 | Row4 is longer |`
+      );
+    });
+  });
+
+  describe('given a single table element with column 2 center-aligned with perfect centering not possible', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Col1', { name: 'Col2', align: 'center' }],
+        rows: [
+          { Col1: 'Row1', Col2: 'Row2' },
+          { Col1: 'Row3', Col2: 'Row4 is longer!' },
+        ],
+      },
+    };
+
+    test('renders a markdown table with justified cell widths and column 2 set to center-aligned with more spaces on the right side', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Col1 |      Col2       |
+| ---- |:---------------:|
+| Row1 |      Row2       |
+| Row3 | Row4 is longer! |`
+      );
+    });
+  });
+
+  describe('given a single table element with column 2 left-aligned', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Col1', { name: 'Col2', align: 'left' }],
+        rows: [
+          { Col1: 'Row1', Col2: 'Row2' },
+          { Col1: 'Row3', Col2: 'Row4 is longer' },
+        ],
+      },
+    };
+
+    test('renders a markdown table with justified cell widths and column 2 set to left-aligned', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Col1 | Col2           |
+| ---- | -------------- |
+| Row1 | Row2           |
+| Row3 | Row4 is longer |`
+      );
+    });
+  });
+
+  describe('given a single table element with headers and cells that contain pipe characters', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Col|1', 'Col|2'],
+        rows: [
+          { Col1: 'Row|1', Col2: 'Row|2' },
+          { Col1: 'Row|3', Col2: 'Row|4' },
+        ],
+      },
+    };
+
+    test('renders a markdown table with justified cell widths and HTML-encoded pipe characters', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Col&#124;1 | Col&#124;2 |
+| ---- | ---- |
+| Row&#124;1 | Row&#124;2 |
+| Row&#124;3 | Row&#124;4 |`
+      );
+    });
+  });
+  
+  // TODO: Add table tests for acceptable elements.
+  // TODO: Test
+  /*
+    - links
+    - code
+    - emphasis
+    - bold
+    - italic
+    - strikethrough
+    - highlight
+    - 
+  */
+
+  // TODO: Add table tests for unacceptable elements. (correlate this with Obsidian. Does Obsidian let you put things in tables that the Markdown guide says cannot go there?)
 });

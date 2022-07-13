@@ -15,7 +15,8 @@ type DataDrivenMarkdownEntry =
   | CodeEntry
   | LinkEntry
   | ParagraphEntry
-  | ImageEntry;
+  | ImageEntry
+  | TableEntry;
 
 type H1Entry = {
   h1: string;
@@ -89,4 +90,20 @@ type ImageEntry = {
     alt?: string;
     title?: string;
   };
+};
+
+type TableEntry = {
+  table: {
+    columns: (TableColumn | string)[];
+    rows: (TableRow | string[])[];
+  };
+};
+
+type TableColumn = {
+  name: string;
+  align?: 'left' | 'center' | 'right';
+};
+
+type TableRow = {
+  [key: string]: string;
 };
