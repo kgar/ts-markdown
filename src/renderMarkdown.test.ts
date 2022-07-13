@@ -85,6 +85,9 @@ describe('single element tests', () => {
     });
   });
 
+  /**
+   * Based on this recommendation: https://www.markdownguide.org/basic-syntax/#bold-best-practices
+   */
   describe('given a single text elemet mid-word bolding', () => {
     const data: DataDrivenMarkdownEntry[] = [
       {
@@ -109,6 +112,9 @@ describe('single element tests', () => {
     });
   });
 
+  /**
+   * Based on this recomendation: https://www.markdownguide.org/basic-syntax/#bold-best-practices
+   */
   describe('given a single text element mid-word italicizing', () => {
     const data: DataDrivenMarkdownEntry[] = [
       {
