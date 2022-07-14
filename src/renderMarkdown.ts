@@ -28,7 +28,8 @@ function requiresAdditionalNewline(entry: DataDrivenMarkdownEntry) {
     'h4' in entry ||
     'h5' in entry ||
     'h6' in entry ||
-    'hr' in entry
+    'hr' in entry ||
+    'table' in entry
   );
 }
 
