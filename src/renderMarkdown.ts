@@ -1,5 +1,35 @@
-export function renderMarkdown(data: DataDrivenMarkdownEntry[]) {
-  return data.map(getMarkdownString).join('');
+export function renderMarkdown(data: DataDrivenMarkdownEntry[], prefix = '') {
+  let textStack = '';
+  for (const [index, entry] of data.entries()) {
+    textStack += prefix + getMarkdownString(entry);
+
+    if (index < data.length - 1) {
+      textStack += '\n';
+
+      if (requiresAdditionalNewline(entry)) {
+        textStack += prefix;
+        textStack += '\n';
+      }
+    }
+  }
+  return textStack;
+}
+
+function requiresAdditionalNewline(entry: DataDrivenMarkdownEntry) {
+  if (typeof entry === 'string') {
+    return false;
+  }
+  return (
+    'p' in entry ||
+    'blockquote' in entry ||
+    'h1' in entry ||
+    'h2' in entry ||
+    'h3' in entry ||
+    'h4' in entry ||
+    'h5' in entry ||
+    'h6' in entry ||
+    'hr' in entry
+  );
 }
 
 function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
@@ -78,7 +108,9 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
   }
 
   if ('blockquote' in entry) {
-    return `> ${getMarkdownString(entry.blockquote)}`;
+    return typeof entry.blockquote === 'string'
+      ? '> ' + getMarkdownString(entry.blockquote)
+      : renderMarkdown(entry.blockquote, '> ');
   }
 
   if ('ol' in entry) {

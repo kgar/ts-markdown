@@ -78,7 +78,7 @@ type TextEntry = {
 };
 
 type BlockquoteEntry = {
-  blockquote: string;
+  blockquote: string | DataDrivenMarkdownEntry[];
 };
 
 type OrderedListEntry = {
@@ -102,7 +102,7 @@ type LinkEntry = {
 };
 
 type ParagraphEntry = {
-  p: string | RichTextEntry[];
+  p: string | (RichTextEntry | TextEntry)[];
 };
 
 type ImageEntry = {
