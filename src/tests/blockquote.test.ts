@@ -79,4 +79,74 @@ describe('given a blockquote entry', () => {
 > > Obsidian rules.`);
     });
   });
+
+  describe('with other elements', () => {
+    const blockquoteEntry: BlockquoteEntry = {
+      blockquote: [
+        {
+          h4: 'The quarterly results look great!',
+        },
+        {
+          ul: ['Revenue was off the chart.', 'Profits were higher than ever.'],
+        },
+        {
+          p: [
+            {
+              italic: 'Everything',
+            },
+            {
+              text: ' is going according to ',
+            },
+            {
+              bold: 'plan',
+            },
+            {
+              text: '.',
+            },
+          ],
+        },
+      ],
+    };
+
+    test('renders blockquote with other elements nested within', () => {
+      expect(renderMarkdown([blockquoteEntry])).toBe(
+        `> #### The quarterly results look great!
+> 
+> - Revenue was off the chart.
+> - Profits were higher than ever.
+> 
+> *Everything* is going according to **plan**.`
+      );
+    });
+  });
+
+  describe('with nested list in nested blockquote', () => {
+    const blockquoteEntry: BlockquoteEntry = {
+      blockquote: [
+        {
+          blockquote: [
+            {
+              ol: [
+                'Revenue was off the chart.',
+                {
+                  text: [
+                    'Profits were ',
+                    { bold: { italic: 'higher' } },
+                    ' than ever.',
+                  ],
+                },
+              ],
+            },
+          ],
+        }
+      ],
+    };
+
+    test('renders blockquote with other elements nested within', () => {
+      expect(renderMarkdown([blockquoteEntry])).toBe(
+        `> > 1. Revenue was off the chart.
+> > 2. Profits were ***higher*** than ever.`
+      );
+    });
+  });
 });

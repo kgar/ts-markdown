@@ -7,7 +7,7 @@ export function renderMarkdown(
     let entryPrefix =
       typeof prefix === 'function' ? prefix(index, entry) : prefix;
 
-    const result = getMarkdownString(entry, entryPrefix);
+    const result = getMarkdownString(entry);
     const newText = typeof result === 'string' ? [result] : result;
     textStack += newText.map((text) => entryPrefix + text).join('\n');
 
@@ -44,8 +44,7 @@ function requiresAdditionalNewline(entry: DataDrivenMarkdownEntry) {
 }
 
 function getMarkdownString(
-  entry: DataDrivenMarkdownEntry | string,
-  prefix = ''
+  entry: DataDrivenMarkdownEntry | string
 ): string | string[] {
   if (entry === null || entry === undefined) {
     return '';
