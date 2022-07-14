@@ -1,13 +1,21 @@
-export function renderMarkdown(data: DataDrivenMarkdownEntry[], prefix = '') {
+export function renderMarkdown(
+  data: DataDrivenMarkdownEntry[],
+  prefix: MarkdownRenderPrefix = ''
+) {
   let textStack = '';
   for (const [index, entry] of data.entries()) {
-    textStack += prefix + getMarkdownString(entry);
+    let entryPrefix =
+      typeof prefix === 'function' ? prefix(index, entry) : prefix;
+
+    const result = getMarkdownString(entry, entryPrefix);
+    const newText = typeof result === 'string' ? [result] : result;
+    textStack += newText.map((text) => entryPrefix + text).join('\n');
 
     if (index < data.length - 1) {
       textStack += '\n';
 
       if (requiresAdditionalNewline(entry)) {
-        textStack += prefix;
+        textStack += entryPrefix;
         textStack += '\n';
       }
     }
@@ -29,11 +37,16 @@ function requiresAdditionalNewline(entry: DataDrivenMarkdownEntry) {
     'h5' in entry ||
     'h6' in entry ||
     'hr' in entry ||
-    'table' in entry
+    'table' in entry ||
+    'ul' in entry ||
+    'ol' in entry
   );
 }
 
-function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
+function getMarkdownString(
+  entry: DataDrivenMarkdownEntry | string,
+  prefix = ''
+): string | string[] {
   if (entry === null || entry === undefined) {
     return '';
   }
@@ -105,7 +118,7 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
       return entry.text;
     }
 
-    return entry.text.map(getMarkdownString).join('');
+    return entry.text.map((entry) => getMarkdownString(entry)).join('');
   }
 
   if ('blockquote' in entry) {
@@ -115,11 +128,16 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
   }
 
   if ('ol' in entry) {
-    return `1. ${entry.ol}`;
+    return entry.ol.map(
+      (lineItem: InlineTypes, index) =>
+        `${index + 1}. ` + getMarkdownString(lineItem)
+    );
   }
 
   if ('ul' in entry) {
-    return renderMarkdown(entry.ul, '- ');
+    return entry.ul.map(
+      (lineItem: InlineTypes) => '- ' + getMarkdownString(lineItem)
+    );
   }
 
   if ('hr' in entry) {
@@ -148,7 +166,9 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
       return getMarkdownString(formatParagraphText(entry.p));
     }
 
-    return formatParagraphText(entry.p.map(getMarkdownString).join(''));
+    return formatParagraphText(
+      entry.p.map((entry) => getMarkdownString(entry)).join('')
+    );
   }
 
   if ('img' in entry) {
@@ -180,12 +200,19 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
           .reduce<string[]>((prev, curr) => {
             let value = 'length' in curr ? curr[i] : curr[columnName];
             if (value !== undefined) {
-              prev.push(getMarkdownString(value));
+              let result = getMarkdownString(value);
+              if (typeof result === 'string') {
+                prev.push(result);
+              } else {
+                throw new Error(
+                  'Unknown table rendering scenario encountered. Multi-line table cell content is not supported.'
+                );
+              }
             }
 
             return prev;
           }, [])
-          .map((x) => x.length),
+          .map((columnCellText) => columnCellText.length),
       ];
 
       cellWidths[i] = columnCellTexts.reduce(
@@ -211,9 +238,23 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
           taskText = taskEntry;
         } else if ('task' in taskEntry) {
           completed = taskEntry.completed === true;
-          taskText = getMarkdownString(taskEntry.task);
+          let result = getMarkdownString(taskEntry.task);
+          if (typeof result === 'string') {
+            taskText = result;
+          } else {
+            throw new Error(
+              'Unexpected rendering scenario encountered. A task list item cannot have multi-line content.'
+            );
+          }
         } else {
-          taskText = getMarkdownString(taskEntry);
+          let result = getMarkdownString(taskEntry);
+          if (typeof result === 'string') {
+            taskText = result;
+          } else {
+            throw new Error(
+              'Unexpected rendering scenario encountered. A task list item cannot have multi-line content.'
+            );
+          }
         }
 
         return `- [${completed ? 'x' : ' '}] ${taskText}`;
@@ -322,9 +363,9 @@ function buildDividerRow(
 ) {
   return `|${cellWidths
     .map(
-      (x, index) =>
+      (cellWidth, index) =>
         getLeftSideAlignmentCharacter(columns[index]) +
-        ''.padStart(x, '-') +
+        ''.padStart(cellWidth, '-') +
         getRightSideAlignmentCharacter(columns[index])
     )
     .join('|')}|`;
@@ -352,8 +393,8 @@ function buildHeaderRow(
   columns: (string | TableColumn)[]
 ) {
   return `| ${entry.table.columns
-    .map((x, index) =>
-      padAlign(getColumnName(x), cellWidths[index], columns[index])
+    .map((column, index) =>
+      padAlign(getColumnName(column), cellWidths[index], columns[index])
     )
     .join(' | ')} |`;
 }
