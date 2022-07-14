@@ -1,7 +1,7 @@
 import { renderMarkdown } from '../renderMarkdown';
 
 describe('given a link entry', () => {
-  describe('no text', () => {
+  describe('with no text', () => {
     const linkEntry: LinkEntry = {
       link: { source: 'https://www.google.com' },
     };

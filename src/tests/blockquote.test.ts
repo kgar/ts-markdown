@@ -1,6 +1,6 @@
 import { renderMarkdown } from '../renderMarkdown';
 
-describe('given a blockquote', () => {
+describe('given a blockquote entry', () => {
   describe('with a single string value', () => {
     const data: DataDrivenMarkdownEntry[] = [
       {
