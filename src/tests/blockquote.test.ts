@@ -1,6 +1,18 @@
 import { renderMarkdown } from '../renderMarkdown';
 
 describe('given a blockquote', () => {
+  describe('with a single string value', () => {
+    const data: DataDrivenMarkdownEntry[] = [
+      {
+        blockquote: 'Hello, world!',
+      },
+    ];
+
+    test('renders a blokquote markdown line with the specified string as text', () => {
+      expect(renderMarkdown(data)).toBe(`> ${data[0]['blockquote']}`);
+    });
+  });
+
   describe('with 2 paragraphs of plain text inside', () => {
     const blockquoteEntry: BlockquoteEntry = {
       blockquote: [
