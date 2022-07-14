@@ -119,7 +119,7 @@ function getMarkdownString(entry: DataDrivenMarkdownEntry | string): string {
   }
 
   if ('ul' in entry) {
-    return `- ${entry.ul}`;
+    return renderMarkdown(entry.ul, '- ');
   }
 
   if ('hr' in entry) {

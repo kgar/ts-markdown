@@ -86,7 +86,7 @@ type OrderedListEntry = {
 };
 
 type UnorderedListEntry = {
-  ul: string[];
+  ul: (string | TextEntry)[];
 };
 
 type HorizontalRuleEntry = {
