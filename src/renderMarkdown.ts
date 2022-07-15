@@ -1,12 +1,19 @@
 export function renderMarkdown(
   data: DataDrivenMarkdownEntry[],
-  prefix: MarkdownRenderPrefix = ''
+  options?: DataDrivenMarkdownOptions
 ) {
+  options ??= {
+    unorderedListItemIndicator: '-',
+    prefix: '',
+  };
+
+  let prefix = options.prefix ?? '';
+
   let textStack = '';
   for (const [index, entry] of data.entries()) {
     let entryPrefix = renderPrefix(prefix, index, entry);
 
-    const result = getMarkdownString(entry);
+    const result = getMarkdownString(entry, options);
     const newText =
       typeof result === 'string'
         ? result.split('\n')
@@ -46,7 +53,8 @@ function requiresAdditionalNewline(entry: DataDrivenMarkdownEntry) {
 }
 
 function getMarkdownString(
-  entry: DataDrivenMarkdownEntry | string
+  entry: DataDrivenMarkdownEntry | string,
+  options: DataDrivenMarkdownOptions
 ): string | string[] {
   if (entry === null || entry === undefined) {
     return '';
@@ -57,61 +65,61 @@ function getMarkdownString(
   }
 
   if ('h1' in entry) {
-    return `# ${getMarkdownString(entry.h1)}${getOptionalHeaderIdText(
+    return `# ${getMarkdownString(entry.h1, options)}${getOptionalHeaderIdText(
       entry,
       ' '
     )}`;
   }
 
   if ('h2' in entry) {
-    return `## ${getMarkdownString(entry.h2)}${getOptionalHeaderIdText(
+    return `## ${getMarkdownString(entry.h2, options)}${getOptionalHeaderIdText(
       entry,
       ' '
     )}`;
   }
 
   if ('h3' in entry) {
-    return `### ${getMarkdownString(entry.h3)}${getOptionalHeaderIdText(
-      entry,
-      ' '
-    )}`;
+    return `### ${getMarkdownString(
+      entry.h3,
+      options
+    )}${getOptionalHeaderIdText(entry, ' ')}`;
   }
 
   if ('h4' in entry) {
-    return `#### ${getMarkdownString(entry.h4)}${getOptionalHeaderIdText(
-      entry,
-      ' '
-    )}`;
+    return `#### ${getMarkdownString(
+      entry.h4,
+      options
+    )}${getOptionalHeaderIdText(entry, ' ')}`;
   }
 
   if ('h5' in entry) {
-    return `##### ${getMarkdownString(entry.h5)}${getOptionalHeaderIdText(
-      entry,
-      ' '
-    )}`;
+    return `##### ${getMarkdownString(
+      entry.h5,
+      options
+    )}${getOptionalHeaderIdText(entry, ' ')}`;
   }
 
   if ('h6' in entry) {
-    return `###### ${getMarkdownString(entry.h6)}${getOptionalHeaderIdText(
-      entry,
-      ' '
-    )}`;
+    return `###### ${getMarkdownString(
+      entry.h6,
+      options
+    )}${getOptionalHeaderIdText(entry, ' ')}`;
   }
 
   if ('bold' in entry) {
-    return `**${getMarkdownString(entry.bold)}**`;
+    return `**${getMarkdownString(entry.bold, options)}**`;
   }
 
   if ('italic' in entry) {
-    return `*${getMarkdownString(entry.italic)}*`;
+    return `*${getMarkdownString(entry.italic, options)}*`;
   }
 
   if ('highlight' in entry) {
-    return `==${getMarkdownString(entry.highlight)}==`;
+    return `==${getMarkdownString(entry.highlight, options)}==`;
   }
 
   if ('strikethrough' in entry) {
-    return `~~${getMarkdownString(entry.strikethrough)}~~`;
+    return `~~${getMarkdownString(entry.strikethrough, options)}~~`;
   }
 
   if ('text' in entry) {
@@ -119,42 +127,48 @@ function getMarkdownString(
       return entry.text;
     }
 
-    return entry.text.map((entry) => getMarkdownString(entry)).join('');
+    return entry.text
+      .map((entry) => getMarkdownString(entry, options))
+      .join('');
   }
 
   if ('blockquote' in entry) {
     return typeof entry.blockquote === 'string'
-      ? '> ' + getMarkdownString(entry.blockquote)
-      : renderMarkdown(entry.blockquote, '> ');
+      ? '> ' + getMarkdownString(entry.blockquote, options)
+      : renderMarkdown(entry.blockquote, { ...options, prefix: '> ' });
   }
 
   if ('ol' in entry) {
     return entry.ol.map((liEntry, index) => {
       const li = liEntry.li;
       if (Array.isArray(li)) {
-        return renderMarkdown(li, (liIndex) => {
-          return liIndex === 0 ? `${index + 1}. ` : '    ';
+        return renderMarkdown(li, {
+          ...options,
+          prefix: (liIndex) => {
+            return liIndex === 0 ? `${index + 1}. ` : '    ';
+          },
         });
       }
 
-      return join(getMarkdownString(li), '\n', (liIndex) => {
+      return join(getMarkdownString(li, options), '\n', (liIndex) => {
         return liIndex === 0 ? `${index + 1}. ` : '    ';
       });
     });
   }
 
   if ('ul' in entry) {
-    let indicator = entry.indicator ?? '-';
+    let indicator = entry.indicator ?? options.unorderedListItemIndicator;
     return entry.ul
       .map((liEntry) => {
         const li = liEntry.li;
         if (Array.isArray(li)) {
-          return renderMarkdown(li, (liIndex) =>
-            liIndex === 0 ? `${indicator} ` : '    '
-          );
+          return renderMarkdown(li, {
+            ...options,
+            prefix: (liIndex) => (liIndex === 0 ? `${indicator} ` : '    '),
+          });
         }
 
-        return join(getMarkdownString(li), '\n', (liIndex) =>
+        return join(getMarkdownString(li, options), '\n', (liIndex) =>
           liIndex === 0 ? `${indicator} ` : '    '
         );
       })
@@ -195,16 +209,16 @@ function getMarkdownString(
 
   if ('p' in entry) {
     if (typeof entry.p === 'string') {
-      return getMarkdownString(formatParagraphText(entry.p));
+      return getMarkdownString(formatParagraphText(entry.p), options);
     }
 
     if (Array.isArray(entry.p)) {
       return formatParagraphText(
-        entry.p.map((entry) => getMarkdownString(entry)).join('')
+        entry.p.map((entry) => getMarkdownString(entry, options)).join('')
       );
     }
 
-    let result = getMarkdownString(entry.p);
+    let result = getMarkdownString(entry.p, options);
     if (typeof result === 'string') {
       return formatParagraphText(result);
     }
@@ -241,7 +255,7 @@ function getMarkdownString(
           .reduce<string[]>((prev, curr) => {
             let value = 'length' in curr ? curr[i] : curr[columnName];
             if (value !== undefined) {
-              let result = getMarkdownString(value);
+              let result = getMarkdownString(value, options);
               if (typeof result === 'string') {
                 prev.push(result);
               } else {
@@ -279,7 +293,7 @@ function getMarkdownString(
           taskText = taskEntry;
         } else if ('task' in taskEntry) {
           completed = taskEntry.completed === true;
-          let result = getMarkdownString(taskEntry.task);
+          let result = getMarkdownString(taskEntry.task, options);
           if (typeof result === 'string') {
             taskText = result;
           } else {
@@ -288,7 +302,7 @@ function getMarkdownString(
             );
           }
         } else {
-          let result = getMarkdownString(taskEntry);
+          let result = getMarkdownString(taskEntry, options);
           if (typeof result === 'string') {
             taskText = result;
           } else {
@@ -311,14 +325,18 @@ function getMarkdownString(
     let superscriptOpen = entry.html ? '<sup>' : '^';
     let superscriptClose = entry.html ? '</sup>' : '^';
     return `${superscriptOpen}${getMarkdownString(
-      entry.sup
+      entry.sup,
+      options
     )}${superscriptClose}`;
   }
 
   if ('sub' in entry) {
     let subscriptOpen = entry.html ? '<sub>' : '~';
     let subscriptClose = entry.html ? '</sub>' : '~';
-    return `${subscriptOpen}${getMarkdownString(entry.sub)}${subscriptClose}`;
+    return `${subscriptOpen}${getMarkdownString(
+      entry.sub,
+      options
+    )}${subscriptClose}`;
   }
 
   if ('codeblock' in entry) {

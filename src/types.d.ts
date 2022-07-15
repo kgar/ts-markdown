@@ -89,8 +89,10 @@ type OrderedListEntry = {
 
 type UnorderedListEntry = {
   ul: ListItemEntry[];
-  indicator?: '-' | '*' | '+';
+  indicator?: UnorderedListItemIndicator;
 };
+
+type UnorderedListItemIndicator = '-' | '*' | '+';
 
 type ListItemEntry = {
   li: DataDrivenMarkdownEntry | DataDrivenMarkdownEntry[];
@@ -171,3 +173,8 @@ type ContextualMarkdownRenderPrefix = (
 ) => string;
 
 type MarkdownRenderPrefix = string | ContextualMarkdownRenderPrefix;
+
+type DataDrivenMarkdownOptions = {
+  unorderedListItemIndicator?: UnorderedListItemIndicator;
+  prefix?: MarkdownRenderPrefix
+};

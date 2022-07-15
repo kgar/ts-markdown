@@ -238,7 +238,7 @@ describe('given an unordered list entry', () => {
           li: "Let's get to work!",
         },
       ],
-      indicator: '*'
+      indicator: '*',
     };
 
     test('renders list with asterisk indicator', () => {
@@ -253,7 +253,7 @@ describe('given an unordered list entry', () => {
           li: "Let's get to work!",
         },
       ],
-      indicator: '-'
+      indicator: '-',
     };
 
     test('renders list with hyphen indicator', () => {
@@ -268,11 +268,59 @@ describe('given an unordered list entry', () => {
           li: "Let's get to work!",
         },
       ],
-      indicator: '+'
+      indicator: '+',
     };
 
     test('renders list with hyphen indicator', () => {
       expect(renderMarkdown([ulEntry])).toBe("+ Let's get to work!");
+    });
+  });
+
+  describe('with global option for asterisk list item indicator', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: "Let's get to work!",
+        },
+      ],
+    };
+
+    test('renders list with asterisk indicator', () => {
+      expect(
+        renderMarkdown([ulEntry], { unorderedListItemIndicator: '*' })
+      ).toBe("* Let's get to work!");
+    });
+  });
+
+  describe('with global option for hyphen list item indicator', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: "Let's get to work!",
+        },
+      ],
+    };
+
+    test('renders list with hyphen indicator', () => {
+      expect(
+        renderMarkdown([ulEntry], { unorderedListItemIndicator: '-' })
+      ).toBe("- Let's get to work!");
+    });
+  });
+
+  describe('with global option for plus sign list item indicator', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: "Let's get to work!",
+        },
+      ],
+    };
+
+    test('renders list with hyphen indicator', () => {
+      expect(
+        renderMarkdown([ulEntry], { unorderedListItemIndicator: '+' })
+      ).toBe("+ Let's get to work!");
     });
   });
 });
