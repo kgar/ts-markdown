@@ -251,7 +251,6 @@ function getMarkdownString(
     return `![${entry.img.alt ?? ''}](${formattedLink}${titleSegment})`;
   }
 
-  // TODO: Extract to own module. It's getting unruly in here.
   if ('table' in entry) {
     escapePipes(entry);
     let columnCount = entry.table.columns.length;
@@ -338,8 +337,9 @@ function getMarkdownString(
   }
 
   if ('sup' in entry) {
-    let superscriptOpen = entry.html ? '<sup>' : '^';
-    let superscriptClose = entry.html ? '</sup>' : '^';
+    let useSuperscriptHtml = entry.html ?? options.useSuperscriptHtml ?? false;
+    let superscriptOpen = useSuperscriptHtml ? '<sup>' : '^';
+    let superscriptClose = useSuperscriptHtml ? '</sup>' : '^';
     return `${superscriptOpen}${getMarkdownString(
       entry.sup,
       options
@@ -347,8 +347,9 @@ function getMarkdownString(
   }
 
   if ('sub' in entry) {
-    let subscriptOpen = entry.html ? '<sub>' : '~';
-    let subscriptClose = entry.html ? '</sub>' : '~';
+    let useSubscriptHtml = entry.html ?? options.useSubscriptHtml ?? false;
+    let subscriptOpen = useSubscriptHtml ? '<sub>' : '~';
+    let subscriptClose = useSubscriptHtml ? '</sub>' : '~';
     return `${subscriptOpen}${getMarkdownString(
       entry.sub,
       options

@@ -180,5 +180,7 @@ type DataDrivenMarkdownOptions = {
   unorderedListItemIndicator?: UnorderedListItemIndicator;
   useH1Underlining?: boolean;
   useH2Underlining?: boolean;
+  useSubscriptHtml?: boolean;
+  useSuperscriptHtml?: boolean;
   prefix?: MarkdownRenderPrefix;
 };
