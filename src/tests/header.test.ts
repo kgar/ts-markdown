@@ -93,6 +93,20 @@ describe('given a header 1 entry', () => {
       );
     });
   });
+
+  describe('with underline set to true', () => {
+    const h1Entry: H1Entry = {
+      h1: 'This is my totally cool header',
+      underline: true,
+    };
+
+    test('renders header without prefixed hashtag and with equal-sign underline character length of header text', () => {
+      expect(renderMarkdown([h1Entry])).toBe(
+        `This is my totally cool header
+==============================`
+      );
+    });
+  });
 });
 
 describe('given a header 2 entry', () => {
@@ -185,6 +199,20 @@ describe('given a header 2 entry', () => {
     test('renders h2 with link and image', () => {
       expect(renderMarkdown([h2Entry])).toBe(
         '## The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
+      );
+    });
+  });
+
+  describe('with underline set to true', () => {
+    const h2Entry: H2Entry = {
+      h2: 'This is my totally cool header',
+      underline: true,
+    };
+
+    test('renders header without prefixed hashtag and with hyphen underline character length of header text', () => {
+      expect(renderMarkdown([h2Entry])).toBe(
+        `This is my totally cool header
+------------------------------`
       );
     });
   });

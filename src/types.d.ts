@@ -21,10 +21,12 @@ type DataDrivenMarkdownEntry =
 
 type H1Entry = {
   h1: InlineTypes;
+  underline?: boolean;
 } & Partial<Identifiable>;
 
 type H2Entry = {
   h2: InlineTypes;
+  underline?: boolean;
 } & Partial<Identifiable>;
 
 type H3Entry = {
@@ -176,5 +178,5 @@ type MarkdownRenderPrefix = string | ContextualMarkdownRenderPrefix;
 
 type DataDrivenMarkdownOptions = {
   unorderedListItemIndicator?: UnorderedListItemIndicator;
-  prefix?: MarkdownRenderPrefix
+  prefix?: MarkdownRenderPrefix;
 };

@@ -65,17 +65,31 @@ function getMarkdownString(
   }
 
   if ('h1' in entry) {
-    return `# ${getMarkdownString(entry.h1, options)}${getOptionalHeaderIdText(
-      entry,
-      ' '
-    )}`;
+    let header1IndicatorPrefix = entry.underline ? '' : '# ';
+    let headerText = `${header1IndicatorPrefix}${getMarkdownString(
+      entry.h1,
+      options
+    )}${getOptionalHeaderIdText(entry, ' ')}`;
+
+    if (entry.underline) {
+      headerText += '\n' + ''.padEnd(headerText.length, '=');
+    }
+
+    return headerText;
   }
 
   if ('h2' in entry) {
-    return `## ${getMarkdownString(entry.h2, options)}${getOptionalHeaderIdText(
-      entry,
-      ' '
-    )}`;
+    let header2IndicatorPrefix = entry.underline ? '' : '## ';
+    let headerText = `${header2IndicatorPrefix}${getMarkdownString(
+      entry.h2,
+      options
+    )}${getOptionalHeaderIdText(entry, ' ')}`;
+
+    if (entry.underline) {
+      headerText += '\n' + ''.padEnd(headerText.length, '-');
+    }
+
+    return headerText;
   }
 
   if ('h3' in entry) {
