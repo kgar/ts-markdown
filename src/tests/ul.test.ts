@@ -128,9 +128,48 @@ describe('given an unordered list entry', () => {
     });
   });
 
-  // TODO: Test ul > ol nesting
+  describe('with deep homogeneous nesting', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: [
+            'Given',
+            {
+              ul: [
+                { li: 'a list with' },
+                {
+                  li: [
+                    'numerous layers which',
+                    {
+                      ul: [
+                        { li: 'run deep,' },
+                        { li: 'we must pass our tests' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        { li: ['in order to', { ul: [{ li: 'meet' }] }] },
+        { li: ['expectations!'] },
+      ],
+    };
 
-  // TODO: Test ul > ul > ul
+    test('renders the nested lists with 4 spaces of indentation added to each nesting layer', () => {
+      expect(renderMarkdown([ulEntry])).toBe(
+        `- Given
+    - a list with
+    - numerous layers which
+        - run deep,
+        - we must pass our tests
+- in order to
+    - meet
+- expectations!`
+      );
+    });
+  });
 
   // TODO: Test ol > ul > ol > ul > content
 });

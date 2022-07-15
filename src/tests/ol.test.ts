@@ -130,9 +130,48 @@ describe('given an ordered list entry', () => {
     });
   });
 
-  // TODO: Test ol > ul nesting
+  describe('with deep homogeneous nesting', () => {
+    const olEntry: OrderedListEntry = {
+      ol: [
+        {
+          li: [
+            'Given',
+            {
+              ol: [
+                { li: 'a list with' },
+                {
+                  li: [
+                    'numerous layers which',
+                    {
+                      ol: [
+                        { li: 'run deep,' },
+                        { li: 'we must pass our tests' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        { li: ['in order to', { ol: [{ li: 'meet' }] }] },
+        { li: ['expectations!'] },
+      ],
+    };
 
-  // TODO: Test ol > ol > ol
+    test('renders the nested lists with 4 spaces of indentation added to each nesting layer', () => {
+      expect(renderMarkdown([olEntry])).toBe(
+        `1. Given
+    1. a list with
+    2. numerous layers which
+        1. run deep,
+        2. we must pass our tests
+2. in order to
+    1. meet
+3. expectations!`
+      );
+    });
+  });
 
   // TODO: Test ol > ul > ol > ul > content
 });
