@@ -66,6 +66,33 @@ describe('given an ordered list entry', () => {
     });
   });
 
+  describe('with inserted elements in list item', () => {
+    const olEntry: OrderedListEntry = {
+      ol: [
+        {
+          li: [
+            'Testing',
+            {
+              h1: 'This is the way 💚',
+            },
+            {
+              blockquote: 'Live, Laugh, Test Code',
+            },
+          ],
+        },
+      ],
+    };
+
+    test('renders list item with indented sub-elements', () => {
+      expect(renderMarkdown([olEntry])).toBe(
+        `1. Testing
+    # This is the way 💚
+    
+    > Live, Laugh, Test Code`
+      );
+    });
+  });
+
   // TODO: Test ol > content
 
   // TODO: Test ol > ul nesting

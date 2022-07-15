@@ -64,6 +64,33 @@ describe('given an unordered list entry', () => {
     });
   });
 
+  describe('with inserted elements in list item', () => {
+    const olEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: [
+            'Testing',
+            {
+              h1: 'This is the way 💚',
+            },
+            {
+              blockquote: 'Live, Laugh, Test Code',
+            },
+          ],
+        },
+      ],
+    };
+
+    test('renders list item with indented sub-elements', () => {
+      expect(renderMarkdown([olEntry])).toBe(
+        `- Testing
+    # This is the way 💚
+    
+    > Live, Laugh, Test Code`
+      );
+    });
+  });
+
   // TODO: Test ul > content
 
   // TODO: Test ul > ol nesting
