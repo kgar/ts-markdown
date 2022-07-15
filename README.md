@@ -99,12 +99,26 @@ Then, receive markdown!
       - ~~*problem*~~
 ```
 
+## Escaping Characters
+To properly escape characters in your strings, here are two good options:
+- Use double-backslashes
+- Use HTML encoding
+
+### Example: Double-Backslash
+TODO
+
+### Example: HTML Encoding
+TODO
+
+## Code Backtick Escaping and Padding is Automatic
+Does your code example include one or more backticks `` ` ``? This library will automatically escape the code indicators so that your backticks show like normal.
+
 ## Goals
 
 - [ ] Support same workloads as [json2md](https://github.com/IonicaBizau/json2md)
 - [ ] Have test coverage 😬
-- [ ] Support as many scenarios as feasible from [json2md](https://github.com/IonicaBizau/json2md)'s [github issues](https://github.com/IonicaBizau/json2md/issues)
-- [ ] Support nesting
+- [x] Support as many scenarios as feasible from [json2md](https://github.com/IonicaBizau/json2md)'s [github issues](https://github.com/IonicaBizau/json2md/issues)
+- [x] Support nesting
 - [ ] Support HTML fallback / escape hatching
 - [ ] Make extensible for people like me who need [Obsidian.md](https://obsidian.md/)-style linking and transclusion and for those who like encapsulating and reusing commonly needed content
 - [ ] Make extension library/libraries that can hook into this one (this is challenging, because differing versions could pose a problem)
