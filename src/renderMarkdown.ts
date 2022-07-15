@@ -8,7 +8,10 @@ export function renderMarkdown(
       typeof prefix === 'function' ? prefix(index, entry) : prefix;
 
     const result = getMarkdownString(entry);
-    const newText = typeof result === 'string' ? [result] : result;
+    const newText =
+      typeof result === 'string'
+        ? result.split('\n')
+        : result.reduce((prev, curr) => [...prev, curr.split('\n')], []);
     textStack += newText.map((text) => entryPrefix + text).join('\n');
 
     if (index < data.length - 1) {
