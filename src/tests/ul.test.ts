@@ -91,7 +91,42 @@ describe('given an unordered list entry', () => {
     });
   });
 
-  // TODO: Test ul > content
+  describe('with nested ordered lists', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: [
+            'Test',
+            {
+              ol: [{ li: 'Nest' }, { li: 'Nest Test' }],
+            },
+          ],
+        },
+        {
+          li: [
+            'This is',
+            {
+              ol: [
+                {
+                  li: { text: ['A ', { bold: 'test' }] },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    test('renders ordered list with nested ordered lists indented with 4 spaces', () => {
+      expect(renderMarkdown([ulEntry])).toBe(
+        `- Test
+    1. Nest
+    2. Nest Test
+- This is
+    1. A **test**`
+      );
+    });
+  });
 
   // TODO: Test ul > ol nesting
 
