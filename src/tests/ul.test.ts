@@ -230,4 +230,49 @@ describe('given an unordered list entry', () => {
       expect(renderMarkdown([olEntry])).toBe('- 1968\\. A great year.');
     });
   });
+
+  describe('with local option for asterisk list item indicator', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: "Let's get to work!",
+        },
+      ],
+      indicator: '*'
+    };
+
+    test('renders list with asterisk indicator', () => {
+      expect(renderMarkdown([ulEntry])).toBe("* Let's get to work!");
+    });
+  });
+
+  describe('with local option for hyphen list item indicator', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: "Let's get to work!",
+        },
+      ],
+      indicator: '-'
+    };
+
+    test('renders list with hyphen indicator', () => {
+      expect(renderMarkdown([ulEntry])).toBe("- Let's get to work!");
+    });
+  });
+
+  describe('with local option for plus sign list item indicator', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: "Let's get to work!",
+        },
+      ],
+      indicator: '+'
+    };
+
+    test('renders list with hyphen indicator', () => {
+      expect(renderMarkdown([ulEntry])).toBe("+ Let's get to work!");
+    });
+  });
 });

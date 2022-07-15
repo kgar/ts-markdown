@@ -89,6 +89,7 @@ type OrderedListEntry = {
 
 type UnorderedListEntry = {
   ul: ListItemEntry[];
+  indicator?: '-' | '*' | '+';
 };
 
 type ListItemEntry = {

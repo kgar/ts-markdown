@@ -144,20 +144,21 @@ function getMarkdownString(
   }
 
   if ('ul' in entry) {
+    let indicator = entry.indicator ?? '-';
     return entry.ul
       .map((liEntry) => {
         const li = liEntry.li;
         if (Array.isArray(li)) {
           return renderMarkdown(li, (liIndex) =>
-            liIndex === 0 ? `- ` : '    '
+            liIndex === 0 ? `${indicator} ` : '    '
           );
         }
 
         return join(getMarkdownString(li), '\n', (liIndex) =>
-          liIndex === 0 ? `- ` : '    '
+          liIndex === 0 ? `${indicator} ` : '    '
         );
       })
-      .map((x) => x.replace(/^(\-\s[\d]+)(\.)/, '$1\\.'));
+      .map((x) => x.replace(/^([\-\+\*]\s[\d]+)(\.)/, '$1\\.'));
   }
 
   if ('hr' in entry) {
