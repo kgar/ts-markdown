@@ -105,8 +105,8 @@ describe('given a text entry', () => {
     <td>14</td>
     <td>10</td>
   </tr>
-</table>`
-    }
+</table>`,
+    };
 
     test('preserves the HTML faithfully when rendering', () => {
       expect(renderMarkdown([textEntry])).toBe(`<table>
@@ -125,8 +125,50 @@ describe('given a text entry', () => {
     <td>14</td>
     <td>10</td>
   </tr>
-</table>`)
-    })
+</table>`);
+    });
+  });
 
-  })
+  describe('with two footnotes', () => {
+    const textEntry: TextEntry = {
+      text: [
+        "Here's a simple footnote,",
+        {
+          footnote: {
+            id: '1',
+            content: 'This is a footnote.',
+          },
+        },
+        " and here's a longer one.",
+        {
+          footnote: {
+            id: 'bignote',
+            content: [
+              { p: "Here's one with multiple paragraphs and code." },
+              { p: 'Indent paragraphs to include them in the footnote.' },
+              { p: { text: [{ code: '{ my code }' }] } },
+              { p: 'Add as many paragraphs as you like.' },
+            ],
+          },
+        },
+      ],
+    };
+
+    // TODO: make this test work. Switch from a hard-typed footnote crawler to a generic one. Take an unknown object type and search for footnote entries.
+    test('renders text with footnote identifiers and footnotes in order of appearance at the bottom', () => {
+      expect(renderMarkdown([textEntry])).toBe(
+        `Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+
+[^1]: This is the first footnote.
+
+[^bignote]: Here's one with multiple paragraphs and code.
+
+    Indent paragraphs to include them in the footnote.
+
+    \`\{ my code \}\`
+
+    Add as many paragraphs as you like.`
+      );
+    });
+  });
 });

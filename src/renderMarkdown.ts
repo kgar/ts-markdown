@@ -2,6 +2,36 @@ export function renderMarkdown(
   data: DataDrivenMarkdownEntry[],
   options?: DataDrivenMarkdownOptions
 ) {
+  let document = renderEntries(data, options);
+
+  let footnotes = getFootnotes(data);
+
+  if (footnotes.length > 0) {
+    document +=
+      '\n\n' +
+      footnotes
+        .map((entry) => {
+          let content = Array.isArray(entry.footnote.content)
+            ? entry.footnote.content
+            : [entry.footnote.content];
+          return renderEntries(content, options)
+            .split('\n')
+            .map((line, index) => {
+              let prefix = index === 0 ? `[^${entry.footnote.id}]: ` : '    ';
+              return prefix + line;
+            })
+            .join('\n');
+        })
+        .join('\n\n');
+  }
+
+  return document;
+}
+
+function renderEntries(
+  data: DataDrivenMarkdownEntry[],
+  options: DataDrivenMarkdownOptions
+) {
   options ??= {
     unorderedListItemIndicator: '-',
     prefix: '',
@@ -151,14 +181,14 @@ function getMarkdownString(
   if ('blockquote' in entry) {
     return typeof entry.blockquote === 'string'
       ? '> ' + getMarkdownString(entry.blockquote, options)
-      : renderMarkdown(entry.blockquote, { ...options, prefix: '> ' });
+      : renderEntries(entry.blockquote, { ...options, prefix: '> ' });
   }
 
   if ('ol' in entry) {
     return entry.ol.map((liEntry, index) => {
       const li = liEntry.li;
       if (Array.isArray(li)) {
-        return renderMarkdown(li, {
+        return renderEntries(li, {
           ...options,
           prefix: (liIndex) => {
             return liIndex === 0 ? `${index + 1}. ` : '    ';
@@ -178,7 +208,7 @@ function getMarkdownString(
       .map((liEntry) => {
         const li = liEntry.li;
         if (Array.isArray(li)) {
-          return renderMarkdown(li, {
+          return renderEntries(li, {
             ...options,
             prefix: (liIndex) => (liIndex === 0 ? `${indicator} ` : '    '),
           });
@@ -294,7 +324,7 @@ function getMarkdownString(
     return [
       buildHeaderRow(entry, cellWidths, entry.table.columns),
       buildDividerRow(cellWidths, entry.table.columns),
-      ...buildDataRows(entry, cellWidths, columnNames),
+      ...buildDataRows(entry, cellWidths, columnNames, options),
     ].join('\n');
   }
 
@@ -369,13 +399,18 @@ function getMarkdownString(
     return `${blockStart}${codeBlock}${blockEnd}`;
   }
 
+  if ('footnote' in entry) {
+    return `[^${entry.footnote.id}]`;
+  }
+
   return null;
 }
 
 function buildDataRows(
   entry: TableEntry,
   cellWidths: number[],
-  columnNames: string[]
+  columnNames: string[],
+  options: DataDrivenMarkdownOptions
 ) {
   return entry.table.rows.map((row) => {
     let cells: string[] = [];
@@ -383,7 +418,7 @@ function buildDataRows(
       cells = [
         ...row.map((cell, index) =>
           padAlign(
-            renderCellText(cell),
+            renderCellText(cell, options),
             cellWidths[index],
             entry.table.columns[index]
           )
@@ -394,7 +429,7 @@ function buildDataRows(
         (prev, curr, index) =>
           prev.concat(
             padAlign(
-              renderCellText(row[curr]) ?? '',
+              renderCellText(row[curr], options) ?? '',
               cellWidths[index],
               entry.table.columns[index]
             )
@@ -406,12 +441,15 @@ function buildDataRows(
   });
 }
 
-function renderCellText(value: string | TextEntry): string {
+function renderCellText(
+  value: string | TextEntry,
+  options: DataDrivenMarkdownOptions
+): string {
   if (typeof value === 'string') {
     return value;
   }
 
-  return renderMarkdown([value]);
+  return renderEntries([value], options);
 }
 
 function padAlign(
@@ -555,4 +593,16 @@ function renderPrefix(
   }
 
   return prefix(index);
+}
+function getFootnotes(data: DataDrivenMarkdownEntry[]) {
+  let footnotes: FootnoteEntry[] = [];
+  for (const entry of data) {
+    if (typeof entry === 'object' && 'footnote' in entry) {
+      footnotes.push(entry);
+    } else if (Array.isArray(entry)) {
+      footnotes = [...footnotes, ...getFootnotes(entry)];
+    }
+  }
+
+  return footnotes;
 }

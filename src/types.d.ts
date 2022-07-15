@@ -17,7 +17,8 @@ type DataDrivenMarkdownEntry =
   | TaskListEntry
   | TextEntry
   | UnorderedListEntry
-  | CodeBlockEntry;
+  | CodeBlockEntry
+  | FootnoteEntry;
 
 type H1Entry = {
   h1: InlineTypes;
@@ -73,6 +74,7 @@ type RichTextEntry =
   | SuperscriptEntry
   | SubscriptEntry
   | EmojiEntry
+  | FootnoteEntry
   | string;
 
 type TextEntry = {
@@ -167,6 +169,13 @@ type CodeBlockEntry = {
   codeblock: string | string[];
   fenced?: boolean | '`' | '~';
   language?: string;
+};
+
+type FootnoteEntry = {
+  footnote: {
+    id: string;
+    content: DataDrivenMarkdownEntry | DataDrivenMarkdownEntry[];
+  };
 };
 
 type ContextualMarkdownRenderPrefix = (
