@@ -171,5 +171,46 @@ describe('given an unordered list entry', () => {
     });
   });
 
-  // TODO: Test ol > ul > ol > ul > content
+  describe('with 4 levels of heterogeneous nesting and then content', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: [
+            'this',
+            {
+              ol: [
+                {
+                  li: [
+                    'is',
+                    {
+                      ul: [
+                        {
+                          li: [
+                            'a',
+                            {
+                              ol: [{ li: ['test', { blockquote: 'Dig it!' }] }],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    test('renders the nested lists with 4 spaces of indentation per level', () => {
+      expect(renderMarkdown([ulEntry])).toBe(
+        `- this
+    1. is
+        - a
+            1. test
+                > Dig it!`
+      );
+    });
+  });
 });

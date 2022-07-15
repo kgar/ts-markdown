@@ -173,5 +173,46 @@ describe('given an ordered list entry', () => {
     });
   });
 
-  // TODO: Test ol > ul > ol > ul > content
+  describe('with 4 levels of heterogeneous nesting and then content', () => {
+    const olEntry: OrderedListEntry = {
+      ol: [
+        {
+          li: [
+            'this',
+            {
+              ul: [
+                {
+                  li: [
+                    'is',
+                    {
+                      ol: [
+                        {
+                          li: [
+                            'a',
+                            {
+                              ul: [{ li: ['test', { blockquote: 'Dig it!' }] }],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    test('renders the nested lists with 4 spaces of indentation per level', () => {
+      expect(renderMarkdown([olEntry])).toBe(
+        `1. this
+    - is
+        1. a
+            - test
+                > Dig it!`
+      );
+    });
+  });
 });
