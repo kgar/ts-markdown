@@ -20,27 +20,27 @@ type DataDrivenMarkdownEntry =
   | CodeBlockEntry;
 
 type H1Entry = {
-  h1: string;
+  h1: InlineTypes;
 } & Partial<Identifiable>;
 
 type H2Entry = {
-  h2: string;
+  h2: InlineTypes;
 } & Partial<Identifiable>;
 
 type H3Entry = {
-  h3: string;
+  h3: InlineTypes;
 } & Partial<Identifiable>;
 
 type H4Entry = {
-  h4: string;
+  h4: InlineTypes;
 } & Partial<Identifiable>;
 
 type H5Entry = {
-  h5: string;
+  h5: InlineTypes;
 } & Partial<Identifiable>;
 
 type H6Entry = {
-  h6: string;
+  h6: InlineTypes;
 } & Partial<Identifiable>;
 
 type Identifiable = {
@@ -136,11 +136,11 @@ type TableRow = {
 };
 
 type TaskListEntry = {
-  tasks: (RichTextEntry | TaskEntry)[];
+  tasks: (InlineTypes | TaskEntry)[];
 };
 
 type TaskEntry = {
-  task: RichTextEntry;
+  task: InlineTypes;
   completed?: boolean;
 };
 

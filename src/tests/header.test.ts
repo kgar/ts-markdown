@@ -25,6 +25,74 @@ describe('given a header 1 entry', () => {
       );
     });
   });
+
+  describe('with a text entry containing rich text', () => {
+    const h1Entry: H1Entry = {
+      h1: {
+        text: [
+          {
+            highlight: 'Totally',
+          },
+          ' ',
+          {
+            bold: { italic: 'awesome' },
+          },
+          ' ',
+          {
+            strikethrough: 'd00d',
+          },
+        ],
+      },
+    };
+
+    test('renders h1 with rich text', () => {
+      expect(renderMarkdown([h1Entry])).toBe(
+        '# ==Totally== ***awesome*** ~~d00d~~'
+      );
+    });
+  });
+
+  describe('with rich text', () => {
+    const h1Entry: H1Entry = {
+      h1: { bold: { italic: { highlight: 'PER MY PREVIOUS EMAIL' } } },
+    };
+
+    test('renders h1 with rich text', () => {
+      expect(renderMarkdown([h1Entry])).toBe(
+        '# ***==PER MY PREVIOUS EMAIL==***'
+      );
+    });
+  });
+
+  describe('with link and image', () => {
+    const h1Entry: H1Entry = {
+      h1: {
+        text: [
+          'The magnificent power of ',
+          {
+            link: {
+              source: 'https://www.google.com',
+              text: 'Googling Placeholders',
+            },
+          },
+          ' like ',
+          {
+            img: {
+              href: 'https://via.placeholder.com/25',
+              alt: 'A 25x25 placeholder image',
+              title: 'Here is a handy placeholder image',
+            },
+          },
+        ],
+      },
+    };
+
+    test('renders h1 with link and image', () => {
+      expect(renderMarkdown([h1Entry])).toBe(
+        '# The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
+      );
+    });
+  });
 });
 
 describe('given a header 2 entry', () => {
@@ -49,6 +117,74 @@ describe('given a header 2 entry', () => {
     test('renders an h2 with the specified text and id', () => {
       expect(renderMarkdown([headerEntry])).toBe(
         `## ${headerEntry.h2} {#${headerEntry.id}}`
+      );
+    });
+  });
+
+  describe('with a text entry containing rich text', () => {
+    const h2Entry: H2Entry = {
+      h2: {
+        text: [
+          {
+            highlight: 'Totally',
+          },
+          ' ',
+          {
+            bold: { italic: 'awesome' },
+          },
+          ' ',
+          {
+            strikethrough: 'd00d',
+          },
+        ],
+      },
+    };
+
+    test('renders h2 with rich text', () => {
+      expect(renderMarkdown([h2Entry])).toBe(
+        '## ==Totally== ***awesome*** ~~d00d~~'
+      );
+    });
+  });
+
+  describe('with rich text', () => {
+    const h2Entry: H2Entry = {
+      h2: { bold: { italic: { highlight: 'PER MY PREVIOUS EMAIL' } } },
+    };
+
+    test('renders h2 with rich text', () => {
+      expect(renderMarkdown([h2Entry])).toBe(
+        '## ***==PER MY PREVIOUS EMAIL==***'
+      );
+    });
+  });
+
+  describe('with link and image', () => {
+    const h2Entry: H2Entry = {
+      h2: {
+        text: [
+          'The magnificent power of ',
+          {
+            link: {
+              source: 'https://www.google.com',
+              text: 'Googling Placeholders',
+            },
+          },
+          ' like ',
+          {
+            img: {
+              href: 'https://via.placeholder.com/25',
+              alt: 'A 25x25 placeholder image',
+              title: 'Here is a handy placeholder image',
+            },
+          },
+        ],
+      },
+    };
+
+    test('renders h2 with link and image', () => {
+      expect(renderMarkdown([h2Entry])).toBe(
+        '## The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
       );
     });
   });
@@ -79,6 +215,74 @@ describe('given a header 3 entry', () => {
       );
     });
   });
+
+  describe('with a text entry containing rich text', () => {
+    const h3Entry: H3Entry = {
+      h3: {
+        text: [
+          {
+            highlight: 'Totally',
+          },
+          ' ',
+          {
+            bold: { italic: 'awesome' },
+          },
+          ' ',
+          {
+            strikethrough: 'd00d',
+          },
+        ],
+      },
+    };
+
+    test('renders h3 with rich text', () => {
+      expect(renderMarkdown([h3Entry])).toBe(
+        '### ==Totally== ***awesome*** ~~d00d~~'
+      );
+    });
+  });
+
+  describe('with rich text', () => {
+    const h3Entry: H3Entry = {
+      h3: { bold: { italic: { highlight: 'PER MY PREVIOUS EMAIL' } } },
+    };
+
+    test('renders h3 with rich text', () => {
+      expect(renderMarkdown([h3Entry])).toBe(
+        '### ***==PER MY PREVIOUS EMAIL==***'
+      );
+    });
+  });
+
+  describe('with link and image', () => {
+    const h3Entry: H3Entry = {
+      h3: {
+        text: [
+          'The magnificent power of ',
+          {
+            link: {
+              source: 'https://www.google.com',
+              text: 'Googling Placeholders',
+            },
+          },
+          ' like ',
+          {
+            img: {
+              href: 'https://via.placeholder.com/25',
+              alt: 'A 25x25 placeholder image',
+              title: 'Here is a handy placeholder image',
+            },
+          },
+        ],
+      },
+    };
+
+    test('renders h3 with link and image', () => {
+      expect(renderMarkdown([h3Entry])).toBe(
+        '### The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
+      );
+    });
+  });
 });
 
 describe('given a header 4 entry', () => {
@@ -103,6 +307,74 @@ describe('given a header 4 entry', () => {
     test('renders an h4 with the specified text and id', () => {
       expect(renderMarkdown([headerEntry])).toBe(
         `#### ${headerEntry.h4} {#${headerEntry.id}}`
+      );
+    });
+  });
+
+  describe('with a text entry containing rich text', () => {
+    const h4Entry: H4Entry = {
+      h4: {
+        text: [
+          {
+            highlight: 'Totally',
+          },
+          ' ',
+          {
+            bold: { italic: 'awesome' },
+          },
+          ' ',
+          {
+            strikethrough: 'd00d',
+          },
+        ],
+      },
+    };
+
+    test('renders h4 with rich text', () => {
+      expect(renderMarkdown([h4Entry])).toBe(
+        '#### ==Totally== ***awesome*** ~~d00d~~'
+      );
+    });
+  });
+
+  describe('with rich text', () => {
+    const h4Entry: H4Entry = {
+      h4: { bold: { italic: { highlight: 'PER MY PREVIOUS EMAIL' } } },
+    };
+
+    test('renders h4 with rich text', () => {
+      expect(renderMarkdown([h4Entry])).toBe(
+        '#### ***==PER MY PREVIOUS EMAIL==***'
+      );
+    });
+  });
+
+  describe('with link and image', () => {
+    const h4Entry: H4Entry = {
+      h4: {
+        text: [
+          'The magnificent power of ',
+          {
+            link: {
+              source: 'https://www.google.com',
+              text: 'Googling Placeholders',
+            },
+          },
+          ' like ',
+          {
+            img: {
+              href: 'https://via.placeholder.com/25',
+              alt: 'A 25x25 placeholder image',
+              title: 'Here is a handy placeholder image',
+            },
+          },
+        ],
+      },
+    };
+
+    test('renders h4 with link and image', () => {
+      expect(renderMarkdown([h4Entry])).toBe(
+        '#### The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
       );
     });
   });
@@ -133,6 +405,74 @@ describe('given a header 5 entry', () => {
       );
     });
   });
+
+  describe('with a text entry containing rich text', () => {
+    const h5Entry: H5Entry = {
+      h5: {
+        text: [
+          {
+            highlight: 'Totally',
+          },
+          ' ',
+          {
+            bold: { italic: 'awesome' },
+          },
+          ' ',
+          {
+            strikethrough: 'd00d',
+          },
+        ],
+      },
+    };
+
+    test('renders h5 with rich text', () => {
+      expect(renderMarkdown([h5Entry])).toBe(
+        '##### ==Totally== ***awesome*** ~~d00d~~'
+      );
+    });
+  });
+
+  describe('with rich text', () => {
+    const h5Entry: H5Entry = {
+      h5: { bold: { italic: { highlight: 'PER MY PREVIOUS EMAIL' } } },
+    };
+
+    test('renders h5 with rich text', () => {
+      expect(renderMarkdown([h5Entry])).toBe(
+        '##### ***==PER MY PREVIOUS EMAIL==***'
+      );
+    });
+  });
+
+  describe('with link and image', () => {
+    const h5Entry: H5Entry = {
+      h5: {
+        text: [
+          'The magnificent power of ',
+          {
+            link: {
+              source: 'https://www.google.com',
+              text: 'Googling Placeholders',
+            },
+          },
+          ' like ',
+          {
+            img: {
+              href: 'https://via.placeholder.com/25',
+              alt: 'A 25x25 placeholder image',
+              title: 'Here is a handy placeholder image',
+            },
+          },
+        ],
+      },
+    };
+
+    test('renders h5 with link and image', () => {
+      expect(renderMarkdown([h5Entry])).toBe(
+        '##### The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
+      );
+    });
+  });
 });
 
 describe('given a header 6 entry', () => {
@@ -157,6 +497,74 @@ describe('given a header 6 entry', () => {
     test('renders an h6 with the specified text and id', () => {
       expect(renderMarkdown([headerEntry])).toBe(
         `###### ${headerEntry.h6} {#${headerEntry.id}}`
+      );
+    });
+  });
+
+  describe('with a text entry containing rich text', () => {
+    const h6Entry: H6Entry = {
+      h6: {
+        text: [
+          {
+            highlight: 'Totally',
+          },
+          ' ',
+          {
+            bold: { italic: 'awesome' },
+          },
+          ' ',
+          {
+            strikethrough: 'd00d',
+          },
+        ],
+      },
+    };
+
+    test('renders h6 with rich text', () => {
+      expect(renderMarkdown([h6Entry])).toBe(
+        '###### ==Totally== ***awesome*** ~~d00d~~'
+      );
+    });
+  });
+
+  describe('with rich text', () => {
+    const h6Entry: H6Entry = {
+      h6: { bold: { italic: { highlight: 'PER MY PREVIOUS EMAIL' } } },
+    };
+
+    test('renders h6 with rich text', () => {
+      expect(renderMarkdown([h6Entry])).toBe(
+        '###### ***==PER MY PREVIOUS EMAIL==***'
+      );
+    });
+  });
+
+  describe('with link and image', () => {
+    const h6Entry: H6Entry = {
+      h6: {
+        text: [
+          'The magnificent power of ',
+          {
+            link: {
+              source: 'https://www.google.com',
+              text: 'Googling Placeholders',
+            },
+          },
+          ' like ',
+          {
+            img: {
+              href: 'https://via.placeholder.com/25',
+              alt: 'A 25x25 placeholder image',
+              title: 'Here is a handy placeholder image',
+            },
+          },
+        ],
+      },
+    };
+
+    test('renders h6 with link and image', () => {
+      expect(renderMarkdown([h6Entry])).toBe(
+        '###### The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
       );
     });
   });
