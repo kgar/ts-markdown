@@ -271,12 +271,12 @@ describe('given an unordered list entry', () => {
       indicator: '+',
     };
 
-    test('renders list with hyphen indicator', () => {
+    test('renders list with plus sign indicator', () => {
       expect(renderMarkdown([ulEntry])).toBe("+ Let's get to work!");
     });
   });
 
-  describe('with global option for asterisk list item indicator', () => {
+  describe('with document-level option for asterisk list item indicator', () => {
     const ulEntry: UnorderedListEntry = {
       ul: [
         {
@@ -292,7 +292,7 @@ describe('given an unordered list entry', () => {
     });
   });
 
-  describe('with global option for hyphen list item indicator', () => {
+  describe('with document-level option for hyphen list item indicator', () => {
     const ulEntry: UnorderedListEntry = {
       ul: [
         {
@@ -308,7 +308,7 @@ describe('given an unordered list entry', () => {
     });
   });
 
-  describe('with global option for plus sign list item indicator', () => {
+  describe('with document-level option for plus sign list item indicator', () => {
     const ulEntry: UnorderedListEntry = {
       ul: [
         {
@@ -317,9 +317,26 @@ describe('given an unordered list entry', () => {
       ],
     };
 
-    test('renders list with hyphen indicator', () => {
+    test('renders list with plus sign indicator', () => {
       expect(
         renderMarkdown([ulEntry], { unorderedListItemIndicator: '+' })
+      ).toBe("+ Let's get to work!");
+    });
+  });
+
+  describe('with local option for plus sign and document-level option for hyphen list item indicator', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: "Let's get to work!",
+        },
+      ],
+      indicator: '+'
+    };
+
+    test('renders list with plus sign indicator', () => {
+      expect(
+        renderMarkdown([ulEntry], { unorderedListItemIndicator: '-' })
       ).toBe("+ Let's get to work!");
     });
   });
