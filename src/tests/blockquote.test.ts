@@ -87,7 +87,10 @@ describe('given a blockquote entry', () => {
           h4: 'The quarterly results look great!',
         },
         {
-          ul: ['Revenue was off the chart.', 'Profits were higher than ever.'],
+          ul: [
+            { li: 'Revenue was off the chart.' },
+            { li: 'Profits were higher than ever.' },
+          ],
         },
         {
           p: [
@@ -127,18 +130,20 @@ describe('given a blockquote entry', () => {
           blockquote: [
             {
               ol: [
-                'Revenue was off the chart.',
+                { li: 'Revenue was off the chart.' },
                 {
-                  text: [
-                    'Profits were ',
-                    { bold: { italic: 'higher' } },
-                    ' than ever.',
-                  ],
+                  li: {
+                    text: [
+                      'Profits were ',
+                      { bold: { italic: 'higher' } },
+                      ' than ever.',
+                    ],
+                  },
                 },
               ],
             },
           ],
-        }
+        },
       ],
     };
 
@@ -149,4 +154,6 @@ describe('given a blockquote entry', () => {
       );
     });
   });
+
+  // TODO: blockquote > blockquote > ol > ul > content
 });

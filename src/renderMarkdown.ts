@@ -4,8 +4,7 @@ export function renderMarkdown(
 ) {
   let textStack = '';
   for (const [index, entry] of data.entries()) {
-    let entryPrefix =
-      typeof prefix === 'function' ? prefix(index, entry) : prefix;
+    let entryPrefix = renderPrefix(prefix, index, entry);
 
     const result = getMarkdownString(entry);
     const newText =
@@ -130,16 +129,31 @@ function getMarkdownString(
   }
 
   if ('ol' in entry) {
-    return entry.ol.map(
-      (lineItem: InlineTypes, index) =>
-        `${index + 1}. ` + getMarkdownString(lineItem)
-    );
+    return entry.ol.map((liEntry, index) => {
+      const li = liEntry.li;
+      if (Array.isArray(li)) {
+        return renderMarkdown(li, (liIndex) => {
+          return liIndex === 0 ? `${index + 1}. ` : '    ';
+        });
+      }
+
+      return join(getMarkdownString(li), '\n', (liIndex) => {
+        return liIndex === 0 ? `${index + 1}. ` : '    ';
+      });
+    });
   }
 
   if ('ul' in entry) {
-    return entry.ul.map(
-      (lineItem: InlineTypes) => '- ' + getMarkdownString(lineItem)
-    );
+    return entry.ul.map((liEntry, index) => {
+      const li = liEntry.li;
+      if (Array.isArray(li)) {
+        return renderMarkdown(li, (liIndex) => (liIndex === 0 ? `- ` : '  '));
+      }
+
+      return join(getMarkdownString(li), '\n', (liIndex) =>
+        liIndex === 0 ? `- ` : '    '
+      );
+    });
   }
 
   if ('hr' in entry) {
@@ -459,4 +473,26 @@ function getCodeFenceCharacter(entry: CodeBlockEntry) {
 function getCodeFenceClose(entry: CodeBlockEntry) {
   let fenceCharacter = getCodeFenceCharacter(entry);
   return fenceCharacter + fenceCharacter + fenceCharacter;
+}
+
+function join(
+  value: string | string[],
+  delimiter: string,
+  prefix: MarkdownRenderPrefix = ''
+) {
+  return typeof value === 'string'
+    ? renderPrefix(prefix, 0) + value
+    : value.map((x, index) => renderPrefix(prefix, index) + x).join(delimiter);
+}
+
+function renderPrefix(
+  prefix: MarkdownRenderPrefix,
+  index: number,
+  entry?: DataDrivenMarkdownEntry
+) {
+  if (typeof prefix === 'string') {
+    return prefix;
+  }
+
+  return prefix(index);
 }

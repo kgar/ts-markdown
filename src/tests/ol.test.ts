@@ -3,11 +3,11 @@ import { renderMarkdown } from '../renderMarkdown';
 describe('given an ordered list entry', () => {
   describe('with a string value', () => {
     const olEntry: OrderedListEntry = {
-      ol: ['Hello, world!'],
+      ol: [{ li: 'Hello, world!' }],
     };
 
     test('renders an ordered list line with the specified string as text', () => {
-      expect(renderMarkdown([olEntry])).toBe(`1. ${olEntry.ol[0]}`);
+      expect(renderMarkdown([olEntry])).toBe(`1. ${olEntry.ol[0].li}`);
     });
   });
 
@@ -15,12 +15,16 @@ describe('given an ordered list entry', () => {
     const olEntry: OrderedListEntry = {
       ol: [
         {
-          text: [
-            'This text is ',
-            { bold: { italic: { highlight: 'so rich!' } } },
-          ],
+          li: {
+            text: [
+              'This text is ',
+              { bold: { italic: { highlight: 'so rich!' } } },
+            ],
+          },
         },
-        'And this text is contentedly unadorned',
+        {
+          li: 'And this text is contentedly unadorned',
+        },
       ],
     };
 
@@ -31,4 +35,14 @@ describe('given an ordered list entry', () => {
       );
     });
   });
+
+  // TODO: Test ol > content
+
+  // TODO: Test ol > ul nesting
+
+  // TODO: Test ol > ol nesting
+
+  // TODO: Test ol > ol > ol
+  
+  // TODO: Test ol > ul > ol > ul > content
 });

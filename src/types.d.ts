@@ -84,11 +84,15 @@ type BlockquoteEntry = {
 type InlineTypes = RichTextEntry | TextEntry;
 
 type OrderedListEntry = {
-  ol: InlineTypes[];
+  ol: ListItemEntry[];
 };
 
 type UnorderedListEntry = {
-  ul: InlineTypes[];
+  ul: ListItemEntry[];
+};
+
+type ListItemEntry = {
+  li: DataDrivenMarkdownEntry | DataDrivenMarkdownEntry[];
 };
 
 type HorizontalRuleEntry = {
@@ -162,7 +166,7 @@ type CodeBlockEntry = {
 
 type ContextualMarkdownRenderPrefix = (
   index: number,
-  entry: DataDrivenMarkdownEntry
+  entry?: DataDrivenMarkdownEntry
 ) => string;
 
 type MarkdownRenderPrefix = string | ContextualMarkdownRenderPrefix;
