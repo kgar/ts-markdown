@@ -108,7 +108,7 @@ type LinkEntry = {
 };
 
 type ParagraphEntry = {
-  p: string | (RichTextEntry | TextEntry)[];
+  p: InlineTypes;
 };
 
 type ImageEntry = {

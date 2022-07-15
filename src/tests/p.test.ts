@@ -13,7 +13,7 @@ describe('given a paragraph entry', () => {
 
   describe('with rich text', () => {
     const pEntry: ParagraphEntry = {
-      p: [{ bold: 'Hello,' }, ' ', { italic: 'world!' }],
+      p: { text: [{ bold: 'Hello,' }, ' ', { italic: 'world!' }] },
     };
 
     test('renders a paragraph line with the specified string and rich text formatting', () => {

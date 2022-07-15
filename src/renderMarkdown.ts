@@ -193,9 +193,18 @@ function getMarkdownString(
       return getMarkdownString(formatParagraphText(entry.p));
     }
 
-    return formatParagraphText(
-      entry.p.map((entry) => getMarkdownString(entry)).join('')
-    );
+    if (Array.isArray(entry.p)) {
+      return formatParagraphText(
+        entry.p.map((entry) => getMarkdownString(entry)).join('')
+      );
+    }
+
+    let result = getMarkdownString(entry.p);
+    if (typeof result === 'string') {
+      return formatParagraphText(result);
+    }
+
+    return result.map((x) => formatParagraphText(x));
   }
 
   if ('img' in entry) {

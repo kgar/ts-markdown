@@ -52,14 +52,14 @@ describe('given a blockquote entry', () => {
     const blockquoteEntry: BlockquoteEntry = {
       blockquote: [
         {
-          p: [
-            {
-              emoji: 'joy',
-            },
-            {
-              text: [': This is an admonition'],
-            },
-          ],
+          p: {
+            text: [
+              {
+                emoji: 'joy',
+              },
+              ': This is an admonition',
+            ],
+          },
         },
         {
           p: 'Be advised.',
@@ -93,20 +93,18 @@ describe('given a blockquote entry', () => {
           ],
         },
         {
-          p: [
-            {
-              italic: 'Everything',
-            },
-            {
-              text: ' is going according to ',
-            },
-            {
-              bold: 'plan',
-            },
-            {
-              text: '.',
-            },
-          ],
+          p: {
+            text: [
+              {
+                italic: 'Everything',
+              },
+              ' is going according to ',
+              {
+                bold: 'plan',
+              },
+              '.',
+            ],
+          },
         },
       ],
     };

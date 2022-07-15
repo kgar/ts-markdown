@@ -86,4 +86,47 @@ describe('given a text entry', () => {
       expect(renderMarkdown([textEntry])).toBe('H<sub>**==*2*==**</sub>O');
     });
   });
+
+  describe('with arbitrary HTML table inserted', () => {
+    const textEntry: TextEntry = {
+      text: `<table>
+  <tr>
+    <th>Person 1</th>
+    <th>Person 2</th>
+    <th>Person 3</th>
+  </tr>
+  <tr>
+    <td>Emil</td>
+    <td>Tobias</td>
+    <td>Linus</td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td>14</td>
+    <td>10</td>
+  </tr>
+</table>`
+    }
+
+    test('preserves the HTML faithfully when rendering', () => {
+      expect(renderMarkdown([textEntry])).toBe(`<table>
+  <tr>
+    <th>Person 1</th>
+    <th>Person 2</th>
+    <th>Person 3</th>
+  </tr>
+  <tr>
+    <td>Emil</td>
+    <td>Tobias</td>
+    <td>Linus</td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td>14</td>
+    <td>10</td>
+  </tr>
+</table>`)
+    })
+
+  })
 });
