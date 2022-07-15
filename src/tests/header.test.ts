@@ -94,7 +94,7 @@ describe('given a header 1 entry', () => {
     });
   });
 
-  describe('with underline set to true', () => {
+  describe('with underline set to true locally', () => {
     const h1Entry: H1Entry = {
       h1: 'This is my totally cool header',
       underline: true,
@@ -102,6 +102,33 @@ describe('given a header 1 entry', () => {
 
     test('renders header without prefixed hashtag and with equal-sign underline character length of header text', () => {
       expect(renderMarkdown([h1Entry])).toBe(
+        `This is my totally cool header
+==============================`
+      );
+    });
+  });
+
+  describe('with underline set to true at document-level', () => {
+    const h1Entry: H1Entry = {
+      h1: 'This is my totally cool header',
+    };
+
+    test('renders header without prefixed hashtag and with equal-sign underline character length of header text', () => {
+      expect(renderMarkdown([h1Entry], { useH1Underlining: true })).toBe(
+        `This is my totally cool header
+==============================`
+      );
+    });
+  });
+
+  describe('with underline set to true at local-level and false at the document level', () => {
+    const h1Entry: H1Entry = {
+      h1: 'This is my totally cool header',
+      underline: true,
+    };
+
+    test('renders header without prefixed hashtag and with equal-sign underline character length of header text', () => {
+      expect(renderMarkdown([h1Entry], { useH1Underlining: false })).toBe(
         `This is my totally cool header
 ==============================`
       );
@@ -211,6 +238,33 @@ describe('given a header 2 entry', () => {
 
     test('renders header without prefixed hashtag and with hyphen underline character length of header text', () => {
       expect(renderMarkdown([h2Entry])).toBe(
+        `This is my totally cool header
+------------------------------`
+      );
+    });
+  });
+
+  describe('with underline set to true at document-level', () => {
+    const h2Entry: H2Entry = {
+      h2: 'This is my totally cool header',
+    };
+
+    test('renders header without prefixed hashtag and with equal-sign underline character length of header text', () => {
+      expect(renderMarkdown([h2Entry], { useH2Underlining: true })).toBe(
+        `This is my totally cool header
+------------------------------`
+      );
+    });
+  });
+
+  describe('with underline set to true at local-level and false at the document level', () => {
+    const h2Entry: H2Entry = {
+      h2: 'This is my totally cool header',
+      underline: true,
+    };
+
+    test('renders header without prefixed hashtag and with equal-sign underline character length of header text', () => {
+      expect(renderMarkdown([h2Entry], { useH2Underlining: false })).toBe(
         `This is my totally cool header
 ------------------------------`
       );

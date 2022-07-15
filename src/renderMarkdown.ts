@@ -65,13 +65,14 @@ function getMarkdownString(
   }
 
   if ('h1' in entry) {
-    let header1IndicatorPrefix = entry.underline ? '' : '# ';
+    let useUnderlining = entry.underline ?? options.useH1Underlining;
+    let header1IndicatorPrefix = useUnderlining ? '' : '# ';
     let headerText = `${header1IndicatorPrefix}${getMarkdownString(
       entry.h1,
       options
     )}${getOptionalHeaderIdText(entry, ' ')}`;
 
-    if (entry.underline) {
+    if (useUnderlining) {
       headerText += '\n' + ''.padEnd(headerText.length, '=');
     }
 
@@ -79,13 +80,14 @@ function getMarkdownString(
   }
 
   if ('h2' in entry) {
-    let header2IndicatorPrefix = entry.underline ? '' : '## ';
+    let useUnderlining = entry.underline ?? options.useH2Underlining;
+    let header2IndicatorPrefix = useUnderlining ? '' : '## ';
     let headerText = `${header2IndicatorPrefix}${getMarkdownString(
       entry.h2,
       options
     )}${getOptionalHeaderIdText(entry, ' ')}`;
 
-    if (entry.underline) {
+    if (useUnderlining) {
       headerText += '\n' + ''.padEnd(headerText.length, '-');
     }
 

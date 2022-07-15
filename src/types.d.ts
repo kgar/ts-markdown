@@ -178,5 +178,7 @@ type MarkdownRenderPrefix = string | ContextualMarkdownRenderPrefix;
 
 type DataDrivenMarkdownOptions = {
   unorderedListItemIndicator?: UnorderedListItemIndicator;
+  useH1Underlining?: boolean;
+  useH2Underlining?: boolean;
   prefix?: MarkdownRenderPrefix;
 };
