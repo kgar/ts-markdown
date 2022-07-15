@@ -34,13 +34,41 @@ describe('given an unordered list entry', () => {
     });
   });
 
-  // TODO: Test ul > content
+  describe('with a nested ordered list', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [
+        { li: 'Test' },
+        {
+          li: [
+            'Nest',
+            {
+              ul: [
+                {
+                  li: {
+                    text: [{ italic: 'Nested' }, ' ', { highlight: 'Test' }],
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
 
-  // TODO: Test ul > ul nesting
+    test('renders a nested list with the sub-list indented by 4 spaces', () => {
+      expect(renderMarkdown([ulEntry])).toBe(
+        `- Test
+- Nest
+    - *Nested* ==Test==`
+      );
+    });
+  });
+
+  // TODO: Test ul > content
 
   // TODO: Test ul > ol nesting
 
   // TODO: Test ul > ul > ul
-  
+
   // TODO: Test ol > ul > ol > ul > content
 });

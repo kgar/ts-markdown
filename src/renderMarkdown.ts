@@ -10,7 +10,7 @@ export function renderMarkdown(
     const newText =
       typeof result === 'string'
         ? result.split('\n')
-        : result.reduce((prev, curr) => [...prev, curr.split('\n')], []);
+        : result.reduce((prev, curr) => [...prev, ...curr.split('\n')], []);
     textStack += newText.map((text) => entryPrefix + text).join('\n');
 
     if (index < data.length - 1) {
@@ -147,7 +147,7 @@ function getMarkdownString(
     return entry.ul.map((liEntry, index) => {
       const li = liEntry.li;
       if (Array.isArray(li)) {
-        return renderMarkdown(li, (liIndex) => (liIndex === 0 ? `- ` : '  '));
+        return renderMarkdown(li, (liIndex) => (liIndex === 0 ? `- ` : '    '));
       }
 
       return join(getMarkdownString(li), '\n', (liIndex) =>

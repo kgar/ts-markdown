@@ -36,13 +36,41 @@ describe('given an ordered list entry', () => {
     });
   });
 
+  describe('with a nested ordered list', () => {
+    const olEntry: OrderedListEntry = {
+      ol: [
+        { li: 'Test' },
+        {
+          li: [
+            'Nest',
+            {
+              ol: [
+                {
+                  li: {
+                    text: [{ italic: 'Nested' }, ' ', { highlight: 'Test' }],
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    test('renders a nested list with the sub-list indented by 4 spaces', () => {
+      expect(renderMarkdown([olEntry])).toBe(
+        `1. Test
+2. Nest
+    1. *Nested* ==Test==`
+      );
+    });
+  });
+
   // TODO: Test ol > content
 
   // TODO: Test ol > ul nesting
 
-  // TODO: Test ol > ol nesting
-
   // TODO: Test ol > ol > ol
-  
+
   // TODO: Test ol > ul > ol > ul > content
 });
