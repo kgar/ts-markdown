@@ -7,7 +7,9 @@ describe('given an array of more than one markdown entry', () => {
         p: 'Test',
       },
       {
-        p: [{ text: [{ italic: { bold: 'This is' } }] }, ' ', 'a test'],
+        p: {
+          text: [{ italic: { bold: 'This is' } }, ' ', 'a test'],
+        },
       },
       {
         p: 'Testing',
