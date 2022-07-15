@@ -144,16 +144,20 @@ function getMarkdownString(
   }
 
   if ('ul' in entry) {
-    return entry.ul.map((liEntry, index) => {
-      const li = liEntry.li;
-      if (Array.isArray(li)) {
-        return renderMarkdown(li, (liIndex) => (liIndex === 0 ? `- ` : '    '));
-      }
+    return entry.ul
+      .map((liEntry) => {
+        const li = liEntry.li;
+        if (Array.isArray(li)) {
+          return renderMarkdown(li, (liIndex) =>
+            liIndex === 0 ? `- ` : '    '
+          );
+        }
 
-      return join(getMarkdownString(li), '\n', (liIndex) =>
-        liIndex === 0 ? `- ` : '    '
-      );
-    });
+        return join(getMarkdownString(li), '\n', (liIndex) =>
+          liIndex === 0 ? `- ` : '    '
+        );
+      })
+      .map((x) => x.replace(/^(\-\s[\d]+)(\.)/, '$1\\.'));
   }
 
   if ('hr' in entry) {

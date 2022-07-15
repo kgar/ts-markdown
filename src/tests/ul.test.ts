@@ -213,4 +213,21 @@ describe('given an unordered list entry', () => {
       );
     });
   });
+
+  /**
+   * Based on this recommendation: https://www.markdownguide.org/basic-syntax/#starting-unordered-list-items-with-numbers
+   */
+  describe('starting with a number and a period', () => {
+    const olEntry: UnorderedListEntry = {
+      ul: [
+        {
+          li: '1968. A great year.',
+        },
+      ],
+    };
+
+    test('renders a list item where the first period is escaped', () => {
+      expect(renderMarkdown([olEntry])).toBe('- 1968\\. A great year.');
+    });
+  });
 });
