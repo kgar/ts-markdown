@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { renderMarkdown } from './rendering';
 
 describe('given an array of more than one markdown entry', () => {
   describe('with 3 paragraphs', () => {
