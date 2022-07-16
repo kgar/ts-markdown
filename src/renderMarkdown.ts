@@ -594,15 +594,21 @@ function renderPrefix(
 
   return prefix(index);
 }
-function getFootnotes(data: DataDrivenMarkdownEntry[]) {
-  let footnotes: FootnoteEntry[] = [];
-  for (const entry of data) {
-    if (typeof entry === 'object' && 'footnote' in entry) {
-      footnotes.push(entry);
-    } else if (Array.isArray(entry)) {
-      footnotes = [...footnotes, ...getFootnotes(entry)];
-    }
+function getFootnotes(data: unknown): FootnoteEntry[] {
+  if (Array.isArray(data)) {
+    return data.reduce((prev, curr) => [...prev, ...getFootnotes(curr)], []);
   }
 
-  return footnotes;
+  if (typeof data === 'object' && 'footnote' in data) {
+    return [data as FootnoteEntry];
+  }
+
+  if (typeof data === 'object') {
+    return Object.keys(data).reduce(
+      (prev, key) => [...prev, ...getFootnotes(data[key])],
+      []
+    );
+  }
+
+  return [];
 }
