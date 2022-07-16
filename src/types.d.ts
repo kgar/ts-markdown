@@ -18,7 +18,8 @@ type DataDrivenMarkdownEntry =
   | TextEntry
   | UnorderedListEntry
   | CodeBlockEntry
-  | FootnoteEntry;
+  | FootnoteEntry
+  | DescriptionListEntry;
 
 type H1Entry = {
   h1: InlineTypes;
@@ -178,6 +179,19 @@ type FootnoteEntry = {
   };
 };
 
+type DescriptionListEntry = {
+  dl: (DescriptionTerm | DescriptionDetails)[];
+  html?: boolean;
+};
+
+type DescriptionTerm = {
+  dt: InlineTypes;
+};
+
+type DescriptionDetails = {
+  dd: InlineTypes;
+};
+
 type ContextualMarkdownRenderPrefix = (
   index: number,
   entry?: DataDrivenMarkdownEntry
@@ -191,5 +205,6 @@ type DataDrivenMarkdownOptions = {
   useH2Underlining?: boolean;
   useSubscriptHtml?: boolean;
   useSuperscriptHtml?: boolean;
+  useDescriptionListHtml?: boolean;
   prefix?: MarkdownRenderPrefix;
 };
