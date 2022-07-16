@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../renderMarkdown';
+import { renderMarkdown } from '../rendering';
 
 describe('given a superscript entry', () => {
   describe('when html is set to true at the local-level', () => {

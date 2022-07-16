@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../renderMarkdown';
+import { renderMarkdown } from '../rendering';
 
 describe('given a footnote entry', () => {
   describe('with valid ID and one line of content', () => {

@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../renderMarkdown';
+import { renderMarkdown } from '../rendering';
 
 describe('given a link entry', () => {
   describe('with no text', () => {

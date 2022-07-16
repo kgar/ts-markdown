@@ -1,4 +1,4 @@
-import { getMarkdownString, renderEntries } from '../renderMarkdown';
+import { getMarkdownString, renderEntries } from '../rendering';
 
 export const tableRenderer = (
   entry: TableEntry,

@@ -1,4 +1,4 @@
-import { renderEntries, join, getMarkdownString } from '../renderMarkdown';
+import { renderEntries, join, getMarkdownString } from '../rendering';
 
 export const olRenderer = (
   entry: OrderedListEntry,

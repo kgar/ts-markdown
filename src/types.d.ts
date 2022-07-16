@@ -207,6 +207,8 @@ type DataDrivenMarkdownOptions = {
   useSuperscriptHtml?: boolean;
   useDescriptionListHtml?: boolean;
   prefix?: MarkdownRenderPrefix;
+  renderers?: Map<string, MarkdownRenderer>;
+  entriesToSurroundWithTwoNewlines?: Set<string>;
 };
 
 type MarkdownRenderer = (

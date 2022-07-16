@@ -1,11 +1,12 @@
-import { renderEntries, join, getMarkdownString } from '../renderMarkdown';
+import { renderEntries, join, getMarkdownString } from '../rendering';
 
 export const ulRenderer = (
   entry: UnorderedListEntry,
   options: DataDrivenMarkdownOptions
 ) => {
   if ('ul' in entry) {
-    let indicator = entry.indicator ?? options.unorderedListItemIndicator;
+    let indicator =
+      entry.indicator ?? options.unorderedListItemIndicator ?? '-';
     return entry.ul
       .map((liEntry) => {
         const li = liEntry.li;

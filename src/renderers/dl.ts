@@ -1,4 +1,4 @@
-import { getMarkdownString, join } from '../renderMarkdown';
+import { getMarkdownString, join } from '../rendering';
 
 export const dlRenderer = (
   entry: DescriptionListEntry,

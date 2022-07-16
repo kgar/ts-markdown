@@ -1,4 +1,4 @@
-import { getMarkdownString, getOptionalHeaderIdText } from '../renderMarkdown';
+import { getMarkdownString, getOptionalHeaderIdText } from '../rendering';
 
 export const h6Renderer: MarkdownRenderer = (
   entry: H6Entry,

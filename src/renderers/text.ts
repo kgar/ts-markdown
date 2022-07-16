@@ -1,4 +1,4 @@
-import { getMarkdownString } from '../renderMarkdown';
+import { getMarkdownString } from '../rendering';
 
 export const textRenderer = (
   entry: TextEntry,
