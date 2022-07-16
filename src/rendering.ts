@@ -2,6 +2,7 @@ import {
   getDefaultEntriesToSurroundWithTwoNewlines,
   getDefaultRendererMap,
 } from './defaults';
+import { appendFootnotes } from './renderers/footnote';
 
 export function renderMarkdown(
   data: DataDrivenMarkdownEntry[],
@@ -17,26 +18,7 @@ export function renderMarkdown(
 
   let document = renderEntries(data, options);
 
-  let footnotes = getFootnotes(data);
-
-  if (footnotes.length > 0) {
-    document +=
-      '\n\n' +
-      footnotes
-        .map((entry) => {
-          let content = Array.isArray(entry.footnote.content)
-            ? entry.footnote.content
-            : [entry.footnote.content];
-          return renderEntries(content, options)
-            .split('\n')
-            .map((line, index) => {
-              let prefix = index === 0 ? `[^${entry.footnote.id}]: ` : '    ';
-              return prefix + line;
-            })
-            .join('\n');
-        })
-        .join('\n\n');
-  }
+  document = appendFootnotes(data, document, options);
 
   return document;
 }
@@ -135,22 +117,4 @@ function renderPrefix(
   }
 
   return prefix(index);
-}
-function getFootnotes(data: unknown): FootnoteEntry[] {
-  if (Array.isArray(data)) {
-    return data.reduce((prev, curr) => [...prev, ...getFootnotes(curr)], []);
-  }
-
-  if (typeof data === 'object' && 'footnote' in data) {
-    return [data as FootnoteEntry];
-  }
-
-  if (typeof data === 'object') {
-    return Object.keys(data).reduce(
-      (prev, key) => [...prev, ...getFootnotes(data[key])],
-      []
-    );
-  }
-
-  return [];
 }
