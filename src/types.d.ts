@@ -208,3 +208,8 @@ type DataDrivenMarkdownOptions = {
   useDescriptionListHtml?: boolean;
   prefix?: MarkdownRenderPrefix;
 };
+
+type MarkdownRenderer = (
+  entry: DataDrivenMarkdownEntry,
+  options: DataDrivenMarkdownOptions
+) => string | string[];
