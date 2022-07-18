@@ -156,15 +156,17 @@ type EmojiEntry = {
   emoji: string;
 };
 
-type SuperscriptEntry = {
-  sup: RichTextEntry;
+type CanFallbackToHtml = {
   html?: boolean;
 };
 
+type SuperscriptEntry = {
+  sup: RichTextEntry;
+} & CanFallbackToHtml;
+
 type SubscriptEntry = {
   sub: RichTextEntry;
-  html?: boolean;
-};
+} & CanFallbackToHtml;
 
 type CodeBlockEntry = {
   codeblock: string | string[];

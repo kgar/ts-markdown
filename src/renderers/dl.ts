@@ -1,3 +1,4 @@
+import { DL } from '../constants';
 import { getMarkdownString, join } from '../rendering';
 
 export const dlRenderer = (
@@ -6,15 +7,15 @@ export const dlRenderer = (
 ) => {
   if ('dl' in entry) {
     let useHtml = options.useDescriptionListHtml ?? entry.html;
-    let termStart = useHtml ? '    <dt>' : '';
-    let termEnd = useHtml ? '</dt>' : '';
-    let descriptionStart = useHtml ? '    <dd>' : ': ';
-    let descriptionEnd = useHtml ? '</dd>' : '';
+    let termStart = useHtml ? `    ${DL.HTML_TERM_OPEN}` : '';
+    let termEnd = useHtml ? DL.HTML_TERM_CLOSE : '';
+    let descriptionStart = useHtml ? `    ${DL.HTML_DESCRIPTION_OPEN}` : ': ';
+    let descriptionEnd = useHtml ? DL.HTML_DESCRIPTION_CLOSE : '';
 
     let lines: string[] = [];
 
     if (useHtml) {
-      lines.push('<dl>');
+      lines.push(DL.HTML_LIST_OPEN);
     }
 
     let lastItem: string = undefined;
@@ -43,7 +44,7 @@ export const dlRenderer = (
     }
 
     if (useHtml) {
-      lines.push('</dl>');
+      lines.push(DL.HTML_LIST_CLOSE);
     }
 
     return lines.join('\n');

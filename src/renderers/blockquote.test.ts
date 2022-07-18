@@ -152,6 +152,4 @@ describe('given a blockquote entry', () => {
       );
     });
   });
-
-  // TODO: blockquote > blockquote > ol > ul > content
 });
