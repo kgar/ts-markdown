@@ -1,4 +1,3 @@
-import { BLOCKQUOTE } from '../constants';
 import { getMarkdownString, renderEntries } from '../rendering';
 
 export const blockquoteRenderer = (
@@ -7,8 +6,8 @@ export const blockquoteRenderer = (
 ) => {
   if ('blockquote' in entry) {
     return typeof entry.blockquote === 'string'
-      ? BLOCKQUOTE.PREFIX + getMarkdownString(entry.blockquote, options)
-      : renderEntries(entry.blockquote, { ...options, prefix: BLOCKQUOTE.PREFIX });
+      ? '> ' + getMarkdownString(entry.blockquote, options)
+      : renderEntries(entry.blockquote, { ...options, prefix: '> ' });
   }
 
   throw new Error('Entry is not a blockquote entry. Unable to render.');

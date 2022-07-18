@@ -1,8 +1,9 @@
-import { CODEBLOCK } from '../constants';
-
-export const codeblockRenderer = (entry: CodeBlockEntry) => {
+export const codeblockRenderer = (
+  entry: CodeBlockEntry,
+  options: DataDrivenMarkdownOptions
+) => {
   if ('codeblock' in entry) {
-    let linePrefix = entry.fenced ? '' : CODEBLOCK.NON_FENCED_PREFIX;
+    let linePrefix = entry.fenced ? '' : '    ';
     let blockStart = entry.fenced ? getCodeFenceOpen(entry) + '\n' : '';
     let blockEnd = entry.fenced ? '\n' + getCodeFenceClose(entry) : '';
 
@@ -24,9 +25,7 @@ function getCodeFenceOpen(entry: CodeBlockEntry) {
 }
 
 function getCodeFenceCharacter(entry: CodeBlockEntry) {
-  return entry.fenced === CODEBLOCK.FENCE_INDICATOR_TILDE
-    ? CODEBLOCK.FENCE_INDICATOR_TILDE
-    : CODEBLOCK.FENCE_INDICATOR_BACKTICK;
+  return entry.fenced === '~' ? '~' : '`';
 }
 
 function getCodeFenceClose(entry: CodeBlockEntry) {
