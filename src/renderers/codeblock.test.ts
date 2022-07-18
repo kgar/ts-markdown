@@ -170,4 +170,22 @@ console.log('hello, world!')
 \`\`\``);
     });
   });
+
+  describe('with an Obsidian-esque identifier appended', () => {
+    const codeBlockEntry: CodeBlockEntry = {
+      codeblock: `const hello = 'hello';
+const world = 'world';
+console.error(hello + ', ' + world + '!')`,
+      append: '^heyo',
+    };
+
+    test('renders a code block indented by 4 spaces', () => {
+      expect(renderMarkdown([codeBlockEntry])).toBe(
+        `    const hello = 'hello';
+    const world = 'world';
+    console.error(hello + ', ' + world + '!')
+^heyo`
+      );
+    });
+  });
 });

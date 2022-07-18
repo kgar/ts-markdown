@@ -47,4 +47,16 @@ describe('given a paragraph entry', () => {
       expect(renderMarkdown([pEntry])).toBe('Hello, world!');
     });
   });
+
+  describe('with a single string and an Obsidian-esque identifier appended', () => {
+    const pEntry: ParagraphEntry = {
+      p: 'Hello, world!',
+      append: '^an-id',
+    };
+
+    test('renders a paragraph line with the specified string and an identifier just below', () => {
+      expect(renderMarkdown([pEntry])).toBe(`${pEntry.p}
+^an-id`);
+    });
+  });
 });

@@ -215,4 +215,16 @@ describe('given an ordered list entry', () => {
       );
     });
   });
+
+  describe('with a string value and an Obsidian-esque identifier appended', () => {
+    const olEntry: OrderedListEntry = {
+      ol: [{ li: 'Hello, world!' }],
+      append: '^hai',
+    };
+
+    test('renders an ordered list line with the specified string as text and the identifier just below', () => {
+      expect(renderMarkdown([olEntry])).toBe(`1. ${olEntry.ol[0].li}
+^hai`);
+    });
+  });
 });

@@ -152,4 +152,20 @@ describe('given a blockquote entry', () => {
       );
     });
   });
+
+  describe('given a blockquote with an Obsidian-esque identifier tacked onto the end of it', () => {
+    const input: BlockquoteEntry = {
+      blockquote: [{ h1: 'Hello, world!' }, { p: 'This is a blockquote!' }],
+      append: '^my-obsidian-id',
+    };
+
+    const output = `> # Hello, world!
+> 
+> This is a blockquote!
+^my-obsidian-id`;
+
+    test('renders the blockquote with the identifier just below it', () => {
+      expect(renderMarkdown([input])).toBe(output);
+    });
+  });
 });

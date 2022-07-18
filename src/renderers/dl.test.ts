@@ -249,4 +249,26 @@ Second Term
       );
     });
   });
+
+  describe('given a term and details with an Obsidian-esque identifier appended', () => {
+    const dlEntry: DescriptionListEntry = {
+      dl: [
+        {
+          dt: 'First Term',
+        },
+        {
+          dd: 'This is the definition of the first term.',
+        },
+      ],
+      append: '^yar',
+    };
+
+    test('renders term and details markdown with identifier just below', () => {
+      expect(renderMarkdown([dlEntry])).toBe(
+        `First Term
+: This is the definition of the first term.
+^yar`
+      );
+    });
+  });
 });

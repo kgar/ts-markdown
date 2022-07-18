@@ -331,13 +331,25 @@ describe('given an unordered list entry', () => {
           li: "Let's get to work!",
         },
       ],
-      indicator: '+'
+      indicator: '+',
     };
 
     test('renders list with plus sign indicator', () => {
       expect(
         renderMarkdown([ulEntry], { unorderedListItemIndicator: '-' })
       ).toBe("+ Let's get to work!");
+    });
+  });
+
+  describe('with a string value and an Obsidian-esque identifier appended', () => {
+    const ulEntry: UnorderedListEntry = {
+      ul: [{ li: 'Hello, world!' }],
+      append: '^still-here',
+    };
+
+    test('renders an unordered list line with hyphen and the specified string as text and an identifier just below', () => {
+      expect(renderMarkdown([ulEntry])).toBe(`- ${ulEntry.ul[0].li}
+^still-here`);
     });
   });
 });

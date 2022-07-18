@@ -134,4 +134,18 @@ describe('given a header 2 entry', () => {
       );
     });
   });
+
+  describe('with a string value and appended with an Obsidianesque identifier', () => {
+    const entry: H2Entry = {
+      h2: 'Hello, world!',
+      append: '^la-dee-da',
+    };
+
+    test('renders an h2 markdown line with the specified string as text', () => {
+      expect(renderMarkdown([entry])).toBe(
+        `## ${entry.h2}
+^la-dee-da`
+      );
+    });
+  });
 });

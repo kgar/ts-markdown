@@ -1,4 +1,4 @@
-import { renderMarkdown } from "../rendering";
+import { renderMarkdown } from '../rendering';
 
 describe('given a header 1 entry', () => {
   describe('with a string value', () => {
@@ -131,6 +131,20 @@ describe('given a header 1 entry', () => {
       expect(renderMarkdown([h1Entry], { useH1Underlining: false })).toBe(
         `This is my totally cool header
 ==============================`
+      );
+    });
+  });
+
+  describe('with a string value and appended with an Obsidianesque identifier', () => {
+    const entry: H1Entry = {
+      h1: 'Hello, world!',
+      append: '^la-dee-da',
+    };
+
+    test('renders an h1 markdown line with the specified string as text', () => {
+      expect(renderMarkdown([entry])).toBe(
+        `# ${entry.h1}
+^la-dee-da`
       );
     });
   });

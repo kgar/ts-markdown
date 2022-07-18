@@ -279,4 +279,27 @@ describe('given a table entry', () => {
       );
     });
   });
+
+  describe('with columns and array-index rows and an Obsidian-esque identifier appended', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['Col1', 'Col2'],
+        rows: [
+          ['Row1', 'Row2'],
+          ['Row3', 'Row4 is longer'],
+        ],
+      },
+      append: '^i-just-keep-showing-up-at-places'
+    };
+
+    test('renders a markdown table with justified cell widths and an identifier just below', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| Col1 | Col2           |
+| ---- | -------------- |
+| Row1 | Row2           |
+| Row3 | Row4 is longer |
+^i-just-keep-showing-up-at-places`
+      );
+    });
+  });
 });

@@ -24,28 +24,34 @@ type DataDrivenMarkdownEntry =
 type H1Entry = {
   h1: InlineTypes;
   underline?: boolean;
-} & Partial<Identifiable>;
+} & Partial<Identifiable> &
+  Appendable;
 
 type H2Entry = {
   h2: InlineTypes;
   underline?: boolean;
-} & Partial<Identifiable>;
+} & Partial<Identifiable> &
+  Appendable;
 
 type H3Entry = {
   h3: InlineTypes;
-} & Partial<Identifiable>;
+} & Partial<Identifiable> &
+  Appendable;
 
 type H4Entry = {
   h4: InlineTypes;
-} & Partial<Identifiable>;
+} & Partial<Identifiable> &
+  Appendable;
 
 type H5Entry = {
   h5: InlineTypes;
-} & Partial<Identifiable>;
+} & Partial<Identifiable> &
+  Appendable;
 
 type H6Entry = {
   h6: InlineTypes;
-} & Partial<Identifiable>;
+} & Partial<Identifiable> &
+  Appendable;
 
 type Identifiable = {
   id: string;
@@ -84,18 +90,22 @@ type TextEntry = {
 
 type BlockquoteEntry = {
   blockquote: string | DataDrivenMarkdownEntry[];
+} & Appendable;
+
+type Appendable = {
+  append?: string;
 };
 
 type InlineTypes = RichTextEntry | TextEntry;
 
 type OrderedListEntry = {
   ol: ListItemEntry[];
-};
+} & Appendable;
 
 type UnorderedListEntry = {
   ul: ListItemEntry[];
   indicator?: UnorderedListItemIndicator;
-};
+} & Appendable;
 
 type UnorderedListItemIndicator = '-' | '*' | '+';
 
@@ -105,7 +115,7 @@ type ListItemEntry = {
 
 type HorizontalRuleEntry = {
   hr: '' | null | undefined | true;
-};
+} & Appendable;
 
 type CodeEntry = {
   code: string;
@@ -117,7 +127,7 @@ type LinkEntry = {
 
 type ParagraphEntry = {
   p: InlineTypes;
-};
+} & Appendable;
 
 type ImageEntry = {
   img: {
@@ -132,7 +142,7 @@ type TableEntry = {
     columns: (TableColumn | string)[];
     rows: (TableRow | (TextEntry | string)[])[];
   };
-};
+} & Appendable;
 
 type TableColumn = {
   name: string;
@@ -145,7 +155,7 @@ type TableRow = {
 
 type TaskListEntry = {
   tasks: (InlineTypes | TaskEntry)[];
-};
+} & Appendable;
 
 type TaskEntry = {
   task: InlineTypes;
@@ -172,7 +182,7 @@ type CodeBlockEntry = {
   codeblock: string | string[];
   fenced?: boolean | '`' | '~';
   language?: string;
-};
+} & Appendable;
 
 type FootnoteEntry = {
   footnote: {
@@ -184,7 +194,7 @@ type FootnoteEntry = {
 type DescriptionListEntry = {
   dl: (DescriptionTerm | DescriptionDetails)[];
   html?: boolean;
-};
+} & Appendable;
 
 type DescriptionTerm = {
   dt: InlineTypes;
@@ -221,7 +231,7 @@ type DataDrivenMarkdownOptions = {
     document: string,
     options: DataDrivenMarkdownOptions
   ) => string;
-  useCodeblockFencing?: boolean | '`' | '~'
+  useCodeblockFencing?: boolean | '`' | '~';
 };
 
 type MarkdownRenderer = (

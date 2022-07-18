@@ -52,9 +52,20 @@ export function renderEntries(
         : result.reduce((prev, curr) => [...prev, ...curr.split('\n')], []);
     textStack += newText.map((text) => entryPrefix + text).join('\n');
 
+    let appendContent =
+      typeof entry === 'object' && 'append' in entry
+        ? getMarkdownString(entry.append, options)
+        : '';
+
+    if (appendContent !== '') {
+      textStack += '\n' + appendContent;
+    }
+
     if (index < data.length - 1) {
       textStack += '\n';
+    }
 
+    if (index < data.length - 1) {
       if (requiresAdditionalNewline(entry, options)) {
         textStack += entryPrefix;
         textStack += '\n';
