@@ -2,10 +2,13 @@ export const codeblockRenderer = (
   entry: CodeBlockEntry,
   options: DataDrivenMarkdownOptions
 ) => {
+  const fencing = options.useCodeblockFencing ?? entry.fenced;
   if ('codeblock' in entry) {
-    let linePrefix = entry.fenced ? '' : '    ';
-    let blockStart = entry.fenced ? getCodeFenceOpen(entry) + '\n' : '';
-    let blockEnd = entry.fenced ? '\n' + getCodeFenceClose(entry) : '';
+    let linePrefix = fencing ? '' : '    ';
+    let blockStart = fencing
+      ? getCodeFenceOpen(fencing, entry.language) + '\n'
+      : '';
+    let blockEnd = fencing ? '\n' + getCodeFenceClose(entry, options) : '';
 
     let codeBlock =
       typeof entry.codeblock === 'string'
@@ -18,17 +21,22 @@ export const codeblockRenderer = (
   throw new Error('Entry is not a codeblock entry. Unable to render.');
 };
 
-function getCodeFenceOpen(entry: CodeBlockEntry) {
-  let fenceCharacter = getCodeFenceCharacter(entry);
-  let languageCharacter = entry.language ?? '';
+function getCodeFenceOpen(fencing: boolean | '`' | '~', language?: string) {
+  let fenceCharacter = getCodeFenceCharacter(fencing);
+  let languageCharacter = language ?? '';
   return fenceCharacter + fenceCharacter + fenceCharacter + languageCharacter;
 }
 
-function getCodeFenceCharacter(entry: CodeBlockEntry) {
-  return entry.fenced === '~' ? '~' : '`';
+function getCodeFenceCharacter(fencing: boolean | '`' | '~') {
+  return fencing === '~' ? '~' : '`';
 }
 
-function getCodeFenceClose(entry: CodeBlockEntry) {
-  let fenceCharacter = getCodeFenceCharacter(entry);
+function getCodeFenceClose(
+  entry: CodeBlockEntry,
+  options: DataDrivenMarkdownOptions
+) {
+  let fenceCharacter = getCodeFenceCharacter(
+    entry.fenced ?? options.useCodeblockFencing
+  );
   return fenceCharacter + fenceCharacter + fenceCharacter;
 }

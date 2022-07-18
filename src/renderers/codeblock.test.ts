@@ -157,4 +157,17 @@ console.error(hello + ', ' + world + '!')
       );
     });
   });
+
+  describe('given document-level code fencing set to true', () => {
+    const codeblockEntry: CodeBlockEntry = {
+      codeblock: "console.log('hello, world!')",
+    };
+
+    test('renders codeblock with fencing', () => {
+      expect(renderMarkdown([codeblockEntry], { useCodeblockFencing: true }))
+        .toBe(`\`\`\`
+console.log('hello, world!')
+\`\`\``);
+    });
+  });
 });

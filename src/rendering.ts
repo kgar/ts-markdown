@@ -18,7 +18,19 @@ export function renderMarkdown(
 
   let document = renderEntries(data, options);
 
+  document = options.applyCompletedDocumentChangesPreFootnotes
+    ? options.applyCompletedDocumentChangesPreFootnotes(data, document, options)
+    : document;
+
   document = appendFootnotes(data, document, options);
+
+  document = options.applyCompletedDocumentChangesPostFootnotes
+    ? options.applyCompletedDocumentChangesPostFootnotes(
+        data,
+        document,
+        options
+      )
+    : document;
 
   return document;
 }

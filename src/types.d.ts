@@ -211,6 +211,17 @@ type DataDrivenMarkdownOptions = {
   prefix?: MarkdownRenderPrefix;
   renderers?: Map<string, MarkdownRenderer>;
   entriesToSurroundWithTwoNewlines?: Set<string>;
+  applyCompletedDocumentChangesPreFootnotes?: (
+    data: DataDrivenMarkdownEntry[],
+    document: string,
+    options: DataDrivenMarkdownOptions
+  ) => string;
+  applyCompletedDocumentChangesPostFootnotes?: (
+    data: DataDrivenMarkdownEntry[],
+    document: string,
+    options: DataDrivenMarkdownOptions
+  ) => string;
+  useCodeblockFencing?: boolean | '`' | '~'
 };
 
 type MarkdownRenderer = (
