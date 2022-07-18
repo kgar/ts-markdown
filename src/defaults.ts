@@ -27,7 +27,9 @@ import { tasksRenderer } from './renderers/tasks';
 import { textRenderer } from './renderers/text';
 import { ulRenderer } from './renderers/ul';
 
-export function getDefaultRendererMap(): Map<string, MarkdownRenderer> {
+export function getRenderers(
+  customRenderers: [string, MarkdownRenderer][] = []
+): Map<string, MarkdownRenderer> {
   return new Map<string, MarkdownRenderer>([
     ['string', stringRenderer],
     ['h1', h1Renderer],
@@ -57,6 +59,7 @@ export function getDefaultRendererMap(): Map<string, MarkdownRenderer> {
     ['tasks', tasksRenderer],
     ['text', textRenderer],
     ['ul', ulRenderer],
+    ...customRenderers,
   ]);
 }
 

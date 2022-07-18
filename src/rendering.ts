@@ -1,6 +1,6 @@
 import {
   getDefaultEntriesToSurroundWithTwoNewlines,
-  getDefaultRendererMap,
+  getRenderers,
 } from './defaults';
 import { appendFootnotes } from './renderers/footnote';
 
@@ -12,7 +12,7 @@ export function renderMarkdown(
     prefix: '',
   };
 
-  options.renderers ??= getDefaultRendererMap();
+  options.renderers ??= getRenderers();
   options.entriesToSurroundWithTwoNewlines ??=
     getDefaultEntriesToSurroundWithTwoNewlines();
 
