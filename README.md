@@ -1,4 +1,4 @@
-# Data-Driven Markdown Generator 💽 ➡ 🏭 ➡ 📄
+# Data-Driven Markdown 💽 ➡ 🏭 ➡ 📄
 
 > Given markdown as JSON, render markdown! What could go wrong?
 
@@ -9,7 +9,7 @@
 Given some JSON data, call the `render()` function:
 ```js
 let data = [
-  { h1: 'Data-Driven Markdown Generator' },
+  { h1: 'Data-Driven Markdown' },
   {
     blockquote: [
       {
@@ -77,7 +77,7 @@ console.log(render(data)); // It makes markdown! 👇
 Then, receive markdown!
 
 ```md
-# Data-Driven Markdown Generator
+# Data-Driven Markdown
 
 > That is ***data-driven*** markdown geenration, ~~not something else.~~
 > 
