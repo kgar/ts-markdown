@@ -12,6 +12,7 @@ export const tableRenderer = (
       []
     );
 
+    let minColumnWidth = 3;
     let cellWidths = [];
     for (let i = 0; i < columnCount; i++) {
       let column = entry.table.columns[i];
@@ -39,7 +40,7 @@ export const tableRenderer = (
       ];
 
       cellWidths[i] = columnCellTexts.reduce(
-        (prev, curr) => Math.max(prev, curr),
+        (prev, curr) => Math.max(minColumnWidth, prev, curr),
         0
       );
     }

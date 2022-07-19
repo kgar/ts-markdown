@@ -289,7 +289,7 @@ describe('given a table entry', () => {
           ['Row3', 'Row4 is longer'],
         ],
       },
-      append: '^i-just-keep-showing-up-at-places'
+      append: '^i-just-keep-showing-up-at-places',
     };
 
     test('renders a markdown table with justified cell widths and an identifier just below', () => {
@@ -300,6 +300,23 @@ describe('given a table entry', () => {
 | Row3 | Row4 is longer |
 ^i-just-keep-showing-up-at-places`
       );
+    });
+  });
+
+  describe('with single-character header names and cells', () => {
+    const tableEntry: TableEntry = {
+      table: {
+        columns: ['A', 'B'],
+        rows: [['C', 'D']],
+      },
+    };
+
+    test('renders 3 hyphens for each column on the header separator row', () => {
+      expect(renderMarkdown([tableEntry])).toBe(
+        `| A   | B   |
+| --- | --- |
+| C   | D   |`
+      )
     });
   });
 });
