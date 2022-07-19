@@ -1,5 +1,5 @@
 import {
-  getDefaultEntriesToSurroundWithTwoNewlines,
+  getBlockLevelEntries,
   getRenderers,
 } from './defaults';
 import { appendFootnotes } from './renderers/footnote';
@@ -13,8 +13,8 @@ export function renderMarkdown(
   };
 
   options.renderers ??= getRenderers();
-  options.entriesToSurroundWithTwoNewlines ??=
-    getDefaultEntriesToSurroundWithTwoNewlines();
+  options.blockLevelEntries ??=
+    getBlockLevelEntries();
 
   let document = renderEntries(data, options);
 
@@ -54,7 +54,7 @@ export function renderEntries(
 
     let appendContent =
       typeof entry === 'object' && 'append' in entry
-        ? getMarkdownString(entry.append, options)
+        ? getMarkdownString((entry as Appendable).append, options)
         : '';
 
     if (appendContent !== '') {
@@ -83,7 +83,7 @@ function requiresAdditionalNewline(
     return false;
   }
   return Object.keys(entry).find((x) =>
-    options.entriesToSurroundWithTwoNewlines.has(x)
+    options.blockLevelEntries.has(x)
   );
 }
 

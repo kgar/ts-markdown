@@ -196,39 +196,4 @@ describe('given some common aspect to these tests', () => {
       );
     });
   });
-
-  describe('with a custom Obsidian transclusion entry', () => {
-    const entries: DataDrivenMarkdownEntry[] = [
-      { h1: 'Hello, world!' },
-      {
-        blockquote:
-          'This is a document which contains cool stuff such as the following:',
-      },
-      {
-        transclusion: {
-          path: 'Path/To/My/Transcluded/Content',
-        },
-      },
-    ];
-
-    type TransclusionEntry = {
-      transclusion: {
-        path: string;
-      };
-    };
-
-    const options: DataDrivenMarkdownOptions = {
-      renderers: getRenderers(),
-    };
-
-    test('renders transclusion markdown as configured', () => {
-      expect(renderMarkdown(entries, options)).toBe(
-        `# Hello, world!
-
-> This is a document which contains cool stuff such as the following:
-
-![[Path/To/My/Transcluded/Content]]`
-      );
-    });
-  });
 });

@@ -63,7 +63,9 @@ export function getRenderers(
   ]);
 }
 
-export function getDefaultEntriesToSurroundWithTwoNewlines(): Set<string> {
+export function getBlockLevelEntries(
+  customEntries: string[] = []
+): Set<string> {
   return new Set<string>([
     'p',
     'blockquote',
@@ -78,5 +80,6 @@ export function getDefaultEntriesToSurroundWithTwoNewlines(): Set<string> {
     'ul',
     'ol',
     'dl',
+    ...customEntries,
   ]);
 }

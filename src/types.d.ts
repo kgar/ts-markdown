@@ -1,57 +1,45 @@
-type DataDrivenMarkdownEntry =
-  | BlockquoteEntry
-  | CodeEntry
-  | H1Entry
-  | H2Entry
-  | H3Entry
-  | H4Entry
-  | H5Entry
-  | H6Entry
-  | HorizontalRuleEntry
-  | ImageEntry
-  | LinkEntry
-  | OrderedListEntry
-  | ParagraphEntry
-  | RichTextEntry
-  | TableEntry
-  | TaskListEntry
-  | TextEntry
-  | UnorderedListEntry
-  | CodeBlockEntry
-  | FootnoteEntry
-  | DescriptionListEntry;
+/**
+ * A marker interface that designates a type as eligible to pass through markdown rendering.
+ */
+interface DataDrivenMarkdownEntry {}
 
 type H1Entry = {
   h1: InlineTypes;
   underline?: boolean;
 } & Partial<Identifiable> &
-  Appendable;
+  Appendable &
+  DataDrivenMarkdownEntry;
 
 type H2Entry = {
   h2: InlineTypes;
   underline?: boolean;
 } & Partial<Identifiable> &
-  Appendable;
+  Appendable &
+  DataDrivenMarkdownEntry;
 
 type H3Entry = {
   h3: InlineTypes;
 } & Partial<Identifiable> &
-  Appendable;
+  Appendable &
+  DataDrivenMarkdownEntry;
 
 type H4Entry = {
   h4: InlineTypes;
 } & Partial<Identifiable> &
-  Appendable;
+  Appendable &
+  DataDrivenMarkdownEntry;
 
 type H5Entry = {
   h5: InlineTypes;
 } & Partial<Identifiable> &
-  Appendable;
+  Appendable &
+  DataDrivenMarkdownEntry;
 
 type H6Entry = {
   h6: InlineTypes;
 } & Partial<Identifiable> &
-  Appendable;
+  Appendable &
+  DataDrivenMarkdownEntry;
 
 type Identifiable = {
   id: string;
@@ -59,19 +47,19 @@ type Identifiable = {
 
 type BoldEntry = {
   bold: RichTextEntry;
-};
+} & DataDrivenMarkdownEntry;
 
 type ItalicEntry = {
   italic: RichTextEntry;
-};
+} & DataDrivenMarkdownEntry;
 
 type StrikethroughEntry = {
   strikethrough: RichTextEntry;
-};
+} & DataDrivenMarkdownEntry;
 
 type HighlightEntry = {
   highlight: RichTextEntry;
-};
+} & DataDrivenMarkdownEntry;
 
 type RichTextEntry =
   | ItalicEntry
@@ -90,7 +78,8 @@ type TextEntry = {
 
 type BlockquoteEntry = {
   blockquote: string | DataDrivenMarkdownEntry[];
-} & Appendable;
+} & Appendable &
+  DataDrivenMarkdownEntry;
 
 type Appendable = {
   append?: string;
@@ -100,12 +89,14 @@ type InlineTypes = RichTextEntry | TextEntry;
 
 type OrderedListEntry = {
   ol: ListItemEntry[];
-} & Appendable;
+} & Appendable &
+  DataDrivenMarkdownEntry;
 
 type UnorderedListEntry = {
   ul: ListItemEntry[];
   indicator?: UnorderedListItemIndicator;
-} & Appendable;
+} & Appendable &
+  DataDrivenMarkdownEntry;
 
 type UnorderedListItemIndicator = '-' | '*' | '+';
 
@@ -115,19 +106,21 @@ type ListItemEntry = {
 
 type HorizontalRuleEntry = {
   hr: '' | null | undefined | true;
-} & Appendable;
+} & Appendable &
+  DataDrivenMarkdownEntry;
 
 type CodeEntry = {
   code: string;
-};
+} & DataDrivenMarkdownEntry;
 
 type LinkEntry = {
   link: { source: string; text?: string; title?: string };
-};
+} & DataDrivenMarkdownEntry;
 
 type ParagraphEntry = {
   p: InlineTypes;
-} & Appendable;
+} & Appendable &
+  DataDrivenMarkdownEntry;
 
 type ImageEntry = {
   img: {
@@ -135,14 +128,15 @@ type ImageEntry = {
     alt?: string;
     title?: string;
   };
-};
+} & DataDrivenMarkdownEntry;
 
 type TableEntry = {
   table: {
     columns: (TableColumn | string)[];
     rows: (TableRow | (TextEntry | string)[])[];
   };
-} & Appendable;
+} & Appendable &
+  DataDrivenMarkdownEntry;
 
 type TableColumn = {
   name: string;
@@ -155,7 +149,8 @@ type TableRow = {
 
 type TaskListEntry = {
   tasks: (InlineTypes | TaskEntry)[];
-} & Appendable;
+} & Appendable &
+  DataDrivenMarkdownEntry;
 
 type TaskEntry = {
   task: InlineTypes;
@@ -164,7 +159,7 @@ type TaskEntry = {
 
 type EmojiEntry = {
   emoji: string;
-};
+} & DataDrivenMarkdownEntry;
 
 type CanFallbackToHtml = {
   html?: boolean;
@@ -172,29 +167,33 @@ type CanFallbackToHtml = {
 
 type SuperscriptEntry = {
   sup: RichTextEntry;
-} & CanFallbackToHtml;
+} & CanFallbackToHtml &
+  DataDrivenMarkdownEntry;
 
 type SubscriptEntry = {
   sub: RichTextEntry;
-} & CanFallbackToHtml;
+} & CanFallbackToHtml &
+  DataDrivenMarkdownEntry;
 
 type CodeBlockEntry = {
   codeblock: string | string[];
   fenced?: boolean | '`' | '~';
   language?: string;
-} & Appendable;
+} & Appendable &
+  DataDrivenMarkdownEntry;
 
 type FootnoteEntry = {
   footnote: {
     id: string;
     content: DataDrivenMarkdownEntry | DataDrivenMarkdownEntry[];
   };
-};
+} & DataDrivenMarkdownEntry;
 
 type DescriptionListEntry = {
   dl: (DescriptionTerm | DescriptionDetails)[];
   html?: boolean;
-} & Appendable;
+} & Appendable &
+  DataDrivenMarkdownEntry;
 
 type DescriptionTerm = {
   dt: InlineTypes;
@@ -219,8 +218,16 @@ type DataDrivenMarkdownOptions = {
   useSuperscriptHtml?: boolean;
   useDescriptionListHtml?: boolean;
   prefix?: MarkdownRenderPrefix;
+
+  /**
+   * The renderers which will be used when processing markdown entries.
+   */
   renderers?: Map<string, MarkdownRenderer>;
-  entriesToSurroundWithTwoNewlines?: Set<string>;
+
+  /**
+   * These entries are specified as needing 2 newlines above and below, to separate them from other entries.
+   */
+  blockLevelEntries?: Set<string>;
   applyCompletedDocumentChangesPreFootnotes?: (
     data: DataDrivenMarkdownEntry[],
     document: string,
