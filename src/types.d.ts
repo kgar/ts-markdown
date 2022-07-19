@@ -47,6 +47,7 @@ type Identifiable = {
 
 type BoldEntry = {
   bold: RichTextEntry;
+  indicator?: '*' | '_';
 } & DataDrivenMarkdownEntry;
 
 type ItalicEntry = {

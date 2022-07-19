@@ -24,6 +24,16 @@ describe('given a text entry', () => {
     });
   });
 
+  describe('with mid-word bolding and underscore indicator', () => {
+    const textEntry: TextEntry = {
+      text: ['He', { bold: 'll', indicator: '_' }, 'o'],
+    };
+
+    test('renders a string with asterisks to denote mid-word bolding, ignoring indicator setting per best practice', () => {
+      expect(renderMarkdown([textEntry])).toBe('He**ll**o');
+    });
+  });
+
   /**
    * Based on this recomendation: https://www.markdownguide.org/basic-syntax/#bold-best-practices
    */

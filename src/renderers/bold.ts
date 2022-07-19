@@ -5,7 +5,12 @@ export const boldRenderer: MarkdownRenderer = (
   options: DataDrivenMarkdownOptions
 ) => {
   if ('bold' in entry) {
-    return `**${getMarkdownString(entry.bold, options)}**`;
+    let indicator = entry.indicator ?? '*';
+
+    return `${indicator}${indicator}${getMarkdownString(
+      entry.bold,
+      options
+    )}${indicator}${indicator}`;
   }
 
   throw new Error('Entry is not a bold entry. Unable to render.');

@@ -11,5 +11,14 @@ describe('given a bold entry', () => {
     });
   });
 
-  
+  describe('with an underscore indicator', () => {
+    const boldEntry: BoldEntry = {
+      bold: 'test',
+      indicator: '_',
+    };
+
+    test('renders a bolded markdown line indicated with an underscore', () => {
+      expect(renderMarkdown([boldEntry])).toBe(`__test__`);
+    });
+  });
 });

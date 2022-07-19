@@ -1,7 +1,4 @@
-import {
-  getBlockLevelEntries,
-  getRenderers,
-} from './defaults';
+import { getBlockLevelEntries, getRenderers } from './defaults';
 import { appendFootnotes } from './renderers/footnote';
 
 export function renderMarkdown(
@@ -13,8 +10,7 @@ export function renderMarkdown(
   };
 
   options.renderers ??= getRenderers();
-  options.blockLevelEntries ??=
-    getBlockLevelEntries();
+  options.blockLevelEntries ??= getBlockLevelEntries();
 
   let document = renderEntries(data, options);
 
@@ -32,7 +28,17 @@ export function renderMarkdown(
       )
     : document;
 
+  // TODO: Formalize a post-render callback option
+  document = correctInvalidMidWordBoldAndItalics(document);
+
   return document;
+}
+
+function correctInvalidMidWordBoldAndItalics(document: string): string {
+  return document
+    .replace(/([\_]{3})([^\s^\_]+)([\_]{3})/g, '***$2***')
+    .replace(/([\_]{2})([^\s^\_]+)([\_]{2})/g, '**$2**')
+    .replace(/([\_]{1})([^\s^\_]+)([\_]{1})/g, '*$2*');
 }
 
 export function renderEntries(
@@ -82,9 +88,7 @@ function requiresAdditionalNewline(
   if (typeof entry === 'string') {
     return false;
   }
-  return Object.keys(entry).find((x) =>
-    options.blockLevelEntries.has(x)
-  );
+  return Object.keys(entry).find((x) => options.blockLevelEntries.has(x));
 }
 
 export function getMarkdownString(
