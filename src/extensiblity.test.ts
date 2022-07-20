@@ -14,12 +14,9 @@ import { DataDrivenMarkdownEntry } from './shared.types';
 describe('given entries to render', () => {
   describe('with custom Obsidian renderers', () => {
     type TransclusionEntry = {
-      transclusion: {
-        path: string;
-      };
+      transclusion: { path: string };
       html?: boolean;
     } & DataDrivenMarkdownEntry;
-
     const transclusionRenderer: MarkdownRenderer = (
       entry: TransclusionEntry
     ) => {
