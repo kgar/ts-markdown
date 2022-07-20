@@ -49,6 +49,44 @@ describe('given a text entry', () => {
     });
   });
 
+  describe('with mid-word tailicizing and underscore indicator', () => {
+    const textEntry: TextEntry = {
+      text: ['He', { italic: 'll', indicator: '_' }, 'o'],
+    };
+
+    test('renders a string with asterisks to denote mid-word italicizing, ignoring indicator setting per best practice', () => {
+      expect(renderMarkdown([textEntry])).toBe('He*ll*o');
+    });
+  });
+
+  describe('with mid-word bold and italics and underscore indicator', () => {
+    const textEntry: TextEntry = {
+      text: [
+        'He',
+        { italic: { bold: 'll', indicator: '_' }, indicator: '_' },
+        'o',
+      ],
+    };
+
+    test('renders a string with asterisks to denote mid-word bold and italicizing, ignoring indicator setting per best practice', () => {
+      expect(renderMarkdown([textEntry])).toBe('He***ll***o');
+    });
+  });
+
+  describe('with mid-word bold and italics and mixed indicators', () => {
+    const textEntry: TextEntry = {
+      text: [
+        'mid',
+        { italic: { bold: 'word', indicator: '_' }, indicator: '*' },
+        'rich-text',
+      ],
+    };
+
+    test('renders a string with asterisks to denote mid-word bold and italicizing, ignoring indicator setting per best practice', () => {
+      expect(renderMarkdown([textEntry])).toBe('mid***word***rich-text');
+    });
+  });
+
   describe('with a superscript', () => {
     const textEntry: TextEntry = {
       text: ['H', { sup: '2' }, 'O'],

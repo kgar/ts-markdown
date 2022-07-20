@@ -52,6 +52,7 @@ type BoldEntry = {
 
 type ItalicEntry = {
   italic: RichTextEntry;
+  indicator?: '*' | '_';
 } & DataDrivenMarkdownEntry;
 
 type StrikethroughEntry = {

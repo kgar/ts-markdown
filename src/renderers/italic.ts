@@ -1,11 +1,15 @@
-import { getMarkdownString } from "../rendering";
+import { getMarkdownString } from '../rendering';
 
 export const italicRenderer: MarkdownRenderer = (
   entry: ItalicEntry,
   options: DataDrivenMarkdownOptions
 ) => {
   if ('italic' in entry) {
-    return `*${getMarkdownString(entry.italic, options)}*`;
+    let indicator = entry.indicator ?? '*';
+    return `${indicator}${getMarkdownString(
+      entry.italic,
+      options
+    )}${indicator}`;
   }
 
   throw new Error('Entry is not an italic entry. Unable to render.');
