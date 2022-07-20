@@ -21,4 +21,29 @@ describe('given a bold entry', () => {
       expect(renderMarkdown([boldEntry])).toBe(`__test__`);
     });
   });
+
+  describe('with a document-level underscore indicator', () => {
+    const boldEntry: BoldEntry = {
+      bold: 'test',
+    };
+
+    test('renders a bolded markdown line indicated with an underscore', () => {
+      expect(renderMarkdown([boldEntry], { boldIndicator: '_' })).toBe(
+        `__test__`
+      );
+    });
+  });
+
+  describe('with a document-level underscore indicator and local asterisk indicator', () => {
+    const boldEntry: BoldEntry = {
+      bold: 'test',
+      indicator: '*'
+    };
+
+    test('favors local indicator', () => {
+      expect(renderMarkdown([boldEntry], { boldIndicator: '_' })).toBe(
+        `**test**`
+      );
+    });
+  });
 });

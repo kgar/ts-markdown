@@ -6,7 +6,7 @@ export const linkRenderer = (
     const formattedLink = entry.link.source.replace(/\s/g, '%20');
 
     if (!entry.link.text) {
-      return formattedLink;
+      return `<${formattedLink}>`;
     }
 
     const titleSegment =

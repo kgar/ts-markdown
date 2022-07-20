@@ -7,7 +7,7 @@ describe('given a link entry', () => {
     };
 
     test('renders an auto-link', () => {
-      expect(renderMarkdown([linkEntry])).toBe(linkEntry.link.source);
+      expect(renderMarkdown([linkEntry])).toBe(`<${linkEntry.link.source}>`);
     });
   });
 
@@ -51,7 +51,7 @@ describe('given a link entry', () => {
 
     test('renders an auto-link with spaces URL-encoded', () => {
       expect(renderMarkdown([linkEntry])).toBe(
-        linkEntry.link.source.replace(/\s/g, '%20')
+        `<${linkEntry.link.source.replace(/\s/g, '%20')}>`
       );
     });
   });

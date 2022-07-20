@@ -5,7 +5,7 @@ export const boldRenderer: MarkdownRenderer = (
   options: DataDrivenMarkdownOptions
 ) => {
   if ('bold' in entry) {
-    let indicator = entry.indicator ?? '*';
+    let indicator = entry.indicator ?? options.boldIndicator ?? '*';
 
     return `${indicator}${indicator}${getMarkdownString(
       entry.bold,

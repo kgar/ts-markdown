@@ -5,7 +5,7 @@ export const italicRenderer: MarkdownRenderer = (
   options: DataDrivenMarkdownOptions
 ) => {
   if ('italic' in entry) {
-    let indicator = entry.indicator ?? '*';
+    let indicator = entry.indicator ?? options.italicIndicator ?? '*';
     return `${indicator}${getMarkdownString(
       entry.italic,
       options

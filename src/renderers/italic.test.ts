@@ -23,4 +23,29 @@ describe('given an italic entry', () => {
       expect(renderMarkdown([italicEntry])).toBe(`_test_`);
     });
   });
+
+  describe('with a document-level underscore indicator', () => {
+    const italicEntry: ItalicEntry = {
+      italic: 'test',
+    };
+
+    test('renders a bolded markdown line indicated with an underscore', () => {
+      expect(renderMarkdown([italicEntry], { italicIndicator: '_' })).toBe(
+        `_test_`
+      );
+    });
+  });
+
+  describe('with a document-level underscore indicator and local asterisk indicator', () => {
+    const italicEntry: ItalicEntry = {
+      italic: 'test',
+      indicator: '*'
+    };
+
+    test('favors local indicator', () => {
+      expect(renderMarkdown([italicEntry], { italicIndicator: '_' })).toBe(
+        `*test*`
+      );
+    });
+  });
 });

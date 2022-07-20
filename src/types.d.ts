@@ -242,6 +242,8 @@ type DataDrivenMarkdownOptions = {
     options: DataDrivenMarkdownOptions
   ) => string;
   useCodeblockFencing?: boolean | '`' | '~';
+  boldIndicator?: '*' | '_';
+  italicIndicator?: '*' | '_';
 };
 
 type MarkdownRenderer = (
