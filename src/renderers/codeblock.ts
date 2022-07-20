@@ -1,3 +1,13 @@
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { DataDrivenMarkdownEntry } from '../shared.types';
+
+export type CodeBlockEntry = {
+  codeblock: string | string[];
+  fenced?: boolean | '`' | '~';
+  language?: string;
+  append?: string;
+} & DataDrivenMarkdownEntry;
+
 export const codeblockRenderer = (
   entry: CodeBlockEntry,
   options: DataDrivenMarkdownOptions

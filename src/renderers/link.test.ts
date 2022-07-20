@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { LinkEntry } from './link';
 
 describe('given a link entry', () => {
   describe('with no text', () => {
@@ -12,7 +13,7 @@ describe('given a link entry', () => {
   });
 
   describe('with source and text', () => {
-    const linkEntry = {
+    const linkEntry: LinkEntry = {
       link: { source: 'https://www.google.com', text: 'Google' },
     };
 
@@ -24,7 +25,7 @@ describe('given a link entry', () => {
   });
 
   describe('with source, text, and title', () => {
-    const linkEntry = {
+    const linkEntry: LinkEntry = {
       link: {
         source: 'https://www.google.com',
         text: 'Google',
@@ -43,7 +44,7 @@ describe('given a link entry', () => {
    * Based on this recommendation: https://www.markdownguide.org/basic-syntax/#link-best-practices
    */
   describe('with source that has spaces', () => {
-    const linkEntry = {
+    const linkEntry: LinkEntry = {
       link: {
         source: 'https://www.google.com/this is my cool link',
       },
@@ -60,7 +61,7 @@ describe('given a link entry', () => {
    * Based on this recommendation: https://www.markdownguide.org/basic-syntax/#link-best-practices
    */
   describe('with source that has spaces and text', () => {
-    const linkEntry = {
+    const linkEntry: LinkEntry = {
       link: {
         source: 'https://www.google.com/this is my cool link',
         text: 'Not a cool link',

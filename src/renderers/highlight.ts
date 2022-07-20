@@ -1,4 +1,14 @@
 import { getMarkdownString } from '../rendering';
+import {
+  DataDrivenMarkdownOptions,
+  MarkdownRenderer,
+} from '../rendering.types';
+import { RichTextEntry, DataDrivenMarkdownEntry } from '../shared.types';
+
+export type HighlightEntry = {
+  highlight: RichTextEntry;
+} & DataDrivenMarkdownEntry &
+  RichTextEntry;
 
 export const highlightRenderer: MarkdownRenderer = (
   entry: HighlightEntry,

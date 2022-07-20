@@ -1,4 +1,16 @@
-import { getMarkdownString, getOptionalHeaderIdText } from '../rendering';
+import { getMarkdownString } from '../rendering';
+import { getOptionalHeaderIdText } from './header';
+import {
+  DataDrivenMarkdownOptions,
+  MarkdownRenderer,
+} from '../rendering.types';
+import { InlineTypes, DataDrivenMarkdownEntry } from '../shared.types';
+
+export type H4Entry = {
+  h4: InlineTypes;
+  id?: string;
+  append?: string;
+} & DataDrivenMarkdownEntry;
 
 export const h4Renderer: MarkdownRenderer = (
   entry: H4Entry,

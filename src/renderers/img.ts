@@ -1,3 +1,14 @@
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { DataDrivenMarkdownEntry } from '../shared.types';
+
+export type ImageEntry = {
+  img: {
+    href: string;
+    alt?: string;
+    title?: string;
+  };
+} & DataDrivenMarkdownEntry;
+
 export const imgRenderer = (
   entry: ImageEntry,
   options: DataDrivenMarkdownOptions

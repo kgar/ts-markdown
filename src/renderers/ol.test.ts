@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { OrderedListEntry } from './ol';
 
 describe('given an ordered list entry', () => {
   describe('with a string value', () => {

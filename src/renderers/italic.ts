@@ -1,4 +1,15 @@
 import { getMarkdownString } from '../rendering';
+import {
+  DataDrivenMarkdownOptions,
+  MarkdownRenderer,
+} from '../rendering.types';
+import { RichTextEntry, DataDrivenMarkdownEntry } from '../shared.types';
+
+export type ItalicEntry = {
+  italic: RichTextEntry;
+  indicator?: '*' | '_';
+} & DataDrivenMarkdownEntry &
+  RichTextEntry;
 
 export const italicRenderer: MarkdownRenderer = (
   entry: ItalicEntry,

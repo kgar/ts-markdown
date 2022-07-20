@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { UnorderedListEntry } from './ul';
 
 describe('given an unordered list entry', () => {
   describe('with a string value', () => {

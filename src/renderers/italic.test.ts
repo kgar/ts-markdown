@@ -1,4 +1,6 @@
 import { renderMarkdown } from '../rendering';
+import { DataDrivenMarkdownEntry } from '../shared.types';
+import { ItalicEntry } from './italic';
 
 describe('given an italic entry', () => {
   describe('with a string value', () => {

@@ -1,4 +1,14 @@
 import { renderEntries, join, getMarkdownString } from '../rendering';
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { ListItemEntry, DataDrivenMarkdownEntry } from '../shared.types';
+
+export type UnorderedListEntry = {
+  ul: ListItemEntry[];
+  indicator?: UnorderedListItemIndicator;
+  append?: string;
+} & DataDrivenMarkdownEntry;
+
+export type UnorderedListItemIndicator = '-' | '*' | '+';
 
 export const ulRenderer = (
   entry: UnorderedListEntry,

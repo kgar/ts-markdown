@@ -1,4 +1,6 @@
 import { renderMarkdown } from '../rendering';
+import { DataDrivenMarkdownEntry } from '../shared.types';
+import { H5Entry } from './h5';
 
 describe('given a header 5 entry', () => {
   describe('with a string value', () => {

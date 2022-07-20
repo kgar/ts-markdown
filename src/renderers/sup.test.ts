@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { SuperscriptEntry } from './sup';
 
 describe('given a superscript entry', () => {
   describe('when html is set to true at the local-level', () => {

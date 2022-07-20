@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { CodeBlockEntry } from './codeblock';
 
 describe('given a codeblock entry', () => {
   describe('with a single string', () => {

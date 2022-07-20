@@ -1,4 +1,11 @@
 import { renderEntries, join, getMarkdownString } from '../rendering';
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { ListItemEntry, DataDrivenMarkdownEntry } from '../shared.types';
+
+export type OrderedListEntry = {
+  ol: ListItemEntry[];
+  append?: string;
+} & DataDrivenMarkdownEntry;
 
 export const olRenderer = (
   entry: OrderedListEntry,

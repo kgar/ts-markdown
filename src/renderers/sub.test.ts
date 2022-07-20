@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { SubscriptEntry } from './sub';
 
 describe('given a subscript entry', () => {
   describe('when html is set to true at the local-level', () => {

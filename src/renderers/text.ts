@@ -1,4 +1,13 @@
 import { getMarkdownString } from '../rendering';
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { RichTextEntry, InlineTypes } from '../shared.types';
+import { CodeEntry } from './code';
+import { ImageEntry } from './img';
+import { LinkEntry } from './link';
+
+export type TextEntry = {
+  text: string | (RichTextEntry | LinkEntry | ImageEntry | CodeEntry)[];
+} & InlineTypes;
 
 export const textRenderer = (
   entry: TextEntry,

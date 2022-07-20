@@ -2,8 +2,14 @@ import {
   getBlockLevelEntries as getBlockLevelEntries,
   getRenderers,
 } from './defaults';
-import { pRenderer } from './renderers/p';
+import { BlockquoteEntry } from './renderers/blockquote';
+import { H1Entry } from './renderers/h1';
+import { H2Entry } from './renderers/h2';
+import { ParagraphEntry, pRenderer } from './renderers/p';
+import { TextEntry } from './renderers/text';
 import { renderEntries, renderMarkdown } from './rendering';
+import { MarkdownRenderer, DataDrivenMarkdownOptions } from './rendering.types';
+import { DataDrivenMarkdownEntry } from './shared.types';
 
 describe('given entries to render', () => {
   describe('with custom Obsidian renderers', () => {
@@ -11,8 +17,8 @@ describe('given entries to render', () => {
       transclusion: {
         path: string;
       };
-    } & DataDrivenMarkdownEntry &
-      CanFallbackToHtml;
+      html?: boolean;
+    } & DataDrivenMarkdownEntry;
 
     const transclusionRenderer: MarkdownRenderer = (
       entry: TransclusionEntry
@@ -29,8 +35,8 @@ describe('given entries to render', () => {
         path: string;
         title?: string;
       };
-    } & DataDrivenMarkdownEntry &
-      CanFallbackToHtml;
+      html?: boolean;
+    } & DataDrivenMarkdownEntry;
 
     const internalLinkRenderer: MarkdownRenderer = (
       entry: ObsidianInternalLinkEntry

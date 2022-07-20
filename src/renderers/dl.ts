@@ -1,4 +1,20 @@
 import { getMarkdownString, join } from '../rendering';
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { DataDrivenMarkdownEntry, InlineTypes } from '../shared.types';
+
+export type DescriptionListEntry = {
+  dl: (DescriptionTerm | DescriptionDetails)[];
+  html?: boolean;
+  append?: string;
+} & DataDrivenMarkdownEntry;
+
+export type DescriptionTerm = {
+  dt: InlineTypes;
+};
+
+export type DescriptionDetails = {
+  dd: InlineTypes;
+};
 
 export const dlRenderer = (
   entry: DescriptionListEntry,

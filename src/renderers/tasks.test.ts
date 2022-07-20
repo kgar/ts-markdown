@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { TaskListEntry } from './tasks';
 
 describe('given a task list entry', () => {
   describe('with every type of modeled task and some rich text', () => {

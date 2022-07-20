@@ -1,4 +1,24 @@
 import { getMarkdownString, renderEntries } from '../rendering';
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { DataDrivenMarkdownEntry } from '../shared.types';
+import { TextEntry } from './text';
+
+export type TableEntry = {
+  table: {
+    columns: (TableColumn | string)[];
+    rows: (TableRow | (TextEntry | string)[])[];
+  };
+  append?: string;
+} & DataDrivenMarkdownEntry;
+
+export type TableColumn = {
+  name: string;
+  align?: 'left' | 'center' | 'right';
+};
+
+export type TableRow = {
+  [key: string]: string | TextEntry;
+};
 
 export const tableRenderer = (
   entry: TableEntry,

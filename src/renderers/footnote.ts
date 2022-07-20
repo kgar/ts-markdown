@@ -1,4 +1,14 @@
 import { renderEntries } from '../rendering';
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { DataDrivenMarkdownEntry, RichTextEntry } from '../shared.types';
+
+export type FootnoteEntry = {
+  footnote: {
+    id: string;
+    content: DataDrivenMarkdownEntry | DataDrivenMarkdownEntry[];
+  };
+} & DataDrivenMarkdownEntry &
+  RichTextEntry;
 
 export const footnoteRenderer = (
   entry: FootnoteEntry,

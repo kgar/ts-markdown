@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { DescriptionListEntry } from './dl';
 
 describe('given a description list entry', () => {
   describe('given a term and details', () => {

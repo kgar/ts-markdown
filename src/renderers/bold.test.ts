@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { BoldEntry } from './bold';
 
 describe('given a bold entry', () => {
   describe('with a string value', () => {

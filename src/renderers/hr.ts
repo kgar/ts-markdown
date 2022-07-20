@@ -1,3 +1,12 @@
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { DataDrivenMarkdownEntry } from '../shared.types';
+
+export type HorizontalRuleEntry = {
+  hr: any;
+  indicator?: '*' | '-' | '_';
+  append?: string;
+} & DataDrivenMarkdownEntry;
+
 export const hrRenderer = (
   entry: HorizontalRuleEntry,
   options: DataDrivenMarkdownOptions

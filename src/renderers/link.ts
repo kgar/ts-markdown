@@ -1,3 +1,10 @@
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { DataDrivenMarkdownEntry } from '../shared.types';
+
+export type LinkEntry = {
+  link: { source: string; text?: string; title?: string };
+} & DataDrivenMarkdownEntry;
+
 export const linkRenderer = (
   entry: LinkEntry,
   options: DataDrivenMarkdownOptions

@@ -1,5 +1,10 @@
 import { getBlockLevelEntries, getRenderers } from './defaults';
 import { appendFootnotes } from './renderers/footnote';
+import {
+  DataDrivenMarkdownOptions,
+  MarkdownRenderPrefix,
+} from './rendering.types';
+import { DataDrivenMarkdownEntry } from './shared.types';
 
 export function renderMarkdown(
   data: DataDrivenMarkdownEntry[],
@@ -73,8 +78,10 @@ export function renderEntries(
     textStack += newText.map((text) => entryPrefix + text).join('\n');
 
     let appendContent =
-      typeof entry === 'object' && 'append' in entry
-        ? getMarkdownString((entry as Appendable).append, options)
+      typeof entry === 'object' &&
+      'append' in entry &&
+      typeof 'append' === 'string'
+        ? getMarkdownString(entry['append'], options)
         : '';
 
     if (appendContent !== '') {
@@ -125,17 +132,6 @@ export function getMarkdownString(
   }
 
   return '';
-}
-
-export function getOptionalHeaderIdText(
-  entry: Partial<Identifiable>,
-  prefix: string = ''
-) {
-  if (entry.id === undefined) {
-    return '';
-  }
-
-  return `${prefix}{#${entry.id}}`;
 }
 
 export function join(

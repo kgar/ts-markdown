@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { StrikethroughEntry } from './strikethrough';
 
 describe('given a strikethrough entry', () => {
   describe('with a string value', () => {

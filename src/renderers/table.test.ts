@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { TableEntry } from './table';
 
 describe('given a table entry', () => {
   describe('with columns and array-index rows', () => {

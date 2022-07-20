@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { ParagraphEntry } from './p';
 
 describe('given a paragraph entry', () => {
   describe('with a single string', () => {

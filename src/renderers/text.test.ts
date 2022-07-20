@@ -1,4 +1,6 @@
 import { renderMarkdown } from '../rendering';
+import { DataDrivenMarkdownEntry } from '../shared.types';
+import { TextEntry } from './text';
 
 describe('given a text entry', () => {
   describe('with bolded, highlighted text', () => {

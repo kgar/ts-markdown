@@ -26,6 +26,7 @@ import { tableRenderer } from './renderers/table';
 import { tasksRenderer } from './renderers/tasks';
 import { textRenderer } from './renderers/text';
 import { ulRenderer } from './renderers/ul';
+import { MarkdownRenderer } from './rendering.types';
 
 export function getRenderers(
   customRenderers: [string, MarkdownRenderer][] = []

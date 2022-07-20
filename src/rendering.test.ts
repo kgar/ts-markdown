@@ -1,5 +1,15 @@
-import { getRenderers } from './defaults';
+import { CodeBlockEntry } from './renderers/codeblock';
+import { H1Entry } from './renderers/h1';
+import { H2Entry } from './renderers/h2';
+import { H3Entry } from './renderers/h3';
+import { H4Entry } from './renderers/h4';
+import { H5Entry } from './renderers/h5';
+import { H6Entry } from './renderers/h6';
+import { HorizontalRuleEntry } from './renderers/hr';
+import { ParagraphEntry } from './renderers/p';
+import { TableEntry } from './renderers/table';
 import { renderMarkdown } from './rendering';
+import { DataDrivenMarkdownEntry } from './shared.types';
 
 describe('given an array of more than one markdown entry', () => {
   describe('with 3 paragraphs', () => {

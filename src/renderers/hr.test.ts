@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { HorizontalRuleEntry } from './hr';
 
 describe('given a horizontal rule entry', () => {
   describe('with any value', () => {

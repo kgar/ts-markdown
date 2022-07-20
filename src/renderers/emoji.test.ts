@@ -1,4 +1,5 @@
-import { renderMarkdown } from "../rendering";
+import { renderMarkdown } from '../rendering';
+import { EmojiEntry } from './emoji';
 
 describe('given an emoji entry', () => {
   describe('with a specified emoji name', () => {

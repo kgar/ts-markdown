@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { CodeEntry } from './code';
 
 describe('given a code entry', () => {
   describe('with a string value', () => {

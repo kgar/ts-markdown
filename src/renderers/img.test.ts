@@ -1,4 +1,5 @@
 import { renderMarkdown } from '../rendering';
+import { ImageEntry } from './img';
 
 describe('given an image entry', () => {
   describe('with an href', () => {

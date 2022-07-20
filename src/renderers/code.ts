@@ -1,3 +1,10 @@
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { DataDrivenMarkdownEntry } from '../shared.types';
+
+export type CodeEntry = {
+  code: string;
+} & DataDrivenMarkdownEntry;
+
 export const codeRenderer = (
   entry: CodeEntry,
   options: DataDrivenMarkdownOptions

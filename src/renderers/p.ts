@@ -1,4 +1,11 @@
 import { getMarkdownString } from '../rendering';
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { InlineTypes, DataDrivenMarkdownEntry } from '../shared.types';
+
+export type ParagraphEntry = {
+  p: InlineTypes;
+  append?: string;
+} & DataDrivenMarkdownEntry;
 
 export const pRenderer = (
   entry: ParagraphEntry,

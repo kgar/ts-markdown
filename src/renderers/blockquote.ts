@@ -1,4 +1,11 @@
 import { getMarkdownString, renderEntries } from '../rendering';
+import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { DataDrivenMarkdownEntry } from '../shared.types';
+
+export type BlockquoteEntry = {
+  blockquote: string | DataDrivenMarkdownEntry[];
+  append?: string;
+} & DataDrivenMarkdownEntry;
 
 export const blockquoteRenderer = (
   entry: BlockquoteEntry,
