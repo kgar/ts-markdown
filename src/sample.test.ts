@@ -3,7 +3,7 @@ import { renderMarkdown } from './rendering';
 describe('given a simple document', () => {
   const entries = [
     {
-      h1: 'Hello, world!',
+      h4: 'Hello, world!',
     },
     {
       blockquote: "Let's generate some markdown!",
@@ -22,7 +22,7 @@ describe('given a simple document', () => {
 
   test('renders expected markdown', () => {
     expect(renderMarkdown(entries)).toBe(
-      `# Hello, world!
+      `#### Hello, world!
 
 > Let's generate some markdown!
 
