@@ -5,6 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "start": "tsc && node dist/app.js",
+    "build-watch": "tsc --watch",
     "test": "jest",
     "test-watch": "jest --watch",
     "build": "tsc"
