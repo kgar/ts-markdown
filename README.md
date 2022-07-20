@@ -49,7 +49,7 @@ renderMarkdown([
 The following markdown is generated:
 
 ```md
-# Hello, world!
+#### Hello, world!
 
 > Let's generate some markdown!
 
@@ -80,9 +80,9 @@ TODO
 
 TODO
 
-## 🤝 Contribution Guidelines
+## Contribution Guidelines
 
-See [how to contribute](https://github.com/kgar/data-driven-markdown/blob/main/CONTRIBUTING.md).
+Have an idea? Found a bug? See [how to contribute](https://github.com/kgar/data-driven-markdown/blob/main/CONTRIBUTING.md).
 
 ## License
 
