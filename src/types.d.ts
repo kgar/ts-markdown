@@ -107,7 +107,8 @@ type ListItemEntry = {
 };
 
 type HorizontalRuleEntry = {
-  hr: '' | null | undefined | true;
+  hr: any;
+  indicator?: '*' | '-' | '_';
 } & Appendable &
   DataDrivenMarkdownEntry;
 

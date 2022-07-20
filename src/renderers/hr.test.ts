@@ -22,4 +22,37 @@ describe('given a horizontal rule entry', () => {
 ^heyo`);
     });
   });
+
+  describe('with asterisk indicator', () => {
+    const hrEntry: HorizontalRuleEntry = {
+      hr: '',
+      indicator: '*'
+    };
+
+    test('renders a horizontal rule with asterisk indicator', () => {
+      expect(renderMarkdown([hrEntry])).toBe(`***`);
+    });
+  });
+
+  describe('with hyphen indicator', () => {
+    const hrEntry: HorizontalRuleEntry = {
+      hr: '',
+      indicator: '-'
+    };
+
+    test('renders a horizontal rule with hyphen indicator', () => {
+      expect(renderMarkdown([hrEntry])).toBe(`---`);
+    });
+  });
+
+  describe('with underscore indicator', () => {
+    const hrEntry: HorizontalRuleEntry = {
+      hr: '',
+      indicator: '_'
+    };
+
+    test('renders a horizontal rule with underscore indicator', () => {
+      expect(renderMarkdown([hrEntry])).toBe(`___`);
+    });
+  });
 });

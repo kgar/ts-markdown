@@ -3,7 +3,8 @@ export const hrRenderer = (
   options: DataDrivenMarkdownOptions
 ) => {
   if ('hr' in entry) {
-    return '---';
+    let indicator = entry.indicator ?? '-';
+    return `${indicator}${indicator}${indicator}`;
   }
 
   throw new Error('Entry is not an hr entry. Unable to render.');
