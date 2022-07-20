@@ -34,11 +34,25 @@ export function renderMarkdown(
   return document;
 }
 
+/**
+ * Finds and corrects and mid-word bold/italics that use hyphens, changing the hyphens to asterisks, per best practice: https://www.markdownguide.org/basic-syntax/#bold-best-practices
+ * @param document the rendered document
+ * @returns document with mid-world bold and italics set to asterisks
+ */
 function correctInvalidMidWordBoldAndItalics(document: string): string {
   return document
-    .replace(/([\_]{3})([^\s^\_]+)([\_]{3})/g, '***$2***')
-    .replace(/([\_]{2})([^\s^\_]+)([\_]{2})/g, '**$2**')
-    .replace(/([\_]{1})([^\s^\_]+)([\_]{1})/g, '*$2*');
+    .replace(
+      /(?<pretext>[^\_^\s])(?<prefix1>[\_]{3})(?<text1>[^\s^\_]+)(?<suffix1>[\_]{3})|(?<prefix2>[\_]{3})(?<text2>[^\s^\_]+)(?<suffix2>[\_]{3})(?<posttext>[^\_^\s])/g,
+      '$<pretext>***$<text1>$<text2>***$<posttext>'
+    )
+    .replace(
+      /(?<pretext>[^\_^\s])(?<prefix1>[\_]{2})(?<text1>[^\s^\_]+)(?<suffix1>[\_]{2})|(?<prefix2>[\_]{2})(?<text2>[^\s^\_]+)(?<suffix2>[\_]{2})(?<posttext>[^\_^\s])/g,
+      '$<pretext>**$<text1>$<text2>**$<posttext>'
+    )
+    .replace(
+      /(?<pretext>[^\_^\s])(?<prefix1>[\_]{1})(?<text1>[^\s^\_]+)(?<suffix1>[\_]{1})|(?<prefix2>[\_]{1})(?<text2>[^\s^\_]+)(?<suffix2>[\_]{1})(?<posttext>[^\_^\s])/g,
+      '$<pretext>*$<text1>$<text2>*$<posttext>'
+    );
 }
 
 export function renderEntries(
