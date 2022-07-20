@@ -50,29 +50,27 @@ describe('given entries to render', () => {
       return `[[${entry.internalLink.path}${titleSuffix}]]`;
     };
 
-    type AdmonitionEntry = {
-      admonition: {
+    type ObsidianCalloutEntry = {
+      callout: {
         type: string;
         title?: string;
         content: DataDrivenMarkdownEntry | DataDrivenMarkdownEntry[];
       };
     };
 
-    const admonitionRenderer: MarkdownRenderer = (
-      entry: AdmonitionEntry,
+    const calloutRenderer: MarkdownRenderer = (
+      entry: ObsidianCalloutEntry,
       options: DataDrivenMarkdownOptions
     ) => {
-      let titleText = entry.admonition.title
-        ? ` ${entry.admonition.title}`
-        : '';
+      let titleText = entry.callout.title ? ` ${entry.callout.title}` : '';
 
-      let content = Array.isArray(entry.admonition.content)
-        ? entry.admonition.content
-        : [entry.admonition.content];
+      let content = Array.isArray(entry.callout.content)
+        ? entry.callout.content
+        : [entry.callout.content];
 
       const blockquote: BlockquoteEntry = {
         blockquote: [
-          <ParagraphEntry>{ p: `[!${entry.admonition.type}]${titleText}` },
+          <ParagraphEntry>{ p: `[!${entry.callout.type}]${titleText}` },
           ...content,
         ],
       };
@@ -83,13 +81,10 @@ describe('given entries to render', () => {
     const renderers: Map<string, MarkdownRenderer> = getRenderers([
       ['transclusion', transclusionRenderer],
       ['internalLink', internalLinkRenderer],
-      ['admonition', admonitionRenderer],
+      ['callout', calloutRenderer],
     ]);
 
-    const blockLevelEntries = getBlockLevelEntries([
-      'transclusion',
-      'admonition',
-    ]);
+    const blockLevelEntries = getBlockLevelEntries(['transclusion', 'callout']);
 
     describe('with a custom Obsidian transclusion entry', () => {
       const entries: DataDrivenMarkdownEntry[] = [
@@ -162,13 +157,13 @@ Oh hai block-level transclusion 👆`
       });
     });
 
-    describe('with an Obsidian admonition as a block-level element in a simple document', () => {
+    describe('with an Obsidian callout as a block-level element in a simple document', () => {
       const entries: DataDrivenMarkdownEntry[] = [
         <H1Entry>{
-          h1: 'Admonition Test',
+          h1: 'Callout Test',
         },
-        <AdmonitionEntry>{
-          admonition: {
+        <ObsidianCalloutEntry>{
+          callout: {
             type: 'tip',
             title: 'Welcome, Friends',
             content: [
@@ -182,18 +177,18 @@ Oh hai block-level transclusion 👆`
           },
         },
         <BlockquoteEntry>{
-          blockquote: 'Note that Admonitions are fancy blockquotes. So fancy!',
+          blockquote: 'Note that Callouts are fancy blockquotes. So fancy!',
         },
       ];
 
-      test('renders simple document with correctly-formatted Obsidian admonition', () => {
+      test('renders simple document with correctly-formatted Obsidian callout', () => {
         expect(
           renderMarkdown(entries, {
             renderers,
             blockLevelEntries,
           })
         ).toBe(
-          `# Admonition Test
+          `# Callout Test
 
 > [!tip] Welcome, Friends
 > 
@@ -201,7 +196,7 @@ Oh hai block-level transclusion 👆`
 > 
 > Obsidian allows you to create content quickly and easily, while rendering a view of your content that is satisfying to behold.
 
-> Note that Admonitions are fancy blockquotes. So fancy!`
+> Note that Callouts are fancy blockquotes. So fancy!`
         );
       });
     });
