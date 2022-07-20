@@ -156,19 +156,15 @@ This will render the following markdown:
 > Obsidian allows you to create content quickly and easily, while rendering a view of your content that is satisfying to behold.
 ```
 
-On GitHub, the callout markdown looks like this:
-
-> [!tip] Welcome, Friends
->
-> ## Content Creation
->
-> Obsidian allows you to create content quickly and easily, while rendering a view of your content that is satisfying to behold.
-
-However, in Obsidian, the vibe is different:
+How the callout is rendered in Obsidian:
 
 ![](https://github.com/kgar/data-driven-markdown/blob/main/images/obsidian-callout-example.jpg)
 
-> **Note**: In the above example, we were able to use the existing blockquote markdown renderer and add some extra functionality to it. Then, we gave it a new name and its own uniquely identifying property ("callout")
+> **Note**: We reused existing renderers! :exploding_head:
+>
+> In the above example, we were able to use the existing blockquote markdown renderer and add some extra functionality to it.
+>
+> We gave it a new name and its own uniquely identifying property ("callout"), so it didn't override the existing blockquote renderer, so we're able to use both.
 
 ## Why This Project?
 
