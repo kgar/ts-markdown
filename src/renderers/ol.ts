@@ -12,8 +12,7 @@ export const olRenderer = (
   options: DataDrivenMarkdownOptions
 ) => {
   if ('ol' in entry) {
-    return entry.ol.map((liEntry, index) => {
-      const li = liEntry.li;
+    return entry.ol.map((li, index) => {
       if (Array.isArray(li)) {
         return renderEntries(li, {
           ...options,

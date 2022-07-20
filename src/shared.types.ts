@@ -7,6 +7,4 @@ export interface RichTextEntry extends InlineTypes {}
 
 export interface InlineTypes {}
 
-export type ListItemEntry = {
-  li: DataDrivenMarkdownEntry | DataDrivenMarkdownEntry[];
-};
+export type ListItemEntry = DataDrivenMarkdownEntry | DataDrivenMarkdownEntry[];

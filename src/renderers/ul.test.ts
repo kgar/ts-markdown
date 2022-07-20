@@ -4,11 +4,11 @@ import { UnorderedListEntry } from './ul';
 describe('given an unordered list entry', () => {
   describe('with a string value', () => {
     const ulEntry: UnorderedListEntry = {
-      ul: [{ li: 'Hello, world!' }],
+      ul: ['Hello, world!'],
     };
 
     test('renders an unordered list line with hyphen and the specified string as text', () => {
-      expect(renderMarkdown([ulEntry])).toBe(`- ${ulEntry.ul[0].li}`);
+      expect(renderMarkdown([ulEntry])).toBe(`- ${ulEntry.ul[0]}`);
     });
   });
 
@@ -16,14 +16,12 @@ describe('given an unordered list entry', () => {
     const ulEntry: UnorderedListEntry = {
       ul: [
         {
-          li: {
-            text: [
-              'This text is ',
-              { bold: { italic: { highlight: 'so rich!' } } },
-            ],
-          },
+          text: [
+            'This text is ',
+            { bold: { italic: { highlight: 'so rich!' } } },
+          ],
         },
-        { li: 'And this text is contentedly unadorned' },
+        'And this text is contentedly unadorned',
       ],
     };
 
@@ -38,21 +36,17 @@ describe('given an unordered list entry', () => {
   describe('with a nested ordered list', () => {
     const ulEntry: UnorderedListEntry = {
       ul: [
-        { li: 'Test' },
-        {
-          li: [
-            'Nest',
-            {
-              ul: [
-                {
-                  li: {
-                    text: [{ italic: 'Nested' }, ' ', { highlight: 'Test' }],
-                  },
-                },
-              ],
-            },
-          ],
-        },
+        'Test',
+        [
+          'Nest',
+          {
+            ul: [
+              {
+                text: [{ italic: 'Nested' }, ' ', { highlight: 'Test' }],
+              },
+            ],
+          },
+        ],
       ],
     };
 
@@ -68,17 +62,15 @@ describe('given an unordered list entry', () => {
   describe('with inserted elements in list item', () => {
     const olEntry: UnorderedListEntry = {
       ul: [
-        {
-          li: [
-            'Testing',
-            {
-              h1: 'This is the way 💚',
-            },
-            {
-              blockquote: 'Live, Laugh, Test Code',
-            },
-          ],
-        },
+        [
+          'Testing',
+          {
+            h1: 'This is the way 💚',
+          },
+          {
+            blockquote: 'Live, Laugh, Test Code',
+          },
+        ],
       ],
     };
 
@@ -95,26 +87,18 @@ describe('given an unordered list entry', () => {
   describe('with nested ordered lists', () => {
     const ulEntry: UnorderedListEntry = {
       ul: [
-        {
-          li: [
-            'Test',
-            {
-              ol: [{ li: 'Nest' }, { li: 'Nest Test' }],
-            },
-          ],
-        },
-        {
-          li: [
-            'This is',
-            {
-              ol: [
-                {
-                  li: { text: ['A ', { bold: 'test' }] },
-                },
-              ],
-            },
-          ],
-        },
+        [
+          'Test',
+          {
+            ol: ['Nest', 'Nest Test'],
+          },
+        ],
+        [
+          'This is',
+          {
+            ol: [{ text: ['A ', { bold: 'test' }] }],
+          },
+        ],
       ],
     };
 
@@ -132,29 +116,22 @@ describe('given an unordered list entry', () => {
   describe('with deep homogeneous nesting', () => {
     const ulEntry: UnorderedListEntry = {
       ul: [
-        {
-          li: [
-            'Given',
-            {
-              ul: [
-                { li: 'a list with' },
+        [
+          'Given',
+          {
+            ul: [
+              'a list with',
+              [
+                'numerous layers which',
                 {
-                  li: [
-                    'numerous layers which',
-                    {
-                      ul: [
-                        { li: 'run deep,' },
-                        { li: 'we must pass our tests' },
-                      ],
-                    },
-                  ],
+                  ul: ['run deep,', 'we must pass our tests'],
                 },
               ],
-            },
-          ],
-        },
-        { li: ['in order to', { ul: [{ li: 'meet' }] }] },
-        { li: ['expectations!'] },
+            ],
+          },
+        ],
+        ['in order to', { ul: ['meet'] }],
+        ['expectations!'],
       ],
     };
 
@@ -175,32 +152,26 @@ describe('given an unordered list entry', () => {
   describe('with 4 levels of heterogeneous nesting and then content', () => {
     const ulEntry: UnorderedListEntry = {
       ul: [
-        {
-          li: [
-            'this',
-            {
-              ol: [
+        [
+          'this',
+          {
+            ol: [
+              [
+                'is',
                 {
-                  li: [
-                    'is',
-                    {
-                      ul: [
-                        {
-                          li: [
-                            'a',
-                            {
-                              ol: [{ li: ['test', { blockquote: 'Dig it!' }] }],
-                            },
-                          ],
-                        },
-                      ],
-                    },
+                  ul: [
+                    [
+                      'a',
+                      {
+                        ol: [['test', { blockquote: 'Dig it!' }]],
+                      },
+                    ],
                   ],
                 },
               ],
-            },
-          ],
-        },
+            ],
+          },
+        ],
       ],
     };
 
@@ -220,11 +191,7 @@ describe('given an unordered list entry', () => {
    */
   describe('starting with a number and a period', () => {
     const olEntry: UnorderedListEntry = {
-      ul: [
-        {
-          li: '1968. A great year.',
-        },
-      ],
+      ul: ['1968. A great year.'],
     };
 
     test('renders a list item where the first period is escaped', () => {
@@ -234,11 +201,7 @@ describe('given an unordered list entry', () => {
 
   describe('with local option for asterisk list item indicator', () => {
     const ulEntry: UnorderedListEntry = {
-      ul: [
-        {
-          li: "Let's get to work!",
-        },
-      ],
+      ul: ["Let's get to work!"],
       indicator: '*',
     };
 
@@ -249,11 +212,7 @@ describe('given an unordered list entry', () => {
 
   describe('with local option for hyphen list item indicator', () => {
     const ulEntry: UnorderedListEntry = {
-      ul: [
-        {
-          li: "Let's get to work!",
-        },
-      ],
+      ul: ["Let's get to work!"],
       indicator: '-',
     };
 
@@ -264,11 +223,7 @@ describe('given an unordered list entry', () => {
 
   describe('with local option for plus sign list item indicator', () => {
     const ulEntry: UnorderedListEntry = {
-      ul: [
-        {
-          li: "Let's get to work!",
-        },
-      ],
+      ul: ["Let's get to work!"],
       indicator: '+',
     };
 
@@ -279,11 +234,7 @@ describe('given an unordered list entry', () => {
 
   describe('with document-level option for asterisk list item indicator', () => {
     const ulEntry: UnorderedListEntry = {
-      ul: [
-        {
-          li: "Let's get to work!",
-        },
-      ],
+      ul: ["Let's get to work!"],
     };
 
     test('renders list with asterisk indicator', () => {
@@ -295,11 +246,7 @@ describe('given an unordered list entry', () => {
 
   describe('with document-level option for hyphen list item indicator', () => {
     const ulEntry: UnorderedListEntry = {
-      ul: [
-        {
-          li: "Let's get to work!",
-        },
-      ],
+      ul: ["Let's get to work!"],
     };
 
     test('renders list with hyphen indicator', () => {
@@ -311,11 +258,7 @@ describe('given an unordered list entry', () => {
 
   describe('with document-level option for plus sign list item indicator', () => {
     const ulEntry: UnorderedListEntry = {
-      ul: [
-        {
-          li: "Let's get to work!",
-        },
-      ],
+      ul: ["Let's get to work!"],
     };
 
     test('renders list with plus sign indicator', () => {
@@ -327,11 +270,7 @@ describe('given an unordered list entry', () => {
 
   describe('with local option for plus sign and document-level option for hyphen list item indicator', () => {
     const ulEntry: UnorderedListEntry = {
-      ul: [
-        {
-          li: "Let's get to work!",
-        },
-      ],
+      ul: ["Let's get to work!"],
       indicator: '+',
     };
 
@@ -344,12 +283,12 @@ describe('given an unordered list entry', () => {
 
   describe('with a string value and an Obsidian-esque identifier appended', () => {
     const ulEntry: UnorderedListEntry = {
-      ul: [{ li: 'Hello, world!' }],
+      ul: ['Hello, world!'],
       append: '^still-here',
     };
 
     test('renders an unordered list line with hyphen and the specified string as text and an identifier just below', () => {
-      expect(renderMarkdown([ulEntry])).toBe(`- ${ulEntry.ul[0].li}
+      expect(renderMarkdown([ulEntry])).toBe(`- ${ulEntry.ul[0]}
 ^still-here`);
     });
   });

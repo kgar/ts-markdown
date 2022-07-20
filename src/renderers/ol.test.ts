@@ -4,11 +4,11 @@ import { OrderedListEntry } from './ol';
 describe('given an ordered list entry', () => {
   describe('with a string value', () => {
     const olEntry: OrderedListEntry = {
-      ol: [{ li: 'Hello, world!' }],
+      ol: ['Hello, world!'],
     };
 
     test('renders an ordered list line with the specified string as text', () => {
-      expect(renderMarkdown([olEntry])).toBe(`1. ${olEntry.ol[0].li}`);
+      expect(renderMarkdown([olEntry])).toBe(`1. ${olEntry.ol[0]}`);
     });
   });
 
@@ -16,16 +16,12 @@ describe('given an ordered list entry', () => {
     const olEntry: OrderedListEntry = {
       ol: [
         {
-          li: {
-            text: [
-              'This text is ',
-              { bold: { italic: { highlight: 'so rich!' } } },
-            ],
-          },
+          text: [
+            'This text is ',
+            { bold: { italic: { highlight: 'so rich!' } } },
+          ],
         },
-        {
-          li: 'And this text is contentedly unadorned',
-        },
+        'And this text is contentedly unadorned',
       ],
     };
 
@@ -40,21 +36,17 @@ describe('given an ordered list entry', () => {
   describe('with a nested ordered list', () => {
     const olEntry: OrderedListEntry = {
       ol: [
-        { li: 'Test' },
-        {
-          li: [
-            'Nest',
-            {
-              ol: [
-                {
-                  li: {
-                    text: [{ italic: 'Nested' }, ' ', { highlight: 'Test' }],
-                  },
-                },
-              ],
-            },
-          ],
-        },
+        'Test',
+        [
+          'Nest',
+          {
+            ol: [
+              {
+                text: [{ italic: 'Nested' }, ' ', { highlight: 'Test' }],
+              },
+            ],
+          },
+        ],
       ],
     };
 
@@ -70,17 +62,15 @@ describe('given an ordered list entry', () => {
   describe('with inserted elements in list item', () => {
     const olEntry: OrderedListEntry = {
       ol: [
-        {
-          li: [
-            'Testing',
-            {
-              h1: 'This is the way 💚',
-            },
-            {
-              blockquote: 'Live, Laugh, Test Code',
-            },
-          ],
-        },
+        [
+          'Testing',
+          {
+            h1: 'This is the way 💚',
+          },
+          {
+            blockquote: 'Live, Laugh, Test Code',
+          },
+        ],
       ],
     };
 
@@ -97,26 +87,18 @@ describe('given an ordered list entry', () => {
   describe('with nested unordered lists', () => {
     const olEntry: OrderedListEntry = {
       ol: [
-        {
-          li: [
-            'Test',
-            {
-              ul: [{ li: 'Nest' }, { li: 'Nest Test' }],
-            },
-          ],
-        },
-        {
-          li: [
-            'This is',
-            {
-              ul: [
-                {
-                  li: { text: ['A ', { bold: 'test' }] },
-                },
-              ],
-            },
-          ],
-        },
+        [
+          'Test',
+          {
+            ul: ['Nest', 'Nest Test'],
+          },
+        ],
+        [
+          'This is',
+          {
+            ul: [{ text: ['A ', { bold: 'test' }] }],
+          },
+        ],
       ],
     };
 
@@ -134,29 +116,22 @@ describe('given an ordered list entry', () => {
   describe('with deep homogeneous nesting', () => {
     const olEntry: OrderedListEntry = {
       ol: [
-        {
-          li: [
-            'Given',
-            {
-              ol: [
-                { li: 'a list with' },
+        [
+          'Given',
+          {
+            ol: [
+              'a list with',
+              [
+                'numerous layers which',
                 {
-                  li: [
-                    'numerous layers which',
-                    {
-                      ol: [
-                        { li: 'run deep,' },
-                        { li: 'we must pass our tests' },
-                      ],
-                    },
-                  ],
+                  ol: ['run deep,', 'we must pass our tests'],
                 },
               ],
-            },
-          ],
-        },
-        { li: ['in order to', { ol: [{ li: 'meet' }] }] },
-        { li: ['expectations!'] },
+            ],
+          },
+        ],
+        ['in order to', { ol: ['meet'] }],
+        'expectations!',
       ],
     };
 
@@ -177,32 +152,26 @@ describe('given an ordered list entry', () => {
   describe('with 4 levels of heterogeneous nesting and then content', () => {
     const olEntry: OrderedListEntry = {
       ol: [
-        {
-          li: [
-            'this',
-            {
-              ul: [
+        [
+          'this',
+          {
+            ul: [
+              [
+                'is',
                 {
-                  li: [
-                    'is',
-                    {
-                      ol: [
-                        {
-                          li: [
-                            'a',
-                            {
-                              ul: [{ li: ['test', { blockquote: 'Dig it!' }] }],
-                            },
-                          ],
-                        },
-                      ],
-                    },
+                  ol: [
+                    [
+                      'a',
+                      {
+                        ul: [['test', { blockquote: 'Dig it!' }]],
+                      },
+                    ],
                   ],
                 },
               ],
-            },
-          ],
-        },
+            ],
+          },
+        ],
       ],
     };
 
@@ -219,12 +188,12 @@ describe('given an ordered list entry', () => {
 
   describe('with a string value and an Obsidian-esque identifier appended', () => {
     const olEntry: OrderedListEntry = {
-      ol: [{ li: 'Hello, world!' }],
+      ol: ['Hello, world!'],
       append: '^hai',
     };
 
     test('renders an ordered list line with the specified string as text and the identifier just below', () => {
-      expect(renderMarkdown([olEntry])).toBe(`1. ${olEntry.ol[0].li}
+      expect(renderMarkdown([olEntry])).toBe(`1. ${olEntry.ol[0]}
 ^hai`);
     });
   });

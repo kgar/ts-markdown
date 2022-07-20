@@ -18,8 +18,7 @@ export const ulRenderer = (
     let indicator =
       entry.indicator ?? options.unorderedListItemIndicator ?? '-';
     return entry.ul
-      .map((liEntry) => {
-        const li = liEntry.li;
+      .map((li) => {
         if (Array.isArray(li)) {
           return renderEntries(li, {
             ...options,
