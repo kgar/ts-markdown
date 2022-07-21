@@ -1,10 +1,10 @@
 import { renderMarkdown } from '../rendering';
-import { DataDrivenMarkdownEntry } from '../shared.types';
+import { MarkdownEntry } from '../shared.types';
 import { ItalicEntry } from './italic';
 
 describe('given an italic entry', () => {
   describe('with a string value', () => {
-    const data: DataDrivenMarkdownEntry[] = [
+    const data: MarkdownEntry[] = [
       {
         italic: 'Hello, world!',
       },
@@ -14,7 +14,7 @@ describe('given an italic entry', () => {
       expect(renderMarkdown(data)).toBe(`*${data[0]['italic']}*`);
     });
   });
-  
+
   describe('with an underscore indicator', () => {
     const italicEntry: ItalicEntry = {
       italic: 'test',
@@ -41,7 +41,7 @@ describe('given an italic entry', () => {
   describe('with a document-level underscore indicator and local asterisk indicator', () => {
     const italicEntry: ItalicEntry = {
       italic: 'test',
-      indicator: '*'
+      indicator: '*',
     };
 
     test('favors local indicator', () => {

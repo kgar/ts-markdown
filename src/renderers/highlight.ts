@@ -1,18 +1,15 @@
 import { getMarkdownString } from '../rendering';
-import {
-  DataDrivenMarkdownOptions,
-  MarkdownRenderer,
-} from '../rendering.types';
-import { RichTextEntry, DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions, MarkdownRenderer } from '../rendering.types';
+import { RichTextEntry, MarkdownEntry } from '../shared.types';
 
 export type HighlightEntry = {
   highlight: RichTextEntry;
-} & DataDrivenMarkdownEntry &
+} & MarkdownEntry &
   RichTextEntry;
 
 export const highlightRenderer: MarkdownRenderer = (
   entry: HighlightEntry,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) => {
   if ('highlight' in entry) {
     return `==${getMarkdownString(entry.highlight, options)}==`;

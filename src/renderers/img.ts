@@ -1,5 +1,5 @@
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { MarkdownEntry } from '../shared.types';
 
 export type ImageEntry = {
   img: {
@@ -7,12 +7,9 @@ export type ImageEntry = {
     alt?: string;
     title?: string;
   };
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
-export const imgRenderer = (
-  entry: ImageEntry,
-  options: DataDrivenMarkdownOptions
-) => {
+export const imgRenderer = (entry: ImageEntry, options: RenderOptions) => {
   if ('img' in entry) {
     const formattedLink = entry.img.href.replace(/\s/g, '%20');
 

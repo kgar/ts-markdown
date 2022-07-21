@@ -1,14 +1,11 @@
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { MarkdownEntry } from '../shared.types';
 
 export type LinkEntry = {
   link: { source: string; text?: string; title?: string };
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
-export const linkRenderer = (
-  entry: LinkEntry,
-  options: DataDrivenMarkdownOptions
-) => {
+export const linkRenderer = (entry: LinkEntry, options: RenderOptions) => {
   if ('link' in entry) {
     const formattedLink = entry.link.source.replace(/\s/g, '%20');
 

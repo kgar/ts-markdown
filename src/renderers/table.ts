@@ -1,6 +1,6 @@
 import { getMarkdownString, renderEntries } from '../rendering';
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { MarkdownEntry } from '../shared.types';
 import { TextEntry } from './text';
 
 export type TableEntry = {
@@ -9,7 +9,7 @@ export type TableEntry = {
     rows: (TableRow | (TextEntry | string)[])[];
   };
   append?: string;
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
 export type TableColumn = {
   name: string;
@@ -20,10 +20,7 @@ export type TableRow = {
   [key: string]: string | TextEntry;
 };
 
-export const tableRenderer = (
-  entry: TableEntry,
-  options: DataDrivenMarkdownOptions
-) => {
+export const tableRenderer = (entry: TableEntry, options: RenderOptions) => {
   if ('table' in entry) {
     escapePipes(entry);
     let columnCount = entry.table.columns.length;
@@ -79,7 +76,7 @@ function buildDataRows(
   entry: TableEntry,
   cellWidths: number[],
   columnNames: string[],
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) {
   return entry.table.rows.map((row) => {
     let cells: string[] = [];
@@ -112,7 +109,7 @@ function buildDataRows(
 
 function renderCellText(
   value: string | TextEntry,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ): string {
   if (typeof value === 'string') {
     return value;

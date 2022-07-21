@@ -1,16 +1,16 @@
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { MarkdownEntry } from '../shared.types';
 
 export type CodeBlockEntry = {
   codeblock: string | string[];
   fenced?: boolean | '`' | '~';
   language?: string;
   append?: string;
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
 export const codeblockRenderer = (
   entry: CodeBlockEntry,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) => {
   const fencing = options.useCodeblockFencing ?? entry.fenced;
   if ('codeblock' in entry) {
@@ -41,10 +41,7 @@ function getCodeFenceCharacter(fencing: boolean | '`' | '~') {
   return fencing === '~' ? '~' : '`';
 }
 
-function getCodeFenceClose(
-  entry: CodeBlockEntry,
-  options: DataDrivenMarkdownOptions
-) {
+function getCodeFenceClose(entry: CodeBlockEntry, options: RenderOptions) {
   let fenceCharacter = getCodeFenceCharacter(
     entry.fenced ?? options.useCodeblockFencing
   );

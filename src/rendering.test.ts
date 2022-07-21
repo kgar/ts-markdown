@@ -9,7 +9,7 @@ import { HorizontalRuleEntry } from './renderers/hr';
 import { ParagraphEntry } from './renderers/p';
 import { TableEntry } from './renderers/table';
 import { renderMarkdown } from './rendering';
-import { DataDrivenMarkdownEntry } from './shared.types';
+import { MarkdownEntry } from './shared.types';
 
 describe('given an array of more than one markdown entry', () => {
   describe('with 3 paragraphs', () => {
@@ -110,7 +110,7 @@ Testing`
   });
 
   describe('with a mildly complex set of markdown data representing a small document', () => {
-    const data: DataDrivenMarkdownEntry[] = [
+    const data: MarkdownEntry[] = [
       <H1Entry>{
         h1: 'Testing the Code',
       },

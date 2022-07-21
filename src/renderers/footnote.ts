@@ -1,18 +1,18 @@
 import { renderEntries } from '../rendering';
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { DataDrivenMarkdownEntry, RichTextEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { MarkdownEntry, RichTextEntry } from '../shared.types';
 
 export type FootnoteEntry = {
   footnote: {
     id: string;
-    content: DataDrivenMarkdownEntry | DataDrivenMarkdownEntry[];
+    content: MarkdownEntry | MarkdownEntry[];
   };
-} & DataDrivenMarkdownEntry &
+} & MarkdownEntry &
   RichTextEntry;
 
 export const footnoteRenderer = (
   entry: FootnoteEntry,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) => {
   if ('footnote' in entry) {
     return `[^${entry.footnote.id}]`;
@@ -22,9 +22,9 @@ export const footnoteRenderer = (
 };
 
 export function appendFootnotes(
-  data: DataDrivenMarkdownEntry[],
+  data: MarkdownEntry[],
   document: string,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) {
   let footnotes = getFootnoteEntries(data);
 
@@ -36,7 +36,7 @@ export function appendFootnotes(
 
 function getFootnotesString(
   footnotes: FootnoteEntry[],
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) {
   return footnotes
     .map((entry) => {

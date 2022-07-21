@@ -1,12 +1,12 @@
 import { getMarkdownString, join } from '../rendering';
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { DataDrivenMarkdownEntry, InlineTypes } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { MarkdownEntry, InlineTypes } from '../shared.types';
 
 export type DescriptionListEntry = {
   dl: (DescriptionTerm | DescriptionDetails)[];
   html?: boolean;
   append?: string;
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
 export type DescriptionTerm = {
   dt: InlineTypes;
@@ -18,7 +18,7 @@ export type DescriptionDetails = {
 
 export const dlRenderer = (
   entry: DescriptionListEntry,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) => {
   if ('dl' in entry) {
     let useHtml = options.useDescriptionListHtml ?? entry.html;

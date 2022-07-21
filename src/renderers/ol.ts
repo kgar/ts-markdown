@@ -1,16 +1,13 @@
 import { renderEntries, join, getMarkdownString } from '../rendering';
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { ListItemEntry, DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { ListItemEntry, MarkdownEntry } from '../shared.types';
 
 export type OrderedListEntry = {
   ol: ListItemEntry[];
   append?: string;
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
-export const olRenderer = (
-  entry: OrderedListEntry,
-  options: DataDrivenMarkdownOptions
-) => {
+export const olRenderer = (entry: OrderedListEntry, options: RenderOptions) => {
   if ('ol' in entry) {
     return entry.ol.map((li, index) => {
       if (Array.isArray(li)) {

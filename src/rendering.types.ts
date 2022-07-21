@@ -1,14 +1,14 @@
-import { UnorderedListItemIndicator } from "./renderers/ul";
-import { DataDrivenMarkdownEntry } from "./shared.types";
+import { UnorderedListItemIndicator } from './renderers/ul';
+import { MarkdownEntry } from './shared.types';
 
-export type ContextualMarkdownRenderPrefix = (
+export type RenderPrefixFunction = (
   index: number,
-  entry?: DataDrivenMarkdownEntry
+  entry?: MarkdownEntry
 ) => string;
 
-export type MarkdownRenderPrefix = string | ContextualMarkdownRenderPrefix;
+export type MarkdownRenderPrefix = string | RenderPrefixFunction;
 
-export type DataDrivenMarkdownOptions = {
+export type RenderOptions = {
   unorderedListItemIndicator?: UnorderedListItemIndicator;
   useH1Underlining?: boolean;
   useH2Underlining?: boolean;
@@ -27,14 +27,14 @@ export type DataDrivenMarkdownOptions = {
    */
   blockLevelEntries?: Set<string>;
   applyCompletedDocumentChangesPreFootnotes?: (
-    data: DataDrivenMarkdownEntry[],
+    data: MarkdownEntry[],
     document: string,
-    options: DataDrivenMarkdownOptions
+    options: RenderOptions
   ) => string;
   applyCompletedDocumentChangesPostFootnotes?: (
-    data: DataDrivenMarkdownEntry[],
+    data: MarkdownEntry[],
     document: string,
-    options: DataDrivenMarkdownOptions
+    options: RenderOptions
   ) => string;
   useCodeblockFencing?: boolean | '`' | '~';
   boldIndicator?: '*' | '_';
@@ -42,6 +42,6 @@ export type DataDrivenMarkdownOptions = {
 };
 
 export type MarkdownRenderer = (
-  entry: DataDrivenMarkdownEntry,
-  options: DataDrivenMarkdownOptions
+  entry: MarkdownEntry,
+  options: RenderOptions
 ) => string | string[];

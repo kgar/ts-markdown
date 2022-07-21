@@ -1,15 +1,15 @@
 import { getMarkdownString, renderEntries } from '../rendering';
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { MarkdownEntry } from '../shared.types';
 
 export type BlockquoteEntry = {
-  blockquote: string | DataDrivenMarkdownEntry[];
+  blockquote: string | MarkdownEntry[];
   append?: string;
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
 export const blockquoteRenderer = (
   entry: BlockquoteEntry,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) => {
   if ('blockquote' in entry) {
     return typeof entry.blockquote === 'string'

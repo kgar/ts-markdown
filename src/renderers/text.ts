@@ -1,5 +1,5 @@
 import { getMarkdownString } from '../rendering';
-import { DataDrivenMarkdownOptions } from '../rendering.types';
+import { RenderOptions } from '../rendering.types';
 import { RichTextEntry, InlineTypes } from '../shared.types';
 import { CodeEntry } from './code';
 import { ImageEntry } from './img';
@@ -9,10 +9,7 @@ export type TextEntry = {
   text: string | (RichTextEntry | LinkEntry | ImageEntry | CodeEntry)[];
 } & InlineTypes;
 
-export const textRenderer = (
-  entry: TextEntry,
-  options: DataDrivenMarkdownOptions
-) => {
+export const textRenderer = (entry: TextEntry, options: RenderOptions) => {
   if ('text' in entry) {
     if (typeof entry.text === 'string') {
       return entry.text;

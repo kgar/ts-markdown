@@ -1,21 +1,18 @@
 import { getMarkdownString } from '../rendering';
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { InlineTypes, DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { InlineTypes, MarkdownEntry } from '../shared.types';
 
 export type TaskListEntry = {
   tasks: (InlineTypes | TaskEntry)[];
   append?: string;
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
 export type TaskEntry = {
   task: InlineTypes;
   completed?: boolean;
 };
 
-export const tasksRenderer = (
-  entry: TaskListEntry,
-  options: DataDrivenMarkdownOptions
-) => {
+export const tasksRenderer = (entry: TaskListEntry, options: RenderOptions) => {
   if ('tasks' in entry) {
     return entry.tasks
       .map((taskEntry) => {

@@ -1,15 +1,9 @@
 import { getBlockLevelEntries, getRenderers } from './defaults';
 import { appendFootnotes } from './renderers/footnote';
-import {
-  DataDrivenMarkdownOptions,
-  MarkdownRenderPrefix,
-} from './rendering.types';
-import { DataDrivenMarkdownEntry } from './shared.types';
+import { RenderOptions, MarkdownRenderPrefix } from './rendering.types';
+import { MarkdownEntry } from './shared.types';
 
-export function renderMarkdown(
-  data: DataDrivenMarkdownEntry[],
-  options?: DataDrivenMarkdownOptions
-) {
+export function renderMarkdown(data: MarkdownEntry[], options?: RenderOptions) {
   options ??= {
     prefix: '',
   };
@@ -60,10 +54,7 @@ function correctInvalidMidWordBoldAndItalics(document: string): string {
     );
 }
 
-export function renderEntries(
-  data: DataDrivenMarkdownEntry[],
-  options: DataDrivenMarkdownOptions
-) {
+export function renderEntries(data: MarkdownEntry[], options: RenderOptions) {
   let prefix = options.prefix ?? '';
 
   let textStack = '';
@@ -103,8 +94,8 @@ export function renderEntries(
 }
 
 function requiresAdditionalNewline(
-  entry: DataDrivenMarkdownEntry,
-  options: DataDrivenMarkdownOptions
+  entry: MarkdownEntry,
+  options: RenderOptions
 ) {
   if (typeof entry === 'string') {
     return false;
@@ -113,8 +104,8 @@ function requiresAdditionalNewline(
 }
 
 export function getMarkdownString(
-  entry: DataDrivenMarkdownEntry | string,
-  options: DataDrivenMarkdownOptions
+  entry: MarkdownEntry | string,
+  options: RenderOptions
 ): string | string[] {
   if (entry === null || entry === undefined) {
     return '';
@@ -147,11 +138,11 @@ export function join(
 function renderPrefix(
   prefix: MarkdownRenderPrefix,
   index: number,
-  entry?: DataDrivenMarkdownEntry
+  entry?: MarkdownEntry
 ) {
   if (typeof prefix === 'string') {
     return prefix;
   }
 
-  return prefix(index);
+  return prefix(index, entry);
 }

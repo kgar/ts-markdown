@@ -1,10 +1,10 @@
 import { renderMarkdown } from '../rendering';
-import { DataDrivenMarkdownEntry } from '../shared.types';
+import { MarkdownEntry } from '../shared.types';
 import { BlockquoteEntry } from './blockquote';
 
 describe('given a blockquote entry', () => {
   describe('with a single string value', () => {
-    const data: DataDrivenMarkdownEntry[] = [
+    const data: MarkdownEntry[] = [
       {
         blockquote: 'Hello, world!',
       },

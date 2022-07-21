@@ -1,10 +1,10 @@
 import { renderMarkdown } from '../rendering';
-import { DataDrivenMarkdownEntry } from '../shared.types';
+import { MarkdownEntry } from '../shared.types';
 import { H1Entry } from './h1';
 
 describe('given a header 1 entry', () => {
   describe('with a string value', () => {
-    const data: DataDrivenMarkdownEntry[] = [
+    const data: MarkdownEntry[] = [
       {
         h1: 'Hello, world!',
       },

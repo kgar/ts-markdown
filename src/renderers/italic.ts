@@ -1,19 +1,16 @@
 import { getMarkdownString } from '../rendering';
-import {
-  DataDrivenMarkdownOptions,
-  MarkdownRenderer,
-} from '../rendering.types';
-import { RichTextEntry, DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions, MarkdownRenderer } from '../rendering.types';
+import { RichTextEntry, MarkdownEntry } from '../shared.types';
 
 export type ItalicEntry = {
   italic: RichTextEntry;
   indicator?: '*' | '_';
-} & DataDrivenMarkdownEntry &
+} & MarkdownEntry &
   RichTextEntry;
 
 export const italicRenderer: MarkdownRenderer = (
   entry: ItalicEntry,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) => {
   if ('italic' in entry) {
     let indicator = entry.indicator ?? options.italicIndicator ?? '*';

@@ -1,14 +1,11 @@
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { MarkdownEntry } from '../shared.types';
 
 export type CodeEntry = {
   code: string;
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
-export const codeRenderer = (
-  entry: CodeEntry,
-  options: DataDrivenMarkdownOptions
-) => {
+export const codeRenderer = (entry: CodeEntry, options: RenderOptions) => {
   if ('code' in entry) {
     let backtickTally = 0;
     entry.code.split('').reduce((prev, curr) => {

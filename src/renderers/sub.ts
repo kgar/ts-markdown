@@ -1,18 +1,14 @@
 import { getMarkdownString } from '../rendering';
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { RichTextEntry, DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { RichTextEntry, MarkdownEntry } from '../shared.types';
 
 export type SubscriptEntry = {
   sub: RichTextEntry;
   html?: boolean;
-} &
-  DataDrivenMarkdownEntry &
+} & MarkdownEntry &
   RichTextEntry;
 
-export const subRenderer = (
-  entry: SubscriptEntry,
-  options: DataDrivenMarkdownOptions
-) => {
+export const subRenderer = (entry: SubscriptEntry, options: RenderOptions) => {
   if ('sub' in entry) {
     let useSubscriptHtml = entry.html ?? options.useSubscriptHtml ?? false;
     let subscriptOpen = useSubscriptHtml ? '<sub>' : '~';

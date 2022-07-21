@@ -1,15 +1,15 @@
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { MarkdownEntry } from '../shared.types';
 
 export type HorizontalRuleEntry = {
   hr: any;
   indicator?: '*' | '-' | '_';
   append?: string;
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
 export const hrRenderer = (
   entry: HorizontalRuleEntry,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) => {
   if ('hr' in entry) {
     let indicator = entry.indicator ?? '-';

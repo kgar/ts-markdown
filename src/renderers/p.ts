@@ -1,16 +1,13 @@
 import { getMarkdownString } from '../rendering';
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { InlineTypes, DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { InlineTypes, MarkdownEntry } from '../shared.types';
 
 export type ParagraphEntry = {
   p: InlineTypes;
   append?: string;
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
-export const pRenderer = (
-  entry: ParagraphEntry,
-  options: DataDrivenMarkdownOptions
-) => {
+export const pRenderer = (entry: ParagraphEntry, options: RenderOptions) => {
   if ('p' in entry) {
     if (typeof entry.p === 'string') {
       return getMarkdownString(formatParagraphText(entry.p), options);

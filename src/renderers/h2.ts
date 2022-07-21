@@ -1,21 +1,18 @@
 import { getMarkdownString } from '../rendering';
 import { getOptionalHeaderIdText } from './header';
-import {
-  DataDrivenMarkdownOptions,
-  MarkdownRenderer,
-} from '../rendering.types';
-import { InlineTypes, DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions, MarkdownRenderer } from '../rendering.types';
+import { InlineTypes, MarkdownEntry } from '../shared.types';
 
 export type H2Entry = {
   h2: InlineTypes;
   underline?: boolean;
   id?: string;
   append?: string;
-} & DataDrivenMarkdownEntry;
+} & MarkdownEntry;
 
 export const h2Renderer: MarkdownRenderer = (
   entry: H2Entry,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) => {
   if ('h2' in entry) {
     let useUnderlining = entry.underline ?? options.useH2Underlining;

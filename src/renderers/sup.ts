@@ -1,16 +1,16 @@
 import { getMarkdownString } from '../rendering';
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { RichTextEntry, DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { RichTextEntry, MarkdownEntry } from '../shared.types';
 
 export type SuperscriptEntry = {
   sup: RichTextEntry;
   html?: boolean;
-} & DataDrivenMarkdownEntry &
+} & MarkdownEntry &
   RichTextEntry;
 
 export const supRenderer = (
   entry: SuperscriptEntry,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) => {
   if ('sup' in entry) {
     let useSuperscriptHtml = entry.html ?? options.useSuperscriptHtml ?? false;

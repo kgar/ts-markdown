@@ -1,5 +1,5 @@
 import { renderMarkdown } from '../rendering';
-import { DataDrivenMarkdownEntry } from '../shared.types';
+import { MarkdownEntry } from '../shared.types';
 import { TextEntry } from './text';
 
 describe('given a text entry', () => {
@@ -40,7 +40,7 @@ describe('given a text entry', () => {
    * Based on this recomendation: https://www.markdownguide.org/basic-syntax/#bold-best-practices
    */
   describe('with mid-word italicizing', () => {
-    const data: DataDrivenMarkdownEntry[] = [
+    const data: MarkdownEntry[] = [
       {
         text: ['He', { italic: 'll' }, 'o'],
       },

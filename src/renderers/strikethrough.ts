@@ -1,15 +1,15 @@
 import { getMarkdownString } from '../rendering';
-import { DataDrivenMarkdownOptions } from '../rendering.types';
-import { RichTextEntry, DataDrivenMarkdownEntry } from '../shared.types';
+import { RenderOptions } from '../rendering.types';
+import { RichTextEntry, MarkdownEntry } from '../shared.types';
 
 export type StrikethroughEntry = {
   strikethrough: RichTextEntry;
-} & DataDrivenMarkdownEntry &
+} & MarkdownEntry &
   RichTextEntry;
 
 export const strikethroughRenderer = (
   entry: StrikethroughEntry,
-  options: DataDrivenMarkdownOptions
+  options: RenderOptions
 ) => {
   if ('strikethrough' in entry) {
     return `~~${getMarkdownString(entry.strikethrough, options)}~~`;

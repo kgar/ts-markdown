@@ -8,15 +8,16 @@ import { H2Entry } from './renderers/h2';
 import { ParagraphEntry, pRenderer } from './renderers/p';
 import { TextEntry } from './renderers/text';
 import { renderEntries, renderMarkdown } from './rendering';
-import { MarkdownRenderer, DataDrivenMarkdownOptions } from './rendering.types';
-import { DataDrivenMarkdownEntry } from './shared.types';
+import { MarkdownRenderer, RenderOptions } from './rendering.types';
+import { MarkdownEntry } from './shared.types';
 
 describe('given entries to render', () => {
   describe('with custom Obsidian renderers', () => {
     type TransclusionEntry = {
       transclusion: { path: string };
       html?: boolean;
-    } & DataDrivenMarkdownEntry;
+    } & MarkdownEntry;
+
     const transclusionRenderer: MarkdownRenderer = (
       entry: TransclusionEntry
     ) => {
@@ -33,7 +34,7 @@ describe('given entries to render', () => {
         title?: string;
       };
       html?: boolean;
-    } & DataDrivenMarkdownEntry;
+    } & MarkdownEntry;
 
     const internalLinkRenderer: MarkdownRenderer = (
       entry: ObsidianInternalLinkEntry
@@ -54,13 +55,13 @@ describe('given entries to render', () => {
       callout: {
         type: string;
         title?: string;
-        content: DataDrivenMarkdownEntry | DataDrivenMarkdownEntry[];
+        content: MarkdownEntry | MarkdownEntry[];
       };
     };
 
     const calloutRenderer: MarkdownRenderer = (
       entry: ObsidianCalloutEntry,
-      options: DataDrivenMarkdownOptions
+      options: RenderOptions
     ) => {
       let titleText = entry.callout.title ? ` ${entry.callout.title}` : '';
 
@@ -87,7 +88,7 @@ describe('given entries to render', () => {
     const blockLevelEntries = getBlockLevelEntries(['transclusion', 'callout']);
 
     describe('with a custom Obsidian transclusion entry', () => {
-      const entries: DataDrivenMarkdownEntry[] = [
+      const entries: MarkdownEntry[] = [
         { h1: 'Hello, world!' },
         {
           blockquote:
@@ -103,7 +104,7 @@ describe('given entries to render', () => {
         },
       ];
 
-      const options: DataDrivenMarkdownOptions = {
+      const options: RenderOptions = {
         renderers: renderers,
         blockLevelEntries,
       };
@@ -122,7 +123,7 @@ Oh hai block-level transclusion 👆`
     });
 
     describe('with a custom Obsidian transclusion entry as HTML', () => {
-      const entries: DataDrivenMarkdownEntry[] = [
+      const entries: MarkdownEntry[] = [
         <H1Entry>{ h1: 'Hello, world!' },
         <BlockquoteEntry>{
           blockquote:
@@ -139,7 +140,7 @@ Oh hai block-level transclusion 👆`
         },
       ];
 
-      const options: DataDrivenMarkdownOptions = {
+      const options: RenderOptions = {
         renderers: renderers,
         blockLevelEntries,
       };
@@ -158,7 +159,7 @@ Oh hai block-level transclusion 👆`
     });
 
     describe('with an Obsidian callout as a block-level element in a simple document', () => {
-      const entries: DataDrivenMarkdownEntry[] = [
+      const entries: MarkdownEntry[] = [
         <H1Entry>{
           h1: 'Callout Test',
         },
@@ -202,7 +203,7 @@ Oh hai block-level transclusion 👆`
     });
 
     describe('with an Obsidian internal link as an inline element in a simple document', () => {
-      const entries: DataDrivenMarkdownEntry[] = [
+      const entries: MarkdownEntry[] = [
         <H1Entry>{
           h1: 'Testing',
         },
@@ -256,7 +257,7 @@ It's as easy as that.`
 
     const renderers = getRenderers([['p', alternateParagraphRenderer]]);
 
-    const entries: DataDrivenMarkdownEntry[] = [
+    const entries: MarkdownEntry[] = [
       <H1Entry>{
         h1: 'Testing',
       },
