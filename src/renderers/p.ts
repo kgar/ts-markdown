@@ -1,5 +1,5 @@
 import { getMarkdownString } from '../rendering';
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { InlineTypes, MarkdownEntry } from '../shared.types';
 
 export type ParagraphEntry = {
@@ -7,7 +7,10 @@ export type ParagraphEntry = {
   append?: string;
 } & MarkdownEntry;
 
-export const pRenderer = (entry: ParagraphEntry, options: RenderOptions) => {
+export const pRenderer: MarkdownRenderer = (
+  entry: ParagraphEntry,
+  options: RenderOptions
+) => {
   if ('p' in entry) {
     if (typeof entry.p === 'string') {
       return getMarkdownString(formatParagraphText(entry.p), options);
@@ -20,11 +23,11 @@ export const pRenderer = (entry: ParagraphEntry, options: RenderOptions) => {
     }
 
     let result = getMarkdownString(entry.p, options);
-    if (typeof result === 'string') {
-      return formatParagraphText(result);
-    }
 
-    return result.map((x) => formatParagraphText(x));
+    return formatParagraphText(result)
+      .split('\n')
+      .map((x) => formatParagraphText(x))
+      .join('\n');
   }
 
   throw new Error('Entry is not a p entry. Unable to render.');

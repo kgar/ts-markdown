@@ -1,5 +1,5 @@
 import { getMarkdownString } from '../rendering';
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { RichTextEntry, MarkdownEntry } from '../shared.types';
 
 export type SuperscriptEntry = {
@@ -8,7 +8,7 @@ export type SuperscriptEntry = {
 } & MarkdownEntry &
   RichTextEntry;
 
-export const supRenderer = (
+export const supRenderer: MarkdownRenderer = (
   entry: SuperscriptEntry,
   options: RenderOptions
 ) => {

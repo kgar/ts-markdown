@@ -1,17 +1,14 @@
 import { renderMarkdown } from '../rendering';
-import { MarkdownEntry } from '../shared.types';
 import { H2Entry } from './h2';
 
 describe('given a header 2 entry', () => {
   describe('with a string value', () => {
-    const data: MarkdownEntry[] = [
-      {
-        h2: 'Hello, world!',
-      },
-    ];
+    const entry = {
+      h2: 'Hello, world!',
+    };
 
     test('renders an h2 markdown line with the specified string as text', () => {
-      expect(renderMarkdown(data)).toBe(`## ${data[0]['h2']}`);
+      expect(renderMarkdown([entry])).toBe(`## ${entry.h2}`);
     });
   });
 
@@ -29,7 +26,7 @@ describe('given a header 2 entry', () => {
   });
 
   describe('with a text entry containing rich text', () => {
-    const h2Entry: H2Entry = {
+    const entry: H2Entry = {
       h2: {
         text: [
           {
@@ -48,26 +45,26 @@ describe('given a header 2 entry', () => {
     };
 
     test('renders h2 with rich text', () => {
-      expect(renderMarkdown([h2Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '## ==Totally== ***awesome*** ~~d00d~~'
       );
     });
   });
 
   describe('with rich text', () => {
-    const h2Entry: H2Entry = {
+    const entry: H2Entry = {
       h2: { bold: { italic: { highlight: 'PER MY PREVIOUS EMAIL' } } },
     };
 
     test('renders h2 with rich text', () => {
-      expect(renderMarkdown([h2Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '## ***==PER MY PREVIOUS EMAIL==***'
       );
     });
   });
 
   describe('with link and image', () => {
-    const h2Entry: H2Entry = {
+    const entry: H2Entry = {
       h2: {
         text: [
           'The magnificent power of ',
@@ -90,20 +87,20 @@ describe('given a header 2 entry', () => {
     };
 
     test('renders h2 with link and image', () => {
-      expect(renderMarkdown([h2Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '## The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
       );
     });
   });
 
   describe('with underline set to true', () => {
-    const h2Entry: H2Entry = {
+    const entry: H2Entry = {
       h2: 'This is my totally cool header',
       underline: true,
     };
 
     test('renders header without prefixed hashtag and with hyphen underline character length of header text', () => {
-      expect(renderMarkdown([h2Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         `This is my totally cool header
 ------------------------------`
       );
@@ -111,12 +108,12 @@ describe('given a header 2 entry', () => {
   });
 
   describe('with underline set to true at document-level', () => {
-    const h2Entry: H2Entry = {
+    const entry: H2Entry = {
       h2: 'This is my totally cool header',
     };
 
     test('renders header without prefixed hashtag and with equal-sign underline character length of header text', () => {
-      expect(renderMarkdown([h2Entry], { useH2Underlining: true })).toBe(
+      expect(renderMarkdown([entry], { useH2Underlining: true })).toBe(
         `This is my totally cool header
 ------------------------------`
       );
@@ -124,13 +121,13 @@ describe('given a header 2 entry', () => {
   });
 
   describe('with underline set to true at local-level and false at the document level', () => {
-    const h2Entry: H2Entry = {
+    const entry: H2Entry = {
       h2: 'This is my totally cool header',
       underline: true,
     };
 
     test('renders header without prefixed hashtag and with equal-sign underline character length of header text', () => {
-      expect(renderMarkdown([h2Entry], { useH2Underlining: false })).toBe(
+      expect(renderMarkdown([entry], { useH2Underlining: false })).toBe(
         `This is my totally cool header
 ------------------------------`
       );

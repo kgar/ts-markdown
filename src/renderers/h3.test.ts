@@ -1,17 +1,14 @@
 import { renderMarkdown } from '../rendering';
-import { MarkdownEntry } from '../shared.types';
 import { H3Entry } from './h3';
 
 describe('given a header 3 entry', () => {
   describe('with a string value', () => {
-    const data: MarkdownEntry[] = [
-      {
-        h3: 'Hello, world!',
-      },
-    ];
+    const entry: H3Entry = {
+      h3: 'Hello, world!',
+    };
 
     test('renders an h3 markdown line with the specified string as text', () => {
-      expect(renderMarkdown(data)).toBe(`### ${data[0]['h3']}`);
+      expect(renderMarkdown([entry])).toBe(`### ${entry.h3}`);
     });
   });
 
@@ -29,7 +26,7 @@ describe('given a header 3 entry', () => {
   });
 
   describe('with a text entry containing rich text', () => {
-    const h3Entry: H3Entry = {
+    const entry: H3Entry = {
       h3: {
         text: [
           {
@@ -48,26 +45,26 @@ describe('given a header 3 entry', () => {
     };
 
     test('renders h3 with rich text', () => {
-      expect(renderMarkdown([h3Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '### ==Totally== ***awesome*** ~~d00d~~'
       );
     });
   });
 
   describe('with rich text', () => {
-    const h3Entry: H3Entry = {
+    const entry: H3Entry = {
       h3: { bold: { italic: { highlight: 'PER MY PREVIOUS EMAIL' } } },
     };
 
     test('renders h3 with rich text', () => {
-      expect(renderMarkdown([h3Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '### ***==PER MY PREVIOUS EMAIL==***'
       );
     });
   });
 
   describe('with link and image', () => {
-    const h3Entry: H3Entry = {
+    const entry: H3Entry = {
       h3: {
         text: [
           'The magnificent power of ',
@@ -90,7 +87,7 @@ describe('given a header 3 entry', () => {
     };
 
     test('renders h3 with link and image', () => {
-      expect(renderMarkdown([h3Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '### The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
       );
     });

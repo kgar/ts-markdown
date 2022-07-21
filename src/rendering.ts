@@ -62,21 +62,17 @@ export function renderEntries(data: MarkdownEntry[], options: RenderOptions) {
     let entryPrefix = renderPrefix(prefix, index, entry);
 
     const result = getMarkdownString(entry, options);
-    const newText =
-      typeof result === 'string'
-        ? result.split('\n')
-        : result.reduce((prev, curr) => [...prev, ...curr.split('\n')], []);
-    textStack += newText.map((text) => entryPrefix + text).join('\n');
+    textStack += result
+      .split('\n')
+      .map((text) => entryPrefix + text)
+      .join('\n');
 
-    let appendContent =
-      typeof entry === 'object' &&
-      'append' in entry &&
-      typeof 'append' === 'string'
-        ? getMarkdownString(entry['append'], options)
-        : '';
-
-    if (appendContent !== '') {
-      textStack += '\n' + appendContent;
+    if (isAppendable(entry)) {
+      let appendable = entry as { append: string };
+      let appendContent = getMarkdownString(appendable.append, options);
+      if (appendContent !== '') {
+        textStack += '\n' + appendContent;
+      }
     }
 
     if (index < data.length - 1) {
@@ -93,6 +89,14 @@ export function renderEntries(data: MarkdownEntry[], options: RenderOptions) {
   return textStack;
 }
 
+function isAppendable(entry: MarkdownEntry) {
+  return (
+    typeof entry === 'object' &&
+    'append' in entry &&
+    typeof 'append' === 'string'
+  );
+}
+
 function requiresAdditionalNewline(
   entry: MarkdownEntry,
   options: RenderOptions
@@ -100,26 +104,26 @@ function requiresAdditionalNewline(
   if (typeof entry === 'string') {
     return false;
   }
-  return Object.keys(entry).find((x) => options.blockLevelEntries.has(x));
+  return Object.keys(entry).find((x) => options.blockLevelEntries?.has(x));
 }
 
 export function getMarkdownString(
   entry: MarkdownEntry | string,
   options: RenderOptions
-): string | string[] {
+): string {
   if (entry === null || entry === undefined) {
     return '';
   }
 
   const isStringEntry = typeof entry === 'string';
 
-  if (isStringEntry && options.renderers.string) {
+  if (isStringEntry && options.renderers?.string) {
     return options.renderers.string(entry, options);
   }
 
   if (!isStringEntry) {
     for (let key in entry) {
-      let renderer = options.renderers[key];
+      let renderer = options.renderers?.[key];
       if (renderer) {
         return renderer(entry, options);
       }

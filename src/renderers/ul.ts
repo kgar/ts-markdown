@@ -1,5 +1,5 @@
 import { renderEntries, join, getMarkdownString } from '../rendering';
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { ListItemEntry, MarkdownEntry } from '../shared.types';
 
 export type UnorderedListEntry = {
@@ -10,7 +10,7 @@ export type UnorderedListEntry = {
 
 export type UnorderedListItemIndicator = '-' | '*' | '+';
 
-export const ulRenderer = (
+export const ulRenderer: MarkdownRenderer = (
   entry: UnorderedListEntry,
   options: RenderOptions
 ) => {
@@ -26,11 +26,10 @@ export const ulRenderer = (
           });
         }
 
-        return join(getMarkdownString(li, options), '\n', (liIndex) =>
-          liIndex === 0 ? `${indicator} ` : '    '
-        );
+        return `${indicator} ${getMarkdownString(li, options)}`;
       })
-      .map((x) => x.replace(/^([\-\+\*]\s[\d]+)(\.)/, '$1\\.'));
+      .map((x) => x.replace(/^([\-\+\*]\s[\d]+)(\.)/, '$1\\.'))
+      .join('\n');
   }
 
   throw new Error('Entry is not an ul entry. Unable to render.');

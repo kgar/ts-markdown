@@ -4,19 +4,17 @@ import { BlockquoteEntry } from './blockquote';
 
 describe('given a blockquote entry', () => {
   describe('with a single string value', () => {
-    const data: MarkdownEntry[] = [
-      {
-        blockquote: 'Hello, world!',
-      },
-    ];
+    const entry = {
+      blockquote: 'Hello, world!',
+    };
 
     test('renders a blokquote markdown line with the specified string as text', () => {
-      expect(renderMarkdown(data)).toBe(`> ${data[0]['blockquote']}`);
+      expect(renderMarkdown([entry])).toBe(`> ${entry.blockquote}`);
     });
   });
 
   describe('with 2 paragraphs of plain text inside', () => {
-    const blockquoteEntry: BlockquoteEntry = {
+    const entry: BlockquoteEntry = {
       blockquote: [
         {
           p: 'Hello, world!',
@@ -28,7 +26,7 @@ describe('given a blockquote entry', () => {
     };
 
     test('renders blockquote with 2 specified paragraphs nested within', () => {
-      expect(renderMarkdown([blockquoteEntry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         `> Hello, world!
 > 
 > Goodbye, Moon Man!`
@@ -37,7 +35,7 @@ describe('given a blockquote entry', () => {
   });
 
   describe('with a nested blockquote', () => {
-    const blockquoteEntry: BlockquoteEntry = {
+    const entry: BlockquoteEntry = {
       blockquote: [
         {
           blockquote: 'Hello, world!',
@@ -46,12 +44,12 @@ describe('given a blockquote entry', () => {
     };
 
     test('renders blockquote with 2 specified paragraphs nested within', () => {
-      expect(renderMarkdown([blockquoteEntry])).toBe(`> > Hello, world!`);
+      expect(renderMarkdown([entry])).toBe(`> > Hello, world!`);
     });
   });
 
   describe('with an admonition and a nested blockquote with paragraphs of rich text', () => {
-    const blockquoteEntry: BlockquoteEntry = {
+    const entry: BlockquoteEntry = {
       blockquote: [
         {
           p: {
@@ -73,8 +71,7 @@ describe('given a blockquote entry', () => {
     };
 
     test('renders complex, nested content as expected', () => {
-      expect(renderMarkdown([blockquoteEntry]))
-        .toBe(`> :joy:: This is an admonition
+      expect(renderMarkdown([entry])).toBe(`> :joy:: This is an admonition
 > 
 > Be advised.
 > 
@@ -83,7 +80,7 @@ describe('given a blockquote entry', () => {
   });
 
   describe('with other elements', () => {
-    const blockquoteEntry: BlockquoteEntry = {
+    const entry: BlockquoteEntry = {
       blockquote: [
         {
           h4: 'The quarterly results look great!',
@@ -109,7 +106,7 @@ describe('given a blockquote entry', () => {
     };
 
     test('renders blockquote with other elements nested within', () => {
-      expect(renderMarkdown([blockquoteEntry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         `> #### The quarterly results look great!
 > 
 > - Revenue was off the chart.
@@ -121,7 +118,7 @@ describe('given a blockquote entry', () => {
   });
 
   describe('with nested list in nested blockquote', () => {
-    const blockquoteEntry: BlockquoteEntry = {
+    const entry: BlockquoteEntry = {
       blockquote: [
         {
           blockquote: [
@@ -143,7 +140,7 @@ describe('given a blockquote entry', () => {
     };
 
     test('renders blockquote with other elements nested within', () => {
-      expect(renderMarkdown([blockquoteEntry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         `> > 1. Revenue was off the chart.
 > > 2. Profits were ***higher*** than ever.`
       );

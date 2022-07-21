@@ -1,5 +1,5 @@
 import { getMarkdownString, renderEntries } from '../rendering';
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 import { TextEntry } from './text';
 
@@ -20,11 +20,14 @@ export type TableRow = {
   [key: string]: string | TextEntry;
 };
 
-export const tableRenderer = (entry: TableEntry, options: RenderOptions) => {
+export const tableRenderer: MarkdownRenderer = (
+  entry: TableEntry,
+  options: RenderOptions
+) => {
   if ('table' in entry) {
     escapePipes(entry);
     let columnCount = entry.table.columns.length;
-    let columnNames = entry.table.columns.reduce(
+    let columnNames = entry.table.columns.reduce<string[]>(
       (prev, curr) => prev.concat(typeof curr === 'string' ? curr : curr.name),
       []
     );
@@ -39,7 +42,7 @@ export const tableRenderer = (entry: TableEntry, options: RenderOptions) => {
         getColumnHeaderTextLength(entry.table.columns[i]),
         ...entry.table.rows
           .reduce<string[]>((prev, curr) => {
-            let value = 'length' in curr ? curr[i] : curr[columnName];
+            let value = Array.isArray(curr) ? curr[i] : curr[columnName];
             if (value !== undefined) {
               let result = getMarkdownString(value, options);
               if (typeof result === 'string') {
@@ -91,7 +94,7 @@ function buildDataRows(
         ),
       ];
     } else if (typeof row === 'object') {
-      cells = columnNames.reduce(
+      cells = columnNames.reduce<string[]>(
         (prev, curr, index) =>
           prev.concat(
             padAlign(
@@ -198,9 +201,10 @@ function escapePipes<T>(target: T): T {
     }
   }
 
-  if (typeof target === 'object') {
-    for (let key of Object.keys(target)) {
-      target[key] = escapePipes(target[key]);
+  if (typeof target === 'object' && target !== null) {
+    let assignable = target as Record<string, any>;
+    for (let key of Object.keys(assignable)) {
+      assignable[key] = escapePipes(assignable[key]);
     }
   }
 

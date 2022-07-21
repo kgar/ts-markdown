@@ -1,4 +1,4 @@
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
 export type HorizontalRuleEntry = {
@@ -7,7 +7,7 @@ export type HorizontalRuleEntry = {
   append?: string;
 } & MarkdownEntry;
 
-export const hrRenderer = (
+export const hrRenderer: MarkdownRenderer = (
   entry: HorizontalRuleEntry,
   options: RenderOptions
 ) => {

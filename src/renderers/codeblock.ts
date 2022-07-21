@@ -1,4 +1,4 @@
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
 export type CodeBlockEntry = {
@@ -8,7 +8,7 @@ export type CodeBlockEntry = {
   append?: string;
 } & MarkdownEntry;
 
-export const codeblockRenderer = (
+export const codeblockRenderer: MarkdownRenderer = (
   entry: CodeBlockEntry,
   options: RenderOptions
 ) => {
@@ -37,7 +37,7 @@ function getCodeFenceOpen(fencing: boolean | '`' | '~', language?: string) {
   return fenceCharacter + fenceCharacter + fenceCharacter + languageCharacter;
 }
 
-function getCodeFenceCharacter(fencing: boolean | '`' | '~') {
+function getCodeFenceCharacter(fencing: boolean | '`' | '~' | undefined) {
   return fencing === '~' ? '~' : '`';
 }
 

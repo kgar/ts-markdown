@@ -1,5 +1,5 @@
-import { getMarkdownString, join } from '../rendering';
-import { RenderOptions } from '../rendering.types';
+import { getMarkdownString } from '../rendering';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry, InlineTypes } from '../shared.types';
 
 export type DescriptionListEntry = {
@@ -16,7 +16,7 @@ export type DescriptionDetails = {
   dd: InlineTypes;
 };
 
-export const dlRenderer = (
+export const dlRenderer: MarkdownRenderer = (
   entry: DescriptionListEntry,
   options: RenderOptions
 ) => {
@@ -33,7 +33,7 @@ export const dlRenderer = (
       lines.push('<dl>');
     }
 
-    let lastItem: string = undefined;
+    let lastItem: string | undefined = undefined;
     for (let descriptionItem of entry.dl) {
       if ('dt' in descriptionItem && lastItem === 'dd') {
         if (lines.length > 0) {
@@ -43,15 +43,13 @@ export const dlRenderer = (
 
       if ('dt' in descriptionItem) {
         const termContent =
-          termStart +
-          join(getMarkdownString(descriptionItem.dt, options), '') +
-          termEnd;
+          termStart + getMarkdownString(descriptionItem.dt, options) + termEnd;
         lines.push(termContent);
         lastItem = 'dt';
       } else if ('dd' in descriptionItem) {
         const descriptionContent =
           descriptionStart +
-          join(getMarkdownString(descriptionItem.dd, options), '') +
+          getMarkdownString(descriptionItem.dd, options) +
           descriptionEnd;
         lines.push(descriptionContent);
         lastItem = 'dd';

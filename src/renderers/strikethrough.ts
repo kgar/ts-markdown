@@ -1,5 +1,5 @@
 import { getMarkdownString } from '../rendering';
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { RichTextEntry, MarkdownEntry } from '../shared.types';
 
 export type StrikethroughEntry = {
@@ -7,7 +7,7 @@ export type StrikethroughEntry = {
 } & MarkdownEntry &
   RichTextEntry;
 
-export const strikethroughRenderer = (
+export const strikethroughRenderer: MarkdownRenderer = (
   entry: StrikethroughEntry,
   options: RenderOptions
 ) => {

@@ -7,7 +7,7 @@
     "sourceMap": true,
     "outDir": "dist",
     "rootDir": "src",
-    "declaration": true
+    "strict": true
   },
   "lib": ["es2022"],
   "exclude": ["node_modules", "dist", "out", "jest.config.ts", "**/*.test.ts"]

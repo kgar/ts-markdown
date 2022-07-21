@@ -95,7 +95,7 @@ describe('given entries to render', () => {
           blockquote:
             'This is a document which contains cool stuff such as the following:',
         },
-        <TransclusionEntry>{
+        {
           transclusion: {
             path: 'Path/To/My/Transcluded/Content',
           },

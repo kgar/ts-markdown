@@ -1,4 +1,4 @@
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
 export type ImageEntry = {
@@ -9,7 +9,10 @@ export type ImageEntry = {
   };
 } & MarkdownEntry;
 
-export const imgRenderer = (entry: ImageEntry, options: RenderOptions) => {
+export const imgRenderer: MarkdownRenderer = (
+  entry: ImageEntry,
+  options: RenderOptions
+) => {
   if ('img' in entry) {
     const formattedLink = entry.img.href.replace(/\s/g, '%20');
 

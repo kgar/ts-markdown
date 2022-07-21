@@ -1,5 +1,5 @@
 import { getMarkdownString } from '../rendering';
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { RichTextEntry, MarkdownEntry } from '../shared.types';
 
 export type SubscriptEntry = {
@@ -8,7 +8,10 @@ export type SubscriptEntry = {
 } & MarkdownEntry &
   RichTextEntry;
 
-export const subRenderer = (entry: SubscriptEntry, options: RenderOptions) => {
+export const subRenderer: MarkdownRenderer = (
+  entry: SubscriptEntry,
+  options: RenderOptions
+) => {
   if ('sub' in entry) {
     let useSubscriptHtml = entry.html ?? options.useSubscriptHtml ?? false;
     let subscriptOpen = useSubscriptHtml ? '<sub>' : '~';

@@ -1,4 +1,4 @@
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry, RichTextEntry } from '../shared.types';
 
 export type EmojiEntry = {
@@ -6,7 +6,10 @@ export type EmojiEntry = {
 } & MarkdownEntry &
   RichTextEntry;
 
-export const emojiRenderer = (entry: EmojiEntry, options: RenderOptions) => {
+export const emojiRenderer: MarkdownRenderer = (
+  entry: EmojiEntry,
+  options: RenderOptions
+) => {
   if ('emoji' in entry) {
     return `:${entry.emoji}:`;
   }

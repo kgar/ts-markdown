@@ -1,5 +1,5 @@
 import { getMarkdownString, renderEntries } from '../rendering';
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
 export type BlockquoteEntry = {
@@ -7,7 +7,7 @@ export type BlockquoteEntry = {
   append?: string;
 } & MarkdownEntry;
 
-export const blockquoteRenderer = (
+export const blockquoteRenderer: MarkdownRenderer = (
   entry: BlockquoteEntry,
   options: RenderOptions
 ) => {

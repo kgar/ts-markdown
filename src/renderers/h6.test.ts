@@ -1,17 +1,14 @@
 import { renderMarkdown } from '../rendering';
-import { MarkdownEntry } from '../shared.types';
 import { H6Entry } from './h6';
 
 describe('given a header 6 entry', () => {
   describe('with a string value', () => {
-    const data: MarkdownEntry[] = [
-      {
-        h6: 'Hello, world!',
-      },
-    ];
+    const entry: H6Entry = {
+      h6: 'Hello, world!',
+    };
 
     test('renders an h6 markdown line with the specified string as text', () => {
-      expect(renderMarkdown(data)).toBe(`###### ${data[0]['h6']}`);
+      expect(renderMarkdown([entry])).toBe(`###### ${entry.h6}`);
     });
   });
 
@@ -29,7 +26,7 @@ describe('given a header 6 entry', () => {
   });
 
   describe('with a text entry containing rich text', () => {
-    const h6Entry: H6Entry = {
+    const entry: H6Entry = {
       h6: {
         text: [
           {
@@ -48,26 +45,26 @@ describe('given a header 6 entry', () => {
     };
 
     test('renders h6 with rich text', () => {
-      expect(renderMarkdown([h6Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '###### ==Totally== ***awesome*** ~~d00d~~'
       );
     });
   });
 
   describe('with rich text', () => {
-    const h6Entry: H6Entry = {
+    const entry: H6Entry = {
       h6: { bold: { italic: { highlight: 'PER MY PREVIOUS EMAIL' } } },
     };
 
     test('renders h6 with rich text', () => {
-      expect(renderMarkdown([h6Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '###### ***==PER MY PREVIOUS EMAIL==***'
       );
     });
   });
 
   describe('with link and image', () => {
-    const h6Entry: H6Entry = {
+    const entry: H6Entry = {
       h6: {
         text: [
           'The magnificent power of ',
@@ -90,7 +87,7 @@ describe('given a header 6 entry', () => {
     };
 
     test('renders h6 with link and image', () => {
-      expect(renderMarkdown([h6Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '###### The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
       );
     });

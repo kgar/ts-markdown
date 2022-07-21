@@ -43,7 +43,5 @@ export type RenderOptions = {
   italicIndicator?: '*' | '_';
 };
 
-export type MarkdownRenderer = (
-  entry: MarkdownEntry,
-  options: RenderOptions
-) => string | string[];
+// TODO: Figure out how to require that `entry` extend `MarkdownEntry` and be containable in the `Renderers` type.
+export type MarkdownRenderer = (entry: any, options: RenderOptions) => string;

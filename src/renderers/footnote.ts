@@ -1,5 +1,5 @@
 import { renderEntries } from '../rendering';
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry, RichTextEntry } from '../shared.types';
 
 export type FootnoteEntry = {
@@ -10,7 +10,7 @@ export type FootnoteEntry = {
 } & MarkdownEntry &
   RichTextEntry;
 
-export const footnoteRenderer = (
+export const footnoteRenderer: MarkdownRenderer = (
   entry: FootnoteEntry,
   options: RenderOptions
 ) => {
@@ -55,23 +55,17 @@ function getFootnotesString(
 }
 
 function getFootnoteEntries(data: unknown): FootnoteEntry[] {
-  if (Array.isArray(data)) {
-    return data.reduce(
-      (prev, curr) => [...prev, ...getFootnoteEntries(curr)],
-      []
-    );
-  }
-
-  if (typeof data === 'object' && 'footnote' in data) {
-    return [data as FootnoteEntry];
-  }
-
-  if (typeof data === 'object') {
-    return Object.keys(data).reduce(
-      (prev, key) => [...prev, ...getFootnoteEntries(data[key])],
-      []
-    );
-  }
-
-  return [];
+  return Array.isArray(data)
+    ? data.reduce((prev, curr) => [...prev, ...getFootnoteEntries(curr)], [])
+    : data !== null && typeof data === 'object' && 'footnote' in data
+    ? [data as FootnoteEntry]
+    : data !== null && typeof data === 'object'
+    ? Object.keys(data).reduce<FootnoteEntry[]>(
+        (prev, key) => [
+          ...prev,
+          ...getFootnoteEntries(data[key as keyof typeof data]),
+        ],
+        []
+      )
+    : [];
 }

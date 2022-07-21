@@ -1,11 +1,14 @@
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
 export type CodeEntry = {
   code: string;
 } & MarkdownEntry;
 
-export const codeRenderer = (entry: CodeEntry, options: RenderOptions) => {
+export const codeRenderer: MarkdownRenderer = (
+  entry: CodeEntry,
+  options: RenderOptions
+) => {
   if ('code' in entry) {
     let backtickTally = 0;
     entry.code.split('').reduce((prev, curr) => {

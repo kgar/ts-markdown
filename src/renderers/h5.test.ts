@@ -1,17 +1,14 @@
 import { renderMarkdown } from '../rendering';
-import { MarkdownEntry } from '../shared.types';
 import { H5Entry } from './h5';
 
 describe('given a header 5 entry', () => {
   describe('with a string value', () => {
-    const data: MarkdownEntry[] = [
-      {
-        h5: 'Hello, world!',
-      },
-    ];
+    const entry: H5Entry = {
+      h5: 'Hello, world!',
+    };
 
     test('renders an h5 markdown line with the specified string as text', () => {
-      expect(renderMarkdown(data)).toBe(`##### ${data[0]['h5']}`);
+      expect(renderMarkdown([entry])).toBe(`##### ${entry.h5}`);
     });
   });
 
@@ -29,7 +26,7 @@ describe('given a header 5 entry', () => {
   });
 
   describe('with a text entry containing rich text', () => {
-    const h5Entry: H5Entry = {
+    const entry: H5Entry = {
       h5: {
         text: [
           {
@@ -48,26 +45,26 @@ describe('given a header 5 entry', () => {
     };
 
     test('renders h5 with rich text', () => {
-      expect(renderMarkdown([h5Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '##### ==Totally== ***awesome*** ~~d00d~~'
       );
     });
   });
 
   describe('with rich text', () => {
-    const h5Entry: H5Entry = {
+    const entry: H5Entry = {
       h5: { bold: { italic: { highlight: 'PER MY PREVIOUS EMAIL' } } },
     };
 
     test('renders h5 with rich text', () => {
-      expect(renderMarkdown([h5Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '##### ***==PER MY PREVIOUS EMAIL==***'
       );
     });
   });
 
   describe('with link and image', () => {
-    const h5Entry: H5Entry = {
+    const entry: H5Entry = {
       h5: {
         text: [
           'The magnificent power of ',
@@ -90,7 +87,7 @@ describe('given a header 5 entry', () => {
     };
 
     test('renders h5 with link and image', () => {
-      expect(renderMarkdown([h5Entry])).toBe(
+      expect(renderMarkdown([entry])).toBe(
         '##### The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
       );
     });

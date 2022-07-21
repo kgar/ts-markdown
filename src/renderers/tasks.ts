@@ -1,5 +1,5 @@
 import { getMarkdownString } from '../rendering';
-import { RenderOptions } from '../rendering.types';
+import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { InlineTypes, MarkdownEntry } from '../shared.types';
 
 export type TaskListEntry = {
@@ -12,7 +12,10 @@ export type TaskEntry = {
   completed?: boolean;
 };
 
-export const tasksRenderer = (entry: TaskListEntry, options: RenderOptions) => {
+export const tasksRenderer: MarkdownRenderer = (
+  entry: TaskListEntry,
+  options: RenderOptions
+) => {
   if ('tasks' in entry) {
     return entry.tasks
       .map((taskEntry) => {
