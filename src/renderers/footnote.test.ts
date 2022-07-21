@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { FootnoteEntry } from './footnote';
 
 describe('given a footnote entry', () => {
@@ -11,7 +11,7 @@ describe('given a footnote entry', () => {
     };
 
     test('renders footnote tag inline and footnote content two lines below', () => {
-      expect(renderMarkdown([footnoteEntry])).toBe(
+      expect(tsMarkdown([footnoteEntry])).toBe(
         `[^1]
 
 [^1]: This is a footnote.`
@@ -31,9 +31,9 @@ describe('given a footnote entry', () => {
         ],
       },
     };
-    
+
     test('renders footnote tag inline and footnote content two lines below', () => {
-      expect(renderMarkdown([footnoteEntry])).toBe(
+      expect(tsMarkdown([footnoteEntry])).toBe(
         `[^bignote]
 
 [^bignote]: Here's one with multiple paragraphs and code.

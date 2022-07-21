@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { CodeBlockEntry } from './codeblock';
 
 describe('given a codeblock entry', () => {
@@ -10,7 +10,7 @@ console.error(hello + ', ' + world + '!')`,
     };
 
     test('renders a code block indented by 4 spaces', () => {
-      expect(renderMarkdown([codeBlockEntry])).toBe(
+      expect(tsMarkdown([codeBlockEntry])).toBe(
         `    const hello = 'hello';
     const world = 'world';
     console.error(hello + ', ' + world + '!')`
@@ -27,7 +27,7 @@ console.error(hello + ', ' + world + '!')`,
     };
 
     test('renders a code block indented by 4 spaces and ignores language indication', () => {
-      expect(renderMarkdown([codeBlockEntry])).toBe(
+      expect(tsMarkdown([codeBlockEntry])).toBe(
         `    const hello = 'hello';
     const world = 'world';
     console.error(hello + ', ' + world + '!')`
@@ -45,7 +45,7 @@ console.error(hello + ', ' + world + '!')`,
     };
 
     test('renders a code block indented by 4 spaces', () => {
-      expect(renderMarkdown([codeBlockEntry])).toBe(
+      expect(tsMarkdown([codeBlockEntry])).toBe(
         `    const hello = 'hello';
     const world = 'world';
     console.error(hello + ', ' + world + '!')`
@@ -62,7 +62,7 @@ console.error(hello + ', ' + world + '!')`,
     };
 
     test('renders a fenced code block denoted by backticks', () => {
-      expect(renderMarkdown([codeBlockEntry])).toBe(
+      expect(tsMarkdown([codeBlockEntry])).toBe(
         `\`\`\`
 const hello = 'hello';
 const world = 'world';
@@ -83,7 +83,7 @@ console.error(hello + ', ' + world + '!')
     };
 
     test('renders a fenced code block denoted by backticks', () => {
-      expect(renderMarkdown([codeBlockEntry])).toBe(
+      expect(tsMarkdown([codeBlockEntry])).toBe(
         `\`\`\`
 const hello = 'hello';
 const world = 'world';
@@ -105,7 +105,7 @@ console.error(hello + ', ' + world + '!')
     };
 
     test('renders a fenced code block denoted by backticks with ts language indicated', () => {
-      expect(renderMarkdown([codeBlockEntry])).toBe(
+      expect(tsMarkdown([codeBlockEntry])).toBe(
         `\`\`\`ts
 const hello = 'hello';
 const world = 'world';
@@ -127,7 +127,7 @@ console.error(hello + ', ' + world + '!')
     };
 
     test('renders a fenced code block denoted by tildes with ts language indicated', () => {
-      expect(renderMarkdown([codeBlockEntry])).toBe(
+      expect(tsMarkdown([codeBlockEntry])).toBe(
         `~~~ts
 const hello = 'hello';
 const world = 'world';
@@ -149,7 +149,7 @@ console.error(hello + ', ' + world + '!')
     };
 
     test('renders a fenced code block denoted by tildes with ts language indicated', () => {
-      expect(renderMarkdown([codeBlockEntry])).toBe(
+      expect(tsMarkdown([codeBlockEntry])).toBe(
         `\`\`\`ts
 const hello = 'hello';
 const world = 'world';
@@ -165,7 +165,7 @@ console.error(hello + ', ' + world + '!')
     };
 
     test('renders codeblock with fencing', () => {
-      expect(renderMarkdown([codeblockEntry], { useCodeblockFencing: true }))
+      expect(tsMarkdown([codeblockEntry], { useCodeblockFencing: true }))
         .toBe(`\`\`\`
 console.log('hello, world!')
 \`\`\``);
@@ -181,7 +181,7 @@ console.error(hello + ', ' + world + '!')`,
     };
 
     test('renders a code block indented by 4 spaces', () => {
-      expect(renderMarkdown([codeBlockEntry])).toBe(
+      expect(tsMarkdown([codeBlockEntry])).toBe(
         `    const hello = 'hello';
     const world = 'world';
     console.error(hello + ', ' + world + '!')

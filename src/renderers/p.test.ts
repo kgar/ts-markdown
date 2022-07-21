@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { ParagraphEntry } from './p';
 
 describe('given a paragraph entry', () => {
@@ -8,7 +8,7 @@ describe('given a paragraph entry', () => {
     };
 
     test('renders a paragraph line with the specified string', () => {
-      expect(renderMarkdown([pEntry])).toBe(pEntry.p);
+      expect(tsMarkdown([pEntry])).toBe(pEntry.p);
     });
   });
 
@@ -18,7 +18,7 @@ describe('given a paragraph entry', () => {
     };
 
     test('renders a paragraph line with the specified string and rich text formatting', () => {
-      expect(renderMarkdown([pEntry])).toBe('**Hello,** *world!*');
+      expect(tsMarkdown([pEntry])).toBe('**Hello,** *world!*');
     });
   });
 
@@ -32,7 +32,7 @@ describe('given a paragraph entry', () => {
     };
 
     test('renders a paragraph line with the specified string and without indentation', () => {
-      expect(renderMarkdown([pEntry])).toBe(pEntry.p.trim());
+      expect(tsMarkdown([pEntry])).toBe(pEntry.p.trim());
     });
   });
 
@@ -45,7 +45,7 @@ describe('given a paragraph entry', () => {
     };
 
     test('renders a paragraph line with the specified string and without indentation', () => {
-      expect(renderMarkdown([pEntry])).toBe('Hello, world!');
+      expect(tsMarkdown([pEntry])).toBe('Hello, world!');
     });
   });
 
@@ -56,7 +56,7 @@ describe('given a paragraph entry', () => {
     };
 
     test('renders a paragraph line with the specified string and an identifier just below', () => {
-      expect(renderMarkdown([pEntry])).toBe(`${pEntry.p}
+      expect(tsMarkdown([pEntry])).toBe(`${pEntry.p}
 ^an-id`);
     });
   });

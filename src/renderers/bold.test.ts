@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { BoldEntry } from './bold';
 
 describe('given a bold entry', () => {
@@ -8,7 +8,7 @@ describe('given a bold entry', () => {
     };
 
     test('renders a bolded markdown line with the specified string as text', () => {
-      expect(renderMarkdown([boldEntry])).toBe(`**${boldEntry.bold}**`);
+      expect(tsMarkdown([boldEntry])).toBe(`**${boldEntry.bold}**`);
     });
   });
 
@@ -19,7 +19,7 @@ describe('given a bold entry', () => {
     };
 
     test('renders a bolded markdown line indicated with an underscore', () => {
-      expect(renderMarkdown([boldEntry])).toBe(`__test__`);
+      expect(tsMarkdown([boldEntry])).toBe(`__test__`);
     });
   });
 
@@ -29,22 +29,18 @@ describe('given a bold entry', () => {
     };
 
     test('renders a bolded markdown line indicated with an underscore', () => {
-      expect(renderMarkdown([boldEntry], { boldIndicator: '_' })).toBe(
-        `__test__`
-      );
+      expect(tsMarkdown([boldEntry], { boldIndicator: '_' })).toBe(`__test__`);
     });
   });
 
   describe('with a document-level underscore indicator and local asterisk indicator', () => {
     const boldEntry: BoldEntry = {
       bold: 'test',
-      indicator: '*'
+      indicator: '*',
     };
 
     test('favors local indicator', () => {
-      expect(renderMarkdown([boldEntry], { boldIndicator: '_' })).toBe(
-        `**test**`
-      );
+      expect(tsMarkdown([boldEntry], { boldIndicator: '_' })).toBe(`**test**`);
     });
   });
 });

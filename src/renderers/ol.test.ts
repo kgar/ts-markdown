@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { OrderedListEntry } from './ol';
 
 describe('given an ordered list entry', () => {
@@ -8,7 +8,7 @@ describe('given an ordered list entry', () => {
     };
 
     test('renders an ordered list line with the specified string as text', () => {
-      expect(renderMarkdown([olEntry])).toBe(`1. ${olEntry.ol[0]}`);
+      expect(tsMarkdown([olEntry])).toBe(`1. ${olEntry.ol[0]}`);
     });
   });
 
@@ -26,7 +26,7 @@ describe('given an ordered list entry', () => {
     };
 
     test('renders unordered list with specified rich text', () => {
-      expect(renderMarkdown([olEntry])).toBe(
+      expect(tsMarkdown([olEntry])).toBe(
         `1. This text is ***==so rich!==***
 2. And this text is contentedly unadorned`
       );
@@ -51,7 +51,7 @@ describe('given an ordered list entry', () => {
     };
 
     test('renders a nested list with the sub-list indented by 4 spaces', () => {
-      expect(renderMarkdown([olEntry])).toBe(
+      expect(tsMarkdown([olEntry])).toBe(
         `1. Test
 2. Nest
     1. *Nested* ==Test==`
@@ -75,7 +75,7 @@ describe('given an ordered list entry', () => {
     };
 
     test('renders list item with indented sub-elements', () => {
-      expect(renderMarkdown([olEntry])).toBe(
+      expect(tsMarkdown([olEntry])).toBe(
         `1. Testing
     # This is the way 💚
     
@@ -103,7 +103,7 @@ describe('given an ordered list entry', () => {
     };
 
     test('renders ordered list with nested unordered lists indented with 4 spaces', () => {
-      expect(renderMarkdown([olEntry])).toBe(
+      expect(tsMarkdown([olEntry])).toBe(
         `1. Test
     - Nest
     - Nest Test
@@ -136,7 +136,7 @@ describe('given an ordered list entry', () => {
     };
 
     test('renders the nested lists with 4 spaces of indentation added to each nesting layer', () => {
-      expect(renderMarkdown([olEntry])).toBe(
+      expect(tsMarkdown([olEntry])).toBe(
         `1. Given
     1. a list with
     2. numerous layers which
@@ -176,7 +176,7 @@ describe('given an ordered list entry', () => {
     };
 
     test('renders the nested lists with 4 spaces of indentation per level', () => {
-      expect(renderMarkdown([olEntry])).toBe(
+      expect(tsMarkdown([olEntry])).toBe(
         `1. this
     - is
         1. a
@@ -193,7 +193,7 @@ describe('given an ordered list entry', () => {
     };
 
     test('renders an ordered list line with the specified string as text and the identifier just below', () => {
-      expect(renderMarkdown([olEntry])).toBe(`1. ${olEntry.ol[0]}
+      expect(tsMarkdown([olEntry])).toBe(`1. ${olEntry.ol[0]}
 ^hai`);
     });
   });

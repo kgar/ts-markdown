@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { SubscriptEntry } from './sub';
 
 describe('given a subscript entry', () => {
@@ -8,7 +8,7 @@ describe('given a subscript entry', () => {
       html: true,
     };
     test('renders html version of subscript', () => {
-      expect(renderMarkdown([subEntry])).toBe(`<sub>${subEntry.sub}</sub>`);
+      expect(tsMarkdown([subEntry])).toBe(`<sub>${subEntry.sub}</sub>`);
     });
   });
 
@@ -18,7 +18,7 @@ describe('given a subscript entry', () => {
       html: false,
     };
     test('renders markdown version of subscript', () => {
-      expect(renderMarkdown([subEntry], { useSubscriptHtml: true })).toBe(
+      expect(tsMarkdown([subEntry], { useSubscriptHtml: true })).toBe(
         `~${subEntry.sub}~`
       );
     });
@@ -29,7 +29,7 @@ describe('given a subscript entry', () => {
       sub: 'test',
     };
     test('renders html version of subscript', () => {
-      expect(renderMarkdown([subEntry], { useSubscriptHtml: true })).toBe(
+      expect(tsMarkdown([subEntry], { useSubscriptHtml: true })).toBe(
         `<sub>${subEntry.sub}</sub>`
       );
     });

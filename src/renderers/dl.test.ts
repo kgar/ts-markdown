@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { DescriptionListEntry } from './dl';
 
 describe('given a description list entry', () => {
@@ -15,7 +15,7 @@ describe('given a description list entry', () => {
     };
 
     test('renders term and details markdown', () => {
-      expect(renderMarkdown([dlEntry])).toBe(
+      expect(tsMarkdown([dlEntry])).toBe(
         `First Term
 : This is the definition of the first term.`
       );
@@ -38,7 +38,7 @@ describe('given a description list entry', () => {
     };
 
     test('renders term and details markdown', () => {
-      expect(renderMarkdown([dlEntry])).toBe(
+      expect(tsMarkdown([dlEntry])).toBe(
         `First Term
 Second Term
 : This is the definition of the terms.`
@@ -71,7 +71,7 @@ Second Term
     };
 
     test('renders term and details markdown', () => {
-      expect(renderMarkdown([dlEntry])).toBe(
+      expect(tsMarkdown([dlEntry])).toBe(
         `First Term
 Second Term
 : This is some definition of the first and second term.
@@ -90,7 +90,7 @@ Second Term
     };
 
     test('renders term markdown', () => {
-      expect(renderMarkdown([dlEntry])).toBe(`First Term`);
+      expect(tsMarkdown([dlEntry])).toBe(`First Term`);
     });
   });
 
@@ -104,7 +104,7 @@ Second Term
     };
 
     test('renders description markdown', () => {
-      expect(renderMarkdown([dlEntry])).toBe(`: A description`);
+      expect(tsMarkdown([dlEntry])).toBe(`: A description`);
     });
   });
 
@@ -122,7 +122,7 @@ Second Term
     };
 
     test('renders term and details html', () => {
-      expect(renderMarkdown([dlEntry])).toBe(
+      expect(tsMarkdown([dlEntry])).toBe(
         `<dl>
     <dt>First Term</dt>
     <dd>This is the definition of the first term.</dd>
@@ -148,7 +148,7 @@ Second Term
     };
 
     test('renders term and details html', () => {
-      expect(renderMarkdown([dlEntry])).toBe(
+      expect(tsMarkdown([dlEntry])).toBe(
         `<dl>
     <dt>First Term</dt>
     <dt>Second Term</dt>
@@ -184,7 +184,7 @@ Second Term
     };
 
     test('renders term and details html with html override set locally', () => {
-      expect(renderMarkdown([dlEntry])).toBe(
+      expect(tsMarkdown([dlEntry])).toBe(
         `<dl>
     <dt>First Term</dt>
     <dt>Second Term</dt>
@@ -206,7 +206,7 @@ Second Term
     };
 
     test('renders term markdown', () => {
-      expect(renderMarkdown([dlEntry])).toBe(`<dl>
+      expect(tsMarkdown([dlEntry])).toBe(`<dl>
     <dt>First Term</dt>
 </dl>`);
     });
@@ -223,7 +223,7 @@ Second Term
     };
 
     test('renders description html', () => {
-      expect(renderMarkdown([dlEntry])).toBe(`<dl>
+      expect(tsMarkdown([dlEntry])).toBe(`<dl>
     <dd>A description</dd>
 </dl>`);
     });
@@ -242,7 +242,7 @@ Second Term
     };
 
     test('renders term and details html', () => {
-      expect(renderMarkdown([dlEntry], { useDescriptionListHtml: true })).toBe(
+      expect(tsMarkdown([dlEntry], { useDescriptionListHtml: true })).toBe(
         `<dl>
     <dt>First Term</dt>
     <dd>This is the definition of the first term.</dd>
@@ -265,7 +265,7 @@ Second Term
     };
 
     test('renders term and details markdown with identifier just below', () => {
-      expect(renderMarkdown([dlEntry])).toBe(
+      expect(tsMarkdown([dlEntry])).toBe(
         `First Term
 : This is the definition of the first term.
 ^yar`

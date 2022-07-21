@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { H4Entry } from './h4';
 
 describe('given a header 4 entry', () => {
@@ -8,7 +8,7 @@ describe('given a header 4 entry', () => {
     };
 
     test('renders an h4 markdown line with the specified string as text', () => {
-      expect(renderMarkdown([entry])).toBe(`#### ${entry.h4}`);
+      expect(tsMarkdown([entry])).toBe(`#### ${entry.h4}`);
     });
   });
 
@@ -19,7 +19,7 @@ describe('given a header 4 entry', () => {
     };
 
     test('renders an h4 with the specified text and id', () => {
-      expect(renderMarkdown([headerEntry])).toBe(
+      expect(tsMarkdown([headerEntry])).toBe(
         `#### ${headerEntry.h4} {#${headerEntry.id}}`
       );
     });
@@ -45,7 +45,7 @@ describe('given a header 4 entry', () => {
     };
 
     test('renders h4 with rich text', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         '#### ==Totally== ***awesome*** ~~d00d~~'
       );
     });
@@ -57,9 +57,7 @@ describe('given a header 4 entry', () => {
     };
 
     test('renders h4 with rich text', () => {
-      expect(renderMarkdown([entry])).toBe(
-        '#### ***==PER MY PREVIOUS EMAIL==***'
-      );
+      expect(tsMarkdown([entry])).toBe('#### ***==PER MY PREVIOUS EMAIL==***');
     });
   });
 
@@ -87,7 +85,7 @@ describe('given a header 4 entry', () => {
     };
 
     test('renders h4 with link and image', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         '#### The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
       );
     });
@@ -100,7 +98,7 @@ describe('given a header 4 entry', () => {
     };
 
     test('renders an h4 markdown line with the specified string as text', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         `#### ${entry.h4}
 ^la-dee-da`
       );

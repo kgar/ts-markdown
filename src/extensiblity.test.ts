@@ -4,7 +4,7 @@ import { H1Entry } from './renderers/h1';
 import { H2Entry } from './renderers/h2';
 import { ParagraphEntry, pRenderer } from './renderers/p';
 import { TextEntry } from './renderers/text';
-import { renderEntries, renderMarkdown } from './rendering';
+import { renderEntries, tsMarkdown } from './rendering';
 import { MarkdownRenderer, RenderOptions } from './rendering.types';
 import { MarkdownEntry } from './shared.types';
 
@@ -109,7 +109,7 @@ describe('given entries to render', () => {
       };
 
       test('renders transclusion markdown as configured', () => {
-        expect(renderMarkdown(entries, options)).toBe(
+        expect(tsMarkdown(entries, options)).toBe(
           `# Hello, world!
 
 > This is a document which contains cool stuff such as the following:
@@ -144,7 +144,7 @@ Oh hai block-level transclusion 👆`
       };
 
       test('renders transclusion markdown as configured', () => {
-        expect(renderMarkdown(entries, options)).toBe(
+        expect(tsMarkdown(entries, options)).toBe(
           `# Hello, world!
 
 > This is a document which contains cool stuff such as the following:
@@ -182,7 +182,7 @@ Oh hai block-level transclusion 👆`
 
       test('renders simple document with correctly-formatted Obsidian callout', () => {
         expect(
-          renderMarkdown(entries, {
+          tsMarkdown(entries, {
             renderers,
           })
         ).toBe(
@@ -227,7 +227,7 @@ Oh hai block-level transclusion 👆`
       ];
       test('renders the content with the internal link contained alongside other inline content', () => {
         expect(
-          renderMarkdown(entries, {
+          tsMarkdown(entries, {
             renderers,
           })
         ).toBe(
@@ -275,7 +275,7 @@ It's as easy as that.`
     ];
 
     test('renders a bolded paragraph', () => {
-      expect(renderMarkdown(entries, { renderers })).toBe(
+      expect(tsMarkdown(entries, { renderers })).toBe(
         `# Testing
 
 **You got to ==test your code!==**

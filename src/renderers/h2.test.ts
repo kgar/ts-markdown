@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { H2Entry } from './h2';
 
 describe('given a header 2 entry', () => {
@@ -8,7 +8,7 @@ describe('given a header 2 entry', () => {
     };
 
     test('renders an h2 markdown line with the specified string as text', () => {
-      expect(renderMarkdown([entry])).toBe(`## ${entry.h2}`);
+      expect(tsMarkdown([entry])).toBe(`## ${entry.h2}`);
     });
   });
 
@@ -19,7 +19,7 @@ describe('given a header 2 entry', () => {
     };
 
     test('renders an h2 with the specified text and id', () => {
-      expect(renderMarkdown([headerEntry])).toBe(
+      expect(tsMarkdown([headerEntry])).toBe(
         `## ${headerEntry.h2} {#${headerEntry.id}}`
       );
     });
@@ -45,9 +45,7 @@ describe('given a header 2 entry', () => {
     };
 
     test('renders h2 with rich text', () => {
-      expect(renderMarkdown([entry])).toBe(
-        '## ==Totally== ***awesome*** ~~d00d~~'
-      );
+      expect(tsMarkdown([entry])).toBe('## ==Totally== ***awesome*** ~~d00d~~');
     });
   });
 
@@ -57,9 +55,7 @@ describe('given a header 2 entry', () => {
     };
 
     test('renders h2 with rich text', () => {
-      expect(renderMarkdown([entry])).toBe(
-        '## ***==PER MY PREVIOUS EMAIL==***'
-      );
+      expect(tsMarkdown([entry])).toBe('## ***==PER MY PREVIOUS EMAIL==***');
     });
   });
 
@@ -87,7 +83,7 @@ describe('given a header 2 entry', () => {
     };
 
     test('renders h2 with link and image', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         '## The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
       );
     });
@@ -100,7 +96,7 @@ describe('given a header 2 entry', () => {
     };
 
     test('renders header without prefixed hashtag and with hyphen underline character length of header text', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         `This is my totally cool header
 ------------------------------`
       );
@@ -113,7 +109,7 @@ describe('given a header 2 entry', () => {
     };
 
     test('renders header without prefixed hashtag and with equal-sign underline character length of header text', () => {
-      expect(renderMarkdown([entry], { useH2Underlining: true })).toBe(
+      expect(tsMarkdown([entry], { useH2Underlining: true })).toBe(
         `This is my totally cool header
 ------------------------------`
       );
@@ -127,7 +123,7 @@ describe('given a header 2 entry', () => {
     };
 
     test('renders header without prefixed hashtag and with equal-sign underline character length of header text', () => {
-      expect(renderMarkdown([entry], { useH2Underlining: false })).toBe(
+      expect(tsMarkdown([entry], { useH2Underlining: false })).toBe(
         `This is my totally cool header
 ------------------------------`
       );
@@ -141,7 +137,7 @@ describe('given a header 2 entry', () => {
     };
 
     test('renders an h2 markdown line with the specified string as text', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         `## ${entry.h2}
 ^la-dee-da`
       );

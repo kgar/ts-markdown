@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { MarkdownEntry } from '../shared.types';
 import { TextEntry } from './text';
 
@@ -9,7 +9,7 @@ describe('given a text entry', () => {
     };
 
     test('renders bolded, highlighted line of specified text', () => {
-      expect(renderMarkdown([textEntry])).toBe('**==Hello, world!==**');
+      expect(tsMarkdown([textEntry])).toBe('**==Hello, world!==**');
     });
   });
 
@@ -22,7 +22,7 @@ describe('given a text entry', () => {
     };
 
     test('renders a string with asterisks to denote mid-word bolding', () => {
-      expect(renderMarkdown([textEntry])).toBe('He**ll**o');
+      expect(tsMarkdown([textEntry])).toBe('He**ll**o');
     });
   });
 
@@ -32,7 +32,7 @@ describe('given a text entry', () => {
     };
 
     test('renders a string with asterisks to denote mid-word bolding, ignoring indicator setting per best practice', () => {
-      expect(renderMarkdown([textEntry])).toBe('He**ll**o');
+      expect(tsMarkdown([textEntry])).toBe('He**ll**o');
     });
   });
 
@@ -47,7 +47,7 @@ describe('given a text entry', () => {
     ];
 
     test('renders a string with asterisks to denote mid-word italicizing', () => {
-      expect(renderMarkdown(data)).toBe('He*ll*o');
+      expect(tsMarkdown(data)).toBe('He*ll*o');
     });
   });
 
@@ -57,7 +57,7 @@ describe('given a text entry', () => {
     };
 
     test('renders a string with asterisks to denote mid-word italicizing, ignoring indicator setting per best practice', () => {
-      expect(renderMarkdown([textEntry])).toBe('He*ll*o');
+      expect(tsMarkdown([textEntry])).toBe('He*ll*o');
     });
   });
 
@@ -71,7 +71,7 @@ describe('given a text entry', () => {
     };
 
     test('renders a string with asterisks to denote mid-word bold and italicizing, ignoring indicator setting per best practice', () => {
-      expect(renderMarkdown([textEntry])).toBe('He***ll***o');
+      expect(tsMarkdown([textEntry])).toBe('He***ll***o');
     });
   });
 
@@ -85,7 +85,7 @@ describe('given a text entry', () => {
     };
 
     test('renders a string with asterisks to denote mid-word bold and italicizing, ignoring indicator setting per best practice', () => {
-      expect(renderMarkdown([textEntry])).toBe('mid***word***rich-text');
+      expect(tsMarkdown([textEntry])).toBe('mid***word***rich-text');
     });
   });
 
@@ -95,7 +95,7 @@ describe('given a text entry', () => {
     };
 
     test('renders text with the specified superscript content', () => {
-      expect(renderMarkdown([textEntry])).toBe('H^2^O');
+      expect(tsMarkdown([textEntry])).toBe('H^2^O');
     });
   });
 
@@ -109,7 +109,7 @@ describe('given a text entry', () => {
     };
 
     test('renders text with the specified superscript content with HTML superscript tags', () => {
-      expect(renderMarkdown([textEntry])).toBe('H<sup>**==*2*==**</sup>O');
+      expect(tsMarkdown([textEntry])).toBe('H<sup>**==*2*==**</sup>O');
     });
   });
 
@@ -119,7 +119,7 @@ describe('given a text entry', () => {
     };
 
     test('renders text with the specified subscript content', () => {
-      expect(renderMarkdown([textEntry])).toBe('H~2~O');
+      expect(tsMarkdown([textEntry])).toBe('H~2~O');
     });
   });
 
@@ -133,7 +133,7 @@ describe('given a text entry', () => {
     };
 
     test('renders text with the specified superscript content with HTML superscript tags', () => {
-      expect(renderMarkdown([textEntry])).toBe('H<sub>**==*2*==**</sub>O');
+      expect(tsMarkdown([textEntry])).toBe('H<sub>**==*2*==**</sub>O');
     });
   });
 
@@ -159,7 +159,7 @@ describe('given a text entry', () => {
     };
 
     test('preserves the HTML faithfully when rendering', () => {
-      expect(renderMarkdown([textEntry])).toBe(`<table>
+      expect(tsMarkdown([textEntry])).toBe(`<table>
   <tr>
     <th>Person 1</th>
     <th>Person 2</th>
@@ -206,7 +206,7 @@ describe('given a text entry', () => {
 
     // TODO: make this test work. Switch from a hard-typed footnote crawler to a generic one. Take an unknown object type and search for footnote entries.
     test('renders text with footnote identifiers and footnotes in order of appearance at the bottom', () => {
-      expect(renderMarkdown([textEntry])).toBe(
+      expect(tsMarkdown([textEntry])).toBe(
         `Here's a simple footnote,[^1] and here's a longer one.[^bignote]
 
 [^1]: This is the first footnote.

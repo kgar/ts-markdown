@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { TableEntry } from './table';
 
 describe('given a table entry', () => {
@@ -14,7 +14,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a markdown table with justified cell widths', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Col1 | Col2           |
 | ---- | -------------- |
 | Row1 | Row2           |
@@ -35,7 +35,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a markdown table with justified cell widths', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Col1 | Col2           |
 | ---- | -------------- |
 | Row1 | Row2           |
@@ -53,7 +53,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a markdown table with justified cell widths and an empty cell for the missing data', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Col1 | Col2           |
 | ---- | -------------- |
 | Row1 |                |
@@ -74,7 +74,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a markdown table with justified cell widths and column 2 set to right-aligned', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Col1 |           Col2 |
 | ---- | --------------:|
 | Row1 |           Row2 |
@@ -95,7 +95,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a markdown table with justified cell widths and column 2 set to center-aligned', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Col1 |      Col2      |
 | ---- |:--------------:|
 | Row1 |      Row2      |
@@ -116,7 +116,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a markdown table with justified cell widths and column 2 set to center-aligned with more spaces on the right side', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Col1 |      Col2       |
 | ---- |:---------------:|
 | Row1 |      Row2       |
@@ -137,7 +137,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a markdown table with justified cell widths and column 2 set to left-aligned', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Col1 | Col2           |
 | ---- |:-------------- |
 | Row1 | Row2           |
@@ -158,7 +158,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a markdown table with justified cell widths and HTML-encoded pipe characters', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Col&#124;1 | Col&#124;2 |
 | ---------- | ---------- |
 | Row&#124;1 | Row&#124;2 |
@@ -208,7 +208,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a markdown table with rich row text', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Col1                                 |
 | ------------------------------------ |
 | **Row1** works                       |
@@ -231,7 +231,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a markdown table with rich row text and escaped pipes', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Col1                       |
 | -------------------------- |
 | **Row1&#124;&#124;** works |`
@@ -272,7 +272,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a table with rich text and a link on one row and rich text with an image on another row', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Test                                                           |
 | -------------------------------------------------------------- |
 | **Hello, please go to** [Google](https://www.google.com).      |
@@ -294,7 +294,7 @@ describe('given a table entry', () => {
     };
 
     test('renders a markdown table with justified cell widths and an identifier just below', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| Col1 | Col2           |
 | ---- | -------------- |
 | Row1 | Row2           |
@@ -313,11 +313,11 @@ describe('given a table entry', () => {
     };
 
     test('renders 3 hyphens for each column on the header separator row', () => {
-      expect(renderMarkdown([tableEntry])).toBe(
+      expect(tsMarkdown([tableEntry])).toBe(
         `| A   | B   |
 | --- | --- |
 | C   | D   |`
-      )
+      );
     });
   });
 });

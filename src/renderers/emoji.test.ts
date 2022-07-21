@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { EmojiEntry } from './emoji';
 
 describe('given an emoji entry', () => {
@@ -8,7 +8,7 @@ describe('given an emoji entry', () => {
     };
 
     test('renders an emoji line with the specified emoji name', () => {
-      expect(renderMarkdown([emojiEntry])).toBe(':joy:');
+      expect(tsMarkdown([emojiEntry])).toBe(':joy:');
     });
   });
 });

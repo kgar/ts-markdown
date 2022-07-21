@@ -1,4 +1,4 @@
-import { renderMarkdown } from './rendering';
+import { tsMarkdown } from './rendering';
 
 describe('given a simple document', () => {
   const entries = [
@@ -21,7 +21,7 @@ describe('given a simple document', () => {
   ];
 
   test('renders expected markdown', () => {
-    expect(renderMarkdown(entries)).toBe(
+    expect(tsMarkdown(entries)).toBe(
       `#### Hello, world!
 
 > Let's generate some markdown!

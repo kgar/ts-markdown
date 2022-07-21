@@ -8,7 +8,7 @@ import { H6Entry } from './renderers/h6';
 import { HorizontalRuleEntry } from './renderers/hr';
 import { ParagraphEntry } from './renderers/p';
 import { TableEntry } from './renderers/table';
-import { renderMarkdown } from './rendering';
+import { tsMarkdown } from './rendering';
 import { MarkdownEntry } from './shared.types';
 
 describe('given an array of more than one markdown entry', () => {
@@ -28,7 +28,7 @@ describe('given an array of more than one markdown entry', () => {
     ];
 
     test('renders 3 paragraphs separated by two newlines between each', () => {
-      expect(renderMarkdown(paragraphs)).toBe(
+      expect(tsMarkdown(paragraphs)).toBe(
         `Test
 
 ***This is*** a test
@@ -83,7 +83,7 @@ Testing`
     ];
 
     test('renders header entries with two newlines between each', () => {
-      expect(renderMarkdown(paragraphs)).toBe(
+      expect(tsMarkdown(paragraphs)).toBe(
         `# Test 1
 
 ## Test 2
@@ -177,7 +177,7 @@ Testing`
     ];
 
     test('renders the document as expected', () => {
-      expect(renderMarkdown(data)).toBe(
+      expect(tsMarkdown(data)).toBe(
         `# Testing the Code
 
 ---

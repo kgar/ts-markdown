@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { LinkEntry } from './link';
 
 describe('given a link entry', () => {
@@ -8,7 +8,7 @@ describe('given a link entry', () => {
     };
 
     test('renders an auto-link', () => {
-      expect(renderMarkdown([linkEntry])).toBe(`<${linkEntry.link.source}>`);
+      expect(tsMarkdown([linkEntry])).toBe(`<${linkEntry.link.source}>`);
     });
   });
 
@@ -18,7 +18,7 @@ describe('given a link entry', () => {
     };
 
     test('renders a link line with specified text and source', () => {
-      expect(renderMarkdown([linkEntry])).toBe(
+      expect(tsMarkdown([linkEntry])).toBe(
         `[${linkEntry.link.text}](${linkEntry.link.source})`
       );
     });
@@ -34,7 +34,7 @@ describe('given a link entry', () => {
     };
 
     test('renders a link line with specified text and source', () => {
-      expect(renderMarkdown([linkEntry])).toBe(
+      expect(tsMarkdown([linkEntry])).toBe(
         `[${linkEntry.link.text}](${linkEntry.link.source} "${linkEntry.link.title}")`
       );
     });
@@ -51,7 +51,7 @@ describe('given a link entry', () => {
     };
 
     test('renders an auto-link with spaces URL-encoded', () => {
-      expect(renderMarkdown([linkEntry])).toBe(
+      expect(tsMarkdown([linkEntry])).toBe(
         `<${linkEntry.link.source.replace(/\s/g, '%20')}>`
       );
     });
@@ -69,7 +69,7 @@ describe('given a link entry', () => {
     };
 
     test('renders a link line with spaces URL-encoded on the source', () => {
-      expect(renderMarkdown([linkEntry])).toBe(
+      expect(tsMarkdown([linkEntry])).toBe(
         `[${linkEntry.link.text}](${linkEntry.link.source.replace(
           /\s/g,
           '%20'

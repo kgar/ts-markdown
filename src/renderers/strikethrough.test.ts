@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { StrikethroughEntry } from './strikethrough';
 
 describe('given a strikethrough entry', () => {
@@ -8,7 +8,7 @@ describe('given a strikethrough entry', () => {
     };
 
     test('renders a highlight line with the specified text', () => {
-      expect(renderMarkdown([strikethroughEntry])).toBe(
+      expect(tsMarkdown([strikethroughEntry])).toBe(
         `~~${strikethroughEntry.strikethrough}~~`
       );
     });

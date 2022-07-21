@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { H6Entry } from './h6';
 
 describe('given a header 6 entry', () => {
@@ -8,7 +8,7 @@ describe('given a header 6 entry', () => {
     };
 
     test('renders an h6 markdown line with the specified string as text', () => {
-      expect(renderMarkdown([entry])).toBe(`###### ${entry.h6}`);
+      expect(tsMarkdown([entry])).toBe(`###### ${entry.h6}`);
     });
   });
 
@@ -19,7 +19,7 @@ describe('given a header 6 entry', () => {
     };
 
     test('renders an h6 with the specified text and id', () => {
-      expect(renderMarkdown([headerEntry])).toBe(
+      expect(tsMarkdown([headerEntry])).toBe(
         `###### ${headerEntry.h6} {#${headerEntry.id}}`
       );
     });
@@ -45,7 +45,7 @@ describe('given a header 6 entry', () => {
     };
 
     test('renders h6 with rich text', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         '###### ==Totally== ***awesome*** ~~d00d~~'
       );
     });
@@ -57,7 +57,7 @@ describe('given a header 6 entry', () => {
     };
 
     test('renders h6 with rich text', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         '###### ***==PER MY PREVIOUS EMAIL==***'
       );
     });
@@ -87,7 +87,7 @@ describe('given a header 6 entry', () => {
     };
 
     test('renders h6 with link and image', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         '###### The magnificent power of [Googling Placeholders](https://www.google.com) like ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image")'
       );
     });
@@ -100,7 +100,7 @@ describe('given a header 6 entry', () => {
     };
 
     test('renders an h6 markdown line with the specified string as text', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         `###### ${entry.h6}
 ^la-dee-da`
       );

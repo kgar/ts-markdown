@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { UnorderedListEntry } from './ul';
 
 describe('given an unordered list entry', () => {
@@ -8,7 +8,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders an unordered list line with hyphen and the specified string as text', () => {
-      expect(renderMarkdown([ulEntry])).toBe(`- ${ulEntry.ul[0]}`);
+      expect(tsMarkdown([ulEntry])).toBe(`- ${ulEntry.ul[0]}`);
     });
   });
 
@@ -26,7 +26,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders unordered list with specified rich text', () => {
-      expect(renderMarkdown([ulEntry])).toBe(
+      expect(tsMarkdown([ulEntry])).toBe(
         `- This text is ***==so rich!==***
 - And this text is contentedly unadorned`
       );
@@ -51,7 +51,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders a nested list with the sub-list indented by 4 spaces', () => {
-      expect(renderMarkdown([ulEntry])).toBe(
+      expect(tsMarkdown([ulEntry])).toBe(
         `- Test
 - Nest
     - *Nested* ==Test==`
@@ -75,7 +75,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders list item with indented sub-elements', () => {
-      expect(renderMarkdown([olEntry])).toBe(
+      expect(tsMarkdown([olEntry])).toBe(
         `- Testing
     # This is the way 💚
     
@@ -103,7 +103,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders ordered list with nested ordered lists indented with 4 spaces', () => {
-      expect(renderMarkdown([ulEntry])).toBe(
+      expect(tsMarkdown([ulEntry])).toBe(
         `- Test
     1. Nest
     2. Nest Test
@@ -136,7 +136,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders the nested lists with 4 spaces of indentation added to each nesting layer', () => {
-      expect(renderMarkdown([ulEntry])).toBe(
+      expect(tsMarkdown([ulEntry])).toBe(
         `- Given
     - a list with
     - numerous layers which
@@ -176,7 +176,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders the nested lists with 4 spaces of indentation per level', () => {
-      expect(renderMarkdown([ulEntry])).toBe(
+      expect(tsMarkdown([ulEntry])).toBe(
         `- this
     1. is
         - a
@@ -195,7 +195,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders a list item where the first period is escaped', () => {
-      expect(renderMarkdown([olEntry])).toBe('- 1968\\. A great year.');
+      expect(tsMarkdown([olEntry])).toBe('- 1968\\. A great year.');
     });
   });
 
@@ -206,7 +206,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders list with asterisk indicator', () => {
-      expect(renderMarkdown([ulEntry])).toBe("* Let's get to work!");
+      expect(tsMarkdown([ulEntry])).toBe("* Let's get to work!");
     });
   });
 
@@ -217,7 +217,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders list with hyphen indicator', () => {
-      expect(renderMarkdown([ulEntry])).toBe("- Let's get to work!");
+      expect(tsMarkdown([ulEntry])).toBe("- Let's get to work!");
     });
   });
 
@@ -228,7 +228,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders list with plus sign indicator', () => {
-      expect(renderMarkdown([ulEntry])).toBe("+ Let's get to work!");
+      expect(tsMarkdown([ulEntry])).toBe("+ Let's get to work!");
     });
   });
 
@@ -238,9 +238,9 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders list with asterisk indicator', () => {
-      expect(
-        renderMarkdown([ulEntry], { unorderedListItemIndicator: '*' })
-      ).toBe("* Let's get to work!");
+      expect(tsMarkdown([ulEntry], { unorderedListItemIndicator: '*' })).toBe(
+        "* Let's get to work!"
+      );
     });
   });
 
@@ -250,9 +250,9 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders list with hyphen indicator', () => {
-      expect(
-        renderMarkdown([ulEntry], { unorderedListItemIndicator: '-' })
-      ).toBe("- Let's get to work!");
+      expect(tsMarkdown([ulEntry], { unorderedListItemIndicator: '-' })).toBe(
+        "- Let's get to work!"
+      );
     });
   });
 
@@ -262,9 +262,9 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders list with plus sign indicator', () => {
-      expect(
-        renderMarkdown([ulEntry], { unorderedListItemIndicator: '+' })
-      ).toBe("+ Let's get to work!");
+      expect(tsMarkdown([ulEntry], { unorderedListItemIndicator: '+' })).toBe(
+        "+ Let's get to work!"
+      );
     });
   });
 
@@ -275,9 +275,9 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders list with plus sign indicator', () => {
-      expect(
-        renderMarkdown([ulEntry], { unorderedListItemIndicator: '-' })
-      ).toBe("+ Let's get to work!");
+      expect(tsMarkdown([ulEntry], { unorderedListItemIndicator: '-' })).toBe(
+        "+ Let's get to work!"
+      );
     });
   });
 
@@ -288,7 +288,7 @@ describe('given an unordered list entry', () => {
     };
 
     test('renders an unordered list line with hyphen and the specified string as text and an identifier just below', () => {
-      expect(renderMarkdown([ulEntry])).toBe(`- ${ulEntry.ul[0]}
+      expect(tsMarkdown([ulEntry])).toBe(`- ${ulEntry.ul[0]}
 ^still-here`);
     });
   });

@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { ItalicEntry } from './italic';
 
 describe('given an italic entry', () => {
@@ -8,7 +8,7 @@ describe('given an italic entry', () => {
     };
 
     test('renders a italicized markdown line with the specified string as text', () => {
-      expect(renderMarkdown([entry])).toBe(`*${entry.italic}*`);
+      expect(tsMarkdown([entry])).toBe(`*${entry.italic}*`);
     });
   });
 
@@ -19,7 +19,7 @@ describe('given an italic entry', () => {
     };
 
     test('renders an italic markdown line indicated with an underscore', () => {
-      expect(renderMarkdown([italicEntry])).toBe(`_test_`);
+      expect(tsMarkdown([italicEntry])).toBe(`_test_`);
     });
   });
 
@@ -29,7 +29,7 @@ describe('given an italic entry', () => {
     };
 
     test('renders a bolded markdown line indicated with an underscore', () => {
-      expect(renderMarkdown([italicEntry], { italicIndicator: '_' })).toBe(
+      expect(tsMarkdown([italicEntry], { italicIndicator: '_' })).toBe(
         `_test_`
       );
     });
@@ -42,7 +42,7 @@ describe('given an italic entry', () => {
     };
 
     test('favors local indicator', () => {
-      expect(renderMarkdown([italicEntry], { italicIndicator: '_' })).toBe(
+      expect(tsMarkdown([italicEntry], { italicIndicator: '_' })).toBe(
         `*test*`
       );
     });

@@ -7,7 +7,7 @@ import {
 } from './rendering.types';
 import { MarkdownEntry } from './shared.types';
 
-export function renderMarkdown(data: MarkdownEntry[], options?: RenderOptions) {
+export function tsMarkdown(data: MarkdownEntry[], options?: RenderOptions) {
   options ??= {
     prefix: '',
   };

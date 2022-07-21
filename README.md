@@ -1,32 +1,32 @@
-# CoolNameHere
+# ts-markdown
 
-## Description
-
-(make sure to include a link to a github pages documentation site here)
+> **Description**:
+>
+> An extensible TypeScript markdown generator that takes markdown entries in JSON and creates a markdown document.
 
 ## Getting Started
 
-To use CoolNameHere in your project, run:
+To use **ts-markdown** in your project, run:
 
 ```sh
-npm install CoolNameHere
-# or "yarn add CoolNameHere"
+npm install ts-markdown
+# or "yarn add ts-markdown"
 ```
 
 ## Usage
 
-CoolNameHere is written in TypeScript and follows the latest maintenance LTS of Node.
+**ts-markdown** is written in TypeScript and follows the latest maintenance LTS of Node.
 
-CoolNameHere resolves around sending an array of "markdown entry" objects to the `renderMarkdown()` function.
+**ts-markdown** resolves around sending an array of "markdown entry" objects to the `tsMarkdown()` function.
 
 ### **Example** - generating a simple document:
 
 Given this code:
 
 ```ts
-import { renderMarkdown } from 'CoolNameHere';
+import { tsMarkdown } from 'ts-markdown';
 
-renderMarkdown([
+tsMarkdown([
   {
     h4: 'Hello, world!',
   },
@@ -76,16 +76,16 @@ Generating markdown from data can be simple. All you need are:
 
 TODO
 
-## Extending CoolNameHere
+## Extending ts-markdown
 
 You can add your own custom markdown renderers into the mix. Here's an example in TypeScript of adding an [Obsidian.md](https://obsidian.md/) [callout](https://help.obsidian.md/How+to/Use+callouts) renderer, which is truly the fanciest of blockquotes:
 
 ```ts
-import { getRenderers } from 'CoolNameHere/defaults';
-import { BlockquoteEntry } from 'CoolNameHere/renderers/blockquote';
-import { renderEntries, renderMarkdown } from 'CoolNameHere/rendering';
-import { MarkdownRenderer, RenderOptions } from 'CoolNameHere/rendering.types';
-import { MarkdownEntry } from 'CoolNameHere/shared.types';
+import { getRenderers } from 'ts-markdown/defaults';
+import { BlockquoteEntry } from 'ts-markdown/renderers/blockquote';
+import { renderEntries, tsMarkdown } from 'ts-markdown/rendering';
+import { MarkdownRenderer, RenderOptions } from 'ts-markdown/rendering.types';
+import { MarkdownEntry } from 'ts-markdown/shared.types';
 
 // Declare a type for your entry.
 type ObsidianCalloutEntry = {
@@ -139,7 +139,7 @@ const callout: ObsidianCalloutEntry = {
   },
 };
 
-// CoolNameHere options are optional 😉
+// ts-markdown options are optional 😉
 const options = {
   // Get the default renderers and pass in your own custom renderers
   // with a key that matches the uniquely identifying property
@@ -147,7 +147,7 @@ const options = {
   renderers: getRenderers({ callout: calloutRenderer }),
 };
 
-renderMarkdown([callout], options);
+tsMarkdown([callout], options);
 ```
 
 This will render the following markdown:

@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { SuperscriptEntry } from './sup';
 
 describe('given a superscript entry', () => {
@@ -8,7 +8,7 @@ describe('given a superscript entry', () => {
       html: true,
     };
     test('renders html version of superscript', () => {
-      expect(renderMarkdown([superEntry])).toBe(`<sup>${superEntry.sup}</sup>`);
+      expect(tsMarkdown([superEntry])).toBe(`<sup>${superEntry.sup}</sup>`);
     });
   });
 
@@ -18,7 +18,7 @@ describe('given a superscript entry', () => {
       html: false,
     };
     test('renders markdown version of superscript', () => {
-      expect(renderMarkdown([superEntry], { useSuperscriptHtml: true })).toBe(
+      expect(tsMarkdown([superEntry], { useSuperscriptHtml: true })).toBe(
         `^${superEntry.sup}^`
       );
     });
@@ -29,7 +29,7 @@ describe('given a superscript entry', () => {
       sup: 'test',
     };
     test('renders html version of superscript', () => {
-      expect(renderMarkdown([supEntry], { useSuperscriptHtml: true })).toBe(
+      expect(tsMarkdown([supEntry], { useSuperscriptHtml: true })).toBe(
         `<sup>${supEntry.sup}</sup>`
       );
     });

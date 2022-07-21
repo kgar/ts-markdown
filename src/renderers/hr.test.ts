@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { HorizontalRuleEntry } from './hr';
 
 describe('given a horizontal rule entry', () => {
@@ -8,7 +8,7 @@ describe('given a horizontal rule entry', () => {
     };
 
     test('renders a horizontal rule', () => {
-      expect(renderMarkdown([hrEntry])).toBe(`---`);
+      expect(tsMarkdown([hrEntry])).toBe(`---`);
     });
   });
 
@@ -19,7 +19,7 @@ describe('given a horizontal rule entry', () => {
     };
 
     test('renders a horizontal rule with identifier below', () => {
-      expect(renderMarkdown([hrEntry])).toBe(`---
+      expect(tsMarkdown([hrEntry])).toBe(`---
 ^heyo`);
     });
   });
@@ -27,33 +27,33 @@ describe('given a horizontal rule entry', () => {
   describe('with asterisk indicator', () => {
     const hrEntry: HorizontalRuleEntry = {
       hr: '',
-      indicator: '*'
+      indicator: '*',
     };
 
     test('renders a horizontal rule with asterisk indicator', () => {
-      expect(renderMarkdown([hrEntry])).toBe(`***`);
+      expect(tsMarkdown([hrEntry])).toBe(`***`);
     });
   });
 
   describe('with hyphen indicator', () => {
     const hrEntry: HorizontalRuleEntry = {
       hr: '',
-      indicator: '-'
+      indicator: '-',
     };
 
     test('renders a horizontal rule with hyphen indicator', () => {
-      expect(renderMarkdown([hrEntry])).toBe(`---`);
+      expect(tsMarkdown([hrEntry])).toBe(`---`);
     });
   });
 
   describe('with underscore indicator', () => {
     const hrEntry: HorizontalRuleEntry = {
       hr: '',
-      indicator: '_'
+      indicator: '_',
     };
 
     test('renders a horizontal rule with underscore indicator', () => {
-      expect(renderMarkdown([hrEntry])).toBe(`___`);
+      expect(tsMarkdown([hrEntry])).toBe(`___`);
     });
   });
 });

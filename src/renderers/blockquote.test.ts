@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { MarkdownEntry } from '../shared.types';
 import { BlockquoteEntry } from './blockquote';
 
@@ -9,7 +9,7 @@ describe('given a blockquote entry', () => {
     };
 
     test('renders a blokquote markdown line with the specified string as text', () => {
-      expect(renderMarkdown([entry])).toBe(`> ${entry.blockquote}`);
+      expect(tsMarkdown([entry])).toBe(`> ${entry.blockquote}`);
     });
   });
 
@@ -26,7 +26,7 @@ describe('given a blockquote entry', () => {
     };
 
     test('renders blockquote with 2 specified paragraphs nested within', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         `> Hello, world!
 > 
 > Goodbye, Moon Man!`
@@ -44,7 +44,7 @@ describe('given a blockquote entry', () => {
     };
 
     test('renders blockquote with 2 specified paragraphs nested within', () => {
-      expect(renderMarkdown([entry])).toBe(`> > Hello, world!`);
+      expect(tsMarkdown([entry])).toBe(`> > Hello, world!`);
     });
   });
 
@@ -71,7 +71,7 @@ describe('given a blockquote entry', () => {
     };
 
     test('renders complex, nested content as expected', () => {
-      expect(renderMarkdown([entry])).toBe(`> :joy:: This is an admonition
+      expect(tsMarkdown([entry])).toBe(`> :joy:: This is an admonition
 > 
 > Be advised.
 > 
@@ -106,7 +106,7 @@ describe('given a blockquote entry', () => {
     };
 
     test('renders blockquote with other elements nested within', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         `> #### The quarterly results look great!
 > 
 > - Revenue was off the chart.
@@ -140,7 +140,7 @@ describe('given a blockquote entry', () => {
     };
 
     test('renders blockquote with other elements nested within', () => {
-      expect(renderMarkdown([entry])).toBe(
+      expect(tsMarkdown([entry])).toBe(
         `> > 1. Revenue was off the chart.
 > > 2. Profits were ***higher*** than ever.`
       );
@@ -159,7 +159,7 @@ describe('given a blockquote entry', () => {
 ^my-obsidian-id`;
 
     test('renders the blockquote with the identifier just below it', () => {
-      expect(renderMarkdown([input])).toBe(output);
+      expect(tsMarkdown([input])).toBe(output);
     });
   });
 });

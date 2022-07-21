@@ -1,4 +1,4 @@
-import { renderMarkdown } from '../rendering';
+import { tsMarkdown } from '../rendering';
 import { TaskListEntry } from './tasks';
 
 describe('given a task list entry', () => {
@@ -15,7 +15,7 @@ describe('given a task list entry', () => {
     };
 
     test('renders a correctly configured task list', () => {
-      expect(renderMarkdown([taskListEntry])).toBe(
+      expect(tsMarkdown([taskListEntry])).toBe(
         `- [ ] Test 1
 - [ ] Test 2
 - [ ] Test 3
@@ -36,11 +36,11 @@ describe('given a task list entry', () => {
         { bold: { italic: 'Get it done' } },
         { task: { bold: { italic: 'Got it done' } }, completed: true },
       ],
-      append: '^another-task-list-wow'
+      append: '^another-task-list-wow',
     };
 
     test('renders a correctly configured task list with identifier just below', () => {
-      expect(renderMarkdown([taskListEntry])).toBe(
+      expect(tsMarkdown([taskListEntry])).toBe(
         `- [ ] Test 1
 - [ ] Test 2
 - [ ] Test 3
