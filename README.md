@@ -58,8 +58,6 @@ Generating markdown from data can be simple. All you need are:
 3. and a place to run :checkered_flag:
 ```
 
-Rendered to GitHub, it looks like this:
-
 #### Hello, world!
 
 > Let's generate some markdown!
