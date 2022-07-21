@@ -24,7 +24,7 @@ CoolNameHere resolves around sending an array of "markdown entry" objects to the
 Given this code:
 
 ```ts
-import { renderMarkdown } from './CoolNameHere';
+import { renderMarkdown } from 'CoolNameHere';
 
 renderMarkdown([
   {
@@ -81,25 +81,25 @@ TODO
 You can add your own custom markdown renderers into the mix. Here's an example in TypeScript of adding an [Obsidian.md](https://obsidian.md/) [callout](https://help.obsidian.md/How+to/Use+callouts) renderer, which is truly the fanciest of blockquotes:
 
 ```ts
-import { getBlockLevelEntries, getRenderers } from './defaults';
-import { BlockquoteEntry } from './renderers/blockquote';
-import { renderEntries, renderMarkdown } from './rendering';
-import { MarkdownRenderer, CoolNameHereOptions } from './rendering.types';
-import { CoolNameHereEntry } from './shared.types';
+import { getBlockLevelEntries, getRenderers } from 'CoolNameHere/defaults';
+import { BlockquoteEntry } from 'CoolNameHere/renderers/blockquote';
+import { renderEntries, renderMarkdown } from 'CoolNameHere/rendering';
+import { MarkdownRenderer, RenderOptions } from 'CoolNameHere/rendering.types';
+import { MarkdownEntry } from 'CoolNameHere/shared.types';
 
 // Declare a type for your entry.
 type ObsidianCalloutEntry = {
   callout: {
     type: string;
     title?: string;
-    content: CoolNameHereEntry | CoolNameHereEntry[];
+    content: MarkdownEntry | MarkdownEntry[];
   };
 };
 
 // Create a MarkdownRenderer.
 const calloutRenderer: MarkdownRenderer = (
   entry: ObsidianCalloutEntry,
-  options: CoolNameHereOptions
+  options: RenderOptions
 ) => {
   let titleText = entry.callout.title ? ` ${entry.callout.title}` : '';
 
