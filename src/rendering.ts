@@ -133,16 +133,6 @@ export function getMarkdownString(
   return '';
 }
 
-export function join(
-  value: string | string[],
-  delimiter: string,
-  prefix: MarkdownRenderPrefix = ''
-) {
-  return typeof value === 'string'
-    ? renderPrefix(prefix, 0) + value
-    : value.map((x, index) => renderPrefix(prefix, index) + x).join(delimiter);
-}
-
 function renderPrefix(
   prefix: MarkdownRenderPrefix,
   index: number,

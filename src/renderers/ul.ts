@@ -1,4 +1,4 @@
-import { renderEntries, join, getMarkdownString } from '../rendering';
+import { renderEntries, getMarkdownString } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { ListItemEntry, MarkdownEntry } from '../shared.types';
 
