@@ -1,18 +1,19 @@
 {
   "name": "ts-markdown",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An extensible TypeScript markdown generator that takes JSON and creates a markdown document.",
   "repository": "https://github.com/kgar/ts-markdown",
   "homepage": "https://github.com/kgar/ts-markdown#readme",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "build": "rimraf dist && tsc",
     "build-watch": "tsc --watch",
     "test": "jest",
     "test-watch": "jest --watch",
-    "build": "tsc",
     "prettier": "prettier --write src",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepublish": "npm run build && npm test"
   },
   "keywords": [
     "markdown",
@@ -33,6 +34,7 @@
     "jest": "^28.1.2",
     "prettier": "^2.7.1",
     "pretty-quick": "^3.1.3",
+    "rimraf": "^3.0.2",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.2",
     "typescript": "^4.7.4"

@@ -4,10 +4,10 @@
     "esModuleInterop": true,
     "target": "ES2022",
     "moduleResolution": "node",
-    "sourceMap": true,
     "outDir": "dist",
     "rootDir": "src",
-    "strict": true
+    "strict": true,
+    "declaration": true
   },
   "lib": ["es2022"],
   "exclude": ["node_modules", "dist", "out", "jest.config.ts", "**/*.test.ts"]
