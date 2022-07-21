@@ -2,6 +2,8 @@
   "name": "ts-markdown",
   "version": "0.1.1",
   "description": "An extensible TypeScript markdown generator that takes JSON and creates a markdown document.",
+  "repository": "https://github.com/kgar/ts-markdown",
+  "homepage": "https://github.com/kgar/ts-markdown#readme",
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && node dist/app.js",
