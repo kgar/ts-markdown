@@ -1,1 +1,0 @@
-export { tsMarkdown } from './rendering';
