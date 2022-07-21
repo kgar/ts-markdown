@@ -1,8 +1,6 @@
 # ts-markdown
 
-> **Description**:
->
-> An extensible TypeScript markdown generator that takes markdown entries in JSON and creates a markdown document.
+> An extensible TypeScript markdown generator that takes JSON and creates a markdown document.
 
 ## Getting Started
 
