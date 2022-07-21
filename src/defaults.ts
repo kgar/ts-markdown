@@ -61,24 +61,3 @@ export function getRenderers(customRenderers: Renderers = {}): Renderers {
     ...customRenderers,
   };
 }
-
-export function getBlockLevelEntries(
-  customEntries: string[] = []
-): Set<string> {
-  return new Set<string>([
-    'p',
-    'blockquote',
-    'h1',
-    'h2',
-    'h3',
-    'h4',
-    'h5',
-    'h6',
-    'hr',
-    'table',
-    'ul',
-    'ol',
-    'dl',
-    ...customEntries,
-  ]);
-}

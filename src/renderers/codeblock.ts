@@ -25,7 +25,10 @@ export const codeblockRenderer: MarkdownRenderer = (
         ? linePrefix + entry.codeblock.split('\n').join('\n' + linePrefix)
         : entry.codeblock.map((line) => linePrefix + line).join('\n');
 
-    return `${blockStart}${codeBlock}${blockEnd}`;
+    return {
+      markdown: `${blockStart}${codeBlock}${blockEnd}`,
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not a codeblock entry. Unable to render.');

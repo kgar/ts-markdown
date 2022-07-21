@@ -13,7 +13,11 @@ export const hrRenderer: MarkdownRenderer = (
 ) => {
   if ('hr' in entry) {
     let indicator = entry.indicator ?? '-';
-    return `${indicator}${indicator}${indicator}`;
+
+    return {
+      markdown: `${indicator}${indicator}${indicator}`,
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not an hr entry. Unable to render.');

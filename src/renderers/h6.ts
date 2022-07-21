@@ -14,10 +14,15 @@ export const h6Renderer: MarkdownRenderer = (
   options: RenderOptions
 ) => {
   if ('h6' in entry) {
-    return `###### ${getMarkdownString(
+    let headerText = `###### ${getMarkdownString(
       entry.h6,
       options
     )}${getOptionalHeaderIdText(entry, ' ')}`;
+
+    return {
+      markdown: headerText,
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not an h6 entry. Unable to render.');

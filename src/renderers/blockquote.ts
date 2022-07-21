@@ -12,9 +12,13 @@ export const blockquoteRenderer: MarkdownRenderer = (
   options: RenderOptions
 ) => {
   if ('blockquote' in entry) {
-    return typeof entry.blockquote === 'string'
-      ? '> ' + getMarkdownString(entry.blockquote, options)
-      : renderEntries(entry.blockquote, { ...options, prefix: '> ' });
+    return {
+      markdown:
+        typeof entry.blockquote === 'string'
+          ? '> ' + getMarkdownString(entry.blockquote, options)
+          : renderEntries(entry.blockquote, { ...options, prefix: '> ' }),
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not a blockquote entry. Unable to render.');

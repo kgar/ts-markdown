@@ -14,10 +14,15 @@ export const h5Renderer: MarkdownRenderer = (
   options: RenderOptions
 ) => {
   if ('h5' in entry) {
-    return `##### ${getMarkdownString(
+    let headerText = `##### ${getMarkdownString(
       entry.h5,
       options
     )}${getOptionalHeaderIdText(entry, ' ')}`;
+
+    return {
+      markdown: headerText,
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not an h5 entry. Unable to render.');

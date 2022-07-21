@@ -81,7 +81,7 @@ TODO
 You can add your own custom markdown renderers into the mix. Here's an example in TypeScript of adding an [Obsidian.md](https://obsidian.md/) [callout](https://help.obsidian.md/How+to/Use+callouts) renderer, which is truly the fanciest of blockquotes:
 
 ```ts
-import { getBlockLevelEntries, getRenderers } from 'CoolNameHere/defaults';
+import { getRenderers } from 'CoolNameHere/defaults';
 import { BlockquoteEntry } from 'CoolNameHere/renderers/blockquote';
 import { renderEntries, renderMarkdown } from 'CoolNameHere/rendering';
 import { MarkdownRenderer, RenderOptions } from 'CoolNameHere/rendering.types';
@@ -111,7 +111,16 @@ const calloutRenderer: MarkdownRenderer = (
     blockquote: [{ p: `[!${entry.callout.type}]${titleText}` }, ...content],
   };
 
-  return renderEntries([blockquote], options);
+  // For markdown elements that are block-level,
+  // 🚫 don't return just a string
+  // ✅ use the object return type as seen here.
+  return {
+    markdown: renderEntries([blockquote], options),
+    // This tells the markdown renderer to ensure
+    // there are 2 newlines between this element
+    // and other elements.
+    blockLevel: true,
+  };
 };
 
 // Using your custom callout
@@ -136,11 +145,6 @@ const options = {
   // with a key that matches the uniquely identifying property
   // of your custom markdown entry.
   renderers: getRenderers({ callout: calloutRenderer }),
-
-  // If your entry is block-level (it needs two newlines above and below it)
-  // include it in the list of block level entries,
-  // and `renderMarkdown()` will do the rest.
-  blockLevelEntries: getBlockLevelEntries(['callout']),
 };
 
 renderMarkdown([callout], options);

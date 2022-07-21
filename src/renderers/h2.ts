@@ -26,7 +26,10 @@ export const h2Renderer: MarkdownRenderer = (
       headerText += '\n' + ''.padEnd(headerText.length, '-');
     }
 
-    return headerText;
+    return {
+      markdown: headerText,
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not an h2 entry. Unable to render.');

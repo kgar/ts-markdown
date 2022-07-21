@@ -12,7 +12,7 @@ export const olRenderer: MarkdownRenderer = (
   options: RenderOptions
 ) => {
   if ('ol' in entry) {
-    return entry.ol
+    let markdown = entry.ol
       .map((li, index) => {
         if (Array.isArray(li)) {
           return renderEntries(li, {
@@ -26,6 +26,11 @@ export const olRenderer: MarkdownRenderer = (
         return `${index + 1}. ${getMarkdownString(li, options)}`;
       })
       .join('\n');
+
+    return {
+      markdown,
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not an ol entry. Unable to render.');

@@ -15,22 +15,34 @@ export const ulRenderer: MarkdownRenderer = (
   options: RenderOptions
 ) => {
   if ('ul' in entry) {
-    let indicator =
-      entry.indicator ?? options.unorderedListItemIndicator ?? '-';
-    return entry.ul
-      .map((li) => {
-        if (Array.isArray(li)) {
-          return renderEntries(li, {
-            ...options,
-            prefix: (liIndex) => (liIndex === 0 ? `${indicator} ` : '    '),
-          });
-        }
+    let markdown = getUnorderedListMarkdown(entry, options);
 
-        return `${indicator} ${getMarkdownString(li, options)}`;
-      })
-      .map((x) => x.replace(/^([\-\+\*]\s[\d]+)(\.)/, '$1\\.'))
-      .join('\n');
+    return {
+      markdown,
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not an ul entry. Unable to render.');
 };
+
+function getUnorderedListMarkdown(
+  entry: UnorderedListEntry,
+  options: RenderOptions
+) {
+  let indicator = entry.indicator ?? options.unorderedListItemIndicator ?? '-';
+
+  return entry.ul
+    .map((li) => {
+      if (Array.isArray(li)) {
+        return renderEntries(li, {
+          ...options,
+          prefix: (liIndex) => (liIndex === 0 ? `${indicator} ` : '    '),
+        });
+      }
+
+      return `${indicator} ${getMarkdownString(li, options)}`;
+    })
+    .map((x) => x.replace(/^([\-\+\*]\s[\d]+)(\.)/, '$1\\.'))
+    .join('\n');
+}

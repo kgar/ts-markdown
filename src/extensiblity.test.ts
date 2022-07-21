@@ -1,7 +1,4 @@
-import {
-  getBlockLevelEntries as getBlockLevelEntries,
-  getRenderers,
-} from './defaults';
+import { getRenderers } from './defaults';
 import { BlockquoteEntry } from './renderers/blockquote';
 import { H1Entry } from './renderers/h1';
 import { H2Entry } from './renderers/h2';
@@ -22,11 +19,12 @@ describe('given entries to render', () => {
       entry: TransclusionEntry,
       options: RenderOptions
     ) => {
-      if (entry.html) {
-        return `<span alt="${entry.transclusion.path}" src="${entry.transclusion.path}" class="internal-embed"></span>`;
-      }
-
-      return `![[${entry.transclusion.path}]]`;
+      return {
+        markdown: entry.html
+          ? `<span alt="${entry.transclusion.path}" src="${entry.transclusion.path}" class="internal-embed"></span>`
+          : `![[${entry.transclusion.path}]]`,
+        blockLevel: true,
+      };
     };
 
     type ObsidianInternalLinkEntry = {
@@ -77,7 +75,10 @@ describe('given entries to render', () => {
         ],
       };
 
-      return renderEntries([blockquote], options);
+      return {
+        markdown: renderEntries([blockquote], options),
+        blockLevel: true,
+      };
     };
 
     const renderers = getRenderers({
@@ -85,8 +86,6 @@ describe('given entries to render', () => {
       internalLink: internalLinkRenderer,
       callout: calloutRenderer,
     });
-
-    const blockLevelEntries = getBlockLevelEntries(['transclusion', 'callout']);
 
     describe('with a custom Obsidian transclusion entry', () => {
       const entries: MarkdownEntry[] = [
@@ -107,7 +106,6 @@ describe('given entries to render', () => {
 
       const options: RenderOptions = {
         renderers: renderers,
-        blockLevelEntries,
       };
 
       test('renders transclusion markdown as configured', () => {
@@ -143,7 +141,6 @@ Oh hai block-level transclusion 👆`
 
       const options: RenderOptions = {
         renderers: renderers,
-        blockLevelEntries,
       };
 
       test('renders transclusion markdown as configured', () => {
@@ -187,7 +184,6 @@ Oh hai block-level transclusion 👆`
         expect(
           renderMarkdown(entries, {
             renderers,
-            blockLevelEntries,
           })
         ).toBe(
           `# Callout Test
@@ -233,7 +229,6 @@ Oh hai block-level transclusion 👆`
         expect(
           renderMarkdown(entries, {
             renderers,
-            blockLevelEntries,
           })
         ).toBe(
           `# Testing
@@ -253,7 +248,14 @@ It's as easy as that.`
       entry: ParagraphEntry,
       options
     ) => {
-      return `**${originalParagraphRenderer(entry, options)}**`;
+      let result = originalParagraphRenderer(entry, options);
+
+      let markdown = typeof result === 'string' ? result : result.markdown;
+
+      return {
+        markdown: `**${markdown}**`,
+        blockLevel: true,
+      };
     };
 
     const renderers = getRenderers({ p: alternateParagraphRenderer });

@@ -14,10 +14,15 @@ export const h4Renderer: MarkdownRenderer = (
   options: RenderOptions
 ) => {
   if ('h4' in entry) {
-    return `#### ${getMarkdownString(
+    let headerText = `#### ${getMarkdownString(
       entry.h4,
       options
     )}${getOptionalHeaderIdText(entry, ' ')}`;
+
+    return {
+      markdown: headerText,
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not an h4 entry. Unable to render.');

@@ -12,22 +12,12 @@ export const pRenderer: MarkdownRenderer = (
   options: RenderOptions
 ) => {
   if ('p' in entry) {
-    if (typeof entry.p === 'string') {
-      return getMarkdownString(formatParagraphText(entry.p), options);
-    }
+    let result = getParagraphMarkdown(entry, options);
 
-    if (Array.isArray(entry.p)) {
-      return formatParagraphText(
-        entry.p.map((entry) => getMarkdownString(entry, options)).join('')
-      );
-    }
-
-    let result = getMarkdownString(entry.p, options);
-
-    return formatParagraphText(result)
-      .split('\n')
-      .map((x) => formatParagraphText(x))
-      .join('\n');
+    return {
+      markdown: typeof result === 'string' ? result : result.markdown,
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not a p entry. Unable to render.');
@@ -38,4 +28,25 @@ function formatParagraphText(text: string) {
     ?.trimStart()
     .replace(/(^.*?)[\t]+/g, '')
     .trimStart();
+}
+
+function getParagraphMarkdown(entry: ParagraphEntry, options: RenderOptions) {
+  if (typeof entry.p === 'string') {
+    return getMarkdownString(formatParagraphText(entry.p), options);
+  }
+
+  if (Array.isArray(entry.p)) {
+    return formatParagraphText(
+      entry.p.map((entry) => getMarkdownString(entry, options)).join('')
+    );
+  }
+
+  let result = getMarkdownString(entry.p, options);
+
+  let resultMarkdown = typeof result === 'string' ? result : result.markdown;
+
+  return formatParagraphText(resultMarkdown)
+    .split('\n')
+    .map((x) => formatParagraphText(x))
+    .join('\n');
 }

@@ -60,7 +60,10 @@ export const dlRenderer: MarkdownRenderer = (
       lines.push('</dl>');
     }
 
-    return lines.join('\n');
+    return {
+      markdown: lines.join('\n'),
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not a dl entry. Unable to render.');

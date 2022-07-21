@@ -1,6 +1,10 @@
-import { getBlockLevelEntries, getRenderers } from './defaults';
+import { getRenderers } from './defaults';
 import { appendFootnotes } from './renderers/footnote';
-import { RenderOptions, MarkdownRenderPrefix } from './rendering.types';
+import {
+  RenderOptions,
+  MarkdownRenderPrefix,
+  MarkdownRenderResult,
+} from './rendering.types';
 import { MarkdownEntry } from './shared.types';
 
 export function renderMarkdown(data: MarkdownEntry[], options?: RenderOptions) {
@@ -9,7 +13,6 @@ export function renderMarkdown(data: MarkdownEntry[], options?: RenderOptions) {
   };
 
   options.renderers ??= getRenderers();
-  options.blockLevelEntries ??= getBlockLevelEntries();
 
   let document = renderEntries(data, options);
 
@@ -62,7 +65,13 @@ export function renderEntries(data: MarkdownEntry[], options: RenderOptions) {
     let entryPrefix = renderPrefix(prefix, index, entry);
 
     const result = getMarkdownString(entry, options);
-    textStack += result
+
+    let { markdown, blockLevel } =
+      typeof result === 'string'
+        ? { markdown: result, blockLevel: false }
+        : result;
+
+    textStack += markdown
       .split('\n')
       .map((text) => entryPrefix + text)
       .join('\n');
@@ -79,11 +88,9 @@ export function renderEntries(data: MarkdownEntry[], options: RenderOptions) {
       textStack += '\n';
     }
 
-    if (index < data.length - 1) {
-      if (requiresAdditionalNewline(entry, options)) {
-        textStack += entryPrefix;
-        textStack += '\n';
-      }
+    if (index < data.length - 1 && blockLevel) {
+      textStack += entryPrefix;
+      textStack += '\n';
     }
   }
   return textStack;
@@ -97,20 +104,10 @@ function isAppendable(entry: MarkdownEntry) {
   );
 }
 
-function requiresAdditionalNewline(
-  entry: MarkdownEntry,
-  options: RenderOptions
-) {
-  if (typeof entry === 'string') {
-    return false;
-  }
-  return Object.keys(entry).find((x) => options.blockLevelEntries?.has(x));
-}
-
 export function getMarkdownString(
   entry: MarkdownEntry | string,
   options: RenderOptions
-): string {
+): MarkdownRenderResult {
   if (entry === null || entry === undefined) {
     return '';
   }

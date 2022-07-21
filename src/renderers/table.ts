@@ -25,55 +25,62 @@ export const tableRenderer: MarkdownRenderer = (
   options: RenderOptions
 ) => {
   if ('table' in entry) {
-    escapePipes(entry);
-    let columnCount = entry.table.columns.length;
-    let columnNames = entry.table.columns.reduce<string[]>(
-      (prev, curr) => prev.concat(typeof curr === 'string' ? curr : curr.name),
-      []
-    );
-
-    let minColumnWidth = 3;
-    let cellWidths = [];
-    for (let i = 0; i < columnCount; i++) {
-      let column = entry.table.columns[i];
-      let columnName = getColumnName(column);
-
-      let columnCellTexts = [
-        getColumnHeaderTextLength(entry.table.columns[i]),
-        ...entry.table.rows
-          .reduce<string[]>((prev, curr) => {
-            let value = Array.isArray(curr) ? curr[i] : curr[columnName];
-            if (value !== undefined) {
-              let result = getMarkdownString(value, options);
-              if (typeof result === 'string') {
-                prev.push(result);
-              } else {
-                throw new Error(
-                  'Unknown table rendering scenario encountered. Multi-line table cell content is not supported.'
-                );
-              }
-            }
-
-            return prev;
-          }, [])
-          .map((columnCellText) => columnCellText.length),
-      ];
-
-      cellWidths[i] = columnCellTexts.reduce(
-        (prev, curr) => Math.max(minColumnWidth, prev, curr),
-        0
-      );
-    }
-
-    return [
-      buildHeaderRow(entry, cellWidths, entry.table.columns),
-      buildDividerRow(cellWidths, entry.table.columns),
-      ...buildDataRows(entry, cellWidths, columnNames, options),
-    ].join('\n');
+    return {
+      markdown: getTableMarkdown(entry, options),
+      blockLevel: true,
+    };
   }
 
   throw new Error('Entry is not a table entry. Unable to render.');
 };
+
+function getTableMarkdown(entry: TableEntry, options: RenderOptions) {
+  escapePipes(entry);
+  let columnCount = entry.table.columns.length;
+  let columnNames = entry.table.columns.reduce<string[]>(
+    (prev, curr) => prev.concat(typeof curr === 'string' ? curr : curr.name),
+    []
+  );
+
+  let minColumnWidth = 3;
+  let cellWidths = [];
+  for (let i = 0; i < columnCount; i++) {
+    let column = entry.table.columns[i];
+    let columnName = getColumnName(column);
+
+    let columnCellTexts = [
+      getColumnHeaderTextLength(entry.table.columns[i]),
+      ...entry.table.rows
+        .reduce<string[]>((prev, curr) => {
+          let value = Array.isArray(curr) ? curr[i] : curr[columnName];
+          if (value !== undefined) {
+            let result = getMarkdownString(value, options);
+            if (typeof result === 'string') {
+              prev.push(result);
+            } else {
+              throw new Error(
+                'Unknown table rendering scenario encountered. Multi-line table cell content is not supported.'
+              );
+            }
+          }
+
+          return prev;
+        }, [])
+        .map((columnCellText) => columnCellText.length),
+    ];
+
+    cellWidths[i] = columnCellTexts.reduce(
+      (prev, curr) => Math.max(minColumnWidth, prev, curr),
+      0
+    );
+  }
+
+  return [
+    buildHeaderRow(entry, cellWidths, entry.table.columns),
+    buildDividerRow(cellWidths, entry.table.columns),
+    ...buildDataRows(entry, cellWidths, columnNames, options),
+  ].join('\n');
+}
 
 function buildDataRows(
   entry: TableEntry,

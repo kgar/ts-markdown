@@ -24,10 +24,6 @@ export type RenderOptions = {
    */
   renderers?: Renderers;
 
-  /**
-   * These entries are specified as needing 2 newlines above and below, to separate them from other entries.
-   */
-  blockLevelEntries?: Set<string>;
   applyCompletedDocumentChangesPreFootnotes?: (
     data: MarkdownEntry[],
     document: string,
@@ -44,4 +40,11 @@ export type RenderOptions = {
 };
 
 // TODO: Figure out how to require that `entry` extend `MarkdownEntry` and be containable in the `Renderers` type.
-export type MarkdownRenderer = (entry: any, options: RenderOptions) => string;
+export type MarkdownRenderer = (
+  entry: any,
+  options: RenderOptions
+) => MarkdownRenderResult;
+
+export type MarkdownRenderResult =
+  | string
+  | { markdown: string; blockLevel: true };
