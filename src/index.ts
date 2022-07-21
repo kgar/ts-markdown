@@ -1,3 +1,1 @@
-import { tsMarkdown } from './rendering';
-
-export default tsMarkdown;
+export { tsMarkdown } from './rendering';
