@@ -19,7 +19,8 @@ describe('given entries to render', () => {
     } & MarkdownEntry;
 
     const transclusionRenderer: MarkdownRenderer = (
-      entry: TransclusionEntry
+      entry: TransclusionEntry,
+      options: RenderOptions
     ) => {
       if (entry.html) {
         return `<span alt="${entry.transclusion.path}" src="${entry.transclusion.path}" class="internal-embed"></span>`;
@@ -79,11 +80,11 @@ describe('given entries to render', () => {
       return renderEntries([blockquote], options);
     };
 
-    const renderers: Map<string, MarkdownRenderer> = getRenderers([
-      ['transclusion', transclusionRenderer],
-      ['internalLink', internalLinkRenderer],
-      ['callout', calloutRenderer],
-    ]);
+    const renderers = getRenderers({
+      transclusion: transclusionRenderer,
+      internalLink: internalLinkRenderer,
+      callout: calloutRenderer,
+    });
 
     const blockLevelEntries = getBlockLevelEntries(['transclusion', 'callout']);
 
@@ -255,7 +256,7 @@ It's as easy as that.`
       return `**${originalParagraphRenderer(entry, options)}**`;
     };
 
-    const renderers = getRenderers([['p', alternateParagraphRenderer]]);
+    const renderers = getRenderers({ p: alternateParagraphRenderer });
 
     const entries: MarkdownEntry[] = [
       <H1Entry>{

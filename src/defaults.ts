@@ -26,42 +26,40 @@ import { tableRenderer } from './renderers/table';
 import { tasksRenderer } from './renderers/tasks';
 import { textRenderer } from './renderers/text';
 import { ulRenderer } from './renderers/ul';
-import { MarkdownRenderer } from './rendering.types';
+import { Renderers } from './rendering.types';
 
-export function getRenderers(
-  customRenderers: [string, MarkdownRenderer][] = []
-): Map<string, MarkdownRenderer> {
-  return new Map<string, MarkdownRenderer>([
-    ['string', stringRenderer],
-    ['h1', h1Renderer],
-    ['h2', h2Renderer],
-    ['h3', h3Renderer],
-    ['h4', h4Renderer],
-    ['h5', h5Renderer],
-    ['h6', h6Renderer],
-    ['blockquote', blockquoteRenderer],
-    ['bold', boldRenderer],
-    ['code', codeRenderer],
-    ['codeblock', codeblockRenderer],
-    ['dl', dlRenderer],
-    ['emoji', emojiRenderer],
-    ['footnote', footnoteRenderer],
-    ['highlight', highlightRenderer],
-    ['hr', hrRenderer],
-    ['img', imgRenderer],
-    ['italic', italicRenderer],
-    ['link', linkRenderer],
-    ['ol', olRenderer],
-    ['p', pRenderer],
-    ['strikethrough', strikethroughRenderer],
-    ['sub', subRenderer],
-    ['sup', supRenderer],
-    ['table', tableRenderer],
-    ['tasks', tasksRenderer],
-    ['text', textRenderer],
-    ['ul', ulRenderer],
+export function getRenderers(customRenderers: Renderers = {}): Renderers {
+  return {
+    string: stringRenderer,
+    h1: h1Renderer,
+    h2: h2Renderer,
+    h3: h3Renderer,
+    h4: h4Renderer,
+    h5: h5Renderer,
+    h6: h6Renderer,
+    blockquote: blockquoteRenderer,
+    bold: boldRenderer,
+    code: codeRenderer,
+    codeblock: codeblockRenderer,
+    dl: dlRenderer,
+    emoji: emojiRenderer,
+    footnote: footnoteRenderer,
+    highlight: highlightRenderer,
+    hr: hrRenderer,
+    img: imgRenderer,
+    italic: italicRenderer,
+    link: linkRenderer,
+    ol: olRenderer,
+    p: pRenderer,
+    strikethrough: strikethroughRenderer,
+    sub: subRenderer,
+    sup: supRenderer,
+    table: tableRenderer,
+    tasks: tasksRenderer,
+    text: textRenderer,
+    ul: ulRenderer,
     ...customRenderers,
-  ]);
+  };
 }
 
 export function getBlockLevelEntries(

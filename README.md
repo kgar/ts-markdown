@@ -135,7 +135,7 @@ const options = {
   // Get the default renderers and pass in your own custom renderers
   // with a key that matches the uniquely identifying property
   // of your custom markdown entry.
-  renderers: getRenderers([['callout', calloutRenderer]]),
+  renderers: getRenderers({ callout: calloutRenderer }),
 
   // If your entry is block-level (it needs two newlines above and below it)
   // include it in the list of block level entries,

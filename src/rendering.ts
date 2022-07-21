@@ -111,14 +111,18 @@ export function getMarkdownString(
     return '';
   }
 
-  if (typeof entry === 'string') {
-    return options.renderers.get('string')(entry, options);
+  const isStringEntry = typeof entry === 'string';
+
+  if (isStringEntry && options.renderers.string) {
+    return options.renderers.string(entry, options);
   }
 
-  for (let key in entry) {
-    let renderer = options.renderers.get(key);
-    if (renderer) {
-      return renderer(entry, options);
+  if (!isStringEntry) {
+    for (let key in entry) {
+      let renderer = options.renderers[key];
+      if (renderer) {
+        return renderer(entry, options);
+      }
     }
   }
 

@@ -8,6 +8,8 @@ export type RenderPrefixFunction = (
 
 export type MarkdownRenderPrefix = string | RenderPrefixFunction;
 
+export type Renderers = { [key: string]: MarkdownRenderer };
+
 export type RenderOptions = {
   unorderedListItemIndicator?: UnorderedListItemIndicator;
   useH1Underlining?: boolean;
@@ -20,7 +22,7 @@ export type RenderOptions = {
   /**
    * The renderers which will be used when processing markdown entries.
    */
-  renderers?: Map<string, MarkdownRenderer>;
+  renderers?: Renderers;
 
   /**
    * These entries are specified as needing 2 newlines above and below, to separate them from other entries.
