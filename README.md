@@ -1,6 +1,26 @@
-# ts-markdown
+# ts-markdown <!-- omit in toc -->
 
 > An extensible TypeScript markdown generator that takes JSON and creates a markdown document.
+
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+  - [**Example** - generating a simple document:](#example---generating-a-simple-document)
+- [Options](#options)
+  - [Document-level options](#document-level-options)
+  - [Entry-level options](#entry-level-options)
+  - [Option Precedence: Entry-level > Document-level > Defaults](#option-precedence-entry-level--document-level--defaults)
+  - [More About Options](#more-about-options)
+- [Extending ts-markdown](#extending-ts-markdown)
+  - [A Simple Extension](#a-simple-extension)
+  - [More Involved Extension Example](#more-involved-extension-example)
+  - [Overriding an Existing Renderer](#overriding-an-existing-renderer)
+  - [Remarks on Extensibility](#remarks-on-extensibility)
+- [Why This Project?](#why-this-project)
+- [🙌 Credit](#-credit)
+  - [Credit to json2md](#credit-to-json2md)
+  - [Credit to Markdown Guide](#credit-to-markdown-guide)
+- [🌏 Contribution Guidelines](#-contribution-guidelines)
+- [License](#license)
 
 ## Getting Started
 
@@ -13,7 +33,7 @@ npm install ts-markdown
 
 ## Usage
 
-**ts-markdown** is written in TypeScript and works with node JS and is known to be supported on node v16.x and higher. Earlier versions may also work, but it is not guaranteed.
+**ts-markdown** is written in TypeScript. It works with node JS v16.x and higher. Earlier versions may also work, but it is not guaranteed.
 
 **ts-markdown** revolves around sending an array of "markdown entry" objects to the `tsMarkdown()` function.
 
@@ -62,12 +82,12 @@ Generating markdown from data can be simple. All you need are:
 
 **ts-markdown** has the following types of options:
 
-- **entry-level**: options that apply to a specific type of `MarkdownEntry`
 - **document-level**: options that apply to the entire document
+- **entry-level**: options that apply to a specific type of `MarkdownEntry`
 
 ### Document-level options
 
-Document-level options affect either a single entry type, a particular lifecycle event in document rendering, or some overarching setting. Entry-specific options at the document-level are a convenient shortcut for applying your desired style to document rendering, reducing unnecessary props on your individual objects.
+Document-level options affect either a single entry type, a particular lifecycle event in document rendering, or some overarching aspect. Entry-specific options at the document-level are a convenient shortcut for applying your desired style to document rendering, reducing unnecessary props on your individual objects.
 
 You can specify options at the document-level by passing in a `RenderOptions` object when calling the `tsMarkdown()` function:
 
