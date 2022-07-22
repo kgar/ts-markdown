@@ -70,7 +70,99 @@ Generating markdown from data can be simple. All you need are:
 
 ## Options
 
-TODO
+**ts-markdown** has the following types of options:
+
+- entry-level: options that apply to a specific type of `MarkdownEntry`
+- document-level: options that apply the entire document
+
+### Document-level options
+
+You can specify options at the document-level by passing in a `RenderOptions` object when calling the `tsMarkdown()` function:
+
+```ts
+const options: RenderOptions = {
+  useH1Underlining: true,
+};
+
+tsMarkdown(myEntries, options);
+// 👆 H1 markdown will now have underlining whenever these options are passed into `tsMarkdown()`
+```
+
+> **Note**: We Have Defaults
+>
+> Any options that you do not specify fall back to a default value, so you do not have to specify all options. You can pick and choose the ones you want to specify.
+
+### Entry-level options
+
+Some markdown entries have their own entry-level options.
+
+For example, unordered lists have an option for which indicator to use:
+
+```ts
+const ulEntry: UnorderedListEntry = {
+  ul: ['Hello, world!', 'Goodbye, Moon Man!'],
+  indicator: '+',
+};
+
+tsMarkdown([ulEntry]);
+```
+
+The result is a list with items indicated by `+`:
+
+```
++ Hello, world!
++ Goodbye, Moon Man!
+```
+
+### Option Precedence: Entry-level > Document-level > Defaults
+
+> Entry-level settings, if specified, take precedence over all else.
+>
+> Then, document-level settings are considered.
+>
+> Otherwise, we use defaults.
+
+When specifying options, you may need to provide entry- and document-level options which conflict with each other.
+
+For example, I want all bolded text to use underscores `_`, except I want one entry to use asterisks `*`:
+
+```ts
+import { tsMarkdown } from './rendering';
+import { RenderOptions } from './rendering.types';
+import { MarkdownEntry } from './shared.types';
+
+const entry: MarkdownEntry = {
+  text: [
+    { bold: 'Note' },
+    ' - This is a ',
+    {
+      bold: 'sample',
+      // 👇 this is an entry-level option
+      indicator: '*',
+    },
+  ],
+};
+
+// 👇 these are document-level options
+const options: RenderOptions = {
+  boldIndicator: '_',
+};
+
+tsMarkdown([entry], options);
+```
+
+The rendered markdown is:
+
+```
+__Note__ - This is a **sample**
+```
+
+### More About Options
+
+> API documentation is in the works. In the meantime, you can view the types for any of the markdown entries by visiting:
+>
+> - [rendering.types.ts](https://github.com/kgar/ts-markdown/blob/main/src/rendering.types.ts)
+> - Any renderer ts file, such as [bold.ts](https://github.com/kgar/ts-markdown/blob/main/src/renderers/bold.ts)
 
 ## Extending ts-markdown
 
@@ -172,9 +264,21 @@ How the callout is rendered in Obsidian:
 
 ## Why This Project?
 
-TODO
+I am an avid user of [Obsidian.md](https://www.obsidian.md), and as I build my vaults of information, I sometimes need to convert JSON into markdown in a programmatic way. I may be working on a project to crunch some JSON and build articles, and having the ability to offload the complexity of rendering markdown to a library would be ideal. Additionally, having TypeScript typing support sweetens the deal for me.
 
-## Contribution Guidelines
+Because I could not find an active / monitored library that handled the level of complexity I need when building my Obsidian markdown documents, I decided to make it myself.
+
+## 🙌 Credit
+
+### Credit to [json2md](https://github.com/IonicaBizau/json2md)
+
+This library is heavily inspired by [Ionică Bizău's](https://github.com/IonicaBizau) [json2md](https://github.com/IonicaBizau/json2md) library, which was the only highly starred repo I could find that offered the kind of functionality I wanted. I also like the modeling the author chose, so I have patterned mine after theirs, adding and expanding in ways that make sense to me.
+
+### Credit to [Markdown Guide](https://www.markdownguide.org/)
+
+The unit tests in this library cover almost all cases defined in [Markdown Guide](https://www.markdownguide.org/), an excellent website for getting exactly the details needed for writing good markdown. Any best practices that I've applied are most likely based on this website.
+
+## 🌏 Contribution Guidelines
 
 Have an idea? Found a bug? See [how to contribute](https://github.com/kgar/data-driven-markdown/blob/main/CONTRIBUTING.md).
 
