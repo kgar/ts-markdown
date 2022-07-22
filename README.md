@@ -63,9 +63,11 @@ Generating markdown from data can be simple. All you need are:
 **ts-markdown** has the following types of options:
 
 - **entry-level**: options that apply to a specific type of `MarkdownEntry`
-- **document-level**: options that apply the entire document
+- **document-level**: options that apply to the entire document
 
 ### Document-level options
+
+Document-level options affect either a single entry type, a particular lifecycle event in document rendering, or some overarching setting. Entry-specific options at the document-level are a convenient shortcut for applying your desired style to document rendering, reducing unnecessary props on your individual objects.
 
 You can specify options at the document-level by passing in a `RenderOptions` object when calling the `tsMarkdown()` function:
 
