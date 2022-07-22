@@ -62,8 +62,8 @@ Generating markdown from data can be simple. All you need are:
 
 **ts-markdown** has the following types of options:
 
-- entry-level: options that apply to a specific type of `MarkdownEntry`
-- document-level: options that apply the entire document
+- **entry-level**: options that apply to a specific type of `MarkdownEntry`
+- **document-level**: options that apply the entire document
 
 ### Document-level options
 
