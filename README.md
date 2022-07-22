@@ -4,10 +4,10 @@
 
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-  - [**Example** - generating a simple document:](#example---generating-a-simple-document)
+  - [Example - Generating a Simple Document](#example---generating-a-simple-document)
 - [Options](#options)
-  - [Document-level options](#document-level-options)
-  - [Entry-level options](#entry-level-options)
+  - [Document-level Options](#document-level-options)
+  - [Entry-level Options](#entry-level-options)
   - [Option Precedence: Entry-level > Document-level > Defaults](#option-precedence-entry-level--document-level--defaults)
   - [More About Options](#more-about-options)
 - [Extending ts-markdown](#extending-ts-markdown)
@@ -37,7 +37,7 @@ npm install ts-markdown
 
 **ts-markdown** revolves around sending an array of "markdown entry" objects to the `tsMarkdown()` function.
 
-### **Example** - generating a simple document:
+### Example - Generating a Simple Document
 
 Given this code:
 
@@ -85,7 +85,7 @@ Generating markdown from data can be simple. All you need are:
 - **document-level**: options that apply to the entire document
 - **entry-level**: options that apply to a specific type of `MarkdownEntry`
 
-### Document-level options
+### Document-level Options
 
 Document-level options affect either a single entry type, a particular lifecycle event in document rendering, or some overarching aspect. Entry-specific options at the document-level are a convenient shortcut for applying your desired style to document rendering, reducing unnecessary props on your individual objects.
 
@@ -104,7 +104,7 @@ tsMarkdown(myEntries, options);
 >
 > Any options that you do not specify fall back to a default value, so you do not have to specify all options. You can pick and choose the ones you want to specify.
 
-### Entry-level options
+### Entry-level Options
 
 Some markdown entries have their own entry-level options.
 
