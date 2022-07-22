@@ -176,7 +176,7 @@ TODO
 
 ## Contribution Guidelines
 
-Have an idea? Found a bug? See [how to contribute](https://github.com/kgar/data-driven-markdown/blob/main/CONTRIBUTING).
+Have an idea? Found a bug? See [how to contribute](https://github.com/kgar/data-driven-markdown/blob/main/CONTRIBUTING.md).
 
 ## License
 
