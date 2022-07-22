@@ -126,7 +126,9 @@ import { MarkdownEntry } from './shared.types';
 const entry: MarkdownEntry = {
   text: [
     { bold: 'Note' },
-    ' - This is a ',
+    ' - This ',
+    { bold: 'is' },
+    ' a ',
     {
       bold: 'sample',
       // 👇 this is an entry-level option
@@ -146,7 +148,7 @@ tsMarkdown([entry], options);
 The rendered markdown is:
 
 ```
-__Note__ - This is a **sample**
+__Note__ - This __is__ a **sample**
 ```
 
 ### More About Options
