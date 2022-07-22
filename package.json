@@ -14,7 +14,7 @@
     "prettier": "prettier --write src",
     "prepare": "husky install",
     "prepublish": "npm run build && npm test",
-    "refresh-index": "npx barrelsby --delete --location top --exclude \"dist\" \".+test\\.ts\" \"jest.config\" --directory ./src"
+    "refresh-index": "npx barrelsby --delete --location top --exclude \"dist\" \"test.ts\" \"jest.config\" --directory ./src"
   },
   "keywords": [
     "markdown",
