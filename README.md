@@ -77,11 +77,15 @@ TODO
 You can add your own custom markdown renderers into the mix. Here's an example in TypeScript of adding an [Obsidian.md](https://obsidian.md/) [callout](https://help.obsidian.md/How+to/Use+callouts) renderer, which is truly the fanciest of blockquotes:
 
 ```ts
-import { getRenderers } from 'ts-markdown/defaults';
-import { BlockquoteEntry } from 'ts-markdown/renderers/blockquote';
-import { renderEntries, tsMarkdown } from 'ts-markdown/rendering';
-import { MarkdownRenderer, RenderOptions } from 'ts-markdown/rendering.types';
-import { MarkdownEntry } from 'ts-markdown/shared.types';
+import {
+  MarkdownEntry,
+  MarkdownRenderer,
+  RenderOptions,
+  BlockquoteEntry,
+  renderEntries,
+  getRenderers,
+  tsMarkdown,
+} from 'ts-markdown';
 
 // Declare a type for your entry.
 type ObsidianCalloutEntry = {
