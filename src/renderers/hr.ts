@@ -1,11 +1,11 @@
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
-export type HorizontalRuleEntry = {
+export interface HorizontalRuleEntry extends MarkdownEntry {
   hr: any;
   indicator?: '*' | '-' | '_';
   append?: string;
-} & MarkdownEntry;
+}
 
 export const hrRenderer: MarkdownRenderer = (
   entry: HorizontalRuleEntry,

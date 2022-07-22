@@ -2,13 +2,12 @@ import { renderEntries } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry, RichTextEntry } from '../shared.types';
 
-export type FootnoteEntry = {
+export interface FootnoteEntry extends MarkdownEntry, RichTextEntry {
   footnote: {
     id: string;
     content: MarkdownEntry | MarkdownEntry[];
   };
-} & MarkdownEntry &
-  RichTextEntry;
+}
 
 export const footnoteRenderer: MarkdownRenderer = (
   entry: FootnoteEntry,

@@ -1,13 +1,13 @@
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
-export type ImageEntry = {
+export interface ImageEntry extends MarkdownEntry {
   img: {
     href: string;
     alt?: string;
     title?: string;
   };
-} & MarkdownEntry;
+}
 
 export const imgRenderer: MarkdownRenderer = (
   entry: ImageEntry,

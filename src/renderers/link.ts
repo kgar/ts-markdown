@@ -1,9 +1,9 @@
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
-export type LinkEntry = {
+export interface LinkEntry extends MarkdownEntry {
   link: { source: string; text?: string; title?: string };
-} & MarkdownEntry;
+}
 
 export const linkRenderer: MarkdownRenderer = (
   entry: LinkEntry,

@@ -2,11 +2,11 @@ import { renderEntries, getMarkdownString } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { ListItemEntry, MarkdownEntry } from '../shared.types';
 
-export type UnorderedListEntry = {
+export interface UnorderedListEntry extends MarkdownEntry {
   ul: ListItemEntry[];
   indicator?: UnorderedListItemIndicator;
   append?: string;
-} & MarkdownEntry;
+}
 
 export type UnorderedListItemIndicator = '-' | '*' | '+';
 

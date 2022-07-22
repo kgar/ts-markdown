@@ -2,10 +2,10 @@ import { getMarkdownString } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { InlineTypes, MarkdownEntry } from '../shared.types';
 
-export type TaskListEntry = {
+export interface TaskListEntry extends MarkdownEntry {
   tasks: (InlineTypes | TaskEntry)[];
   append?: string;
-} & MarkdownEntry;
+}
 
 export type TaskEntry = {
   task: InlineTypes;

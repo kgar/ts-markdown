@@ -5,9 +5,9 @@ import { CodeEntry } from './code';
 import { ImageEntry } from './img';
 import { LinkEntry } from './link';
 
-export type TextEntry = {
+export interface TextEntry extends InlineTypes {
   text: string | (RichTextEntry | LinkEntry | ImageEntry | CodeEntry)[];
-} & InlineTypes;
+}
 
 export const textRenderer: MarkdownRenderer = (
   entry: TextEntry,

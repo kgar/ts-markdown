@@ -1,12 +1,12 @@
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
-export type CodeBlockEntry = {
+export interface CodeBlockEntry extends MarkdownEntry {
   codeblock: string | string[];
   fenced?: boolean | '`' | '~';
   language?: string;
   append?: string;
-} & MarkdownEntry;
+}
 
 export const codeblockRenderer: MarkdownRenderer = (
   entry: CodeBlockEntry,

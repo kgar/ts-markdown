@@ -3,13 +3,13 @@ import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 import { TextEntry } from './text';
 
-export type TableEntry = {
+export interface TableEntry extends MarkdownEntry {
   table: {
     columns: (TableColumn | string)[];
     rows: (TableRow | (TextEntry | string)[])[];
   };
   append?: string;
-} & MarkdownEntry;
+}
 
 export type TableColumn = {
   name: string;

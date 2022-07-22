@@ -3,11 +3,11 @@ import { getOptionalHeaderIdText } from './header';
 import { RenderOptions, MarkdownRenderer } from '../rendering.types';
 import { InlineTypes, MarkdownEntry } from '../shared.types';
 
-export type H6Entry = {
+export interface H6Entry extends MarkdownEntry {
   h6: InlineTypes;
   id?: string;
   append?: string;
-} & MarkdownEntry;
+}
 
 export const h6Renderer: MarkdownRenderer = (
   entry: H6Entry,

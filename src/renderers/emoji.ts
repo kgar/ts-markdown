@@ -1,10 +1,9 @@
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry, RichTextEntry } from '../shared.types';
 
-export type EmojiEntry = {
+export interface EmojiEntry extends MarkdownEntry, RichTextEntry {
   emoji: string;
-} & MarkdownEntry &
-  RichTextEntry;
+}
 
 export const emojiRenderer: MarkdownRenderer = (
   entry: EmojiEntry,

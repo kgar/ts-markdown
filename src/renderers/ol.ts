@@ -2,10 +2,10 @@ import { renderEntries, getMarkdownString } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { ListItemEntry, MarkdownEntry } from '../shared.types';
 
-export type OrderedListEntry = {
+export interface OrderedListEntry extends MarkdownEntry {
   ol: ListItemEntry[];
   append?: string;
-} & MarkdownEntry;
+}
 
 export const olRenderer: MarkdownRenderer = (
   entry: OrderedListEntry,

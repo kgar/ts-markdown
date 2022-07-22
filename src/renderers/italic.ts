@@ -2,11 +2,10 @@ import { getMarkdownString } from '../rendering';
 import { RenderOptions, MarkdownRenderer } from '../rendering.types';
 import { RichTextEntry, MarkdownEntry } from '../shared.types';
 
-export type ItalicEntry = {
+export interface ItalicEntry extends MarkdownEntry, RichTextEntry {
   italic: RichTextEntry;
   indicator?: '*' | '_';
-} & MarkdownEntry &
-  RichTextEntry;
+}
 
 export const italicRenderer: MarkdownRenderer = (
   entry: ItalicEntry,

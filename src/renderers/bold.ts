@@ -2,11 +2,10 @@ import { getMarkdownString } from '../rendering';
 import { RenderOptions, MarkdownRenderer } from '../rendering.types';
 import { MarkdownEntry, RichTextEntry } from '../shared.types';
 
-export type BoldEntry = {
+export interface BoldEntry extends MarkdownEntry, RichTextEntry {
   bold: RichTextEntry;
   indicator?: '*' | '_';
-} & MarkdownEntry &
-  RichTextEntry;
+}
 
 export const boldRenderer: MarkdownRenderer = (
   entry: BoldEntry,

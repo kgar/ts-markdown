@@ -2,10 +2,10 @@ import { getMarkdownString } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { InlineTypes, MarkdownEntry } from '../shared.types';
 
-export type ParagraphEntry = {
+export interface ParagraphEntry extends MarkdownEntry {
   p: InlineTypes;
   append?: string;
-} & MarkdownEntry;
+}
 
 export const pRenderer: MarkdownRenderer = (
   entry: ParagraphEntry,

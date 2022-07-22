@@ -1,16 +1,17 @@
 import { UnorderedListItemIndicator } from './renderers/ul';
 import { MarkdownEntry } from './shared.types';
 
-export type RenderPrefixFunction = (
-  index: number,
-  entry?: MarkdownEntry
-) => string;
+export interface RenderPrefixFunction {
+  (index: number, entry?: MarkdownEntry): string;
+}
 
 export type MarkdownRenderPrefix = string | RenderPrefixFunction;
 
-export type Renderers = { [key: string]: MarkdownRenderer };
+export interface Renderers {
+  [key: string]: MarkdownRenderer;
+}
 
-export type RenderOptions = {
+export interface RenderOptions {
   unorderedListItemIndicator?: UnorderedListItemIndicator;
   useH1Underlining?: boolean;
   useH2Underlining?: boolean;
@@ -37,13 +38,12 @@ export type RenderOptions = {
   useCodeblockFencing?: boolean | '`' | '~';
   boldIndicator?: '*' | '_';
   italicIndicator?: '*' | '_';
-};
+}
 
 // TODO: Figure out how to require that `entry` extend `MarkdownEntry` and be containable in the `Renderers` type.
-export type MarkdownRenderer = (
-  entry: any,
-  options: RenderOptions
-) => MarkdownRenderResult;
+export interface MarkdownRenderer {
+  (entry: any, options: RenderOptions): MarkdownRenderResult;
+}
 
 export type MarkdownRenderResult =
   | string

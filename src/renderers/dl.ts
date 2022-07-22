@@ -2,11 +2,11 @@ import { getMarkdownString } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry, InlineTypes } from '../shared.types';
 
-export type DescriptionListEntry = {
+export interface DescriptionListEntry extends MarkdownEntry {
   dl: (DescriptionTerm | DescriptionDetails)[];
   html?: boolean;
   append?: string;
-} & MarkdownEntry;
+}
 
 export type DescriptionTerm = {
   dt: InlineTypes;

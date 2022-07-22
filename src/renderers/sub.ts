@@ -2,11 +2,10 @@ import { getMarkdownString } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { RichTextEntry, MarkdownEntry } from '../shared.types';
 
-export type SubscriptEntry = {
+export interface SubscriptEntry extends MarkdownEntry, RichTextEntry {
   sub: RichTextEntry;
   html?: boolean;
-} & MarkdownEntry &
-  RichTextEntry;
+}
 
 export const subRenderer: MarkdownRenderer = (
   entry: SubscriptEntry,

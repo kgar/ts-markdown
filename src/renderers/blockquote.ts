@@ -2,10 +2,10 @@ import { getMarkdownString, renderEntries } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
-export type BlockquoteEntry = {
+export interface BlockquoteEntry extends MarkdownEntry {
   blockquote: string | MarkdownEntry[];
   append?: string;
-} & MarkdownEntry;
+}
 
 export const blockquoteRenderer: MarkdownRenderer = (
   entry: BlockquoteEntry,

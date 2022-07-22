@@ -1,9 +1,9 @@
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
-export type CodeEntry = {
+export interface CodeEntry extends MarkdownEntry {
   code: string;
-} & MarkdownEntry;
+}
 
 export const codeRenderer: MarkdownRenderer = (
   entry: CodeEntry,
