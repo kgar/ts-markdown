@@ -2,11 +2,27 @@ import { getMarkdownString } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { InlineTypes, MarkdownEntry } from '../shared.types';
 
+/**
+ * A markdown entry for generating paragraphs.
+ */
 export interface ParagraphEntry extends MarkdownEntry {
+  /**
+   * The paragraph contents and identifying property for the renderer.
+   */
   p: InlineTypes;
+
+  /**
+   * Option which will arbitrarily append a string immediately below the paragraph, ignoring block-level settings.
+   */
   append?: string;
 }
 
+/**
+ * The renderer for paragraph entries.
+ * @param entry The paragraph entry.
+ * @param options Document-level render options.
+ * @returns Block-level paragraph markdown content.
+ */
 export const pRenderer: MarkdownRenderer = (
   entry: ParagraphEntry,
   options: RenderOptions

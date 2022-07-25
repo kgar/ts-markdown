@@ -46,7 +46,7 @@ export const h2Renderer: MarkdownRenderer = (
     let headerText = `${header2IndicatorPrefix}${getMarkdownString(
       entry.h2,
       options
-    )}${getOptionalHeaderIdText(entry, ' ')}`;
+    )}${getOptionalHeaderIdText(entry.id, ' ')}`;
 
     if (useUnderlining) {
       headerText += '\n' + ''.padEnd(headerText.length, '-');

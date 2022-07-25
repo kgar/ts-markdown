@@ -39,7 +39,7 @@ export const h6Renderer: MarkdownRenderer = (
     let headerText = `###### ${getMarkdownString(
       entry.h6,
       options
-    )}${getOptionalHeaderIdText(entry, ' ')}`;
+    )}${getOptionalHeaderIdText(entry.id, ' ')}`;
 
     return {
       markdown: headerText,

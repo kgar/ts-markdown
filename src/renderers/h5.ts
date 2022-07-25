@@ -39,7 +39,7 @@ export const h5Renderer: MarkdownRenderer = (
     let headerText = `##### ${getMarkdownString(
       entry.h5,
       options
-    )}${getOptionalHeaderIdText(entry, ' ')}`;
+    )}${getOptionalHeaderIdText(entry.id, ' ')}`;
 
     return {
       markdown: headerText,
