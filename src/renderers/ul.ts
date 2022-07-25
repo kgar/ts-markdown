@@ -2,14 +2,38 @@ import { renderEntries, getMarkdownString } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { ListItemEntry, MarkdownEntry } from '../shared.types';
 
+/**
+ * A markdown entry for generating unordered lists.
+ */
 export interface UnorderedListEntry extends MarkdownEntry {
+  /**
+   * The unordered list contents and identifying property for the renderer.
+   */
   ul: ListItemEntry[];
+
+  /**
+   * An indicator specifying which character to use when denoting a list item.
+   * Default: '-'
+   */
   indicator?: UnorderedListItemIndicator;
+
+  /**
+   * Option which will arbitrarily append a string immediately below the unordered list, ignoring block-level settings.
+   */
   append?: string;
 }
 
+/**
+ * Eligible characters for denoting a list item.
+ */
 export type UnorderedListItemIndicator = '-' | '*' | '+';
 
+/**
+ * The renderer for unordered list entries.
+ * @param entry The unordered list entry.
+ * @param options Document-level render options.
+ * @returns Block-level unordered list markdown content.
+ */
 export const ulRenderer: MarkdownRenderer = (
   entry: UnorderedListEntry,
   options: RenderOptions
