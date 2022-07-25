@@ -28,6 +28,13 @@ import { textRenderer } from './renderers/text';
 import { ulRenderer } from './renderers/ul';
 import { Renderers } from './rendering.types';
 
+/**
+ * Provides default, custom, and overridden renderers for markdown rendering.
+ * This is often invoked when the caller wishes to provide custom renderers when rendering a markdown document.
+ *
+ * @param customRenderers Any renderers which should be used in addition to or in place of existing default renderers.
+ * @returns An object map of renderers where the key is the identifying property of the particular markdown entry type.
+ */
 export function getRenderers(customRenderers: Renderers = {}): Renderers {
   return {
     string: stringRenderer,

@@ -13,7 +13,7 @@ export interface H2Entry extends MarkdownEntry {
   h2: InlineTypes;
 
   /**
-   * Option which will use '-' underlining rather than a '#' prefix.
+   * Option which will use '-' underlining rather than a '##' prefix.
    */
   underline?: boolean;
 
