@@ -7,6 +7,13 @@ import {
 } from './rendering.types';
 import { MarkdownEntry } from './shared.types';
 
+/**
+ * The main entrypoint into rendering documents in **ts-markdown**.
+ *
+ * @param data The markdown entries which should be rendered into a markdown document.
+ * @param options Document-level options which can affect broad aspects of the rendering process.
+ * @returns A string of markdown.
+ */
 export function tsMarkdown(data: MarkdownEntry[], options?: RenderOptions) {
   options ??= {
     prefix: '',
@@ -16,18 +23,14 @@ export function tsMarkdown(data: MarkdownEntry[], options?: RenderOptions) {
 
   let document = renderEntries(data, options);
 
-  document = options.applyCompletedDocumentChangesPreFootnotes
-    ? options.applyCompletedDocumentChangesPreFootnotes(data, document, options)
+  document = options.onDocumentFootnoteAppending
+    ? options.onDocumentFootnoteAppending(data, document, options)
     : document;
 
   document = appendFootnotes(data, document, options);
 
-  document = options.applyCompletedDocumentChangesPostFootnotes
-    ? options.applyCompletedDocumentChangesPostFootnotes(
-        data,
-        document,
-        options
-      )
+  document = options.onDocumentFootnoteAppended
+    ? options.onDocumentFootnoteAppended(data, document, options)
     : document;
 
   // TODO: Formalize a post-render callback option
@@ -38,6 +41,7 @@ export function tsMarkdown(data: MarkdownEntry[], options?: RenderOptions) {
 
 /**
  * Finds and corrects and mid-word bold/italics that use hyphens, changing the hyphens to asterisks, per best practice: https://www.markdownguide.org/basic-syntax/#bold-best-practices
+ *
  * @param document the rendered document
  * @returns document with mid-world bold and italics set to asterisks
  */
@@ -57,7 +61,17 @@ function correctInvalidMidWordBoldAndItalics(document: string): string {
     );
 }
 
-export function renderEntries(data: MarkdownEntry[], options: RenderOptions) {
+/**
+ * Reduces an array of markdown entries to a single string.
+ *
+ * @param data the markdown entries to process.
+ * @param options Document-level options which can affect broad aspects of the rendering process.
+ * @returns a string of markdown content.
+ */
+export function renderEntries(
+  data: MarkdownEntry[],
+  options: RenderOptions
+): string {
   let prefix = options.prefix ?? '';
 
   let textStack = '';
@@ -104,6 +118,13 @@ function isAppendable(entry: MarkdownEntry) {
   );
 }
 
+/**
+ * Reduces a single markdown entry to a string of markdown content.
+ *
+ * @param entry the target markdown entry or string of text.
+ * @param options Document-level options which can affect broad aspects of the rendering process.
+ * @returns
+ */
 export function getMarkdownString(
   entry: MarkdownEntry | string,
   options: RenderOptions

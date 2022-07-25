@@ -1,6 +1,6 @@
 # ts-markdown <!-- omit in toc -->
 
-> An extensible TypeScript markdown generator that takes JSON and creates a markdown document.
+An extensible TypeScript markdown generator that takes JSON and creates a markdown document.
 
 - [Getting Started](#getting-started)
 - [Usage](#usage)

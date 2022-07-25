@@ -138,7 +138,7 @@ Testing`
                 text: [
                   {
                     link: {
-                      source: 'https://www.google.com',
+                      href: 'https://www.google.com',
                       text: 'Time to get back to testing',
                       title:
                         "Don't worry, search engines are a vital part of development",
@@ -147,7 +147,7 @@ Testing`
                   ' ',
                   {
                     img: {
-                      href: 'https://via.placeholder.com/25',
+                      source: 'https://via.placeholder.com/25',
                       alt: 'A 25x25 placeholder image',
                       title: 'Here is a handy placeholder image',
                     },

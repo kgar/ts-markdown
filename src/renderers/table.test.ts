@@ -249,7 +249,7 @@ describe('given a table entry', () => {
               text: [
                 { bold: 'Hello, please go to' },
                 ' ',
-                { link: { text: 'Google', source: 'https://www.google.com' } },
+                { link: { text: 'Google', href: 'https://www.google.com' } },
                 '.',
               ],
             },
@@ -261,7 +261,7 @@ describe('given a table entry', () => {
                 {
                   img: {
                     alt: 'Placeholder!',
-                    href: 'https://via.placeholder.com/150',
+                    source: 'https://via.placeholder.com/150',
                   },
                 },
               ],

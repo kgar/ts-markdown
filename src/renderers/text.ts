@@ -5,10 +5,24 @@ import { CodeEntry } from './code';
 import { ImageEntry } from './img';
 import { LinkEntry } from './link';
 
-export type TextEntry = {
+/**
+ * A markdown entry for generating inline text.
+ * Used for injecting rich inline text in most places, such as a paragraph or a table cell.
+ */
+export interface TextEntry extends InlineTypes {
+  /**
+   * The inline text contents and identifying property for the renderer.
+   */
   text: string | (RichTextEntry | LinkEntry | ImageEntry | CodeEntry)[];
-} & InlineTypes;
+}
 
+/**
+ * The renderer for inline text entries.
+ *
+ * @param entry The text entry.
+ * @param options Document-level render options.
+ * @returns Inline text markdown content.
+ */
 export const textRenderer: MarkdownRenderer = (
   entry: TextEntry,
   options: RenderOptions

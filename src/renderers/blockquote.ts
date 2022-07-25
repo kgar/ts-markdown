@@ -2,11 +2,28 @@ import { getMarkdownString, renderEntries } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
-export type BlockquoteEntry = {
+/**
+ * A markdown entry for generating blockquotes.
+ */
+export interface BlockquoteEntry extends MarkdownEntry {
+  /**
+   * The blockquote contents and identifying property for the renderer.
+   */
   blockquote: string | MarkdownEntry[];
-  append?: string;
-} & MarkdownEntry;
 
+  /**
+   * Option which will arbitrarily append a string immediately below the blockquote, ignoring block-level settings.
+   */
+  append?: string;
+}
+
+/**
+ * The renderer for blockquote entries.
+ *
+ * @param entry The blockquote entry.
+ * @param options Document-level render options.
+ * @returns Block-level blockquote markdown content.
+ */
 export const blockquoteRenderer: MarkdownRenderer = (
   entry: BlockquoteEntry,
   options: RenderOptions

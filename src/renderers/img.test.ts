@@ -5,26 +5,26 @@ describe('given an image entry', () => {
   describe('with an href', () => {
     const imgEntry: ImageEntry = {
       img: {
-        href: 'image.png',
+        source: 'image.png',
       },
     };
 
     test('renders an image line with the specified href', () => {
-      expect(tsMarkdown([imgEntry])).toBe(`![](${imgEntry.img.href})`);
+      expect(tsMarkdown([imgEntry])).toBe(`![](${imgEntry.img.source})`);
     });
   });
 
   describe('with an href and alt text', () => {
     const imgEntry: ImageEntry = {
       img: {
-        href: 'image.png',
+        source: 'image.png',
         alt: 'Alt text here',
       },
     };
 
     test('renders an image line with the specified href and alt text', () => {
       expect(tsMarkdown([imgEntry])).toBe(
-        `![${imgEntry.img.alt}](${imgEntry.img.href})`
+        `![${imgEntry.img.alt}](${imgEntry.img.source})`
       );
     });
   });
@@ -32,7 +32,7 @@ describe('given an image entry', () => {
   describe('with an href, title, and alt text', () => {
     const imgEntry: ImageEntry = {
       img: {
-        href: 'image.png',
+        source: 'image.png',
         alt: 'Alt text here',
         title: 'Title here',
       },
@@ -40,7 +40,7 @@ describe('given an image entry', () => {
 
     test('renders an image line with the specified href and alt text', () => {
       expect(tsMarkdown([imgEntry])).toBe(
-        `![${imgEntry.img.alt}](${imgEntry.img.href} "${imgEntry.img.title}")`
+        `![${imgEntry.img.alt}](${imgEntry.img.source} "${imgEntry.img.title}")`
       );
     });
   });

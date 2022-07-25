@@ -68,14 +68,14 @@ describe('given a header 4 entry', () => {
           'The magnificent power of ',
           {
             link: {
-              source: 'https://www.google.com',
+              href: 'https://www.google.com',
               text: 'Googling Placeholders',
             },
           },
           ' like ',
           {
             img: {
-              href: 'https://via.placeholder.com/25',
+              source: 'https://via.placeholder.com/25',
               alt: 'A 25x25 placeholder image',
               title: 'Here is a handy placeholder image',
             },

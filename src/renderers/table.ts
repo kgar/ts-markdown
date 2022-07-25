@@ -3,23 +3,64 @@ import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 import { TextEntry } from './text';
 
-export type TableEntry = {
+/**
+ * A markdown entry for generating tables.
+ */
+export interface TableEntry extends MarkdownEntry {
+  /**
+   * The table row and column data, and identifying property for the renderer.
+   */
   table: {
+    /**
+     * The column headers for the table.
+     */
     columns: (TableColumn | string)[];
+
+    /**
+     * The row data for the table.
+     */
     rows: (TableRow | (TextEntry | string)[])[];
   };
-  append?: string;
-} & MarkdownEntry;
 
+  /**
+   * Option which will arbitrarily append a string immediately below the table, ignoring block-level settings.
+   */
+  append?: string;
+}
+
+/**
+ * A table column header.
+ */
 export type TableColumn = {
+  /**
+   * The name of the column.
+   */
   name: string;
+
+  /**
+   * The horizontal alignment of the entire column.
+   */
   align?: 'left' | 'center' | 'right';
 };
 
+/**
+ * A a row of table data.
+ */
 export type TableRow = {
+  /**
+   * A cell of table data.
+   * Each key in this object represents a column header name, case-sensitively.
+   */
   [key: string]: string | TextEntry;
 };
 
+/**
+ * The renderer for table entries.
+ *
+ * @param entry The table entry.
+ * @param options Document-level render options.
+ * @returns Block-level table markdown content.
+ */
 export const tableRenderer: MarkdownRenderer = (
   entry: TableEntry,
   options: RenderOptions

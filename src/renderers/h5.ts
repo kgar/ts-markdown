@@ -3,12 +3,35 @@ import { getOptionalHeaderIdText } from './header';
 import { RenderOptions, MarkdownRenderer } from '../rendering.types';
 import { InlineTypes, MarkdownEntry } from '../shared.types';
 
-export type H5Entry = {
+/**
+ * A markdown entry for generating h5 elements.
+ */
+export interface H5Entry extends MarkdownEntry {
+  /**
+   * The h5 contents and identifying property for the renderer.
+   */
   h5: InlineTypes;
-  id?: string;
-  append?: string;
-} & MarkdownEntry;
 
+  /**
+   * Option which will append a markdown heading ID.
+   * E.g., given the ID 'my-id' and the header 'Header Example',
+   * `##### Header Example {#my-id}`
+   */
+  id?: string;
+
+  /**
+   * Option which will arbitrarily append a string immediately below the h5, ignoring block-level settings.
+   */
+  append?: string;
+}
+
+/**
+ * The renderer for h5 entries.
+ *
+ * @param entry The h5 entry.
+ * @param options Document-level render options.
+ * @returns Block-level h5 markdown content.
+ */
 export const h5Renderer: MarkdownRenderer = (
   entry: H5Entry,
   options: RenderOptions
@@ -17,7 +40,7 @@ export const h5Renderer: MarkdownRenderer = (
     let headerText = `##### ${getMarkdownString(
       entry.h5,
       options
-    )}${getOptionalHeaderIdText(entry, ' ')}`;
+    )}${getOptionalHeaderIdText(entry.id, ' ')}`;
 
     return {
       markdown: headerText,

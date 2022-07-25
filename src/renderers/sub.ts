@@ -2,12 +2,29 @@ import { getMarkdownString } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { RichTextEntry, MarkdownEntry } from '../shared.types';
 
-export type SubscriptEntry = {
+/**
+ * A markdown entry for generating subscript text.
+ */
+export interface SubscriptEntry extends MarkdownEntry, RichTextEntry {
+  /**
+   * The subscript contents and identifying property for the renderer.
+   */
   sub: RichTextEntry;
-  html?: boolean;
-} & MarkdownEntry &
-  RichTextEntry;
 
+  /**
+   * Option to render the subscript indicators as HTML.
+   * Default: false
+   */
+  html?: boolean;
+}
+
+/**
+ * The renderer for subscript entries.
+ *
+ * @param entry The subscript entry.
+ * @param options Document-level render options.
+ * @returns Subscript markdown content.
+ */
 export const subRenderer: MarkdownRenderer = (
   entry: SubscriptEntry,
   options: RenderOptions

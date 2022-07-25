@@ -1,20 +1,44 @@
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
-export type ImageEntry = {
+/**
+ * A markdown entry for generating img elements.
+ */
+export interface ImageEntry extends MarkdownEntry {
+  /**
+   * The img settings and identifying property for the renderer.
+   */
   img: {
-    href: string;
+    /**
+     * The path to the image.
+     */
+    source: string;
+
+    /**
+     * Alternative text to include with the image for accessibility.
+     */
     alt?: string;
+
+    /**
+     * A title for the image.
+     */
     title?: string;
   };
-} & MarkdownEntry;
+}
 
+/**
+ * The renderer for img entries.
+ *
+ * @param entry The img entry.
+ * @param options Document-level render options.
+ * @returns img markdown content.
+ */
 export const imgRenderer: MarkdownRenderer = (
   entry: ImageEntry,
   options: RenderOptions
 ) => {
   if ('img' in entry) {
-    const formattedLink = entry.img.href.replace(/\s/g, '%20');
+    const formattedLink = entry.img.source.replace(/\s/g, '%20');
 
     const titleSegment =
       entry.img.title !== undefined ? ` "${entry.img.title}"` : '';
