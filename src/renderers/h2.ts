@@ -32,6 +32,7 @@ export interface H2Entry extends MarkdownEntry {
 
 /**
  * The renderer for h2 entries.
+ *
  * @param entry The h2 entry.
  * @param options Document-level render options.
  * @returns Block-level h2 markdown content.

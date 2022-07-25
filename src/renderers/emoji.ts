@@ -13,6 +13,7 @@ export interface EmojiEntry extends MarkdownEntry, RichTextEntry {
 
 /**
  * The renderer for emoji entries.
+ *
  * @param entry The emoji entry.
  * @param options Document-level render options.
  * @returns Emoji markdown content.

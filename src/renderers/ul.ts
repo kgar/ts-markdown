@@ -30,6 +30,7 @@ export type UnorderedListItemIndicator = '-' | '*' | '+';
 
 /**
  * The renderer for unordered list entries.
+ *
  * @param entry The unordered list entry.
  * @param options Document-level render options.
  * @returns Block-level unordered list markdown content.

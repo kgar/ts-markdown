@@ -14,6 +14,7 @@ export interface HighlightEntry extends MarkdownEntry, RichTextEntry {
 
 /**
  * The renderer for highlight entries.
+ *
  * @param entry The highlight entry.
  * @param options Document-level render options.
  * @returns Hihglighted text markdown content.

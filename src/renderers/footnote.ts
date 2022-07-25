@@ -25,6 +25,7 @@ export interface FootnoteEntry extends MarkdownEntry, RichTextEntry {
 
 /**
  * The renderer for footnote entries.
+ *
  * @param entry The footnote entry.
  * @param options Document-level render options.
  * @returns Footnote ID markdown content.
@@ -42,6 +43,7 @@ export const footnoteRenderer: MarkdownRenderer = (
 
 /**
  * The renderer for footnote content at the bottom of the document.
+ *
  * @param data Content to include in the footnote.
  * @param document The document to update.
  * @param options Document-level options.

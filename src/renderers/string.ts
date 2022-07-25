@@ -9,6 +9,7 @@ export interface String extends RichTextEntry {}
 
 /**
  * The renderer for string entries.
+ *
  * @param entry A string of text.
  * @returns String content.
  */

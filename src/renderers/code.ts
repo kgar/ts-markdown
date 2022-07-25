@@ -13,6 +13,7 @@ export interface CodeEntry extends MarkdownEntry {
 
 /**
  * The renderer for code entries.
+ *
  * @param entry The code entry.
  * @param options Document-level render options.
  * @returns Code markdown content.

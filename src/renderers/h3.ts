@@ -27,6 +27,7 @@ export interface H3Entry extends MarkdownEntry {
 
 /**
  * The renderer for h3 entries.
+ *
  * @param entry The h3 entry.
  * @param options Document-level render options.
  * @returns Block-level h3 markdown content.

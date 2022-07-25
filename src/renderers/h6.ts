@@ -27,6 +27,7 @@ export interface H6Entry extends MarkdownEntry {
 
 /**
  * The renderer for h6 entries.
+ *
  * @param entry The h6 entry.
  * @param options Document-level render options.
  * @returns Block-level h6 markdown content.

@@ -19,6 +19,7 @@ export interface OrderedListEntry extends MarkdownEntry {
 
 /**
  * The renderer for ordered list entries.
+ *
  * @param entry The ordererd list entry.
  * @param options Document-level render options.
  * @returns Block-level ordered list markdown content.

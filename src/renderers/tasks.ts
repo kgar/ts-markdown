@@ -35,6 +35,7 @@ export type TaskEntry = {
 
 /**
  * The renderer for task list entries.
+ *
  * @param entry The task list entry.
  * @param options Document-level render options.
  * @returns Block-level task list markdown content.

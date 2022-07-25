@@ -29,6 +29,7 @@ export interface CodeBlockEntry extends MarkdownEntry {
 
 /**
  * The renderer for codeblock entries.
+ *
  * @param entry The codeblock entry
  * @param options Document-level render options
  * @returns Block-level codeblock markdown content

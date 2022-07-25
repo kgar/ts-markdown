@@ -19,6 +19,7 @@ export interface ParagraphEntry extends MarkdownEntry {
 
 /**
  * The renderer for paragraph entries.
+ *
  * @param entry The paragraph entry.
  * @param options Document-level render options.
  * @returns Block-level paragraph markdown content.

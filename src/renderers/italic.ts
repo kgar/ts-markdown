@@ -20,6 +20,7 @@ export interface ItalicEntry extends MarkdownEntry, RichTextEntry {
 
 /**
  * The renderer for italic entries.
+ *
  * @param entry The italic entry.
  * @param options Document-level render options.
  * @returns Italic markdown content.

@@ -27,6 +27,7 @@ export interface H4Entry extends MarkdownEntry {
 
 /**
  * The renderer for h4 entries.
+ *
  * @param entry The h4 entry.
  * @param options Document-level render options.
  * @returns Block-level h4 markdown content.

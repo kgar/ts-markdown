@@ -28,6 +28,7 @@ export interface ImageEntry extends MarkdownEntry {
 
 /**
  * The renderer for img entries.
+ *
  * @param entry The img entry.
  * @param options Document-level render options.
  * @returns img markdown content.

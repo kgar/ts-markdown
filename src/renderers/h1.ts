@@ -32,6 +32,7 @@ export interface H1Entry extends MarkdownEntry {
 
 /**
  * The renderer for h1 entries.
+ *
  * @param entry The h1 entry.
  * @param options Document-level render options.
  * @returns Block-level h1 markdown content.

@@ -18,6 +18,7 @@ export interface BoldEntry extends MarkdownEntry, RichTextEntry {
 }
 
 /**
+ * The renderer for bold entries.
  *
  * @param entry The renderer for bolded entries.
  * @param options Document-level render options.

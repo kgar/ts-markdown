@@ -24,6 +24,7 @@ export interface HorizontalRuleEntry extends MarkdownEntry {
 
 /**
  * The renderer for hr entries.
+ *
  * @param entry The hr entry.
  * @param options Document-level render options.
  * @returns Block-level hr markdown content.

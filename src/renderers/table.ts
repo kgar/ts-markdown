@@ -56,6 +56,7 @@ export type TableRow = {
 
 /**
  * The renderer for table entries.
+ *
  * @param entry The table entry.
  * @param options Document-level render options.
  * @returns Block-level table markdown content.

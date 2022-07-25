@@ -45,6 +45,7 @@ export type DescriptionDetails = {
 
 /**
  * The renderer for descriptions list entries.
+ *
  * @param entry The description list entry.
  * @param options Document-level render options.
  * @returns Block-level description list markdown content.

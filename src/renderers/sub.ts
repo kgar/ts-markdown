@@ -20,6 +20,7 @@ export interface SubscriptEntry extends MarkdownEntry, RichTextEntry {
 
 /**
  * The renderer for subscript entries.
+ *
  * @param entry The subscript entry.
  * @param options Document-level render options.
  * @returns Subscript markdown content.

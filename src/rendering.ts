@@ -41,6 +41,7 @@ export function tsMarkdown(data: MarkdownEntry[], options?: RenderOptions) {
 
 /**
  * Finds and corrects and mid-word bold/italics that use hyphens, changing the hyphens to asterisks, per best practice: https://www.markdownguide.org/basic-syntax/#bold-best-practices
+ *
  * @param document the rendered document
  * @returns document with mid-world bold and italics set to asterisks
  */

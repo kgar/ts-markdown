@@ -27,6 +27,7 @@ export interface H5Entry extends MarkdownEntry {
 
 /**
  * The renderer for h5 entries.
+ *
  * @param entry The h5 entry.
  * @param options Document-level render options.
  * @returns Block-level h5 markdown content.

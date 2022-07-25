@@ -30,6 +30,7 @@ export interface LinkEntry extends MarkdownEntry {
 
 /**
  * The renderer for link entries.
+ *
  * @param entry The link entry.
  * @param options Document-level render options.
  * @returns Link markdown content.

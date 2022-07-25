@@ -20,6 +20,7 @@ export interface SuperscriptEntry extends MarkdownEntry, RichTextEntry {
 
 /**
  * The renderer for superscript entries.
+ *
  * @param entry The superscript entry.
  * @param options Document-level render options.
  * @returns Superscript markdown content.

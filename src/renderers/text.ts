@@ -18,6 +18,7 @@ export interface TextEntry extends InlineTypes {
 
 /**
  * The renderer for inline text entries.
+ *
  * @param entry The text entry.
  * @param options Document-level render options.
  * @returns Inline text markdown content.

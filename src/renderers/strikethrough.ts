@@ -14,6 +14,7 @@ export interface StrikethroughEntry extends MarkdownEntry, RichTextEntry {
 
 /**
  * The renderer for strickethrough text entries.
+ *
  * @param entry The strikethrough entry.
  * @param options Document-level render options.
  * @returns Strikethrough markdown content.
