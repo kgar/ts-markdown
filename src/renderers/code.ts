@@ -1,10 +1,22 @@
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
+/**
+ * A markdown entry for generating a code segment.
+ */
 export interface CodeEntry extends MarkdownEntry {
+  /**
+   * The code text.
+   */
   code: string;
 }
 
+/**
+ * The renderer for code entries.
+ * @param entry The code entry.
+ * @param options Document-level render options.
+ * @returns Code markdown content.
+ */
 export const codeRenderer: MarkdownRenderer = (
   entry: CodeEntry,
   options: RenderOptions

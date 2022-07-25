@@ -1,13 +1,38 @@
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
+/**
+ * A markdown entry for generating code blocks.
+ */
 export interface CodeBlockEntry extends MarkdownEntry {
+  /**
+   * The block of code, newlines included.
+   */
   codeblock: string | string[];
+
+  /**
+   * The character for signifying how to fence the code block.
+   * Leaving this blank results in the classic indented code block.
+   */
   fenced?: boolean | '`' | '~';
+
+  /**
+   * The code language, used for syntax highlighting in some markdown renderers.
+   */
   language?: string;
+
+  /**
+   * Option which will arbitrarily append a string immediately below the blockquote, ignoring block-level settings.
+   */
   append?: string;
 }
 
+/**
+ * The renderer for codeblock entries.
+ * @param entry The codeblock entry
+ * @param options Document-level render options
+ * @returns Block-level codeblock markdown content
+ */
 export const codeblockRenderer: MarkdownRenderer = (
   entry: CodeBlockEntry,
   options: RenderOptions

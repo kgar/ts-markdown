@@ -2,13 +2,33 @@ import { renderEntries } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import { MarkdownEntry, RichTextEntry } from '../shared.types';
 
+/**
+ * A markdown entry for generating footnotes.
+ */
 export interface FootnoteEntry extends MarkdownEntry, RichTextEntry {
+  /**
+   * The footnote contents and identifying property for the renderer.
+   */
   footnote: {
+    /**
+     * The footnote ID. This is used inline to signify which footnote to reference.
+     * Identifiers can be numbers or words, but they cannot contain spaces or tabs.
+     */
     id: string;
+
+    /**
+     * The footnote content to appear at the bottom of the document.
+     */
     content: MarkdownEntry | MarkdownEntry[];
   };
 }
 
+/**
+ * The renderer for footnote entries.
+ * @param entry The footnote entry.
+ * @param options Document-level render options.
+ * @returns Footnote ID markdown content.
+ */
 export const footnoteRenderer: MarkdownRenderer = (
   entry: FootnoteEntry,
   options: RenderOptions
@@ -20,6 +40,13 @@ export const footnoteRenderer: MarkdownRenderer = (
   throw new Error('Entry is not a footnote entry. Unable to render.');
 };
 
+/**
+ * The renderer for footnote content at the bottom of the document.
+ * @param data Content to include in the footnote.
+ * @param document The document to update.
+ * @param options Document-level options.
+ * @returns The updated document.
+ */
 export function appendFootnotes(
   data: MarkdownEntry[],
   document: string,

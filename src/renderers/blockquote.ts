@@ -19,9 +19,9 @@ export interface BlockquoteEntry extends MarkdownEntry {
 
 /**
  * The renderer for blockquote entries.
- * @param entry The blockquote entry
- * @param options Document-level render option
- * @returns Block-level blockquote markdown content
+ * @param entry The blockquote entry.
+ * @param options Document-level render options.
+ * @returns Block-level blockquote markdown content.
  */
 export const blockquoteRenderer: MarkdownRenderer = (
   entry: BlockquoteEntry,
