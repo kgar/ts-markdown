@@ -28,3 +28,19 @@ export const emojiRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an emoji entry. Unable to render.');
 };
+
+/**
+ * Helper which creates an emoji entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns an emoji entry
+ */
+export function emoji(
+  content: EmojiEntry['emoji'],
+  options?: Omit<EmojiEntry, 'emoji'>
+): EmojiEntry {
+  return {
+    emoji: content,
+    ...options,
+  };
+}

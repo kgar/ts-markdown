@@ -40,3 +40,19 @@ export const blockquoteRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not a blockquote entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a blockquote entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a blockquote entry
+ */
+export function blockquote(
+  content: BlockquoteEntry['blockquote'],
+  options?: Omit<BlockquoteEntry, 'blockquote'>
+): BlockquoteEntry {
+  return {
+    blockquote: content,
+    ...options,
+  };
+}

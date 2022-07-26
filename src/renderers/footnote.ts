@@ -97,3 +97,23 @@ function getFootnoteEntries(data: unknown): FootnoteEntry[] {
       )
     : [];
 }
+
+/**
+ * Helper which creates a footnote entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a footnote entry
+ */
+export function footnote(
+  id: FootnoteEntry['footnote']['id'],
+  content: FootnoteEntry['footnote']['content'],
+  options?: Omit<FootnoteEntry, 'footnote'>
+): FootnoteEntry {
+  return {
+    footnote: {
+      id,
+      content,
+    },
+    ...options,
+  };
+}

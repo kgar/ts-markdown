@@ -39,3 +39,13 @@ export const italicRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an italic entry. Unable to render.');
 };
+
+export function italic(
+  content: ItalicEntry['italic'],
+  options?: Omit<ItalicEntry, 'italic'>
+): ItalicEntry {
+  return {
+    italic: content,
+    ...options,
+  };
+}

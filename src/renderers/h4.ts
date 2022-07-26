@@ -50,3 +50,19 @@ export const h4Renderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an h4 entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a fourth-level header entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a fourth-level header entry
+ */
+export function h4(
+  content: H4Entry['h4'],
+  options?: Omit<H4Entry, 'h4'>
+): H4Entry {
+  return {
+    h4: content,
+    ...options,
+  };
+}

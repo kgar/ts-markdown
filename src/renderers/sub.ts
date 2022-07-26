@@ -41,3 +41,19 @@ export const subRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not a sub entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a subscript text entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a subscript text entry
+ */
+export function sub(
+  content: SubscriptEntry['sub'],
+  options?: Omit<SubscriptEntry, 'sub'>
+): SubscriptEntry {
+  return {
+    sub: content,
+    ...options,
+  };
+}

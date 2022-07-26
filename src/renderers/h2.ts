@@ -61,3 +61,19 @@ export const h2Renderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an h2 entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a second-level header entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a second-level header entry
+ */
+export function h2(
+  content: H2Entry['h2'],
+  options?: Omit<H2Entry, 'h2'>
+): H2Entry {
+  return {
+    h2: content,
+    ...options,
+  };
+}

@@ -50,3 +50,19 @@ export const h3Renderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an h3 entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a third-level header entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a third-level header entry
+ */
+export function h3(
+  content: H3Entry['h3'],
+  options?: Omit<H3Entry, 'h3'>
+): H3Entry {
+  return {
+    h3: content,
+    ...options,
+  };
+}

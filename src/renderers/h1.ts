@@ -61,3 +61,19 @@ export const h1Renderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an h1 entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a first-level header entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a first-level header entry
+ */
+export function h1(
+  content: H1Entry['h1'],
+  options?: Omit<H1Entry, 'h1'>
+): H1Entry {
+  return {
+    h1: content,
+    ...options,
+  };
+}

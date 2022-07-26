@@ -50,3 +50,19 @@ export const h5Renderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an h5 entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a fifth-level header entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a fifth-level header entry
+ */
+export function h5(
+  content: H5Entry['h5'],
+  options?: Omit<H5Entry, 'h5'>
+): H5Entry {
+  return {
+    h5: content,
+    ...options,
+  };
+}

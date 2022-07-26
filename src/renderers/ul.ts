@@ -71,3 +71,19 @@ function getUnorderedListMarkdown(
     .map((x) => x.replace(/^([\-\+\*]\s[\d]+)(\.)/, '$1\\.'))
     .join('\n');
 }
+
+/**
+ * Helper which creates an unordered list entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns an unordered list entry
+ */
+export function ul(
+  content: UnorderedListEntry['ul'],
+  options?: Omit<UnorderedListEntry, 'ul'>
+): UnorderedListEntry {
+  return {
+    ul: content,
+    ...options,
+  };
+}

@@ -5,6 +5,7 @@ An extensible TypeScript markdown generator that takes JSON and creates a markdo
 - [Getting Started](#getting-started)
 - [Usage](#usage)
   - [Example - Generating a Simple Document](#example---generating-a-simple-document)
+  - [Example - Using Markdown Helper Functions](#example---using-markdown-helper-functions)
 - [Options](#options)
   - [Document-level Options](#document-level-options)
   - [Entry-level Options](#entry-level-options)
@@ -64,7 +65,7 @@ tsMarkdown([
 ]);
 ```
 
-The following markdown is generated:
+And the result is:
 
 ```md
 #### Hello, world!
@@ -76,6 +77,25 @@ Generating markdown from data can be simple. All you need are:
 1. objects
 2. a function
 3. and a place to run :checkered_flag:
+```
+
+### Example - Using Markdown Helper Functions
+
+The same document from the previous example can be generated using **markdown helper functions**:
+
+```ts
+import { blockquote, emoji, h4, ol, p, text, tsMarkdown } from 'ts-markdown';
+
+tsMarkdown([
+  h4('Hello, world!'),
+  blockquote("Let's generate some markdown!"),
+  p('Generating markdown from data can be simple. All you need are:'),
+  ol([
+    'objects',
+    'a function',
+    text(['and a place to run ', emoji('checkered_flag')]),
+  ]),
+]);
 ```
 
 ## Options
