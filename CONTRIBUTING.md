@@ -36,7 +36,7 @@ Feel free to create a GitHub issue if
 
 - If possible, use the relevant bug report templates to create the issue. Simply copy the content of the appropriate template into a Github issue, make the necessary changes to demonstrate the issue, and **paste the content into the issue description**:
 
-  - [**Bug Issue template**](https://github.com/kgar/ts-markdown/blob/main/guids/bug-issue-template.md)
+  - [**Bug Issue template**](https://github.com/kgar/ts-markdown/blob/main/guides/bug-issue-template.md)
   - ... more to come as we discover them together!
 
 ### 📃 Did you fix whitespace, format code, or make a purely cosmetic patch?
@@ -57,13 +57,13 @@ Expanding, fixing, or improving documentation is valuable in many ways for the c
 
 If you would like to change how the code itself is laid out, we're usually talking about a change to the [.prettierrc file](https://github.com/kgar/ts-markdown/blob/main/.prettierrc). To get started on proposing a change to how the code formats, see:
 
-- [**Style Settings Change Issue template**](https://github.com/kgar/ts-markdown/blob/main/guids/style-settings-change-issue-template.md)
+- [**Style Settings Change Issue template**](https://github.com/kgar/ts-markdown/blob/main/guides/style-settings-change-issue-template.md)
 
 ### 💡 Do you intend to add a new feature or change an existing one?
 
 To get started with proposing a new feature, check out
 
-- [**Feature Issue template**](https://github.com/kgar/ts-markdown/blob/main/guids/feature-issue-template.md)
+- [**Feature Issue template**](https://github.com/kgar/ts-markdown/blob/main/guides/feature-issue-template.md)
 
 If the template doesn't work for your needs, feel free to write your own, providing a description of the feature, reasoning for the feature, and what it should do.
 
