@@ -1,0 +1,18 @@
+{
+  "out": "docs",
+  "name": "ts-markdown",
+  "entryPoints": ["src/index.ts"],
+  "exclude": "**/*+(.test).ts",
+  "pluginPages": {
+    "pages": [
+      {
+        "title": "ts-markdown",
+        "moduleRoot": true,
+        "children": [
+          { "title": "Let's Go", "source": "cool.md" },
+          { "title": "Link Test", "source": "all-right.md" }
+        ]
+      }
+    ]
+  }
+}
