@@ -39,3 +39,19 @@ export const codeRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not a code entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a code segment entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a code segment entry
+ */
+export function code(
+  content: CodeEntry['code'],
+  options?: Omit<CodeEntry, 'code'>
+): CodeEntry {
+  return {
+    code: content,
+    ...options,
+  };
+}

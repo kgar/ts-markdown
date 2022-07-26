@@ -41,3 +41,19 @@ export const supRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an sup entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a superscript text entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a superscript text entry
+ */
+export function sup(
+  content: SuperscriptEntry['sup'],
+  options?: Omit<SuperscriptEntry, 'sup'>
+): SuperscriptEntry {
+  return {
+    sup: content,
+    ...options,
+  };
+}

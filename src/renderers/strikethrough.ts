@@ -29,3 +29,19 @@ export const strikethroughRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not a strikethrough entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a strikethrough text entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a strikethrough text entry
+ */
+export function strikethrough(
+  content: StrikethroughEntry['strikethrough'],
+  options?: Omit<StrikethroughEntry, 'strikethrough'>
+): StrikethroughEntry {
+  return {
+    strikethrough: content,
+    ...options,
+  };
+}

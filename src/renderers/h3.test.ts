@@ -1,11 +1,19 @@
 import { tsMarkdown } from '../rendering';
-import { H3Entry } from './h3';
+import { h3, H3Entry } from './h3';
 
 describe('given a header 3 entry', () => {
   describe('with a string value', () => {
     const entry: H3Entry = {
       h3: 'Hello, world!',
     };
+
+    test('renders an h3 markdown line with the specified string as text', () => {
+      expect(tsMarkdown([entry])).toBe(`### ${entry.h3}`);
+    });
+  });
+
+  describe('using a helper with a string value', () => {
+    const entry = h3('Hello, world!');
 
     test('renders an h3 markdown line with the specified string as text', () => {
       expect(tsMarkdown([entry])).toBe(`### ${entry.h3}`);

@@ -87,3 +87,19 @@ function getTasksMarkdown(entry: TaskListEntry, options: RenderOptions) {
     })
     .join('\n');
 }
+
+/**
+ * Helper which creates a task list entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a task list entry
+ */
+export function tasks(
+  content: TaskListEntry['tasks'],
+  options?: Omit<TaskListEntry, 'tasks'>
+): TaskListEntry {
+  return {
+    tasks: content,
+    ...options,
+  };
+}

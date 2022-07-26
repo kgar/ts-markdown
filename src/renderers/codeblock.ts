@@ -77,6 +77,12 @@ function getCodeFenceClose(entry: CodeBlockEntry, options: RenderOptions) {
   return fenceCharacter + fenceCharacter + fenceCharacter;
 }
 
+/**
+ * Helper which creates a codeblock entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a codeblock entry
+ */
 export function codeblock(
   content: CodeBlockEntry['codeblock'],
   options?: Omit<CodeBlockEntry, 'codeblock'>

@@ -40,6 +40,12 @@ export const boldRenderer: MarkdownRenderer = (
   throw new Error('Entry is not a bold entry. Unable to render.');
 };
 
+/**
+ * Helper which creates a bold text entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a bold text entry
+ */
 export function bold(
   content: BoldEntry['bold'],
   options?: Omit<BoldEntry, 'bold'>

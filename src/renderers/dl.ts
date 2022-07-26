@@ -18,7 +18,7 @@ export interface DescriptionListEntry extends MarkdownEntry {
   html?: boolean;
 
   /**
-   * Option which will arbitrarily append a string immediately below the blockquote, ignoring block-level settings.
+   * Option which will arbitrarily append a string immediately below the dl, ignoring block-level settings.
    */
   append?: string;
 }
@@ -102,3 +102,19 @@ export const dlRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not a dl entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a description list entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a description list entry
+ */
+export function dl(
+  content: DescriptionListEntry['dl'],
+  options?: Omit<DescriptionListEntry, 'dl'>
+): DescriptionListEntry {
+  return {
+    dl: content,
+    ...options,
+  };
+}

@@ -29,3 +29,19 @@ export const highlightRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not a highlight entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a highlighted text entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a highlighted text entry
+ */
+export function highlight(
+  content: HighlightEntry['highlight'],
+  options?: Omit<HighlightEntry, 'highlight'>
+): HighlightEntry {
+  return {
+    highlight: content,
+    ...options,
+  };
+}

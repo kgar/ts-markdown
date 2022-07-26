@@ -52,3 +52,19 @@ export const olRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an ol entry. Unable to render.');
 };
+
+/**
+ * Helper which creates an ordered list entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns an ordered list entry
+ */
+export function ol(
+  content: OrderedListEntry['ol'],
+  options?: Omit<OrderedListEntry, 'ol'>
+): OrderedListEntry {
+  return {
+    ol: content,
+    ...options,
+  };
+}

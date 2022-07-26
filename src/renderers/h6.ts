@@ -50,3 +50,19 @@ export const h6Renderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an h6 entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a sixth-level header entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a sixth-level header entry
+ */
+export function h6(
+  content: H6Entry['h6'],
+  options?: Omit<H6Entry, 'h6'>
+): H6Entry {
+  return {
+    h6: content,
+    ...options,
+  };
+}
