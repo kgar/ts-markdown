@@ -48,3 +48,9 @@ export const imgRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an img entry. Unable to render.');
 };
+
+export function img(settings: ImageEntry['img']): ImageEntry {
+  return {
+    img: settings,
+  };
+}

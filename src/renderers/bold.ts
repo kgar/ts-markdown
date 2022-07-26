@@ -39,3 +39,13 @@ export const boldRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not a bold entry. Unable to render.');
 };
+
+export function bold(
+  content: BoldEntry['bold'],
+  options?: Omit<BoldEntry, 'bold'>
+): BoldEntry {
+  return {
+    bold: content,
+    ...options,
+  };
+}

@@ -54,3 +54,9 @@ export const linkRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not a link entry. Unable to render.');
 };
+
+export function link(settings: LinkEntry['link']): LinkEntry {
+  return {
+    link: settings,
+  };
+}

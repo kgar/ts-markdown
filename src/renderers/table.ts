@@ -258,3 +258,13 @@ function escapePipes<T>(target: T): T {
 
   return target;
 }
+
+export function table(
+  settings: TableEntry['table'],
+  options?: Omit<TableEntry, 'table'>
+): TableEntry {
+  return {
+    table: settings,
+    ...options,
+  };
+}

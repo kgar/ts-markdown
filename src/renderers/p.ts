@@ -67,3 +67,13 @@ function getParagraphMarkdown(entry: ParagraphEntry, options: RenderOptions) {
     .map((x) => formatParagraphText(x))
     .join('\n');
 }
+
+export function p(
+  content: ParagraphEntry['p'],
+  options?: Omit<ParagraphEntry, 'p'>
+): ParagraphEntry {
+  return {
+    p: content,
+    ...options,
+  };
+}

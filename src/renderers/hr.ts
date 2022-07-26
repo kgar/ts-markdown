@@ -44,3 +44,18 @@ export const hrRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an hr entry. Unable to render.');
 };
+
+/**
+ * Helper which creates a horizontal rule entry.
+ *
+ * @param options Entry-level options for this element.
+ * @returns a horizontal rule entry
+ */
+export function hr(
+  options?: Omit<HorizontalRuleEntry, 'hr'>
+): HorizontalRuleEntry {
+  return {
+    hr: true,
+    ...options,
+  };
+}

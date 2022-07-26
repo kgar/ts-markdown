@@ -61,3 +61,13 @@ export const h1Renderer: MarkdownRenderer = (
 
   throw new Error('Entry is not an h1 entry. Unable to render.');
 };
+
+export function h1(
+  content: H1Entry['h1'],
+  options?: Omit<H1Entry, 'h1'>
+): H1Entry {
+  return {
+    h1: content,
+    ...options,
+  };
+}

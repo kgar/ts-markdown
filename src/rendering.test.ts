@@ -1,13 +1,18 @@
-import { CodeBlockEntry } from './renderers/codeblock';
-import { H1Entry } from './renderers/h1';
-import { H2Entry } from './renderers/h2';
+import { bold } from './renderers/bold';
+import { codeblock, CodeBlockEntry } from './renderers/codeblock';
+import { h1, H1Entry } from './renderers/h1';
+import { h2, H2Entry } from './renderers/h2';
 import { H3Entry } from './renderers/h3';
 import { H4Entry } from './renderers/h4';
 import { H5Entry } from './renderers/h5';
 import { H6Entry } from './renderers/h6';
-import { HorizontalRuleEntry } from './renderers/hr';
-import { ParagraphEntry } from './renderers/p';
-import { TableEntry } from './renderers/table';
+import { HorizontalRuleEntry, hr } from './renderers/hr';
+import { img } from './renderers/img';
+import { italic } from './renderers/italic';
+import { link } from './renderers/link';
+import { p, ParagraphEntry } from './renderers/p';
+import { table, TableEntry } from './renderers/table';
+import { text } from './renderers/text';
 import { tsMarkdown } from './rendering';
 import { MarkdownEntry } from './shared.types';
 
@@ -25,6 +30,24 @@ describe('given an array of more than one markdown entry', () => {
       {
         p: 'Testing',
       },
+    ];
+
+    test('renders 3 paragraphs separated by two newlines between each', () => {
+      expect(tsMarkdown(paragraphs)).toBe(
+        `Test
+
+***This is*** a test
+
+Testing`
+      );
+    });
+  });
+
+  describe('with 3 paragraphs using helpers', () => {
+    const paragraphs: MarkdownEntry[] = [
+      p('Test'),
+      p(text([italic(bold('This is')), ' ', 'a test'])),
+      p('Testing'),
     ];
 
     test('renders 3 paragraphs separated by two newlines between each', () => {
@@ -174,6 +197,90 @@ Testing`
         fenced: true,
         language: 'ts',
       },
+    ];
+
+    test('renders the document as expected', () => {
+      expect(tsMarkdown(data)).toBe(
+        `# Testing the Code
+
+---
+
+It is important to write tests for both initial development and for longterm maintenance.
+
+| Action                                 | Reason                                                                                                                                                                                                               |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Add new tests for new features         | Ensures the library is doing what we expect                                                                                                                                                                          |
+| Ensure all previous tests run and pass | Ensures new features do not break existing features                                                                                                                                                                  |
+| Etc.                                   | [Time to get back to testing](https://www.google.com "Don't worry, search engines are a vital part of development") ![A 25x25 placeholder image](https://via.placeholder.com/25 "Here is a handy placeholder image") |
+
+## Sample Test Suite with One Test
+
+\`\`\`ts
+describe('given some common aspect to these tests', () => {
+  describe('with this particular input', () => {
+    const data = 'some data here';
+
+    test('results in this exepected output', () => {
+      expect(runMyCode(data)).toBe('my expected result')
+    });
+  });
+});
+\`\`\``
+      );
+    });
+  });
+
+  describe('with a mildly complex set of markdown data representing a small document, using helpers', () => {
+    const data: MarkdownEntry[] = [
+      h1('Testing the Code'),
+      hr(),
+      p(
+        'It is important to write tests for both initial development and for longterm maintenance.'
+      ),
+      table({
+        columns: ['Action', 'Reason'],
+        rows: [
+          [
+            'Add new tests for new features',
+            'Ensures the library is doing what we expect',
+          ],
+          [
+            'Ensure all previous tests run and pass',
+            'Ensures new features do not break existing features',
+          ],
+          [
+            'Etc.',
+
+            text([
+              link({
+                href: 'https://www.google.com',
+                text: 'Time to get back to testing',
+                title:
+                  "Don't worry, search engines are a vital part of development",
+              }),
+              ' ',
+              img({
+                source: 'https://via.placeholder.com/25',
+                alt: 'A 25x25 placeholder image',
+                title: 'Here is a handy placeholder image',
+              }),
+            ]),
+          ],
+        ],
+      }),
+      h2('Sample Test Suite with One Test'),
+      codeblock(
+        `describe('given some common aspect to these tests', () => {
+  describe('with this particular input', () => {
+    const data = 'some data here';
+
+    test('results in this exepected output', () => {
+      expect(runMyCode(data)).toBe('my expected result')
+    });
+  });
+});`,
+        { fenced: true, language: 'ts' }
+      ),
     ];
 
     test('renders the document as expected', () => {

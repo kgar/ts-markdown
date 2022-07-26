@@ -39,3 +39,9 @@ export const textRenderer: MarkdownRenderer = (
 
   throw new Error('Entry is not a text entry. Unable to render.');
 };
+
+export function text(content: TextEntry['text']): TextEntry {
+  return {
+    text: content,
+  };
+}

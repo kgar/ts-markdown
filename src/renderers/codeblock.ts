@@ -76,3 +76,13 @@ function getCodeFenceClose(entry: CodeBlockEntry, options: RenderOptions) {
   );
   return fenceCharacter + fenceCharacter + fenceCharacter;
 }
+
+export function codeblock(
+  content: CodeBlockEntry['codeblock'],
+  options?: Omit<CodeBlockEntry, 'codeblock'>
+): MarkdownEntry {
+  return {
+    codeblock: content,
+    ...options,
+  };
+}
