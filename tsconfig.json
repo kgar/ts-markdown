@@ -22,8 +22,13 @@
           "title": "ts-markdown",
           "moduleRoot": true,
           "children": [
-            { "title": "Let's Go", "source": "cool.md" },
-            { "title": "Link Test", "source": "all-right.md" }
+            { "title": "Cookbook", "source": "cookbook.md" },
+            {
+              "title": "Extending ts-markdown",
+              "source": "extending-ts-markdown.md"
+            },
+            { "title": "FAQs", "source": "faqs.md" },
+            { "title": "Options", "source": "options.md" }
           ]
         }
       ]
