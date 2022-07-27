@@ -10,5 +10,29 @@
     "declaration": true
   },
   "lib": ["es2022"],
-  "exclude": ["node_modules", "dist", "out", "jest.config.ts", "**/*.test.ts"]
+  "exclude": ["node_modules", "dist", "out", "jest.config.ts", "**/*.test.ts"],
+  "typedocOptions": {
+    "out": "docs",
+    "name": "ts-markdown",
+    "readme": "pages/typedoc-README.md",
+    "entryPoints": ["src/index.ts"],
+    "exclude": "**/*+(.test).ts",
+    "pluginPages": {
+      "pages": [
+        {
+          "title": "ts-markdown",
+          "moduleRoot": true,
+          "children": [
+            { "title": "Cookbook", "source": "cookbook.md" },
+            {
+              "title": "Extending ts-markdown",
+              "source": "extending-ts-markdown.md"
+            },
+            { "title": "FAQs", "source": "faqs.md" },
+            { "title": "Options", "source": "options.md" }
+          ]
+        }
+      ]
+    }
+  }
 }

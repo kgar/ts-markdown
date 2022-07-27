@@ -320,4 +320,53 @@ describe('given a table entry', () => {
       );
     });
   });
+
+  describe('with external data having null and numeric cells', () => {
+    // Given some external data
+    const data = [
+      {
+        firstName: 'Fred',
+        lastName: 'Flintstone',
+        age: 100000000,
+      },
+      {
+        firstName: 'Saitama',
+        lastName: null,
+        age: 25,
+      },
+      {
+        firstName: 'Miles',
+        lastName: 'Morales',
+        age: 17,
+      },
+    ];
+
+    // Map the data to match your column names
+    const rows = data.map((x) => ({
+      'First Name': x.firstName,
+      'Last Name': x.lastName,
+      Age: x.age,
+    }));
+
+    const myTable = {
+      table: {
+        columns: [
+          { name: 'First Name' },
+          { name: 'Last Name' },
+          { name: 'Age' },
+        ],
+        rows: rows,
+      },
+    };
+
+    test('renders table with null values as empty strings and numbers as strings', () => {
+      expect(tsMarkdown([myTable])).toBe(
+        `| First Name | Last Name  | Age       |
+| ---------- | ---------- | --------- |
+| Fred       | Flintstone | 100000000 |
+| Saitama    |            | 25        |
+| Miles      | Morales    | 17        |`
+      );
+    });
+  });
 });
