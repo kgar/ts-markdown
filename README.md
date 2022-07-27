@@ -2,20 +2,13 @@
 
 An extensible TypeScript markdown generator that takes JSON and creates a markdown document.
 
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-  - [Example - Generating a Simple Document](#example---generating-a-simple-document)
-  - [Example - Using Markdown Helper Functions](#example---using-markdown-helper-functions)
-- [Options](#options)
-  - [Document-level Options](#document-level-options)
-  - [Entry-level Options](#entry-level-options)
-  - [Option Precedence: Entry-level > Document-level > Defaults](#option-precedence-entry-level--document-level--defaults)
-  - [More About Options](#more-about-options)
-- [Extending ts-markdown](#extending-ts-markdown)
-  - [A Simple Extension](#a-simple-extension)
-  - [More Involved Extension Example](#more-involved-extension-example)
-  - [Overriding an Existing Renderer](#overriding-an-existing-renderer)
-  - [Remarks on Extensibility](#remarks-on-extensibility)
+[**View the Docs**](https://kgar.github.io/ts-markdown/)
+
+---
+
+- [Quick Start](#quick-start)
+- [Extensibility](#extensibility)
+- [Compatibility](#compatibility)
 - [Why This Project?](#why-this-project)
 - [🙌 Credit](#-credit)
   - [Credit to json2md](#credit-to-json2md)
@@ -23,34 +16,27 @@ An extensible TypeScript markdown generator that takes JSON and creates a markdo
 - [🌏 Contribution Guidelines](#-contribution-guidelines)
 - [License](#license)
 
-## Getting Started
+## Quick Start
 
-To use **ts-markdown** in your project, run:
+Install **ts-markdown**:
 
 ```sh
 npm install ts-markdown
 # or "yarn add ts-markdown"
 ```
 
-## Usage
-
-**ts-markdown** is written in TypeScript. It works with node JS v16.x and higher. Earlier versions may also work, but it is not guaranteed.
-
-**ts-markdown** revolves around sending an array of "markdown entry" objects to the `tsMarkdown()` function.
-
-### Example - Generating a Simple Document
-
-Given this code:
+Generate some markdown:
 
 ```ts
 import { tsMarkdown } from 'ts-markdown';
 
-tsMarkdown([
+// Make markdown entries
+const entries = [
   {
     h4: 'Hello, world!',
   },
   {
-    blockquote: "Let's generate some markdown!",
+    blockquote: "Let's generate markdown!",
   },
   { p: 'Generating markdown from data can be simple. All you need are:' },
   {
@@ -62,7 +48,9 @@ tsMarkdown([
       },
     ],
   },
-]);
+];
+
+return tsMarkdown(entries); // returns the markdown document as a string
 ```
 
 And the result is:
@@ -70,7 +58,7 @@ And the result is:
 ```md
 #### Hello, world!
 
-> Let's generate some markdown!
+> Let's generate markdown!
 
 Generating markdown from data can be simple. All you need are:
 
@@ -79,361 +67,19 @@ Generating markdown from data can be simple. All you need are:
 3. and a place to run :checkered_flag:
 ```
 
-### Example - Using Markdown Helper Functions
+For more information about supported markdown elements, view the [type docs](https://kgar.github.io/ts-markdown/modules.html). All support markdown elements end with `Entry`, such as `LinkEntry`, `ImageEntry`, `UnorderedListEntry`, and so on.
 
-The same document from the previous example can be generated using **markdown helper functions**:
+For more examples of **generating markdown**, check out the [cookbook](https://kgar.github.io/ts-markdown/pages/cookbook.html).
 
-```ts
-import { blockquote, emoji, h4, ol, p, text, tsMarkdown } from 'ts-markdown';
+## Extensibility
 
-tsMarkdown([
-  h4('Hello, world!'),
-  blockquote("Let's generate some markdown!"),
-  p('Generating markdown from data can be simple. All you need are:'),
-  ol([
-    'objects',
-    'a function',
-    text(['and a place to run ', emoji('checkered_flag')]),
-  ]),
-]);
-```
+You can extend **ts-markdown** to render your own custom elements or even override existing renderers.
 
-## Options
+For more information on extending **ts-markdown**, see [Extending ts-markdown](https://kgar.github.io/ts-markdown/pages/extending-ts-markdown.html).
 
-**ts-markdown** has the following types of options:
+## Compatibility
 
-- **document-level**: options that apply to the entire document
-- **entry-level**: options that apply to a specific type of `MarkdownEntry`
-
-### Document-level Options
-
-Document-level options affect either a single entry type, a particular lifecycle event in document rendering, or some overarching aspect. Entry-specific options at the document-level are a convenient shortcut for applying your desired style to document rendering, reducing unnecessary props on your individual objects.
-
-You can specify options at the document-level by passing in a `RenderOptions` object when calling the `tsMarkdown()` function:
-
-```ts
-const options: RenderOptions = {
-  useH1Underlining: true,
-};
-
-tsMarkdown(myEntries, options);
-// 👆 H1 markdown will now have underlining whenever these options are passed into `tsMarkdown()`
-```
-
-> **Note**: We Have Defaults
->
-> Any options that you do not specify fall back to a default value, so you do not have to specify all options. You can pick and choose the ones you want to specify.
-
-### Entry-level Options
-
-Some markdown entries have their own entry-level options.
-
-For example, unordered lists have an option for which indicator to use:
-
-```ts
-const ulEntry: UnorderedListEntry = {
-  ul: ['Hello, world!', 'Goodbye, Moon Man!'],
-  indicator: '+',
-};
-
-tsMarkdown([ulEntry]);
-```
-
-The result is a list with items indicated by `+`:
-
-```
-+ Hello, world!
-+ Goodbye, Moon Man!
-```
-
-### Option Precedence: Entry-level > Document-level > Defaults
-
-> Entry-level settings, if specified, take precedence over all else.
->
-> Then, document-level settings are considered.
->
-> Otherwise, we use defaults.
-
-When specifying options, you may need to provide entry- and document-level options which conflict with each other.
-
-For example, I want all bolded text to use underscores `_`, except I want one entry to use asterisks `*`:
-
-```ts
-import { tsMarkdown } from './rendering';
-import { RenderOptions } from './rendering.types';
-import { MarkdownEntry } from './shared.types';
-
-const entry: MarkdownEntry = {
-  text: [
-    { bold: 'Note' },
-    ' - This ',
-    { bold: 'is' },
-    ' a ',
-    {
-      bold: 'sample',
-      // 👇 this is an entry-level option
-      indicator: '*',
-    },
-  ],
-};
-
-// 👇 these are document-level options
-const options: RenderOptions = {
-  boldIndicator: '_',
-};
-
-tsMarkdown([entry], options);
-```
-
-The rendered markdown is:
-
-```
-__Note__ - This __is__ a **sample**
-```
-
-### More About Options
-
-> API documentation is in the works. In the meantime, you can view the types for any of the markdown entries by visiting:
->
-> - [rendering.types.ts](https://github.com/kgar/ts-markdown/blob/main/src/rendering.types.ts)
-> - Any renderer ts file, such as [bold.ts](https://github.com/kgar/ts-markdown/blob/main/src/renderers/bold.ts)
-
-## Extending ts-markdown
-
-You can add your own custom markdown renderers into the mix.
-
-### A Simple Extension
-
-Let's make an extension which wraps around some text like `OHAI ${textHere}!`.
-
-First, let's make a custom render extension using a super-compact approach:
-
-```ts
-import { getRenderers } from './defaults';
-import { tsMarkdown } from './rendering';
-
-let entry = {
-  sayHelloTo: 'friend',
-};
-
-tsMarkdown([entry], {
-  renderers: getRenderers({
-    sayHelloTo: (entry: { sayHelloTo: string }) => {
-      return `OHAI ${entry.sayHelloTo}!`;
-    },
-  }),
-});
-```
-
-We get:
-
-```
-OHAI friend!
-```
-
-Here's a longer form where we declare types and assign more variables along the way:
-
-```ts
-import { getRenderers } from './defaults';
-import { tsMarkdown } from './rendering';
-import { MarkdownRenderer } from './rendering.types';
-
-type SayHelloToEntry = {
-  sayHelloTo: string;
-};
-
-const sayHelloToRenderer: MarkdownRenderer = (
-  entry: SayHelloToEntry,
-  options
-) => {
-  return `OHAI ${entry.sayHelloTo}!`;
-};
-
-const myCustomRenderers = { sayHelloTo: sayHelloToRenderer };
-
-const renderers = getRenderers(myCustomRenderers);
-
-let entry: SayHelloToEntry = {
-  sayHelloTo: 'friend',
-};
-
-tsMarkdown([entry], { renderers });
-```
-
-Let's break down the longer form:
-
-```ts
-import { getRenderers } from './defaults';
-import { tsMarkdown } from './rendering';
-import { MarkdownRenderer } from './rendering.types';
-
-// ✅ Declare a type for your entry.
-// The naming convention is to suffix your element name with "Entry", so:
-type SayHelloToEntry = {
-  sayHelloTo: string;
-  // 👆 This is the identifying property.
-  // All markdown entries have it.
-  // Unordered lists are identified with `ul`:
-  // { ul: myListItems }
-  //   👆
-  // When looking for a renderer, we will try to find it based on properties on the entry object 🤞
-};
-
-// ✅ Make a renderer of type `MarkdownRenderer` and return a string, whatever that string is.
-const sayHelloToRenderer: MarkdownRenderer = (
-  entry: SayHelloToEntry,
-  options
-  // 👆 Sometimes, you need access to the document-level options. Here they are!
-) => {
-  return `OHAI ${entry.sayHelloTo}!`;
-};
-
-// ✅ Create an object with all of your custom renderers to be used when creating markdown:
-const myCustomRenderers = { sayHelloTo: sayHelloToRenderer };
-
-// ✅ Get the standard set of renderers and add your custom renderers:
-const renderers = getRenderers(myCustomRenderers);
-
-// ✅ Make some data and generate some markdown!
-let entry: SayHelloToEntry = {
-  sayHelloTo: 'friend',
-};
-
-tsMarkdown([entry], { renderers });
-```
-
-### More Involved Extension Example
-
-Here's an example in TypeScript of adding an [Obsidian.md](https://obsidian.md/) [callout](https://help.obsidian.md/How+to/Use+callouts) renderer, which is truly the fanciest of blockquotes:
-
-```ts
-import {
-  MarkdownEntry,
-  MarkdownRenderer,
-  RenderOptions,
-  BlockquoteEntry,
-  renderEntries,
-  getRenderers,
-  tsMarkdown,
-} from 'ts-markdown';
-
-// Declare a type for your entry.
-type ObsidianCalloutEntry = {
-  callout: {
-    type: string;
-    title?: string;
-    content: MarkdownEntry | MarkdownEntry[];
-  };
-};
-
-// Create a MarkdownRenderer.
-const calloutRenderer: MarkdownRenderer = (
-  entry: ObsidianCalloutEntry,
-  options: RenderOptions
-) => {
-  let titleText = entry.callout.title ? ` ${entry.callout.title}` : '';
-
-  let content = Array.isArray(entry.callout.content)
-    ? entry.callout.content
-    : [entry.callout.content];
-
-  const blockquote: BlockquoteEntry = {
-    blockquote: [{ p: `[!${entry.callout.type}]${titleText}` }, ...content],
-  };
-
-  // For markdown elements that are block-level,
-  // 🚫 don't return just a string
-  // ✅ use the object return type as seen here.
-  return {
-    markdown: renderEntries([blockquote], options),
-    // This tells the markdown renderer to ensure
-    // there are 2 newlines between this element
-    // and other elements.
-    blockLevel: true,
-  };
-};
-
-// Using your custom callout
-const callout: ObsidianCalloutEntry = {
-  callout: {
-    type: 'tip',
-    title: 'Welcome, Friends',
-    content: [
-      {
-        h2: 'Content Creation',
-      },
-      {
-        p: 'Obsidian allows you to create content quickly and easily, while rendering a view of your content that is satisfying to behold.',
-      },
-    ],
-  },
-};
-
-// ts-markdown options are optional 😉
-const options = {
-  // Get the default renderers and pass in your own custom renderers
-  // with a key that matches the uniquely identifying property
-  // of your custom markdown entry.
-  renderers: getRenderers({ callout: calloutRenderer }),
-};
-
-tsMarkdown([callout], options);
-```
-
-This will render the following markdown:
-
-```md
-> [!tip] Welcome, Friends
->
-> ## Content Creation
->
-> Obsidian allows you to create content quickly and easily, while rendering a view of your content that is satisfying to behold.
-```
-
-How the callout is rendered in Obsidian:
-
-![](https://github.com/kgar/data-driven-markdown/blob/main/images/obsidian-callout-example.jpg)
-
-> **Note**: We reused existing renderers! :exploding_head:
->
-> In the above example, we were able to use the existing blockquote markdown renderer and add some extra functionality to it.
->
-> We gave it a new name and its own uniquely identifying property ("callout"), so it didn't override the existing blockquote renderer, so we're able to use both.
-
-### Overriding an Existing Renderer
-
-You can also completely override an existing renderer. For example, let's have bolded text wrapped in turtles 🐢:
-
-```ts
-import { getRenderers } from './defaults';
-import { tsMarkdown } from './rendering';
-
-let entry = {
-  bold: 'I can be a professional turtle if I want.',
-};
-
-tsMarkdown([entry], {
-  renderers: getRenderers({
-    bold: (entry: { bold: string }) => {
-      return `🐢🐢${entry.bold}🐢🐢`;
-    },
-  }),
-});
-```
-
-And the result is:
-
-```md
-🐢🐢I can be a professional turtle if I want.🐢🐢
-```
-
-> Enjoy the possibilities 🌌🐢
-
-### Remarks on Extensibility
-
-The current API involves settings things up in stages. It's not as brief as I would like, but it's well-suited for larger-scale document rendering where the same options are used for hundreds or thousands of calls to `tsMarkdown()`. It's largely designed so that other projects can pull in ts-markdown and thoroughly extend and customize it for their purposes, using multiple files and organizing the information in a way that fits their needs.
-
-If you have an idea 💡 for making this extensibility API leaner, cleaner, and easier to read, see [how to contribute](https://github.com/kgar/data-driven-markdown/blob/main/CONTRIBUTING.md).
+**ts-markdown** is written in TypeScript and node JS. It works with node JS v16.x and higher. Earlier versions may also work, but it is not guaranteed.
 
 ## Why This Project?
 
