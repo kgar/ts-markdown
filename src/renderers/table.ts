@@ -95,7 +95,7 @@ function getTableMarkdown(entry: TableEntry, options: RenderOptions) {
         .reduce<string[]>((prev, curr) => {
           let value = Array.isArray(curr) ? curr[i] : curr[columnName];
           if (value !== undefined) {
-            let result = getMarkdownString(value, options);
+            let result = renderCellText(value, options);
             if (typeof result === 'string') {
               prev.push(result);
             } else {
@@ -159,11 +159,27 @@ function buildDataRows(
 }
 
 function renderCellText(
-  value: string | TextEntry,
+  value: string | number | Date | boolean | TextEntry,
   options: RenderOptions
 ): string {
+  if (value === null || value === undefined) {
+    return '';
+  }
+
   if (typeof value === 'string') {
     return value;
+  }
+
+  if (typeof value === 'number') {
+    return value.toString();
+  }
+
+  if (value instanceof Date) {
+    return value.toISOString();
+  }
+
+  if (typeof value === 'boolean') {
+    return value.toString();
   }
 
   return renderEntries([value], options);
