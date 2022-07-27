@@ -1,5 +1,5 @@
 import { tsMarkdown } from '../rendering';
-import { TableEntry } from './table';
+import { table, TableEntry } from './table';
 
 describe('given a table entry', () => {
   describe('with columns and array-index rows', () => {
@@ -322,7 +322,6 @@ describe('given a table entry', () => {
   });
 
   describe('with external data having null and numeric cells', () => {
-    // Given some external data
     const data = [
       {
         firstName: 'Fred',
@@ -341,7 +340,6 @@ describe('given a table entry', () => {
       },
     ];
 
-    // Map the data to match your column names
     const rows = data.map((x) => ({
       'First Name': x.firstName,
       'Last Name': x.lastName,
@@ -360,6 +358,45 @@ describe('given a table entry', () => {
     };
 
     test('renders table with null values as empty strings and numbers as strings', () => {
+      expect(tsMarkdown([myTable])).toBe(
+        `| First Name | Last Name  | Age       |
+| ---------- | ---------- | --------- |
+| Fred       | Flintstone | 100000000 |
+| Saitama    |            | 25        |
+| Miles      | Morales    | 17        |`
+      );
+    });
+  });
+
+  describe('with fields that differ from the column names', () => {
+    const data = [
+      {
+        firstName: 'Fred',
+        lastName: 'Flintstone',
+        age: 100000000,
+      },
+      {
+        firstName: 'Saitama',
+        lastName: null,
+        age: 25,
+      },
+      {
+        firstName: 'Miles',
+        lastName: 'Morales',
+        age: 17,
+      },
+    ];
+
+    const myTable = table({
+      columns: [
+        { name: 'First Name', field: 'firstName' },
+        { name: 'Last Name', field: 'lastName' },
+        { name: 'Age', field: 'age' },
+      ],
+      rows: data,
+    });
+
+    test('renders tables with specified column names, using data from specified fields', () => {
       expect(tsMarkdown([myTable])).toBe(
         `| First Name | Last Name  | Age       |
 | ---------- | ---------- | --------- |

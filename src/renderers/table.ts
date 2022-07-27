@@ -19,7 +19,7 @@ export interface TableEntry extends MarkdownEntry {
     /**
      * The row data for the table.
      */
-    rows: (TableRow | (TextEntry | string)[])[];
+    rows: (TableRow | TableCell[])[];
   };
 
   /**
@@ -38,6 +38,12 @@ export type TableColumn = {
   name: string;
 
   /**
+   * The property which the column should use when pulling data from a given row.
+   * If not specified, then `name` will be used as the field.
+   */
+  field?: string;
+
+  /**
    * The horizontal alignment of the entire column.
    */
   align?: 'left' | 'center' | 'right';
@@ -51,8 +57,10 @@ export type TableRow = {
    * A cell of table data.
    * Each key in this object represents a column header name, case-sensitively.
    */
-  [key: string]: string | TextEntry;
+  [key: string]: TableCell;
 };
+
+export type TableCell = string | TextEntry | number | Date | boolean | null;
 
 /**
  * The renderer for table entries.
@@ -87,13 +95,14 @@ function getTableMarkdown(entry: TableEntry, options: RenderOptions) {
   let cellWidths = [];
   for (let i = 0; i < columnCount; i++) {
     let column = entry.table.columns[i];
-    let columnName = getColumnName(column);
 
     let columnCellTexts = [
       getColumnHeaderTextLength(entry.table.columns[i]),
       ...entry.table.rows
         .reduce<string[]>((prev, curr) => {
-          let value = Array.isArray(curr) ? curr[i] : curr[columnName];
+          let value = Array.isArray(curr)
+            ? curr[i]
+            : curr[getDataRowPropertyName(column)];
           if (value !== undefined) {
             let result = renderCellText(value, options);
             if (typeof result === 'string') {
@@ -119,14 +128,14 @@ function getTableMarkdown(entry: TableEntry, options: RenderOptions) {
   return [
     buildHeaderRow(entry, cellWidths, entry.table.columns),
     buildDividerRow(cellWidths, entry.table.columns),
-    ...buildDataRows(entry, cellWidths, columnNames, options),
+    ...buildDataRows(entry, cellWidths, entry.table.columns, options),
   ].join('\n');
 }
 
 function buildDataRows(
   entry: TableEntry,
   cellWidths: number[],
-  columnNames: string[],
+  columns: (string | TableColumn)[],
   options: RenderOptions
 ) {
   return entry.table.rows.map((row) => {
@@ -142,11 +151,11 @@ function buildDataRows(
         ),
       ];
     } else if (typeof row === 'object') {
-      cells = columnNames.reduce<string[]>(
+      cells = columns.reduce<string[]>(
         (prev, curr, index) =>
           prev.concat(
             padAlign(
-              renderCellText(row[curr], options) ?? '',
+              renderCellText(row[getDataRowPropertyName(curr)], options) ?? '',
               cellWidths[index],
               entry.table.columns[index]
             )
@@ -159,7 +168,7 @@ function buildDataRows(
 }
 
 function renderCellText(
-  value: string | number | Date | boolean | TextEntry,
+  value: string | number | Date | boolean | TextEntry | null,
   options: RenderOptions
 ): string {
   if (value === null || value === undefined) {
@@ -283,4 +292,8 @@ export function table(
     table: settings,
     ...options,
   };
+}
+
+function getDataRowPropertyName(curr: string | TableColumn) {
+  return typeof curr === 'string' ? curr : curr.field ?? curr.name;
 }
