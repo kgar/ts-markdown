@@ -12,6 +12,10 @@ This is useful for those who are generating markdown for a specific type of mark
 
 If you would like an example of how to extend **ts-markdown** that is not covered here, feel free to [open a new github issue](https://github.com/kgar/ts-markdown/issues/new) requesting the type of extensibility example you'd like to see.
 
+[Back to Top](#)
+
+<br />
+
 ## A Simple Extension
 
 Let's make an extension which wraps around some text like `OHAI ${textHere}!`.
@@ -112,6 +116,10 @@ let entry: SayHelloToEntry = {
 tsMarkdown([entry], { renderers });
 ```
 
+[Back to Top](#)
+
+<br />
+
 ## More Involved Extension Example
 
 Here's an example in TypeScript of adding an [Obsidian.md](https://obsidian.md/) [callout](https://help.obsidian.md/How+to/Use+callouts) renderer, which is truly the fanciest of blockquotes:
@@ -210,6 +218,10 @@ How the callout is rendered in Obsidian:
 >
 > We gave it a new name and its own uniquely identifying property ("callout"), so it didn't override the existing blockquote renderer, so we're able to use both.
 
+[Back to Top](#)
+
+<br />
+
 ## Overriding an Existing Renderer
 
 You can also completely override an existing renderer. For example, let's have bolded text wrapped in turtles 🐢:
@@ -239,8 +251,14 @@ And the result is:
 
 > Enjoy the possibilities 🌌🐢
 
+[Back to Top](#)
+
+<br />
+
 ## Remarks on Extensibility
 
 The current API involves settings things up in stages. It's not as brief as I would like, but it's well-suited for larger-scale document rendering where the same options are used for hundreds or thousands of calls to `tsMarkdown()`. It's largely designed so that other projects can pull in ts-markdown and thoroughly extend and customize it for their purposes, using multiple files and organizing the information in a way that fits their needs.
 
 If you have an idea 💡 for making this extensibility API leaner, cleaner, and easier to read, see [how to contribute](https://github.com/kgar/data-driven-markdown/blob/main/CONTRIBUTING.md).
+
+[Back to Top](#)
