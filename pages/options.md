@@ -13,6 +13,10 @@
 
 If there is additional options information you'd like to see here which wouldn't fit in FAQs, the cookbook, or the type docs, [open a new GitHub issue](https://github.com/kgar/ts-markdown/issues/new) requesting the type of options documentation you'd like to see.
 
+[Back to Top](#)
+
+<br />
+
 ## Document-level Options
 
 Document-level options affect either a single entry type, a particular lifecycle event in document rendering, or some overarching aspect. Entry-specific options at the document-level are a convenient shortcut for applying your desired style to document rendering, reducing unnecessary props on your individual objects.
@@ -31,6 +35,10 @@ tsMarkdown(myEntries, options);
 > **Note**: We Have Defaults
 >
 > Any options that you do not specify fall back to a default value, so you do not have to specify all options. You can pick and choose the ones you want to specify.
+
+[Back to Top](#)
+
+<br />
 
 ## Entry-level Options
 
@@ -53,6 +61,10 @@ The result is a list with items indicated by `+`:
 + Hello, world!
 + Goodbye, Moon Man!
 ```
+
+[Back to Top](#)
+
+<br />
 
 ## Option Precedence: Entry-level > Document-level > Defaults
 
@@ -99,6 +111,12 @@ The rendered markdown is:
 __Note__ - This __is__ a **sample**
 ```
 
+[Back to Top](#)
+
+<br />
+
 ## More About Options
 
 > For a full list of document-level and entry-level options, see the type documents for `RenderOptions` and the individual entry types, such as `BoldEntry`.
+
+[Back to Top](#)

@@ -30,6 +30,10 @@ let entries = [{ h1: 'Documentation' }, { p: 'My paragraph' }];
 let result = tsMarkdown(entries);
 ```
 
+[Back to Top](#)
+
+<br />
+
 ## Multiple Emphases on Text
 
 Recipe:
@@ -52,6 +56,10 @@ Result:
 Hello, ==***world***==!
 ```
 
+[Back to Top](#)
+
+<br />
+
 ## Paragraph with Rich Text
 
 Recipe:
@@ -73,6 +81,10 @@ Result:
 ```
 Here is some **rich** *text*.
 ```
+
+[Back to Top](#)
+
+<br />
 
 ## Table with Object Rows
 
@@ -122,6 +134,10 @@ Result:
 | Column 1 stuff  | Column 2 stuff  |
 | More col1 stuff | More col2 stuff |
 ```
+
+[Back to Top](#)
+
+<br />
 
 ## Table with Object Rows, Using External Data
 
@@ -179,6 +195,10 @@ Result:
 | Miles      | Morales    | 17        |
 ```
 
+[Back to Top](#)
+
+<br />
+
 ## Table with Tuple Rows
 
 Recipe:
@@ -215,3 +235,5 @@ Result:
 | Column 1 stuff  | Column 2 stuff  |
 | More col1 stuff | More col2 stuff |
 ```
+
+[Back to Top](#)
