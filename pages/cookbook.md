@@ -1,13 +1,18 @@
 - [Introduction](#introduction)
+  - [How the Recipes and Results Work](#how-the-recipes-and-results-work)
 - [Multiple Emphases on Text](#multiple-emphases-on-text)
 - [Paragraph with Rich Text](#paragraph-with-rich-text)
-- [Table with Tuple Rows](#table-with-tuple-rows)
 - [Table with Object Rows](#table-with-object-rows)
 - [Table with Object Rows, Using External Data](#table-with-object-rows-using-external-data)
+- [Table with Tuple Rows](#table-with-tuple-rows)
 
 ## Introduction
 
-Below are examples and recipes for using **ts-markdown**, where we show a **recipe** and then a **result**. Assume that for each case, we are passing the resulting entry or entries into the `tsMarkdown()` function, as follows:
+Below are examples and recipes for using **ts-markdown**, where we show a **recipe** and then a **result**. If you would like an example of how to do something in this cookbook, [open a new github issue](https://github.com/kgar/ts-markdown/issues/new) requesting the type of cookbook example you'd like to see here.
+
+### How the Recipes and Results Work
+
+Assume that for each case, we are passing the resulting entry or entries into the `tsMarkdown()` function, as follows:
 
 For single-entry examples, we would wrap it in an array before rendering markdown:
 
@@ -67,43 +72,6 @@ Result:
 
 ```
 Here is some **rich** *text*.
-```
-
-## Table with Tuple Rows
-
-Recipe:
-
-```ts
-const table: TableEntry = {
-  table: {
-    columns: [{ name: 'Column 1' }, { name: 'Column 2' }],
-    rows: [
-      ['Column 1 stuff', 'Column 2 stuff'],
-      ['More col1 stuff', 'More col2 stuff'],
-    ],
-  },
-};
-```
-
-Recipe (with helper functions):
-
-```ts
-const myTable = table({
-  columns: [{ name: 'Column 1' }, { name: 'Column 2' }],
-  rows: [
-    ['Column 1 stuff', 'Column 2 stuff'],
-    ['More col1 stuff', 'More col2 stuff'],
-  ],
-});
-```
-
-Result:
-
-```
-| Column 1        | Column 2        |
-| --------------- | --------------- |
-| Column 1 stuff  | Column 2 stuff  |
-| More col1 stuff | More col2 stuff |
 ```
 
 ## Table with Object Rows
@@ -209,4 +177,41 @@ Result:
 | Fred       | Flintstone | 100000000 |
 | Saitama    |            | 25        |
 | Miles      | Morales    | 17        |
+```
+
+## Table with Tuple Rows
+
+Recipe:
+
+```ts
+const table: TableEntry = {
+  table: {
+    columns: [{ name: 'Column 1' }, { name: 'Column 2' }],
+    rows: [
+      ['Column 1 stuff', 'Column 2 stuff'],
+      ['More col1 stuff', 'More col2 stuff'],
+    ],
+  },
+};
+```
+
+Recipe (with helper functions):
+
+```ts
+const myTable = table({
+  columns: [{ name: 'Column 1' }, { name: 'Column 2' }],
+  rows: [
+    ['Column 1 stuff', 'Column 2 stuff'],
+    ['More col1 stuff', 'More col2 stuff'],
+  ],
+});
+```
+
+Result:
+
+```
+| Column 1        | Column 2        |
+| --------------- | --------------- |
+| Column 1 stuff  | Column 2 stuff  |
+| More col1 stuff | More col2 stuff |
 ```

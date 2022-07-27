@@ -1,12 +1,17 @@
+- [Introduction](#introduction)
+- [Document-level Options](#document-level-options)
+- [Entry-level Options](#entry-level-options)
+- [Option Precedence: Entry-level > Document-level > Defaults](#option-precedence-entry-level--document-level--defaults)
+- [More About Options](#more-about-options)
+
+## Introduction
+
 **ts-markdown** has the following types of options:
 
 - **document-level**: options that apply to the entire document
 - **entry-level**: options that apply to a specific type of `MarkdownEntry`
 
-- [Document-level Options](#document-level-options)
-- [Entry-level Options](#entry-level-options)
-- [Option Precedence: Entry-level > Document-level > Defaults](#option-precedence-entry-level--document-level--defaults)
-- [More About Options](#more-about-options)
+If there is additional options information you'd like to see here which wouldn't fit in FAQs, the cookbook, or the type docs, [open a new GitHub issue](https://github.com/kgar/ts-markdown/issues/new) requesting the type of options documentation you'd like to see.
 
 ## Document-level Options
 

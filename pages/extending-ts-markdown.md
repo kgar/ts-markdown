@@ -1,9 +1,16 @@
-You can add your own custom markdown renderers and override existing renderers.
-
+- [Introduction](#introduction)
 - [A Simple Extension](#a-simple-extension)
 - [More Involved Extension Example](#more-involved-extension-example)
 - [Overriding an Existing Renderer](#overriding-an-existing-renderer)
 - [Remarks on Extensibility](#remarks-on-extensibility)
+
+## Introduction
+
+You can add your own custom markdown renderers and override existing renderers.
+
+This is useful for those who are generating markdown for a specific type of markdown engine, such as [Obsidian.md](https://www.obsidian.md).
+
+If you would like an example of how to extend **ts-markdown** that is not covered here, feel free to [open a new github issue](https://github.com/kgar/ts-markdown/issues/new) requesting the type of extensibility example you'd like to see.
 
 ## A Simple Extension
 
