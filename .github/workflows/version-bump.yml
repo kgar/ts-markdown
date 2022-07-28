@@ -15,10 +15,6 @@ jobs:
   apply-version:
     runs-on: ubuntu-latest
     steps:
-      - name: Configure email
-        run: git config --global user.email ""
-      - name: Configure name
-        run: git config --global user.name "Your Name"
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Node
@@ -28,11 +24,10 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm ci
       - name: Create Version Branch
-        run: git checkout -b 
-        
+        run: git checkout -b $BRANCH_NAME
       - run: npm version ${{ github.event.inputs.version }} --git-tag-version false
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        # env:
+        #  NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: git commit -a -m "Bumped version to ${{ github.event.inputs.version }}"
       - name: Push branch to remote
         run: git push -u origin $BRANCH_NAME
