@@ -32,7 +32,7 @@ jobs:
       - run: npm version ${{ github.event.inputs.version }} --git-tag-version false
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-      - run: git commit -m "Bumped version to ${{ github.event.inputs.version }}"
+      - run: git commit -a -m "Bumped version to ${{ github.event.inputs.version }}"
       - name: Push branch to remote
         run: git push -u origin $BRANCH_NAME
       - name: Create Pull Request
