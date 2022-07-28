@@ -60,7 +60,7 @@ jobs:
           # Add `Signed-off-by` line by the committer at the end of the commit log message.
           # signoff: # optional
           # The pull request branch name.
-          branch: ${{ BRANCH_NAME }}
+          branch: ${{ env.BRANCH_NAME }}
           # Delete the `branch` when closing pull requests, and when undeleted after merging. Recommend `true`.
 
           delete-branch: true
