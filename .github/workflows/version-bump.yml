@@ -7,10 +7,6 @@ on:
         type: string
         description: Target version
         required: true
-      beta:
-        type: boolean
-        description: Tag as beta
-        required: true
         
 env:
   BRANCH_NAME: version-bump-${{ github.event.inputs.version }}
@@ -30,9 +26,6 @@ jobs:
       - name: Create Version Branch
         run: git checkout -b $BRANCH_NAME
       - run: npm version ${{ github.event.inputs.version }}
-        if: github.event.inputs.beta == false
-      - run: npm version ${{ github.event.inputs.version }} --tag beta
-        if: github.event.inputs.beta == true
       - name: Push branch to remote
         run: git push -u origin $BRANCH_NAME
       - name: Create Pull Request
