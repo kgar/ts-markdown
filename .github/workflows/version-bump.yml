@@ -1,0 +1,91 @@
+name: Bump ts-markdown Package Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: The target version.
+        required: true
+      beta:
+        type: boolean
+        description: Whether to tag the package as a beta version.
+        required: true
+        
+env:
+  BRANCH_NAME: version-bump-${{ github.event.inputs.version }}
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - name: Create Version Branch
+        run: git checkout -b $BRANCH_NAME
+      - run: npm version ${{ github.event.inputs.version }}
+        if: ${{ github.event.inputs.beta == false }}
+      - run: npm version ${{ github.event.inputs.version }} --tag beta
+        if: ${{ github.event.inputs.beta == true }}
+      - name: Push branch to remote
+        run: git push -u origin $BRANCH_NAME
+      - name: Create Pull Request
+        # You may pin to the exact commit or the version.
+        # uses: peter-evans/create-pull-request@923ad837f191474af6b1721408744feb989a4c27
+        uses: peter-evans/create-pull-request@v4.0.4
+        with:
+          # GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)
+          # token: # optional, default is ${{ github.token }}
+          # Relative path under $GITHUB_WORKSPACE to the repository. Defaults to $GITHUB_WORKSPACE.
+
+          # path: # optional
+          # A comma or newline-separated list of file paths to commit. Paths should follow git's pathspec syntax. Defaults to adding all new and modified files.
+
+          # add-paths: # optional
+          # The message to use when committing changes.
+          # commit-message: Version Bump to $BRANCH_NAME
+          # The committer name and email address in the format `Display Name <email@address.com>`. Defaults to the GitHub Actions bot user.
+
+          # committer: # optional, default is GitHub <noreply@github.com>
+          # The author name and email address in the format `Display Name <email@address.com>`. Defaults to the user who triggered the workflow run.
+
+          # author: # optional, default is ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          # Add `Signed-off-by` line by the committer at the end of the commit log message.
+          # signoff: # optional
+          # The pull request branch name.
+          branch: $BRANCH_NAME
+          # Delete the `branch` when closing pull requests, and when undeleted after merging. Recommend `true`.
+
+          delete-branch: true
+          # The branch suffix type when using the alternative branching strategy.
+          # branch-suffix: # optional
+          # The pull request base branch. Defaults to the branch checked out in the workflow.
+
+          base: main
+          # A fork of the checked out parent repository to which the pull request branch will be pushed. e.g. `owner/repo-fork`. The pull request will be created to merge the fork's branch into the parent's base.
+
+          # push-to-fork: # optional
+          # The title of the pull request.
+          title: Version Bump to ${{ github.event.inputs.version }}
+          # The body of the pull request.
+          body: Bumped version of ts-markdown to ${{ github.event.inputs.version }}
+          # A comma or newline separated list of labels.
+          # labels: # optional
+          # A comma or newline separated list of assignees (GitHub usernames).
+          assignees: kgar
+          # A comma or newline separated list of reviewers (GitHub usernames) to request a review from.
+          reviewers: kgar
+          # A comma or newline separated list of GitHub teams to request a review from. Note that a `repo` scoped Personal Access Token (PAT) may be required.
+
+          # team-reviewers: # optional
+          # The number of the milestone to associate the pull request with.
+          # milestone: # optional
+          # Create a draft pull request. It is not possible to change draft status after creation except through the web interface
+          # draft: # optional
+      
