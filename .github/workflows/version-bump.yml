@@ -16,7 +16,7 @@ env:
   BRANCH_NAME: version-bump-${{ github.event.inputs.version }}
 
 jobs:
-  publish-npm:
+  apply-version:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
