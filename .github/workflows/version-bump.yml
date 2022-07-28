@@ -78,9 +78,9 @@ jobs:
           # A comma or newline separated list of labels.
           # labels: # optional
           # A comma or newline separated list of assignees (GitHub usernames).
-          # assignees: kgar
+          assignees: kgar
           # A comma or newline separated list of reviewers (GitHub usernames) to request a review from.
-          # reviewers: kgar
+          reviewers: kgar
           # A comma or newline separated list of GitHub teams to request a review from. Note that a `repo` scoped Personal Access Token (PAT) may be required.
 
           # team-reviewers: # optional
