@@ -40,13 +40,9 @@ export const textRenderer: MarkdownRenderer = (
   options: RenderOptions
 ) => {
   if ('text' in entry) {
-    if (Array.isArray(entry.text)) {
-      return entry.text
-        .map((textSegment) => getMarkdownString(textSegment, options))
-        .join('');
-    }
-
-    return getMarkdownString(entry.text, options);
+    return (Array.isArray(entry.text) ? entry.text : [entry.text])
+      .map((textSegment) => getMarkdownString(textSegment, options))
+      .join('');
   }
 
   throw new Error('Entry is not a text entry. Unable to render.');

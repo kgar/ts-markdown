@@ -1,4 +1,4 @@
-import { getMarkdownString, renderEntries } from '../rendering';
+import { renderEntries } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import {
   InlineTypes,

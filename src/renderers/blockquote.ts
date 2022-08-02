@@ -34,9 +34,10 @@ export const blockquoteRenderer: MarkdownRenderer = (
 ) => {
   if ('blockquote' in entry) {
     return {
-      markdown: Array.isArray(entry.blockquote)
-        ? renderEntries(entry.blockquote, { ...options, prefix: '> ' })
-        : '> ' + getMarkdownString(entry.blockquote, options),
+      markdown: renderEntries(
+        Array.isArray(entry.blockquote) ? entry.blockquote : [entry.blockquote],
+        { ...options, prefix: '> ' }
+      ),
       blockLevel: true,
     };
   }

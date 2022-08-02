@@ -184,7 +184,7 @@ describe('given a blockquote entry', () => {
         blockquote: 9007199254740991n,
       },
       {
-        blockquote: new Date('11/05/1955'),
+        blockquote: new Date('1955-11-05'),
       },
     ];
 
@@ -202,7 +202,7 @@ describe('given a blockquote entry', () => {
 
 > 9007199254740991
 
-> 1955-11-05T06:00:00.000Z`
+> 1955-11-05T00:00:00.000Z`
       );
     });
   });

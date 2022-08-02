@@ -31,16 +31,12 @@ export const olRenderer: MarkdownRenderer = (
   if ('ol' in entry) {
     let markdown = entry.ol
       .map((li, index) => {
-        if (Array.isArray(li)) {
-          return renderEntries(li, {
-            ...options,
-            prefix: (liIndex) => {
-              return liIndex === 0 ? `${index + 1}. ` : '    ';
-            },
-          });
-        }
-
-        return `${index + 1}. ${getMarkdownString(li, options)}`;
+        return renderEntries(Array.isArray(li) ? li : [li], {
+          ...options,
+          prefix: (liIndex) => {
+            return liIndex === 0 ? `${index + 1}. ` : '    ';
+          },
+        });
       })
       .join('\n');
 
