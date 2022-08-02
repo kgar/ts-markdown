@@ -1,5 +1,7 @@
 import { UnorderedListItemIndicator } from './renderers/ul';
-import { MarkdownEntry } from './shared.types';
+import { MarkdownEntry, SupportedPrimitive } from './shared.types';
+
+export type MarkdownEntryOrPrimitive = MarkdownEntry | SupportedPrimitive;
 
 /**
  * A function providing prefix text to the markdown rendering code.
@@ -7,7 +9,7 @@ import { MarkdownEntry } from './shared.types';
  * Often used when differentiating between parent and nested child content, such as with adding block elements to a list item.
  */
 export interface RenderPrefixFunction {
-  (index: number, entry?: MarkdownEntry): string;
+  (index: number, entry?: MarkdownEntryOrPrimitive): string;
 }
 
 /**
@@ -83,7 +85,7 @@ export interface RenderOptions {
     /**
      * The originally-submitted markdown entries.
      */
-    data: MarkdownEntry[],
+    data: MarkdownEntryOrPrimitive[],
 
     /**
      * The document after initial rendering but before footnotes are applied.
@@ -104,7 +106,7 @@ export interface RenderOptions {
     /**
      * The originally-submitted markdown entries.
      */
-    data: MarkdownEntry[],
+    data: MarkdownEntryOrPrimitive[],
 
     /**
      * The document after initial rendering and after footnotes are applied.

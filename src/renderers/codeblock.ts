@@ -86,7 +86,7 @@ function getCodeFenceClose(entry: CodeBlockEntry, options: RenderOptions) {
 export function codeblock(
   content: CodeBlockEntry['codeblock'],
   options?: Omit<CodeBlockEntry, 'codeblock'>
-): MarkdownEntry {
+): CodeBlockEntry {
   return {
     codeblock: content,
     ...options,

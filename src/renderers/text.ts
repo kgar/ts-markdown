@@ -1,6 +1,10 @@
 import { getMarkdownString } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
-import { RichTextEntry, InlineTypes } from '../shared.types';
+import {
+  RichTextEntry,
+  InlineTypes,
+  SupportedPrimitive,
+} from '../shared.types';
 import { CodeEntry } from './code';
 import { ImageEntry } from './img';
 import { LinkEntry } from './link';
@@ -13,7 +17,15 @@ export interface TextEntry extends InlineTypes {
   /**
    * The inline text contents and identifying property for the renderer.
    */
-  text: string | (RichTextEntry | LinkEntry | ImageEntry | CodeEntry)[];
+  text:
+    | SupportedPrimitive
+    | (
+        | RichTextEntry
+        | LinkEntry
+        | ImageEntry
+        | CodeEntry
+        | SupportedPrimitive
+      )[];
 }
 
 /**
@@ -28,12 +40,8 @@ export const textRenderer: MarkdownRenderer = (
   options: RenderOptions
 ) => {
   if ('text' in entry) {
-    if (typeof entry.text === 'string') {
-      return entry.text;
-    }
-
-    return entry.text
-      .map((entry) => getMarkdownString(entry, options))
+    return (Array.isArray(entry.text) ? entry.text : [entry.text])
+      .map((textSegment) => getMarkdownString(textSegment, options))
       .join('');
   }
 

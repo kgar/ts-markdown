@@ -19,7 +19,15 @@ import { linkRenderer } from './renderers/link';
 import { olRenderer } from './renderers/ol';
 import { pRenderer } from './renderers/p';
 import { strikethroughRenderer } from './renderers/strikethrough';
-import { stringRenderer } from './renderers/string';
+import {
+  bigintRenderer,
+  booleanRenderer,
+  dateRenderer,
+  nullRenderer,
+  numberRenderer,
+  stringRenderer,
+  undefinedRenderer,
+} from './renderers/primitives';
 import { subRenderer } from './renderers/sub';
 import { supRenderer } from './renderers/sup';
 import { tableRenderer } from './renderers/table';
@@ -38,6 +46,12 @@ import { Renderers } from './rendering.types';
 export function getRenderers(customRenderers: Renderers = {}): Renderers {
   return {
     string: stringRenderer,
+    null: nullRenderer,
+    undefined: undefinedRenderer,
+    boolean: booleanRenderer,
+    number: numberRenderer,
+    bigint: bigintRenderer,
+    date: dateRenderer,
     h1: h1Renderer,
     h2: h2Renderer,
     h3: h3Renderer,
