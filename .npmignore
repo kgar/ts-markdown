@@ -131,6 +131,7 @@ dist
 
 # Local files that should be excluded
 docs
+custom-docs
 pages
 images
 guides
@@ -141,3 +142,4 @@ jest.config.ts
 .vscode
 src
 tsconfig.json
+rollup.config.js

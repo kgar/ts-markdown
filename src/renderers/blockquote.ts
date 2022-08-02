@@ -1,4 +1,4 @@
-import { getMarkdownString, renderEntries } from '../rendering';
+import { renderEntries } from '../rendering';
 import {
   MarkdownEntryOrPrimitive,
   MarkdownRenderer,

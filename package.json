@@ -7,14 +7,16 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc && npm run build-web",
+    "build-web": "rimraf dist.browser && rollup -c && uglifyjs dist.browser/ts-markdown.js --output dist.browser/ts-markdown.min.js --compress --mangle",
     "build-watch": "tsc --watch",
     "test": "jest",
     "test-watch": "jest --watch",
     "prettier": "prettier --write src",
     "prepare": "husky install",
     "refresh-index": "npx barrelsby --delete --location top --exclude \"dist\" \"test.ts\" \"jest.config\" --directory ./src",
-    "refresh-docs": "typedoc"
+    "copy-custom-docs": "npx copyfiles --error --verbose --flat \"custom-docs/**\" \"docs\"",
+    "refresh-docs": "typedoc && npm run copy-custom-docs"
   },
   "keywords": [
     "markdown",
@@ -31,15 +33,19 @@
   "license": "MIT",
   "devDependencies": {
     "@knodes/typedoc-plugin-pages": "^0.23.1",
+    "@rollup/plugin-typescript": "^8.3.4",
     "@types/jest": "^28.1.4",
     "husky": "^8.0.0",
     "jest": "^28.1.2",
     "prettier": "^2.7.1",
     "pretty-quick": "^3.1.3",
     "rimraf": "^3.0.2",
+    "rollup": "^2.77.2",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.2",
+    "tslib": "^2.4.0",
     "typedoc": "^0.23.9",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "uglify-js": "^3.16.3"
   }
 }
