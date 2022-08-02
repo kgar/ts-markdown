@@ -162,4 +162,48 @@ describe('given a blockquote entry', () => {
       expect(tsMarkdown([input])).toBe(output);
     });
   });
+
+  describe('with primitive values', () => {
+    const blockquotes: BlockquoteEntry[] = [
+      {
+        blockquote: 'Hello, world!',
+      },
+      {
+        blockquote: null,
+      },
+      {
+        blockquote: undefined,
+      },
+      {
+        blockquote: true,
+      },
+      {
+        blockquote: 8675309,
+      },
+      {
+        blockquote: 9007199254740991n,
+      },
+      {
+        blockquote: new Date('11/05/1955'),
+      },
+    ];
+
+    test('renders expected markdown', () => {
+      expect(tsMarkdown(blockquotes)).toBe(
+        `> Hello, world!
+
+> 
+
+> 
+
+> true
+
+> 8675309
+
+> 9007199254740991
+
+> 1955-11-05T06:00:00.000Z`
+      );
+    });
+  });
 });

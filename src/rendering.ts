@@ -4,6 +4,7 @@ import {
   RenderOptions,
   MarkdownRenderPrefix,
   MarkdownRenderResult,
+  MarkdownEntryOrPrimitive,
 } from './rendering.types';
 import { MarkdownEntry } from './shared.types';
 
@@ -14,7 +15,10 @@ import { MarkdownEntry } from './shared.types';
  * @param options Document-level options which can affect broad aspects of the rendering process.
  * @returns A string of markdown.
  */
-export function tsMarkdown(data: MarkdownEntry[], options?: RenderOptions) {
+export function tsMarkdown(
+  data: MarkdownEntryOrPrimitive[],
+  options?: RenderOptions
+) {
   options ??= {
     prefix: '',
   };
@@ -69,7 +73,7 @@ function correctInvalidMidWordBoldAndItalics(document: string): string {
  * @returns a string of markdown content.
  */
 export function renderEntries(
-  data: MarkdownEntry[],
+  data: MarkdownEntryOrPrimitive[],
   options: RenderOptions
 ): string {
   let prefix = options.prefix ?? '';
@@ -110,8 +114,9 @@ export function renderEntries(
   return textStack;
 }
 
-function isAppendable(entry: MarkdownEntry) {
+function isAppendable(entry: MarkdownEntryOrPrimitive) {
   return (
+    !!entry &&
     typeof entry === 'object' &&
     'append' in entry &&
     typeof 'append' === 'string'
@@ -126,20 +131,38 @@ function isAppendable(entry: MarkdownEntry) {
  * @returns
  */
 export function getMarkdownString(
-  entry: MarkdownEntry | string,
+  entry: MarkdownEntryOrPrimitive,
   options: RenderOptions
 ): MarkdownRenderResult {
-  if (entry === null || entry === undefined) {
-    return '';
+  if (entry === null && options.renderers?.null) {
+    return options.renderers.null(entry, options);
   }
 
-  const isStringEntry = typeof entry === 'string';
+  if (entry === undefined && options.renderers?.null) {
+    return options.renderers.undefined(entry, options);
+  }
 
-  if (isStringEntry && options.renderers?.string) {
+  if (typeof entry === 'string' && options.renderers?.string) {
     return options.renderers.string(entry, options);
   }
 
-  if (!isStringEntry) {
+  if (typeof entry === 'boolean' && options.renderers?.boolean) {
+    return options.renderers.boolean(entry, options);
+  }
+
+  if (typeof entry === 'number' && options.renderers?.number) {
+    return options.renderers.number(entry, options);
+  }
+
+  if (typeof entry === 'bigint' && options.renderers?.bigint) {
+    return options.renderers.bigint(entry, options);
+  }
+
+  if (entry instanceof Date && options.renderers?.date) {
+    return options.renderers.date(entry, options);
+  }
+
+  if (typeof entry === 'object') {
     for (let key in entry) {
       let renderer = options.renderers?.[key];
       if (renderer) {
@@ -154,7 +177,7 @@ export function getMarkdownString(
 function renderPrefix(
   prefix: MarkdownRenderPrefix,
   index: number,
-  entry?: MarkdownEntry
+  entry?: MarkdownEntryOrPrimitive
 ) {
   if (typeof prefix === 'string') {
     return prefix;

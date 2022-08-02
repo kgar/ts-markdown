@@ -1,5 +1,9 @@
 import { getMarkdownString, renderEntries } from '../rendering';
-import { MarkdownRenderer, RenderOptions } from '../rendering.types';
+import {
+  MarkdownEntryOrPrimitive,
+  MarkdownRenderer,
+  RenderOptions,
+} from '../rendering.types';
 import { MarkdownEntry } from '../shared.types';
 
 /**
@@ -9,7 +13,7 @@ export interface BlockquoteEntry extends MarkdownEntry {
   /**
    * The blockquote contents and identifying property for the renderer.
    */
-  blockquote: string | MarkdownEntry[];
+  blockquote: MarkdownEntryOrPrimitive | MarkdownEntryOrPrimitive[];
 
   /**
    * Option which will arbitrarily append a string immediately below the blockquote, ignoring block-level settings.
@@ -30,10 +34,9 @@ export const blockquoteRenderer: MarkdownRenderer = (
 ) => {
   if ('blockquote' in entry) {
     return {
-      markdown:
-        typeof entry.blockquote === 'string'
-          ? '> ' + getMarkdownString(entry.blockquote, options)
-          : renderEntries(entry.blockquote, { ...options, prefix: '> ' }),
+      markdown: Array.isArray(entry.blockquote)
+        ? renderEntries(entry.blockquote, { ...options, prefix: '> ' })
+        : '> ' + getMarkdownString(entry.blockquote, options),
       blockLevel: true,
     };
   }

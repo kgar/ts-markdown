@@ -1,6 +1,11 @@
 import { getMarkdownString, renderEntries } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
-import { MarkdownEntry } from '../shared.types';
+import {
+  InlineTypes,
+  MarkdownEntry,
+  SupportedPrimitive,
+  RichTextEntry,
+} from '../shared.types';
 import { TextEntry } from './text';
 
 /**
@@ -60,7 +65,7 @@ export type TableRow = {
   [key: string]: TableCell;
 };
 
-export type TableCell = string | TextEntry | number | Date | boolean | null;
+export type TableCell = RichTextEntry | SupportedPrimitive;
 
 /**
  * The renderer for table entries.
@@ -168,29 +173,9 @@ function buildDataRows(
 }
 
 function renderCellText(
-  value: string | number | Date | boolean | TextEntry | null,
+  value: RichTextEntry | SupportedPrimitive,
   options: RenderOptions
 ): string {
-  if (value === null || value === undefined) {
-    return '';
-  }
-
-  if (typeof value === 'string') {
-    return value;
-  }
-
-  if (typeof value === 'number') {
-    return value.toString();
-  }
-
-  if (value instanceof Date) {
-    return value.toISOString();
-  }
-
-  if (typeof value === 'boolean') {
-    return value.toString();
-  }
-
   return renderEntries([value], options);
 }
 

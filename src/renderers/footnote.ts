@@ -1,5 +1,9 @@
 import { renderEntries } from '../rendering';
-import { MarkdownRenderer, RenderOptions } from '../rendering.types';
+import {
+  MarkdownEntryOrPrimitive,
+  MarkdownRenderer,
+  RenderOptions,
+} from '../rendering.types';
 import { MarkdownEntry, RichTextEntry } from '../shared.types';
 
 /**
@@ -19,7 +23,7 @@ export interface FootnoteEntry extends MarkdownEntry, RichTextEntry {
     /**
      * The footnote content to appear at the bottom of the document.
      */
-    content: MarkdownEntry | MarkdownEntry[];
+    content: MarkdownEntryOrPrimitive | MarkdownEntryOrPrimitive[];
   };
 }
 
@@ -50,7 +54,7 @@ export const footnoteRenderer: MarkdownRenderer = (
  * @returns The updated document.
  */
 export function appendFootnotes(
-  data: MarkdownEntry[],
+  data: MarkdownEntryOrPrimitive[],
   document: string,
   options: RenderOptions
 ) {

@@ -17,3 +17,14 @@ export interface InlineTypes {}
  * Valid list item content, to be used in an ordered or unordered list.
  */
 export type ListItemEntry = MarkdownEntry | MarkdownEntry[];
+
+/**
+ * The JavaScript primitives which are supported in **ts-markdown**.
+ */
+export type SupportedPrimitive =
+  | string
+  | null
+  | undefined
+  | Date
+  | number
+  | bigint;

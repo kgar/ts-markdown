@@ -24,7 +24,7 @@ export * from './renderers/link';
 export * from './renderers/ol';
 export * from './renderers/p';
 export * from './renderers/strikethrough';
-export * from './renderers/string';
+export * from './renderers/primitives';
 export * from './renderers/sub';
 export * from './renderers/sup';
 export * from './renderers/table';
