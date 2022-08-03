@@ -6,6 +6,25 @@
   let examples = [
     defaultExampleOption,
     {
+      group: 'Blockquote',
+      text: 'Example',
+      json: `[
+  {
+    "blockquote": "Hello, world!"
+  }
+]`,
+    },
+    {
+      group: 'Blockquote',
+      text: 'Example with options',
+      json: `[
+  {
+    "blockquote": "Hello, world!",
+    "append": "^in-obdisian-this-is-a-block-id"
+  }
+]`,
+    },
+    {
       group: 'Bold',
       text: 'Example',
       json: `[
@@ -23,6 +42,335 @@
     "indicator": "_"
   }
 ]`,
+    },
+    {
+      group: 'Code',
+      text: 'Example',
+      json: `[
+  {
+    "code": "Hello, world!"
+  }
+]`,
+    },
+    {
+      group: 'Codeblock',
+      text: 'Example',
+      json: `[
+  {
+    "codeblock": "const hello = 'hello';\\nconst world = 'world';\\nconsole.error(hello + ', ' + world + '!')\\n\\n// Note: In JSON, you have to stringify multi-line content. In regular JavaScript or TypeScript, you can use the template \`\` style string 👍"
+  }
+]
+`,
+    },
+    {
+      group: 'Codeblock',
+      text: 'Example with Options',
+      json: `[
+  {
+    "codeblock": "const hello = 'hello';\\nconst world = 'world';\\nconsole.error(hello + ', ' + world + '!')\\n\\n// Note: In JSON, you have to stringify multi-line content. In regular JavaScript or TypeScript, you can use the template \`\` style string 👍",
+    "language": "js",
+    "fenced": true
+  }
+]
+`,
+    },
+    {
+      group: 'Description List',
+      text: 'Example',
+      json: `[
+  {
+    "dl": [
+      {
+        "dt": "First Term"
+      },
+      {
+        "dd": "This is the definition of the first term."
+      }
+    ]
+  }
+]`,
+    },
+    {
+      group: 'Description List',
+      text: 'Example with options',
+      json: `[
+  {
+    "dl": [
+      {
+        "dt": "First Term"
+      },
+      {
+        "dd": "This is the definition of the first term."
+      }
+    ],
+    "html": true
+  }
+]
+`,
+    },
+    {
+      group: 'Emoji',
+      text: 'Example',
+      json: `[
+  {
+    "emoji": "joy"
+  }
+]`,
+    },
+    {
+      group: 'Footnote',
+      text: 'Example',
+      json: `[
+  {
+    "footnote": {
+      "id": "1",
+      "content": "This is a footnote."
+    }
+  }
+]
+`,
+    },
+    {
+      group: 'Footnote',
+      text: 'Example with Multi-line Content',
+      json: `[
+  {
+    "footnote": {
+      "id": "bignote",
+      "content": [
+        { "p": "Here's one with multiple paragraphs and code." },
+        { "p": "Indent paragraphs to include them in the footnote." },
+        { "p": { "text": [
+  {
+     "code": "{ my code }" }] 
+    }
+},
+        { "p": "Add as many paragraphs as you like." }
+      ]
+    }
+  }
+]`,
+    },
+    {
+      group: 'Footnote',
+      text: 'Example in context',
+      json: `[
+  {
+    "h1": "Doing the Work"
+  },
+  {
+    "p": "We use footnotes in the midst of other text, typically. In the next paragraph, we'll see a footnote in action."
+  },
+  {
+    "p": [
+      "Let's do the work",
+      {
+        "footnote": {
+          "id": "1",
+          "content": "Is it really work, though?"
+        }
+      },
+      "!"
+    ]
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H1 Example',
+      json: `[
+  {
+    "h1": "Hello, world!"
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H1 Example with options',
+      json: `[
+  {
+    "h1": "Hello, world!", "underline": true, "id": "a-greeting"
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H2 Example',
+      json: `[
+  {
+    "h2": "Hello, world!"
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H2 Example with options',
+      json: `[
+  {
+    "h2": "Hello, world!", "underline": true, "id": "a-second-greeting"
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H3 Example',
+      json: `[
+  {
+    "h3": "Hello, world!"
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H3 Example with options',
+      json: `[
+  {
+    "h3": "Hello, world!", "id": "a-third-greeting"
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H4 Example',
+      json: `[
+  {
+    "h4": "Hello, world!"
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H4 Example with options',
+      json: `[
+  {
+    "h4": "Hello, world!", "id": "a-fourth-greeting"
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H5 Example',
+      json: `[
+  {
+    "h5": "Hello, world!"
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H5 Example with options',
+      json: `[
+  {
+    "h5": "Hello, world!", "id": "a-fifth-greeting"
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H6 Example',
+      json: `[
+  {
+    "h6": "Hello, world!"
+  }
+]`,
+    },
+    {
+      group: 'Headers',
+      text: 'H6 Example with options',
+      json: `[
+  {
+    "h6": "Hello, world!", "id": "a-sixth-greeting"
+  }
+]`,
+    },
+    {
+      group: 'Highlight',
+      text: 'Example',
+      json: `[
+  {
+    "highlight": "Hello, highlighted text!"
+  }
+]`,
+    },
+    {
+      group: 'Horizontal Rule',
+      text: 'Example',
+      json: `[
+  {
+    "hr": true
+  }
+]`,
+    },
+    {
+      group: 'Image',
+      text: 'Example',
+      json: `[
+  {
+    "img": {
+      "source": "https://via.placeholder.com/25"
+    }
+  }
+]
+`,
+    },
+    {
+      group: 'Image',
+      text: 'Example with options',
+      json: `[
+  {
+    "img": {
+      "source": "https://via.placeholder.com/25",
+      "alt": "A 25x25 placeholder image",
+      "title": "Here is a handy placeholder image"
+    }
+  }
+]
+`,
+    },
+    {
+      group: 'Italic',
+      text: 'Example',
+      json: `[
+  {
+    "italic": "Hello, world!"
+  }
+]`,
+    },
+    {
+      group: 'Italic',
+      text: 'Example with options',
+      json: `[
+  {
+    "italic": "Hello, world!",
+    "indicator": "_"
+  }
+]
+`,
+    },
+    {
+      group: '',
+      text: '',
+      json: ``,
+    },
+    {
+      group: '',
+      text: '',
+      json: ``,
+    },
+    {
+      group: '',
+      text: '',
+      json: ``,
+    },
+    {
+      group: '',
+      text: '',
+      json: ``,
+    },
+    {
+      group: '',
+      text: '',
+      json: ``,
     },
   ];
 
@@ -54,7 +402,10 @@
     .addEventListener('change', function (event) {
       let optionValue = event.target.options[event.target.selectedIndex].value;
 
-      if (optionValue === defaultExampleOption.text) {
+      if (
+        optionValue ===
+        createOptionValue(defaultExampleOption.group, defaultExampleOption.text)
+      ) {
         return;
       }
 
@@ -153,6 +504,6 @@
   }
 
   function createOptionValue(groupName, text) {
-    return groupName + '-' + text;
+    return (groupName || '') + '-' + text;
   }
 })();
