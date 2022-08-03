@@ -1,4 +1,6 @@
 (function () {
+  initTheme();
+
   let defaultExampleOption = {
     text: 'Choose an example to view it below',
   };
@@ -348,33 +350,349 @@
 `,
     },
     {
-      group: '',
-      text: '',
-      json: ``,
+      group: 'Link',
+      text: 'Example',
+      json: `[
+  {
+    "link": { "href": "https://www.google.com" }
+  }
+]`,
     },
     {
-      group: '',
-      text: '',
-      json: ``,
+      group: 'Link',
+      text: 'Example with options',
+      json: `[
+  {
+    "link": {
+      "href": "https://www.google.com",
+      "text": "Google",
+      "title": "Let Me Google That For You..."
+    }
+  }
+]`,
     },
     {
-      group: '',
-      text: '',
-      json: ``,
+      group: 'Ordered List',
+      text: 'Example',
+      json: `[
+  {
+    "ol": ["Hello,", "world!"]
+  }
+]`,
     },
     {
-      group: '',
-      text: '',
-      json: ``,
+      group: 'Ordered List',
+      text: 'Example with nesting',
+      json: `[
+  {
+    "ol": [
+      [
+        "Test",
+        {
+          "ul": ["Nest", "Nest Test"]
+        }
+      ],
+      [
+        "This is",
+        {
+          "ul": [{ "text": ["A ", { "bold": "test" }] }]
+        }
+      ]
+    ]
+  }
+]`,
     },
     {
-      group: '',
-      text: '',
-      json: ``,
+      group: 'Ordered List',
+      text: 'Example with rich text',
+      json: `[
+  {
+    "ol": [
+      {
+        "text": [
+          "This text is ",
+          { "bold": { "italic": { "highlight": "so rich!" } } }
+        ]
+      },
+      "And this text is contentedly unadorned"
+    ]
+  }
+]
+`,
+    },
+    {
+      group: 'Paragraph',
+      text: 'Example',
+      json: `[
+  {
+    "p": "Hello, world!"
+  }
+]`,
+    },
+    {
+      group: 'Paragraph',
+      text: 'Example with multiple paragraphs',
+      json: `[
+  {
+    "p": "Hello, world!"
+  },
+  {
+    "p": "Let's make some markdown."
+  },
+  {
+    "p": [
+      {
+        "text": [
+          "This paragraph has ",
+          { "bold": { "italic": { "highlight": "rich text." } } }
+        ]
+      }
+    ]
+  }
+]`,
+    },
+    {
+      group: 'Strikethrough',
+      text: 'Example',
+      json: `[
+  {
+    "strikethrough": "Goodbye for now... 😭💔"
+  }
+]
+`,
+    },
+    {
+      group: 'Subscript',
+      text: 'Example',
+      json: `[
+  {
+    "sub": "test"
+  }
+]`,
+    },
+    {
+      group: 'Subscript',
+      text: 'Example with options',
+      json: `[
+  {
+    "sub": "test",
+    "html": true
+  }
+]`,
+    },
+    {
+      group: 'Superscript',
+      text: 'Example',
+      json: `[
+  {
+    "sup": "test"
+  }
+]`,
+    },
+    {
+      group: 'Superscript',
+      text: 'Example with options',
+      json: `[
+  {
+    "sup": "test",
+    "html": true
+  }
+]`,
+    },
+    {
+      group: 'Table',
+      text: 'Example',
+      json: `[
+  {
+    "table": {
+      "columns": ["Col1", "Col2"],
+      "rows": [
+        ["Row1", "Row2"],
+        ["Row3", "Row4 is longer"]
+      ]
+    }
+  }
+]`,
+    },
+    {
+      group: 'Table',
+      text: 'Example with row objects',
+      json: `[
+  {
+    "table": {
+      "columns": ["Col1", "Col2"],
+      "rows": [
+        { "Col1": "Row1", "Col2": "Row2" },
+        { "Col1": "Row3", "Col2": "Row4 is longer" }
+      ]
+    }
+  }
+]`,
+    },
+    {
+      group: 'Table',
+      text: 'Example with varying alignments',
+      json: `[
+  {
+    "table": {
+      "columns": [
+        { "name": "Col1", "align": "center" },
+        { "name": "Col2", "align": "right" }
+      ],
+      "rows": [
+        { "Col1": "Row1 is longer", "Col2": "Row2" },
+        { "Col1": "Row3", "Col2": "Row4 is longer" }
+      ]
+    }
+  }
+]`,
+    },
+    {
+      group: 'Table',
+      text: 'Example with various other elements',
+      json: `[
+  {
+    "table": {
+      "columns": ["Col1"],
+      "rows": [
+        [{ "text": [{ "bold": "Row1" }, " works"] }],
+        [{ "text": [{ "italic": "Row2" }, " works"] }],
+        [{ "text": ["Yes, ", { "strikethrough": "Row3" }, " works"] }],
+        [{ "text": [{ "highlight": "Row4" }, " works"] }],
+        [
+          {
+            "text": [
+              { "bold": { "italic": "Row5" } },
+              " ",
+              { "italic": "works" }
+            ]
+          }
+        ],
+        [
+          {
+            "text": [
+              { "strikethrough": { "bold": { "italic": "Row6" } } },
+              " ",
+              { "code": "works" }
+            ]
+          }
+        ],
+        [
+          {
+            "text": [
+              {
+                "highlight": {
+                  "bold": {
+                    "italic": "Row7"
+                  }
+                }
+              },
+              " ",
+              {
+                "code": "works like a charm!"
+              }
+            ]
+          }
+        ]
+      ]
+    }
+  }
+]`,
+    },
+    {
+      group: 'Task List',
+      text: 'Example',
+      json: `[
+  {
+    "tasks": [
+      "Task 1",
+      "Task 2"
+    ]
+  }
+]`,
+    },
+    {
+      group: 'Task List',
+      text: 'Example with options',
+      json: `[
+  {
+    "tasks": [
+      "Test 1",
+      { "task": "Test 2" },
+      { "task": "Test 3", "completed": false },
+      { "task": "Test 4", "completed": true },
+      { "bold": { "italic": "Get it done" } },
+      { "task": { "bold": { "italic": "Got it done" } }, "completed": true }
+    ]
+  }
+]`,
+    },
+    {
+      group: 'Text',
+      text: 'Example with rich text',
+      json: `[
+  {
+    "text": [
+      { "bold": { "highlight": "Hello, world!" } },
+      " Nice day for learning something new 🌟"
+    ]
+  }
+]`,
+    },
+    {
+      group: 'Unordered List',
+      text: 'Example',
+      json: `[
+  {
+    "ul": ["Hello, world!", "Check out this unordered list!"]
+  }
+]`,
+    },
+    {
+      group: 'Unordered List',
+      text: 'Example with nesting',
+      json: `[
+  {
+    "ul": [
+      [
+        "Given",
+        {
+          "ul": [
+            "a list with",
+            [
+              "numerous layers which",
+              {
+                "ul": ["run deep,", "we must pass our tests"]
+              }
+            ]
+          ]
+        }
+      ],
+      ["in order to", { "ul": ["meet"] }],
+      ["expectations!"]
+    ]
+  }
+]`,
     },
   ];
-
   initExamples(examples);
+
+  function initTheme() {
+    let theme =
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+
+    setTheme(theme);
+
+    document
+      .getElementById('color-scheme-toggler')
+      .addEventListener('click', function (event) {
+        let newTheme = event.target.getAttribute('data-other-theme');
+        setTheme(newTheme);
+      });
+  }
 
   function render() {
     let outputEl = document.getElementById('ts-markdown-output');
@@ -505,5 +823,17 @@
 
   function createOptionValue(groupName, text) {
     return (groupName || '') + '-' + text;
+  }
+
+  function setTheme(theme) {
+    let otherMode = theme === 'dark' ? 'light' : 'dark';
+    let modeButton = document.getElementById('color-scheme-toggler');
+    modeButton.textContent =
+      (otherMode === 'light' ? '🌞' : '🌛') +
+      ' Switch to ' +
+      otherMode +
+      ' mode';
+    modeButton.setAttribute('data-other-theme', otherMode);
+    document.documentElement.setAttribute('data-theme', theme);
   }
 })();

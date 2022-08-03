@@ -15,7 +15,7 @@
     "prettier": "prettier --write src",
     "prepare": "husky install",
     "refresh-index": "npx barrelsby --delete --location top --exclude \"dist\" \"test.ts\" \"jest.config\" --directory ./src",
-    "copy-custom-docs": "npx copyfiles --error --verbose --flat \"custom-docs/**\" \"docs\"",
+    "copy-custom-docs": "npx copyfiles --error --verbose --flat \"custom-docs/playground.js\" \"custom-docs/playground.css\" \"custom-docs/playground.html\" \"custom-docs/ts-markdown.min.js\" \"docs\"",
     "refresh-docs": "typedoc && npm run copy-custom-docs"
   },
   "keywords": [
