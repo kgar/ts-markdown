@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ts-markdown Playground</title>
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/highlight.css" />
+    <link rel="stylesheet" href="playground.css" />
+  </head>
+  <body>
+    <header>
+      <h1>ts-markdown Playground</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="https://github.com/kgar/ts-markdown/">Source on Github</a>
+          </li>
+          <li><a href="https://kgar.github.io/ts-markdown/">Docs</a></li>
+          <li>
+            <a href="https://kgar.github.io/ts-markdown/pages/cookbook.html"
+              >Cookbook</a
+            >
+          </li>
+          <li>
+            <a href="https://kgar.github.io/ts-markdown/pages/faqs.html"
+              >FAQs</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <button id="color-scheme-toggler">...</button>
+    </header>
+    <section class="examples-selection-section">
+      <h2>Examples</h2>
+      <select name="examples-selector" id="examples-selector"></select>
+    </section>
+    <section class="input-section">
+      <h2>JSON</h2>
+      <textarea name="input" id="ts-markdown-json-input" class="input">
+[
+  {
+    "h4": "Hello, world!"
+  },
+  {
+    "blockquote": "Let's generate markdown!"
+  },
+  { "p": "Generating markdown from data can be simple. All you need are:" },
+  {
+    "ol": [
+      "objects",
+      "a function",
+      {
+        "text": ["and a place to run ", { "emoji": "checkered_flag" }]
+      }
+    ]
+  }
+]
+</textarea
+      >
+    </section>
+    <section class="output-section">
+      <h2>Markdown</h2>
+      <textarea
+        name="output"
+        id="ts-markdown-output"
+        class="output"
+        readonly
+      ></textarea>
+    </section>
+    <section class="options-section">
+      <fieldset class="options">
+        <legend>Document-Level Options</legend>
+        <p>
+          <label for="unordered-list-item-indicator">List Style</label>
+          <select
+            name="unordered-list-item-indicator"
+            id="unordered-list-item-indicator"
+          >
+            <option></option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="+">+</option>
+          </select>
+        </p>
+        <p>
+          <label for="use-h1-underlining">Underline h1</label>
+          <select name="use-h1-underlining" id="use-h1-underlining">
+            <option></option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </p>
+        <p>
+          <label for="use-h2-underlining">Underline h2</label>
+          <select name="use-h2-underlining" id="use-h2-underlining">
+            <option></option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </p>
+
+        <p>
+          <label for="use-subscript-html">Subscript HTML</label>
+          <select name="use-subscript-html" id="use-subscript-html">
+            <option></option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </p>
+        <p>
+          <label for="use-superscript-html">Superscript HTML</label>
+          <select name="use-superscript-html" id="use-superscript-html">
+            <option></option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </p>
+        <p>
+          <label for="use-description-list-html">Description List HTML</label>
+          <select
+            name="use-description-list-html"
+            id="use-description-list-html"
+          >
+            <option></option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </p>
+        <p>
+          <label for="use-codeblock-fencing">Codeblock Fencing</label>
+          <select name="use-codeblock-fencing" id="use-codeblock-fencing">
+            <option></option>
+            <option value="true">Yes (use default indicator)</option>
+            <option value="`">`</option>
+            <option value="~">~</option>
+            <option value="false">No</option>
+          </select>
+        </p>
+        <p>
+          <label for="bold-indicator">Bold Indicator</label>
+          <select name="bold-indicator" id="bold-indicator">
+            <option></option>
+            <option value="*">*</option>
+            <option value="_">_</option>
+          </select>
+        </p>
+        <p>
+          <label for="italic-indicator">Italic Indicator</label>
+          <select name="italic-indicator" id="italic-indicator">
+            <option></option>
+            <option value="*">*</option>
+            <option value="_">_</option>
+          </select>
+        </p>
+      </fieldset>
+    </section>
+
+    <!-- TODO: Switch to unpkg when available -->
+    <script defer src="ts-markdown.min.js"></script>
+    <script defer src="playground.js"></script>
+  </body>
+</html>
