@@ -2,7 +2,7 @@
 
 An extensible TypeScript markdown generator that takes JSON and creates a markdown document.
 
-[**View the Docs**](https://kgar.github.io/ts-markdown/)
+[📖 Docs](https://kgar.github.io/ts-markdown/) | [🎮 Playground (Live Demo)](https://kgar.github.io/ts-markdown/playground.html)
 
 ---
 

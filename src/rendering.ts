@@ -6,7 +6,6 @@ import {
   MarkdownRenderResult,
   MarkdownEntryOrPrimitive,
 } from './rendering.types';
-import { MarkdownEntry } from './shared.types';
 
 /**
  * The main entrypoint into rendering documents in **ts-markdown**.
