@@ -8,5 +8,5 @@ export default {
     format: 'iife',
     name: 'tsMarkdown',
   },
-  plugins: [typescript()],
+  plugins: [typescript({ tsconfig: 'tsconfig.browser.json' })],
 };
