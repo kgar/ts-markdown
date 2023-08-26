@@ -8,3 +8,10 @@
 1. Generate release notes and add any extra notes for personalization
 1. Publish the release
    - This will trigger the github action [Publish to NPM](https://github.com/kgar/ts-markdown/actions/workflows/npm-publish.yml) and put the latest out there
+1. Do a web build of the scripts and copy over `ts-markdown.js` to `custom-docs`
+1. Run the [Refresh Docs](https://github.com/kgar/ts-markdown/actions/workflows/refresh-docs.yml) github action
+
+### To Do
+
+- [ ] Automate the web script build of `ts-markdown.js` and the copy operation into `custom-docs`
+- [ ] Roll this automated action into the "Refresh Docs" github action
