@@ -1,12 +1,10 @@
 import { renderEntries } from '../rendering';
 import { MarkdownRenderer, RenderOptions } from '../rendering.types';
 import {
-  InlineTypes,
   MarkdownEntry,
   SupportedPrimitive,
   RichTextEntry,
 } from '../shared.types';
-import { TextEntry } from './text';
 
 /**
  * A markdown entry for generating tables.
@@ -31,6 +29,23 @@ export interface TableEntry extends MarkdownEntry {
    * Option which will arbitrarily append a string immediately below the table, ignoring block-level settings.
    */
   append?: string;
+
+  /**
+   * Function to replace pipes in a cell's content, which is necessary to avoid breaking the table layout.
+   * @defaultValue Function which replaces pipe characters with the entity "&#124;".
+   */
+  pipeReplacer?: (content: string) => string;
+
+  /**
+   * Determines whether the "prefix" specified via RenderOptions is applied to cell values or not. If set to true,
+   * every data cell (excluding table headers and the separator row) will have the prefix prepended. If set to false,
+   * then the prefix will not be included in the cells.
+   *
+   * In any case, the prefix will be prepended to every row of the table (including header and separator rows).
+   *
+   * @defaultValue true
+   */
+  prefixCellValues?: boolean;
 }
 
 /**
@@ -89,7 +104,7 @@ export const tableRenderer: MarkdownRenderer = (
 };
 
 function getTableMarkdown(entry: TableEntry, options: RenderOptions) {
-  escapePipes(entry);
+  escapePipes(entry, entry.pipeReplacer);
   let columnCount = entry.table.columns.length;
   let columnNames = entry.table.columns.reduce<string[]>(
     (prev, curr) => prev.concat(typeof curr === 'string' ? curr : curr.name),
@@ -109,7 +124,7 @@ function getTableMarkdown(entry: TableEntry, options: RenderOptions) {
             ? curr[i]
             : curr[getDataRowPropertyName(column)];
           if (value !== undefined) {
-            let result = renderCellText(value, options);
+            let result = renderCellText(value, options, entry.prefixCellValues);
             if (typeof result === 'string') {
               prev.push(result);
             } else {
@@ -149,7 +164,7 @@ function buildDataRows(
       cells = [
         ...row.map((cell, index) =>
           padAlign(
-            renderCellText(cell, options),
+            renderCellText(cell, options, entry.prefixCellValues),
             cellWidths[index],
             entry.table.columns[index]
           )
@@ -160,7 +175,11 @@ function buildDataRows(
         (prev, curr, index) =>
           prev.concat(
             padAlign(
-              renderCellText(row[getDataRowPropertyName(curr)], options) ?? '',
+              renderCellText(
+                row[getDataRowPropertyName(curr)],
+                options,
+                entry.prefixCellValues
+              ) ?? '',
               cellWidths[index],
               entry.table.columns[index]
             )
@@ -174,9 +193,13 @@ function buildDataRows(
 
 function renderCellText(
   value: RichTextEntry | SupportedPrimitive,
-  options: RenderOptions
+  options: RenderOptions,
+  prefixCellValues = true
 ): string {
-  return renderEntries([value], options);
+  return renderEntries([value], {
+    ...options,
+    prefix: prefixCellValues ? options.prefix : '',
+  });
 }
 
 function padAlign(
@@ -248,21 +271,28 @@ function getColumnHeaderTextLength(column: string | TableColumn) {
   return typeof column === 'string' ? column.length : column.name.length;
 }
 
-function escapePipes<T>(target: T): T {
+function defaultPipeReplacer(content: string) {
+  return content.replaceAll('|', '&#124;');
+}
+
+function escapePipes<T>(
+  target: T,
+  pipeReplacer: (content: string) => string = defaultPipeReplacer
+): T {
   if (typeof target === 'string') {
-    return target.replaceAll('|', '&#124;') as unknown as T;
+    return pipeReplacer(target) as unknown as T;
   }
 
   if (Array.isArray(target)) {
     for (let i = 0; i < target.length; i++) {
-      target[i] = escapePipes(target[i]);
+      target[i] = escapePipes(target[i], pipeReplacer);
     }
   }
 
   if (typeof target === 'object' && target !== null) {
     let assignable = target as Record<string, any>;
     for (let key of Object.keys(assignable)) {
-      assignable[key] = escapePipes(assignable[key]);
+      assignable[key] = escapePipes(assignable[key], pipeReplacer);
     }
   }
 

@@ -165,6 +165,29 @@ describe('given a table entry', () => {
 | Row&#124;3 | Row&#124;4 |`
       );
     });
+
+    test('uses custom pipeReplacer function', () => {
+      expect(
+        tsMarkdown([
+          {
+            table: {
+              columns: ['Col|1', 'Col|2'],
+              rows: [
+                ['Link', '[[Path/to/note.md|Display Text]]'],
+                ['Row|3', 'Row|4'],
+              ],
+            },
+            pipeReplacer: (content: string) =>
+              content.replace(/(?<!\\)\|/g, '\\|'),
+          },
+        ])
+      ).toBe(
+        `| Col\\|1 | Col\\|2                            |
+| ------ | --------------------------------- |
+| Link   | [[Path/to/note.md\\|Display Text]] |
+| Row\\|3 | Row\\|4                            |`
+      );
+    });
   });
 
   describe('with rich row text', () => {
@@ -235,6 +258,24 @@ describe('given a table entry', () => {
         `| Col1                       |
 | -------------------------- |
 | **Row1&#124;&#124;** works |`
+      );
+    });
+
+    test('renders a markdown table with rich row text and escaped pipes, using a custom pipeReplacer function', () => {
+      expect(
+        tsMarkdown([
+          {
+            table: {
+              columns: ['Col1'],
+              rows: [[{ text: [{ bold: 'Row1||' }, ' works'] }]],
+            },
+            pipeReplacer: (content: string) => content.replace('|', '<PIPE>'),
+          },
+        ])
+      ).toBe(
+        `| Col1                       |
+| -------------------------- |
+| **Row1<PIPE><PIPE>** works |`
       );
     });
   });
@@ -404,6 +445,47 @@ describe('given a table entry', () => {
 | Saitama    |            | 25        |
 | Miles      | Morales    | 17        |`
       );
+    });
+  });
+
+  describe('with prefixCellValues option set', () => {
+    test.each([[undefined], [true]])(
+      'applies prefix to cell values when prefixCellValues = %s',
+      (prefixCellValues) => {
+        expect(
+          tsMarkdown([
+            {
+              blockquote: {
+                table: {
+                  columns: ['Col1', 'Col2'],
+                  rows: [['Row 1-Left', 'Row 1-Right']],
+                },
+                prefixCellValues,
+              },
+            },
+          ])
+        ).toBe(`> | Col1         | Col2          |
+> | ------------ | ------------- |
+> | > Row 1-Left | > Row 1-Right |`);
+      }
+    );
+
+    test('does not prefix cell values when prefixCellValues = false', () => {
+      expect(
+        tsMarkdown([
+          {
+            blockquote: {
+              table: {
+                columns: ['Col1', 'Col2'],
+                rows: [['Row 1-Left', 'Row 1-Right']],
+              },
+              prefixCellValues: false,
+            },
+          },
+        ])
+      ).toBe(`> | Col1       | Col2        |
+> | ---------- | ----------- |
+> | Row 1-Left | Row 1-Right |`);
     });
   });
 });
