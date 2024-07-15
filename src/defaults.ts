@@ -5,6 +5,7 @@ import { codeblockRenderer } from './renderers/codeblock';
 import { dlRenderer } from './renderers/dl';
 import { emojiRenderer } from './renderers/emoji';
 import { footnoteRenderer } from './renderers/footnote';
+import { frontmatter, frontmatterRenderer } from './renderers/frontmatter';
 import { h1Renderer } from './renderers/h1';
 import { h2Renderer } from './renderers/h2';
 import { h3Renderer } from './renderers/h3';
@@ -18,7 +19,6 @@ import { italicRenderer } from './renderers/italic';
 import { linkRenderer } from './renderers/link';
 import { olRenderer } from './renderers/ol';
 import { pRenderer } from './renderers/p';
-import { strikethroughRenderer } from './renderers/strikethrough';
 import {
   bigintRenderer,
   booleanRenderer,
@@ -28,6 +28,7 @@ import {
   stringRenderer,
   undefinedRenderer,
 } from './renderers/primitives';
+import { strikethroughRenderer } from './renderers/strikethrough';
 import { subRenderer } from './renderers/sub';
 import { supRenderer } from './renderers/sup';
 import { tableRenderer } from './renderers/table';
@@ -79,6 +80,7 @@ export function getRenderers(customRenderers: Renderers = {}): Renderers {
     tasks: tasksRenderer,
     text: textRenderer,
     ul: ulRenderer,
+    frontmatter: frontmatterRenderer,
     ...customRenderers,
   };
 }
