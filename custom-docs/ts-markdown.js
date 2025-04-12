@@ -1,4 +1,4 @@
-var tsMarkdown = (function (exports) {
+var tsMarkdown = (function (exports, yaml) {
   'use strict';
 
   /**
@@ -426,6 +426,29 @@ var tsMarkdown = (function (exports) {
     return {
       emoji: content,
       ...options,
+    };
+  }
+
+  /**
+   * Renderer for frontmatter entries
+   *
+   * @param entry the frontmatter object entry
+   * @param options
+   * @returns
+   */
+  const frontmatterRenderer = (entry) => {
+    if ('frontmatter' in entry) {
+      const frontmatterText = yaml.stringify(entry.frontmatter);
+      return {
+        markdown: `---\n${frontmatterText}---`,
+        blockLevel: true,
+      };
+    }
+    throw new Error('Entry is not a frontmatter object. Unable to render');
+  };
+  function frontmatter(content) {
+    return {
+      frontmatter: content,
     };
   }
 
@@ -884,32 +907,6 @@ var tsMarkdown = (function (exports) {
   }
 
   /**
-   * The renderer for strickethrough text entries.
-   *
-   * @param entry The strikethrough entry.
-   * @param options Document-level render options.
-   * @returns Strikethrough markdown content.
-   */
-  const strikethroughRenderer = (entry, options) => {
-    if ('strikethrough' in entry) {
-      return `~~${getMarkdownString(entry.strikethrough, options)}~~`;
-    }
-    throw new Error('Entry is not a strikethrough entry. Unable to render.');
-  };
-  /**
-   * Helper which creates a strikethrough text entry.
-   *
-   * @param options Entry-level options for this element.
-   * @returns a strikethrough text entry
-   */
-  function strikethrough(content, options) {
-    return {
-      strikethrough: content,
-      ...options,
-    };
-  }
-
-  /**
    * The renderer for string entries.
    *
    * @param entry A string of text.
@@ -958,6 +955,32 @@ var tsMarkdown = (function (exports) {
    * @returns the date as an ISO string.
    */
   const dateRenderer = (entry) => entry.toISOString();
+
+  /**
+   * The renderer for strickethrough text entries.
+   *
+   * @param entry The strikethrough entry.
+   * @param options Document-level render options.
+   * @returns Strikethrough markdown content.
+   */
+  const strikethroughRenderer = (entry, options) => {
+    if ('strikethrough' in entry) {
+      return `~~${getMarkdownString(entry.strikethrough, options)}~~`;
+    }
+    throw new Error('Entry is not a strikethrough entry. Unable to render.');
+  };
+  /**
+   * Helper which creates a strikethrough text entry.
+   *
+   * @param options Entry-level options for this element.
+   * @returns a strikethrough text entry
+   */
+  function strikethrough(content, options) {
+    return {
+      strikethrough: content,
+      ...options,
+    };
+  }
 
   /**
    * The renderer for subscript entries.
@@ -1041,7 +1064,7 @@ var tsMarkdown = (function (exports) {
     throw new Error('Entry is not a table entry. Unable to render.');
   };
   function getTableMarkdown(entry, options) {
-    escapePipes(entry);
+    escapePipes(entry, entry.pipeReplacer);
     let columnCount = entry.table.columns.length;
     entry.table.columns.reduce(
       (prev, curr) => prev.concat(typeof curr === 'string' ? curr : curr.name),
@@ -1059,7 +1082,11 @@ var tsMarkdown = (function (exports) {
               ? curr[i]
               : curr[getDataRowPropertyName(column)];
             if (value !== undefined) {
-              let result = renderCellText(value, options);
+              let result = renderCellText(
+                value,
+                options,
+                entry.prefixCellValues
+              );
               if (typeof result === 'string') {
                 prev.push(result);
               } else {
@@ -1090,7 +1117,7 @@ var tsMarkdown = (function (exports) {
         cells = [
           ...row.map((cell, index) =>
             padAlign(
-              renderCellText(cell, options),
+              renderCellText(cell, options, entry.prefixCellValues),
               cellWidths[index],
               entry.table.columns[index]
             )
@@ -1101,8 +1128,11 @@ var tsMarkdown = (function (exports) {
           (prev, curr, index) =>
             prev.concat(
               padAlign(
-                renderCellText(row[getDataRowPropertyName(curr)], options) ??
-                  '',
+                renderCellText(
+                  row[getDataRowPropertyName(curr)],
+                  options,
+                  entry.prefixCellValues
+                ) ?? '',
                 cellWidths[index],
                 entry.table.columns[index]
               )
@@ -1113,8 +1143,11 @@ var tsMarkdown = (function (exports) {
       return `| ${cells.join(' | ')} |`;
     });
   }
-  function renderCellText(value, options) {
-    return renderEntries([value], options);
+  function renderCellText(value, options, prefixCellValues = true) {
+    return renderEntries([value], {
+      ...options,
+      prefix: prefixCellValues ? options.prefix : '',
+    });
   }
   function padAlign(cellText, cellWidth, column) {
     return typeof column === 'string' ||
@@ -1167,19 +1200,22 @@ var tsMarkdown = (function (exports) {
   function getColumnHeaderTextLength(column) {
     return typeof column === 'string' ? column.length : column.name.length;
   }
-  function escapePipes(target) {
+  function defaultPipeReplacer(content) {
+    return content.replaceAll('|', '&#124;');
+  }
+  function escapePipes(target, pipeReplacer = defaultPipeReplacer) {
     if (typeof target === 'string') {
-      return target.replaceAll('|', '&#124;');
+      return pipeReplacer(target);
     }
     if (Array.isArray(target)) {
       for (let i = 0; i < target.length; i++) {
-        target[i] = escapePipes(target[i]);
+        target[i] = escapePipes(target[i], pipeReplacer);
       }
     }
     if (typeof target === 'object' && target !== null) {
       let assignable = target;
       for (let key of Object.keys(assignable)) {
-        assignable[key] = escapePipes(assignable[key]);
+        assignable[key] = escapePipes(assignable[key], pipeReplacer);
       }
     }
     return target;
@@ -1364,6 +1400,7 @@ var tsMarkdown = (function (exports) {
       tasks: tasksRenderer,
       text: textRenderer,
       ul: ulRenderer,
+      frontmatter: frontmatterRenderer,
       ...customRenderers,
     };
   }
@@ -1386,6 +1423,8 @@ var tsMarkdown = (function (exports) {
   exports.emojiRenderer = emojiRenderer;
   exports.footnote = footnote;
   exports.footnoteRenderer = footnoteRenderer;
+  exports.frontmatter = frontmatter;
+  exports.frontmatterRenderer = frontmatterRenderer;
   exports.getMarkdownString = getMarkdownString;
   exports.getOptionalHeaderIdText = getOptionalHeaderIdText;
   exports.getRenderers = getRenderers;
@@ -1440,4 +1479,4 @@ var tsMarkdown = (function (exports) {
   Object.defineProperty(exports, '__esModule', { value: true });
 
   return exports;
-})({});
+})({}, yaml);

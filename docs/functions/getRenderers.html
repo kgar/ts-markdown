@@ -1,179 +1,2012 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>getRenderers | ts-markdown</title><meta name="description" content="Documentation for ts-markdown"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script async src="../assets/search.js" id="search-script"></script><link rel="stylesheet" href="../assets/pages.css"/></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
-<div class="tsd-toolbar-contents container">
-<div class="table-cell" id="tsd-search" data-base="..">
-<div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
-<ul class="results">
-<li class="state loading">Preparing search index...</li>
-<li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">ts-markdown</a></div>
-<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
-<div class="container container-main">
-<div class="col-8 col-content">
-<div class="tsd-page-title">
-<ul class="tsd-breadcrumb">
-<li><a href="../modules.html">ts-markdown</a></li>
-<li><a href="getRenderers.html">getRenderers</a></li></ul>
-<h1>Function getRenderers</h1></div>
-<section class="tsd-panel">
-<ul class="tsd-signatures tsd-kind-function">
-<li class="tsd-signature tsd-anchor-link" id="getRenderers">get<wbr/>Renderers<span class="tsd-signature-symbol">(</span>customRenderers<span class="tsd-signature-symbol">?: </span><a href="../interfaces/Renderers.html" class="tsd-signature-type" data-tsd-kind="Interface">Renderers</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/Renderers.html" class="tsd-signature-type" data-tsd-kind="Interface">Renderers</a><a href="#getRenderers" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Provides default, custom, and overridden renderers for markdown rendering.
-This is often invoked when the caller wishes to provide custom renderers when rendering a markdown document.</p>
+<!DOCTYPE html>
+<html class="default" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>getRenderers | ts-markdown</title>
+    <meta name="description" content="Documentation for ts-markdown" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <link rel="stylesheet" href="../assets/highlight.css" />
+    <script async src="../assets/search.js" id="search-script"></script>
+    <link rel="stylesheet" href="../assets/pages.css" />
+  </head>
+  <body>
+    <script>
+      document.documentElement.dataset.theme =
+        localStorage.getItem('tsd-theme') || 'os';
+    </script>
+    <header class="tsd-page-toolbar">
+      <div class="tsd-toolbar-contents container">
+        <div class="table-cell" id="tsd-search" data-base="..">
+          <div class="field">
+            <label for="tsd-search-field" class="tsd-widget search no-caption"
+              ><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z"
+                  fill="var(--color-text)"
+                ></path></svg></label
+            ><input type="text" id="tsd-search-field" aria-label="Search" />
+          </div>
+          <ul class="results">
+            <li class="state loading">Preparing search index...</li>
+            <li class="state failure">The search index is not available</li>
+          </ul>
+          <a href="../index.html" class="title">ts-markdown</a>
+        </div>
+        <div class="table-cell" id="tsd-widgets">
+          <a
+            href="#"
+            class="tsd-widget menu no-caption"
+            data-toggle="menu"
+            aria-label="Menu"
+            ><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect
+                x="1"
+                y="3"
+                width="14"
+                height="2"
+                fill="var(--color-text)"
+              ></rect>
+              <rect
+                x="1"
+                y="7"
+                width="14"
+                height="2"
+                fill="var(--color-text)"
+              ></rect>
+              <rect
+                x="1"
+                y="11"
+                width="14"
+                height="2"
+                fill="var(--color-text)"
+              ></rect></svg
+          ></a>
+        </div>
+      </div>
+    </header>
+    <div class="container container-main">
+      <div class="col-8 col-content">
+        <div class="tsd-page-title">
+          <ul class="tsd-breadcrumb">
+            <li><a href="../modules.html">ts-markdown</a></li>
+            <li><a href="getRenderers.html">getRenderers</a></li>
+          </ul>
+          <h1>Function getRenderers</h1>
+        </div>
+        <section class="tsd-panel">
+          <ul class="tsd-signatures tsd-kind-function">
+            <li class="tsd-signature tsd-anchor-link" id="getRenderers">
+              get<wbr />Renderers<span class="tsd-signature-symbol">(</span
+              >customRenderers<span class="tsd-signature-symbol">?: </span
+              ><a
+                href="../interfaces/Renderers.html"
+                class="tsd-signature-type"
+                data-tsd-kind="Interface"
+                >Renderers</a
+              ><span class="tsd-signature-symbol">)</span
+              ><span class="tsd-signature-symbol">: </span
+              ><a
+                href="../interfaces/Renderers.html"
+                class="tsd-signature-type"
+                data-tsd-kind="Interface"
+                >Renderers</a
+              ><a
+                href="#getRenderers"
+                aria-label="Permalink"
+                class="tsd-anchor-icon"
+                ><svg
+                  class="icon icon-tabler icon-tabler-link"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    stroke="none"
+                    d="M0 0h24v24H0z"
+                    fill="none"
+                    id="icon-anchor-a"
+                  ></path>
+                  <path
+                    d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"
+                    id="icon-anchor-b"
+                  ></path>
+                  <path
+                    d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"
+                    id="icon-anchor-c"
+                  ></path></svg
+              ></a>
+            </li>
+            <li class="tsd-description">
+              <div class="tsd-comment tsd-typography">
+                <p>
+                  Provides default, custom, and overridden renderers for
+                  markdown rendering. This is often invoked when the caller
+                  wishes to provide custom renderers when rendering a markdown
+                  document.
+                </p>
 
-<h3>Returns</h3><p>An object map of renderers where the key is the identifying property of the particular markdown entry type.</p>
-</div>
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5>customRenderers: <a href="../interfaces/Renderers.html" class="tsd-signature-type" data-tsd-kind="Interface">Renderers</a><span class="tsd-signature-symbol"> = {}</span></h5>
-<div class="tsd-comment tsd-typography"><p>Any renderers which should be used in addition to or in place of existing default renderers.</p>
-</div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../interfaces/Renderers.html" class="tsd-signature-type" data-tsd-kind="Interface">Renderers</a></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/kgar/ts-markdown/blob/c135d28/src/defaults.ts#L46">defaults.ts:46</a></li></ul></aside></li></ul></section></div>
-<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-<div class="tsd-navigation settings">
-<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
-<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Settings</h3></summary>
-<div class="tsd-accordion-details">
-<div class="tsd-filter-visibility">
-<h4 class="uppercase">Member Visibility</h4><form>
-<ul id="tsd-filter-options">
-<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
-<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li>
-<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
-<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div>
-<div class="tsd-theme-toggle">
-<h4 class="uppercase">Theme</h4><select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
-<nav class="tsd-navigation primary">
-<details class="tsd-index-accordion" open><summary class="tsd-accordion-summary">
-<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
-<div class="tsd-accordion-details">
-<ul>
-<li><a href="../modules.html">ts-<wbr/>markdown</a>
-<ul>
-<li class="pages-entry pages-entry-page pages-entry-depth-1"><a href="../pages/cookbook.html">Cookbook</a></li>
-<li class="pages-entry pages-entry-page pages-entry-depth-1"><a href="../pages/extending-ts-markdown.html">Extending ts-<wbr/>markdown</a></li>
-<li class="pages-entry pages-entry-page pages-entry-depth-1"><a href="../pages/faqs.html">FAQs</a></li>
-<li class="pages-entry pages-entry-page pages-entry-depth-1"><a href="../pages/options.html">Options</a></li></ul></li></ul></div></details></nav>
-<nav class="tsd-navigation secondary menu-sticky">
-<ul>
-<li class="tsd-kind-interface"><a href="../interfaces/BlockquoteEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-256-path"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)" id="icon-256-text"></path></svg>Blockquote<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/BoldEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Bold<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/CodeBlockEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Code<wbr/>Block<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/CodeEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Code<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/DescriptionListEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Description<wbr/>List<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/EmojiEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Emoji<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/FootnoteEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Footnote<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/H1Entry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>H1<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/H2Entry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>H2<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/H3Entry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>H3<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/H4Entry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>H4<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/H5Entry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>H5<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/H6Entry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>H6<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/HighlightEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Highlight<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/HorizontalRuleEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Horizontal<wbr/>Rule<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/ImageEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Image<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/InlineTypes.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Inline<wbr/>Types</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/ItalicEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Italic<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/LinkEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Link<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/MarkdownEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Markdown<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/MarkdownRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Markdown<wbr/>Renderer</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/OrderedListEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Ordered<wbr/>List<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/ParagraphEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Paragraph<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/RenderOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Render<wbr/>Options</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/RenderPrefixFunction.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Render<wbr/>Prefix<wbr/>Function</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/Renderers.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Renderers</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/RichTextEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Rich<wbr/>Text<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/StrikethroughEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Strikethrough<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/String.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>String</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/SubscriptEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Subscript<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/SuperscriptEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Superscript<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/TableEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Table<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/TaskListEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Task<wbr/>List<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/TextEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Text<wbr/>Entry</a></li>
-<li class="tsd-kind-interface"><a href="../interfaces/UnorderedListEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Unordered<wbr/>List<wbr/>Entry</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/DescriptionDetails.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-4194304-path"></rect><path d="M11.31 16V8.224H8.91V7.24H14.79V8.224H12.39V16H11.31Z" fill="var(--color-text)" id="icon-4194304-text"></path></svg>Description<wbr/>Details</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/DescriptionTerm.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Description<wbr/>Term</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/ListItemEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>List<wbr/>Item<wbr/>Entry</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/MarkdownEntryOrPrimitive.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Markdown<wbr/>Entry<wbr/>Or<wbr/>Primitive</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/MarkdownRenderPrefix.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Markdown<wbr/>Render<wbr/>Prefix</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/MarkdownRenderResult.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Markdown<wbr/>Render<wbr/>Result</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/SupportedPrimitive.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Supported<wbr/>Primitive</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/TableCell.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Table<wbr/>Cell</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/TableColumn.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Table<wbr/>Column</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/TableRow.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Table<wbr/>Row</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/TaskEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Task<wbr/>Entry</a></li>
-<li class="tsd-kind-type-alias"><a href="../types/UnorderedListItemIndicator.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Unordered<wbr/>List<wbr/>Item<wbr/>Indicator</a></li>
-<li class="tsd-kind-function"><a href="appendFootnotes.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-64-path"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)" id="icon-64-text"></path></svg>append<wbr/>Footnotes</a></li>
-<li class="tsd-kind-function"><a href="bigintRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>bigint<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="blockquote.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>blockquote</a></li>
-<li class="tsd-kind-function"><a href="blockquoteRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>blockquote<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="bold.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>bold</a></li>
-<li class="tsd-kind-function"><a href="boldRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>bold<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="booleanRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>boolean<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="code.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>code</a></li>
-<li class="tsd-kind-function"><a href="codeRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>code<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="codeblock.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>codeblock</a></li>
-<li class="tsd-kind-function"><a href="codeblockRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>codeblock<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="dateRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>date<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="dl.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>dl</a></li>
-<li class="tsd-kind-function"><a href="dlRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>dl<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="emoji.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>emoji</a></li>
-<li class="tsd-kind-function"><a href="emojiRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>emoji<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="footnote.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>footnote</a></li>
-<li class="tsd-kind-function"><a href="footnoteRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>footnote<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="getMarkdownString.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Markdown<wbr/>String</a></li>
-<li class="tsd-kind-function"><a href="getOptionalHeaderIdText.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Optional<wbr/>Header<wbr/>Id<wbr/>Text</a></li>
-<li class="current tsd-kind-function"><a href="getRenderers.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Renderers</a></li>
-<li class="tsd-kind-function"><a href="h1.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h1</a></li>
-<li class="tsd-kind-function"><a href="h1Renderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h1<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="h2.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h2</a></li>
-<li class="tsd-kind-function"><a href="h2Renderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h2<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="h3.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h3</a></li>
-<li class="tsd-kind-function"><a href="h3Renderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h3<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="h4.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h4</a></li>
-<li class="tsd-kind-function"><a href="h4Renderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h4<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="h5.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h5</a></li>
-<li class="tsd-kind-function"><a href="h5Renderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h5<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="h6.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h6</a></li>
-<li class="tsd-kind-function"><a href="h6Renderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>h6<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="header.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>header</a></li>
-<li class="tsd-kind-function"><a href="highlight.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>highlight</a></li>
-<li class="tsd-kind-function"><a href="highlightRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>highlight<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="hr.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>hr</a></li>
-<li class="tsd-kind-function"><a href="hrRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>hr<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="img.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>img</a></li>
-<li class="tsd-kind-function"><a href="imgRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>img<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="italic.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>italic</a></li>
-<li class="tsd-kind-function"><a href="italicRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>italic<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="link.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>link</a></li>
-<li class="tsd-kind-function"><a href="linkRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>link<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="nullRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>null<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="numberRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>number<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="ol.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>ol</a></li>
-<li class="tsd-kind-function"><a href="olRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>ol<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="p.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>p</a></li>
-<li class="tsd-kind-function"><a href="pRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>p<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="renderEntries.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>render<wbr/>Entries</a></li>
-<li class="tsd-kind-function"><a href="strikethrough.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>strikethrough</a></li>
-<li class="tsd-kind-function"><a href="strikethroughRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>strikethrough<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="stringRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>string<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="sub.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>sub</a></li>
-<li class="tsd-kind-function"><a href="subRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>sub<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="sup.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>sup</a></li>
-<li class="tsd-kind-function"><a href="supRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>sup<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="table.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>table</a></li>
-<li class="tsd-kind-function"><a href="tableRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>table<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="tasks.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>tasks</a></li>
-<li class="tsd-kind-function"><a href="tasksRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>tasks<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="text.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>text</a></li>
-<li class="tsd-kind-function"><a href="textRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>text<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="tsMarkdown.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>ts<wbr/>Markdown</a></li>
-<li class="tsd-kind-function"><a href="ul.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>ul</a></li>
-<li class="tsd-kind-function"><a href="ulRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>ul<wbr/>Renderer</a></li>
-<li class="tsd-kind-function"><a href="undefinedRenderer.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>undefined<wbr/>Renderer</a></li></ul></nav></div></div>
-<div class="container tsd-generator">
-<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
-<div class="overlay"></div><script src="../assets/main.js"></script></body></html>
+                <h3>Returns</h3>
+                <p>
+                  An object map of renderers where the key is the identifying
+                  property of the particular markdown entry type.
+                </p>
+              </div>
+              <div class="tsd-parameters">
+                <h4 class="tsd-parameters-title">Parameters</h4>
+                <ul class="tsd-parameter-list">
+                  <li>
+                    <h5>
+                      customRenderers:
+                      <a
+                        href="../interfaces/Renderers.html"
+                        class="tsd-signature-type"
+                        data-tsd-kind="Interface"
+                        >Renderers</a
+                      ><span class="tsd-signature-symbol"> = {}</span>
+                    </h5>
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Any renderers which should be used in addition to or in
+                        place of existing default renderers.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <h4 class="tsd-returns-title">
+                Returns
+                <a
+                  href="../interfaces/Renderers.html"
+                  class="tsd-signature-type"
+                  data-tsd-kind="Interface"
+                  >Renderers</a
+                >
+              </h4>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/kgar/ts-markdown/blob/4d5d684/src/defaults.ts#L47"
+                      >defaults.ts:47</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </li>
+          </ul>
+        </section>
+      </div>
+      <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+        <div class="tsd-navigation settings">
+          <details class="tsd-index-accordion">
+            <summary class="tsd-accordion-summary">
+              <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z"
+                    fill="var(--color-text)"
+                  ></path>
+                </svg>
+                Settings
+              </h3>
+            </summary>
+            <div class="tsd-accordion-details">
+              <div class="tsd-filter-visibility">
+                <h4 class="uppercase">Member Visibility</h4>
+                <form>
+                  <ul id="tsd-filter-options">
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input
+                          type="checkbox"
+                          id="tsd-filter-protected"
+                          name="protected"
+                        /><svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          aria-hidden="true"
+                        >
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>Protected</span></label
+                      >
+                    </li>
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input
+                          type="checkbox"
+                          id="tsd-filter-private"
+                          name="private"
+                        /><svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          aria-hidden="true"
+                        >
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>Private</span></label
+                      >
+                    </li>
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input
+                          type="checkbox"
+                          id="tsd-filter-inherited"
+                          name="inherited"
+                          checked
+                        /><svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          aria-hidden="true"
+                        >
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>Inherited</span></label
+                      >
+                    </li>
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input
+                          type="checkbox"
+                          id="tsd-filter-external"
+                          name="external"
+                        /><svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          aria-hidden="true"
+                        >
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>External</span></label
+                      >
+                    </li>
+                  </ul>
+                </form>
+              </div>
+              <div class="tsd-theme-toggle">
+                <h4 class="uppercase">Theme</h4>
+                <select id="theme">
+                  <option value="os">OS</option>
+                  <option value="light">Light</option>
+                  <option value="dark">Dark</option>
+                </select>
+              </div>
+            </div>
+          </details>
+        </div>
+        <nav class="tsd-navigation primary">
+          <details class="tsd-index-accordion" open>
+            <summary class="tsd-accordion-summary">
+              <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z"
+                    fill="var(--color-text)"
+                  ></path>
+                </svg>
+                Modules
+              </h3>
+            </summary>
+            <div class="tsd-accordion-details">
+              <ul>
+                <li>
+                  <a href="../modules.html">ts-<wbr />markdown</a>
+                  <ul>
+                    <li
+                      class="pages-entry pages-entry-page pages-entry-depth-1"
+                    >
+                      <a href="../pages/cookbook.html">Cookbook</a>
+                    </li>
+                    <li
+                      class="pages-entry pages-entry-page pages-entry-depth-1"
+                    >
+                      <a href="../pages/extending-ts-markdown.html"
+                        >Extending ts-<wbr />markdown</a
+                      >
+                    </li>
+                    <li
+                      class="pages-entry pages-entry-page pages-entry-depth-1"
+                    >
+                      <a href="../pages/faqs.html">FAQs</a>
+                    </li>
+                    <li
+                      class="pages-entry pages-entry-page pages-entry-depth-1"
+                    >
+                      <a href="../pages/options.html">Options</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </nav>
+        <nav class="tsd-navigation secondary menu-sticky">
+          <ul>
+            <li class="tsd-kind-interface">
+              <a
+                href="../interfaces/BlockquoteEntry.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <rect
+                    fill="var(--color-icon-background)"
+                    stroke="var(--color-ts-interface)"
+                    stroke-width="1.5"
+                    x="1"
+                    y="1"
+                    width="22"
+                    height="22"
+                    rx="6"
+                    id="icon-256-path"
+                  ></rect>
+                  <path
+                    d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z"
+                    fill="var(--color-text)"
+                    id="icon-256-text"
+                  ></path></svg
+                >Blockquote<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/BoldEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Bold<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/CodeBlockEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Code<wbr />Block<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/CodeEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Code<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a
+                href="../interfaces/DescriptionListEntry.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Description<wbr />List<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/EmojiEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Emoji<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/FootnoteEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Footnote<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a
+                href="../interfaces/FrontmatterEntry.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Frontmatter<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/H1Entry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >H1<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/H2Entry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >H2<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/H3Entry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >H3<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/H4Entry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >H4<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/H5Entry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >H5<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/H6Entry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >H6<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/HighlightEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Highlight<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a
+                href="../interfaces/HorizontalRuleEntry.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Horizontal<wbr />Rule<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/ImageEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Image<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/InlineTypes.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Inline<wbr />Types</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/ItalicEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Italic<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/LinkEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Link<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/MarkdownEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Markdown<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a
+                href="../interfaces/MarkdownRenderer.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Markdown<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a
+                href="../interfaces/OrderedListEntry.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Ordered<wbr />List<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/ParagraphEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Paragraph<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/RenderOptions.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Render<wbr />Options</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a
+                href="../interfaces/RenderPrefixFunction.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Render<wbr />Prefix<wbr />Function</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/Renderers.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Renderers</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/RichTextEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Rich<wbr />Text<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a
+                href="../interfaces/StrikethroughEntry.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Strikethrough<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/String.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >String</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/SubscriptEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Subscript<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a
+                href="../interfaces/SuperscriptEntry.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Superscript<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/TableEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Table<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/TaskListEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Task<wbr />List<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a href="../interfaces/TextEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Text<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-interface">
+              <a
+                href="../interfaces/UnorderedListEntry.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-256-path"></use>
+                  <use href="#icon-256-text"></use></svg
+                >Unordered<wbr />List<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a href="../types/DescriptionDetails.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <rect
+                    fill="var(--color-icon-background)"
+                    stroke="var(--color-ts)"
+                    stroke-width="1.5"
+                    x="1"
+                    y="1"
+                    width="22"
+                    height="22"
+                    rx="6"
+                    id="icon-4194304-path"
+                  ></rect>
+                  <path
+                    d="M11.31 16V8.224H8.91V7.24H14.79V8.224H12.39V16H11.31Z"
+                    fill="var(--color-text)"
+                    id="icon-4194304-text"
+                  ></path></svg
+                >Description<wbr />Details</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a href="../types/DescriptionTerm.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-4194304-path"></use>
+                  <use href="#icon-4194304-text"></use></svg
+                >Description<wbr />Term</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a href="../types/ListItemEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-4194304-path"></use>
+                  <use href="#icon-4194304-text"></use></svg
+                >List<wbr />Item<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a
+                href="../types/MarkdownEntryOrPrimitive.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-4194304-path"></use>
+                  <use href="#icon-4194304-text"></use></svg
+                >Markdown<wbr />Entry<wbr />Or<wbr />Primitive</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a
+                href="../types/MarkdownRenderPrefix.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-4194304-path"></use>
+                  <use href="#icon-4194304-text"></use></svg
+                >Markdown<wbr />Render<wbr />Prefix</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a
+                href="../types/MarkdownRenderResult.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-4194304-path"></use>
+                  <use href="#icon-4194304-text"></use></svg
+                >Markdown<wbr />Render<wbr />Result</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a href="../types/SupportedPrimitive.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-4194304-path"></use>
+                  <use href="#icon-4194304-text"></use></svg
+                >Supported<wbr />Primitive</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a href="../types/TableCell.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-4194304-path"></use>
+                  <use href="#icon-4194304-text"></use></svg
+                >Table<wbr />Cell</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a href="../types/TableColumn.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-4194304-path"></use>
+                  <use href="#icon-4194304-text"></use></svg
+                >Table<wbr />Column</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a href="../types/TableRow.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-4194304-path"></use>
+                  <use href="#icon-4194304-text"></use></svg
+                >Table<wbr />Row</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a href="../types/TaskEntry.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-4194304-path"></use>
+                  <use href="#icon-4194304-text"></use></svg
+                >Task<wbr />Entry</a
+              >
+            </li>
+            <li class="tsd-kind-type-alias">
+              <a
+                href="../types/UnorderedListItemIndicator.html"
+                class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-4194304-path"></use>
+                  <use href="#icon-4194304-text"></use></svg
+                >Unordered<wbr />List<wbr />Item<wbr />Indicator</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="appendFootnotes.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <rect
+                    fill="var(--color-icon-background)"
+                    stroke="var(--color-ts-function)"
+                    stroke-width="1.5"
+                    x="1"
+                    y="1"
+                    width="22"
+                    height="22"
+                    rx="6"
+                    id="icon-64-path"
+                  ></rect>
+                  <path
+                    d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z"
+                    fill="var(--color-text)"
+                    id="icon-64-text"
+                  ></path></svg
+                >append<wbr />Footnotes</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="bigintRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >bigint<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="blockquote.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >blockquote</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="blockquoteRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >blockquote<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="bold.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >bold</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="boldRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >bold<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="booleanRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >boolean<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="code.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >code</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="codeRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >code<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="codeblock.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >codeblock</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="codeblockRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >codeblock<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="dateRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >date<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="dl.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >dl</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="dlRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >dl<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="emoji.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >emoji</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="emojiRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >emoji<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="footnote.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >footnote</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="footnoteRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >footnote<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="frontmatter.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >frontmatter</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="frontmatterRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >frontmatter<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="getMarkdownString.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >get<wbr />Markdown<wbr />String</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="getOptionalHeaderIdText.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >get<wbr />Optional<wbr />Header<wbr />Id<wbr />Text</a
+              >
+            </li>
+            <li class="current tsd-kind-function">
+              <a href="getRenderers.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >get<wbr />Renderers</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h1.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h1</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h1Renderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h1<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h2.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h2</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h2Renderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h2<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h3.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h3</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h3Renderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h3<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h4.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h4</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h4Renderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h4<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h5.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h5</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h5Renderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h5<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h6.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h6</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="h6Renderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >h6<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="header.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >header</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="highlight.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >highlight</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="highlightRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >highlight<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="hr.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >hr</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="hrRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >hr<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="img.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >img</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="imgRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >img<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="italic.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >italic</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="italicRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >italic<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="link.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >link</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="linkRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >link<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="nullRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >null<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="numberRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >number<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="ol.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >ol</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="olRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >ol<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="p.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >p</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="pRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >p<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="renderEntries.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >render<wbr />Entries</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="strikethrough.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >strikethrough</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="strikethroughRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >strikethrough<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="stringRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >string<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="sub.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >sub</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="subRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >sub<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="sup.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >sup</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="supRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >sup<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="table.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >table</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="tableRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >table<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="tasks.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >tasks</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="tasksRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >tasks<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="text.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >text</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="textRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >text<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="tsMarkdown.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >ts<wbr />Markdown</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="ul.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >ul</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="ulRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >ul<wbr />Renderer</a
+              >
+            </li>
+            <li class="tsd-kind-function">
+              <a href="undefinedRenderer.html" class="tsd-index-link"
+                ><svg
+                  class="tsd-kind-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <use href="#icon-64-path"></use>
+                  <use href="#icon-64-text"></use></svg
+                >undefined<wbr />Renderer</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="container tsd-generator">
+      <p>
+        Generated using
+        <a href="https://typedoc.org/" target="_blank">TypeDoc</a>
+      </p>
+    </div>
+    <div class="overlay"></div>
+    <script src="../assets/main.js"></script>
+  </body>
+</html>
